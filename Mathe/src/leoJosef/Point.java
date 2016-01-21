@@ -1,7 +1,5 @@
 package leoJosef;
 
-import javax.swing.JOptionPane;
-
 public class Point {
 
 	private double x, y;
@@ -19,12 +17,16 @@ public class Point {
 	}
 	
 	
-	public void read(){
-		this.x = Double.parseDouble(JOptionPane.showInputDialog("Enter x: "));
-		this.y = Double.parseDouble(JOptionPane.showInputDialog("Enter y: "));
+	public void setX(double x) {
+		this.x = x;
 	}
-	
-	
+
+
+	public void setY(double y) {
+		this.y = y;
+	}
+
+
 	public String toString(){
 		return "(" + this.getX() + "," + this.getY() + ")";
 	}
