@@ -9,7 +9,7 @@ import com.fathzer.soft.javaluator.DoubleEvaluator;
 
 public class ExponentialFunktionDurch2Punkte {
 	
-	public static void main(String[] args) {
+	public void run() {
 		
 		Point p = new Point(readDoubleFromStringInput("x Koordinate von P: " ), readDoubleFromStringInput("y Koordinate von P: " ));
 		
@@ -23,7 +23,7 @@ public class ExponentialFunktionDurch2Punkte {
 	
 	
 	
-	public static double readDoubleFromStringInput(String displayMessage) {
+	private  double readDoubleFromStringInput(String displayMessage) {
 		
 		DoubleEvaluator evaluator = new DoubleEvaluator();
 		String expression = JOptionPane.showInputDialog(displayMessage);
