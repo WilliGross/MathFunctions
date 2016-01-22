@@ -1,16 +1,27 @@
 package willigrossBubble;
 
-import java.util.HashMap;
+import javax.swing.JOptionPane;
 
 import com.fathzer.soft.javaluator.DoubleEvaluator;
 import com.fathzer.soft.javaluator.StaticVariableSet;
 
-public abstract class Function {
+public class Function {
 	
 	/**
 	 * The actual function
 	 */
-	private String expression = "";
+	protected String expression = "";
+	
+	/**
+	 * Directly enter the expression
+	 * @param expression - the expression to save as the function
+	 */
+	public void setExpression(String expression) {
+		this.expression = expression;
+	}
+	
+
+	
 	
 	/**
 	 * This checks whether a point is on the graph
@@ -32,15 +43,14 @@ public abstract class Function {
 	}
 	
 	/**
-	 * This calculates a value table for the expression
+	 * Displays a value table for the expression
 	 * @param start - start value for x
 	 * @param end - end value for x
 	 * @param step - the step between x values
-	 * @return the table as a hash map with x as key and corresponding value as value
 	 */
-	public HashMap<Double, Double> table(double start, double end, double step) {
+	public void table(double start, double end, double step) {
 		
-		HashMap<Double, Double> table = new HashMap<Double, Double>();
+		String tableString ="f(x) = " + expression + "\n\n";
 		
 		final DoubleEvaluator evaluator = new DoubleEvaluator();
 		final StaticVariableSet<Double> variables = new StaticVariableSet<Double>();
@@ -53,7 +63,7 @@ public abstract class Function {
 				
 				variables.set("x", x);
 				
-				table.put(x, evaluator.evaluate(expression, variables));
+				tableString += "f(" + x + ") = "  +evaluator.evaluate(expression, variables) + "\n";
 				
 				x += step;
 			}
@@ -63,13 +73,14 @@ public abstract class Function {
 				
 				variables.set("x", x);
 				
-				table.put(x, evaluator.evaluate(expression, variables));
+				tableString += "f(" + x + ") = "  +evaluator.evaluate(expression, variables) + "\n";
 				
 				x -= step;
 			}
 		}
 		
-		return table;
+		JOptionPane.showMessageDialog(null, tableString);
+		
 	}
 	
 	/**
