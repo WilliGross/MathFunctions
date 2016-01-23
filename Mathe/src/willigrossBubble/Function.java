@@ -63,7 +63,7 @@ public class Function {
 				
 				variables.set("x", x);
 				
-				tableString += "f(" + x + ") = "  +evaluator.evaluate(expression, variables) + "\n";
+				tableString += "f(" + x + ") = " + roundDouble(evaluator.evaluate(expression, variables), 3) + "\n";
 				
 				x += step;
 			}
@@ -73,7 +73,7 @@ public class Function {
 				
 				variables.set("x", x);
 				
-				tableString += "f(" + x + ") = "  +evaluator.evaluate(expression, variables) + "\n";
+				tableString += "f(" + x + ") = " + roundDouble(evaluator.evaluate(expression, variables), 3) + "\n";
 				
 				x -= step;
 			}
@@ -88,6 +88,17 @@ public class Function {
 	 */
 	public String toString() {
 		return expression;
+	}
+	
+	
+	/**
+	 * Round a double value to a specified number of decimals
+	 * @param doubleValue - the object to be rounded
+	 * @param decimals - the number of decimals
+	 * @return the rounded double
+	 */
+	public static double roundDouble(double doubleValue, int decimals) {
+		return Math.round(Math.pow(10, decimals) * doubleValue) / Math.pow(10, decimals);
 	}
 	
 }

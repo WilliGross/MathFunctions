@@ -12,7 +12,7 @@ public class ExponentialFunction extends Function {
 		double a = Math.pow(q.getY() / p.getY(), 1 / (q.getX() - p.getX()));
 		double b = p.getY() / Math.pow(a, p.getX());
 		
-		 expression = b + " * " + a + "^x";
+		 expression = Function.roundDouble(b, 3) + " * " + Function.roundDouble(a, 3) + "^x";
 	}
 
 	
