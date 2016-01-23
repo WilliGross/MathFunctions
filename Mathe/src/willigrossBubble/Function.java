@@ -84,7 +84,7 @@ public class Function {
 	}
 	
 	/**
-	 * A String to represent the function
+	 * A string to represent the function
 	 */
 	public String toString() {
 		return expression;

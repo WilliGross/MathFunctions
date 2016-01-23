@@ -8,15 +8,23 @@ import com.fathzer.soft.javaluator.DoubleEvaluator;
 
 public class Main {
 
+	/**A utility array representing the alphabet */
 	public static char[] alphabet = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
 
+	/**A list where all functions are stored */
 	private ArrayList<Function> functions = new ArrayList<Function>();
+	
+	/**A boolean value that represents the programs state */
 	private static boolean running;
 
+	
+	/**
+	 * The main method: creates a new instance of Main and keeps the program running
+	 * @param args
+	 */
 	public static void main(String[] args) {
 
 		new Main();
-
 
 		//keep program running
 		while (running == true) {
@@ -27,10 +35,18 @@ public class Main {
 		}
 	}
 
+	/**
+	 * The constructor that calls the menu
+	 */
 	public Main() {
+		
 		menu();
 	}
 
+	
+	/**
+	 * Displays the menu and calls selected tasks
+	 */
 	private void menu() {
 
 		String programMode = JOptionPane.showInputDialog("What would you like to do? \n"
@@ -64,6 +80,32 @@ public class Main {
 		}
 	}
 
+	/**
+	 * Displays a menu for a specific function
+	 * @param function - the function to interact with
+	 */
+	private void functionActionsMenu(Function function) {
+	
+		String action = JOptionPane.showInputDialog("Would you like to calculate a value table "
+				+ "or check if a specified point lies on your functions graph?");
+	
+		if (action != null) {
+	
+			action.toLowerCase();
+	
+			if (action.contains("table") || action.contains("1"))
+				valueTable(function);
+	
+			if (action.contains("check") || action.contains("point") || action.contains("2"))
+				checkPointOnGraph(function);
+		}
+	
+	}
+
+	
+	/**
+	 * Displays previous functions and lets the user select one; calls the function actions menu
+	 */
 	private void showAndSelectPreviousFunctions() {
 
 		//show prev functions
@@ -90,30 +132,16 @@ public class Main {
 		}
 	}
 
-	private void functionActionsMenu(Function function) {
-
-		String action = JOptionPane.showInputDialog("Would you like to calculate a value table "
-				+ "or check if a specified point lies on your functions graph?");
-
-		if (action != null) {
-
-			action.toLowerCase();
-
-			if (action.contains("table") || action.contains("1"))
-				valueTable(function);
-
-			if (action.contains("check") || action.contains("point") || action.contains("2"))
-				checkPointOnGraph(function);
-		}
-
-	}
-
+	/**
+	 * Displays a value table for a function
+	 * @param function - the function the value table should be calculated for
+	 */
 	private void valueTable(Function function) {
 
 		String parameters = JOptionPane.showInputDialog("Enter start and end value for x and step , seperated by spaces: ");
 		String[] params = parameters.split(" ");
 
-		if (params.length < 3 || params.length > 3) {
+		if (params.length < 3 || params.length > 3) { //check if there are 3 arguments
 			JOptionPane.showMessageDialog(null, "Please enter 3 arguments!");
 			valueTable(function);
 		} else {
@@ -121,8 +149,14 @@ public class Main {
 		}
 	}
 
+	
+	/**
+	 * Checks if a specified point lies on the graph
+	 * @param function - the function whose graph should be checked
+	 */
 	private void checkPointOnGraph(Function function) {
-		Point p = new Point(readDoubleFromStringInput("x Koordinate von P: " ), readDoubleFromStringInput("y Koordinate von P: " ));
+		
+		Point p = new Point(readDoubleFromStringInput("x coordinate of P: " ), readDoubleFromStringInput("y coordinate of P: " ));
 
 		boolean onGraph = function.testPointOnGraph(p);
 
@@ -132,6 +166,10 @@ public class Main {
 			JOptionPane.showMessageDialog(null, "The point does not lie on your function's graph");
 	}
 
+	
+	/**
+	 * Manually enter a function
+	 */
 	private void typeFunction() {
 
 		String expression = JOptionPane.showInputDialog("Please enter your function: f(x) = ");
@@ -142,12 +180,16 @@ public class Main {
 		functionActionsMenu(functions.get(functions.size() - 1));
 	}
 
+	
+	/**
+	 * Create an exponential function by specifying two points
+	 */
 	private void createExponentialFunction() {
 
 		functions.add(new ExponentialFunction());
 
-		Point p = new Point(readDoubleFromStringInput("x Koordinate von P: " ), readDoubleFromStringInput("y Koordinate von P: " ));
-		Point q = new Point(readDoubleFromStringInput("x Koordinate von Q: " ), readDoubleFromStringInput("y Koordinate von Q: " ));
+		Point p = new Point(readDoubleFromStringInput("x coordinate of P: " ), readDoubleFromStringInput("y coordinate of P: " ));
+		Point q = new Point(readDoubleFromStringInput("x coordinate of Q: " ), readDoubleFromStringInput("y coordinate of Q: " ));
 
 		((ExponentialFunction) functions.get(functions.size() - 1)).createThroughPoints(p, q);
 
@@ -157,7 +199,12 @@ public class Main {
 	}
 
 
-	private  double readDoubleFromStringInput(String displayMessage) {
+	/**
+	 * A utility method that converts a string expression into a double value
+	 * @param displayMessage - the message that should be displayed when the user needs to enter the expression
+	 * @return the calculated double value
+	 */
+	private double readDoubleFromStringInput(String displayMessage) {
 
 		DoubleEvaluator evaluator = new DoubleEvaluator();
 		String expression = JOptionPane.showInputDialog(displayMessage);
