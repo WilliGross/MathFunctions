@@ -40,7 +40,7 @@ public class Main {
 	private void menu() {
 
 		String programMode = JOptionPane.showInputDialog("What would you like to do? \n"
-				+ "(create a function, load a previous function, close)");
+				+ "(CREATE a function, LOAD a previous function, CLOSE)");
 
 		if (programMode != null) {
 
@@ -73,7 +73,7 @@ public class Main {
 	private void createFunctionsMenu() {
 
 		String functionType = JOptionPane.showInputDialog("How would you like to create your function? \n"
-				+ "(type, create linear f. through 2 points, create exponential f. through 2 points, go back to main menu)");
+				+ "(TYPE, create LINEAR f. through 2 points, create EXPONENTIAL f. through 2 points, go BACK to main menu)");
 
 		if (functionType != null) {
 
@@ -108,14 +108,14 @@ public class Main {
 	 */
 	private void functionActionsMenu(Function function) {
 
-		String action = JOptionPane.showInputDialog("Would you like to calculate a value table "
-				+ "or check if a specified point lies on your function's graph?");
+		String action = JOptionPane.showInputDialog("Would you like to calculate a VALUE TABLE "
+				+ "or check if a specified POINT lies on your function's graph?");
 
 		if (action != null) {
 
 			action.toLowerCase();
 
-			if (action.contains("table") || action.contains("1"))
+			if (action.contains("val") || action.contains("table") || action.contains("1"))
 				valueTable(function);
 
 			if (action.contains("check") || action.contains("point") || action.contains("2"))
@@ -173,7 +173,7 @@ public class Main {
 	 */
 	private void valueTable(Function function) {
 
-		String parameters = JOptionPane.showInputDialog("Enter start and end value for x and step , seperated by spaces: ");
+		String parameters = JOptionPane.showInputDialog("Enter START and END value for x and STEP, seperated by spaces: ");
 		String[] params = parameters.split(" ");
 
 		if (params.length < 3 || params.length > 3) { //check if there are 3 arguments
@@ -191,7 +191,7 @@ public class Main {
 	 */
 	private void checkPointOnGraph(Function function) {
 
-		Point p = new Point(readDoubleFromStringInput("x coordinate of P: " ), readDoubleFromStringInput("y coordinate of P: " ));
+		Point p = new Point(readDoubleFromStringInput("x coordinate of point P: " ), readDoubleFromStringInput("y coordinate of point P: " ));
 
 		boolean onGraph = function.testPointOnGraph(p);
 
@@ -223,8 +223,8 @@ public class Main {
 
 		functions.add(new ExponentialFunction());
 
-		Point p = new Point(readDoubleFromStringInput("x coordinate of P: " ), readDoubleFromStringInput("y coordinate of P: " ));
-		Point q = new Point(readDoubleFromStringInput("x coordinate of Q: " ), readDoubleFromStringInput("y coordinate of Q: " ));
+		Point p = new Point(readDoubleFromStringInput("x coordinate of point P: " ), readDoubleFromStringInput("y coordinate of point P: " ));
+		Point q = new Point(readDoubleFromStringInput("x coordinate of point Q: " ), readDoubleFromStringInput("y coordinate of point Q: " ));
 
 		((ExponentialFunction) functions.get(functions.size() - 1)).createThroughPoints(p, q);
 
@@ -241,8 +241,8 @@ public class Main {
 
 		functions.add(new LinearFunction());
 
-		Point p = new Point(readDoubleFromStringInput("x coordinate of P: " ), readDoubleFromStringInput("y coordinate of P: " ));
-		Point q = new Point(readDoubleFromStringInput("x coordinate of Q: " ), readDoubleFromStringInput("y coordinate of Q: " ));
+		Point p = new Point(readDoubleFromStringInput("x coordinate of point P: " ), readDoubleFromStringInput("y coordinate of point P: " ));
+		Point q = new Point(readDoubleFromStringInput("x coordinate of point Q: " ), readDoubleFromStringInput("y coordinate of point Q: " ));
 
 		((LinearFunction) functions.get(functions.size() - 1)).createThroughPoints(p, q);
 
