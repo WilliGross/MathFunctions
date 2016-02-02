@@ -14,9 +14,6 @@ public class Main {
 	/**A list where all functions are stored */
 	private ArrayList<Function> functions = new ArrayList<Function>();
 
-	/**A boolean value that represents the programs state */
-	private static boolean running;
-
 
 	/**
 	 * The main method: creates a new instance of Main and keeps the program running
@@ -26,14 +23,7 @@ public class Main {
 
 		new Main();
 
-		//keep program running
-		while (running == true) {
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-			}
-		}
-	}
+	} 
 
 	/**
 	 * The constructor that calls the menu
@@ -67,14 +57,12 @@ public class Main {
 
 			if (programMode.contains("close") || programMode.contains("exit") 
 					|| programMode.equals("") || programMode.contains("0") || programMode.contains("3")) {
-				running = false;
 			} else {
 				menu();
 			}
 
 		} else {
 			JOptionPane.showMessageDialog(null, "No operation entered! Exiting program!");
-			running = false;
 		}
 	}
 
@@ -95,13 +83,15 @@ public class Main {
 				typeFunction();
 			}
 
-			if (functionType.contains("exp") || functionType.contains("2")) {
+			if (functionType.contains("lin") || functionType.contains("2")) {
+				createLinearFunction();
+			}
+			
+			if (functionType.contains("exp") || functionType.contains("3")) {
 				createExponentialFunction();
 			}
 
-			if (functionType.contains("lin") || functionType.contains("3")) {
-				createLinearFunction();
-			}
+
 
 			//if nothing matches go back to main menu automatically due to recursive method call in menu()
 
