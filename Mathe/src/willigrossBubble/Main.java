@@ -109,7 +109,7 @@ public class Main {
 	private void functionActionsMenu(Function function) {
 
 		String action = JOptionPane.showInputDialog("Would you like to calculate a value table "
-				+ "or check if a specified point lies on your functions graph?");
+				+ "or check if a specified point lies on your function's graph?");
 
 		if (action != null) {
 
@@ -145,13 +145,21 @@ public class Main {
 			JOptionPane.showMessageDialog(null, prevFunctions);
 
 			//select prev functions
-			String seletion = JOptionPane.showInputDialog("Which function would you like to select? (enter its letter)");
+			
+			String selection;
+			
+			if (functions.size() == 1) {
+				selection = "f";
+			} else {
+				selection = JOptionPane.showInputDialog("Which function would you like to select? (enter its letter)");
+			}
+			
 
-			if (seletion.charAt(0) - 97 - 5 > functions.size() - 1) { //test if that function exists
+			if (selection.charAt(0) - 97 - 5 > functions.size() - 1) { //test if that function exists
 				JOptionPane.showMessageDialog(null, "The requested function is not available!");
 				showAndSelectPreviousFunctions();
 			} else {
-				functionActionsMenu(functions.get(seletion.charAt(0) - 97 - 5)); //ASCII value of a = 97 ; -5 as functions start with f
+				functionActionsMenu(functions.get(selection.charAt(0) - 97 - 5)); //ASCII value of a = 97 ; -5 as functions start with f
 			}
 		} else {
 			JOptionPane.showMessageDialog(null, "There are no previous functions saved! Create one first!");
@@ -187,7 +195,7 @@ public class Main {
 
 		boolean onGraph = function.testPointOnGraph(p);
 
-		if (onGraph) //TODO maybe use ? : operator
+		if (onGraph)
 			JOptionPane.showMessageDialog(null, "The point lies on your function's graph");
 		else
 			JOptionPane.showMessageDialog(null, "The point does not lie on your function's graph");
