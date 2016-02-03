@@ -30,7 +30,7 @@ public class ExponentialFunction extends Function {
 				expression += (a != 1.0) ? Function.roundDouble(a, 3) + "^x": "";
 			
 			
-			if (expression.equals(""));
+			if (expression.equals(""))
 				expression = "1";
 
 		}
