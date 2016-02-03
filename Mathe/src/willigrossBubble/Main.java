@@ -109,7 +109,8 @@ public class Main {
 	private void functionActionsMenu(Function function) {
 
 		String action = JOptionPane.showInputDialog("Would you like to calculate a VALUE TABLE "
-				+ "or check if a specified POINT lies on your function's graph?");
+				+ "or check if a specified POINT lies on your function's graph?" 
+				+ "\nYou can also create a MIRRORED version of your function (type X, Y or origin)");
 
 		if (action != null) {
 
@@ -120,6 +121,30 @@ public class Main {
 
 			if (action.contains("check") || action.contains("point") || action.contains("2"))
 				checkPointOnGraph(function);
+			
+			if (action.contains("x") || action.contains("3")) {
+				functions.add(Function.mirrorX(function));
+				JOptionPane.showMessageDialog(null, "Your function: f(x) = " + functions.get(functions.size() - 1));
+				functionActionsMenu(functions.get(functions.size() - 1));
+			}
+				
+			if (action.contains("y") || action.contains("4")) {
+				functions.add(Function.mirrorY(function));
+				JOptionPane.showMessageDialog(null, "Your function: f(x) = " + functions.get(functions.size() - 1));
+				functionActionsMenu(functions.get(functions.size() - 1));
+			}
+			
+			if (action.contains("ori") || action.contains("5")) {
+				functions.add(Function.mirrorOrigin(function));
+				JOptionPane.showMessageDialog(null, "Your function: f(x) = " + functions.get(functions.size() - 1));
+				functionActionsMenu(functions.get(functions.size() - 1));
+			}
+				
+			if (action.contains("mirr")) {
+				JOptionPane.showMessageDialog(null, "Please enter \"x\", \"y\" or \"origin\"!");
+				functionActionsMenu(function);
+			}
+				
 		}
 
 	}
@@ -154,7 +179,12 @@ public class Main {
 				selection = JOptionPane.showInputDialog("Which function would you like to select? (enter its letter)");
 			}
 			
-
+			if (selection == null || selection.equals("")) {
+				JOptionPane.showMessageDialog(null, "Nothing entered, going bach to main menu!");
+				return;
+			}
+			
+			
 			if (selection.charAt(0) - 97 - 5 > functions.size() - 1) { //test if that function exists
 				JOptionPane.showMessageDialog(null, "The requested function is not available!");
 				showAndSelectPreviousFunctions();

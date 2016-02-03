@@ -100,5 +100,87 @@ public class Function {
 	public static double roundDouble(double doubleValue, int decimals) {
 		return Math.round(Math.pow(10, decimals) * doubleValue) / Math.pow(10, decimals);
 	}
+
+
+
+
+	public static Function mirrorX(Function function) {
+		
+		Function f;
+		
+		//avoid double -
+		if (function.expression.startsWith("-")) {
+			
+			if (function instanceof ExponentialFunction) {
+				f = new ExponentialFunction();
+			} else if (function instanceof LinearFunction) {
+				f = new LinearFunction();
+			} else {
+				f = new Function();
+			}
+			
+			f.setExpression(function.expression.substring(1));
+			
+		//add - otherwise	
+		} else {
+			
+			if (function instanceof ExponentialFunction) {
+				f = new ExponentialFunction();
+				f.setExpression("-" + function);
+				return f;
+			
+			} else if (function instanceof LinearFunction){
+				f = new LinearFunction();
+				f.setExpression("-(" + function + ")");
+				return f;
+			
+			} else {
+				f = new Function();
+				f.setExpression("-(" + function + ")");
+				return f;
+			}
+		}
+		
+		return f;
+
+	}
+
+
+
+
+	public static Function mirrorY(Function function) {
+
+		String[] splitX = function.expression.split("x");
+		Function f = new Function();
+		
+		try {
+			f.setExpression(splitX[0] + "(-x)" + splitX[1]);
+		} catch (ArrayIndexOutOfBoundsException e) {
+			return function;
+		}
+		
+		if (function instanceof ExponentialFunction)
+			return (ExponentialFunction) f;
+		else if (function instanceof LinearFunction)
+			return (LinearFunction) f;
+		else 
+			return f;
+	}
+
+
+
+
+	public static Function mirrorOrigin(Function function) {
+		
+		Function f = mirrorX(function);
+		Function g = mirrorY(f);
+		
+		if (function instanceof ExponentialFunction)
+			return (ExponentialFunction) g;
+		else if (function instanceof LinearFunction)
+			return (LinearFunction) g;
+		else 
+			return g;
+	}
 	
 }

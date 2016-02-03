@@ -11,6 +11,18 @@ public class ExponentialFunction extends Function {
 		double a = Math.pow(q.getY() / p.getY(), 1 / (q.getX() - p.getX()));
 		double b = p.getY() / Math.pow(a, p.getX());
 
+		if (Double.isNaN(a)) {
+			a = Math.pow(p.getY(), 1 / p.getX());
+			b = 1;
+			
+			if (a - (int) a == 0)
+				expression += (int) a;
+			else
+				expression += Function.roundDouble(a, 3);
+			
+			return;
+		}
+		
 
 		if ( a == 0 || b == 0)
 			expression = "0";
