@@ -1,5 +1,7 @@
 package willigrossBubble;
 
+import javax.swing.JOptionPane;
+
 public class LinearFunction extends Function {
 
 	/**
@@ -7,7 +9,14 @@ public class LinearFunction extends Function {
 	 * @param p - point 1
 	 * @param q - point 2
 	 */
-	public void createThroughPoints(Point p, Point q) {
+	public boolean createThroughPoints(Point p, Point q) {
+		
+		if (p.getX() == q.getX() && !p.equals(q)) {
+			JOptionPane.showMessageDialog(null, "There is no function f(x) for a vertical straight line!");
+			return false;
+		}
+			
+		
 		double m = (q.getY() - p.getY()) / (q.getX() - p.getX());
 		
 		if (Double.isNaN(m))
@@ -30,6 +39,7 @@ public class LinearFunction extends Function {
 			expression += (t != 0.0) ? (int) t : "";
 		else
 			expression += (t != 0.0) ? Function.roundDouble(t, 3) : "";
+		return true;
 
 	}
 

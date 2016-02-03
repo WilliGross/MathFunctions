@@ -276,11 +276,14 @@ public class Main {
 		Point p = new Point(readDoubleFromStringInput("x coordinate of point P: " ), readDoubleFromStringInput("y coordinate of point P: " ));
 		Point q = new Point(readDoubleFromStringInput("x coordinate of point Q: " ), readDoubleFromStringInput("y coordinate of point Q: " ));
 
-		((LinearFunction) functions.get(functions.size() - 1)).createThroughPoints(p, q);
+		boolean success = ((LinearFunction) functions.get(functions.size() - 1)).createThroughPoints(p, q);
 
-		JOptionPane.showMessageDialog(null, "Your function: f(x) = " + functions.get(functions.size() - 1));
 
-		functionActionsMenu(functions.get(functions.size() - 1));
+		if (success) {
+			JOptionPane.showMessageDialog(null, "Your function: f(x) = " + functions.get(functions.size() - 1));
+
+			functionActionsMenu(functions.get(functions.size() - 1));
+		}
 	}
 
 	/**
