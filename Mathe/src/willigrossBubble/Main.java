@@ -86,7 +86,7 @@ public class Main {
 			if (functionType.contains("lin") || functionType.contains("2")) {
 				createLinearFunction();
 			}
-			
+
 			if (functionType.contains("exp") || functionType.contains("3")) {
 				createExponentialFunction();
 			}
@@ -121,30 +121,30 @@ public class Main {
 
 			if (action.contains("check") || action.contains("point") || action.contains("2"))
 				checkPointOnGraph(function);
-			
+
 			if (action.contains("x") || action.contains("3")) {
 				functions.add(Function.mirrorX(function));
 				JOptionPane.showMessageDialog(null, "Your function: f(x) = " + functions.get(functions.size() - 1));
 				functionActionsMenu(functions.get(functions.size() - 1));
 			}
-				
+
 			if (action.contains("y") || action.contains("4")) {
 				functions.add(Function.mirrorY(function));
 				JOptionPane.showMessageDialog(null, "Your function: f(x) = " + functions.get(functions.size() - 1));
 				functionActionsMenu(functions.get(functions.size() - 1));
 			}
-			
+
 			if (action.contains("ori") || action.contains("5")) {
 				functions.add(Function.mirrorOrigin(function));
 				JOptionPane.showMessageDialog(null, "Your function: f(x) = " + functions.get(functions.size() - 1));
 				functionActionsMenu(functions.get(functions.size() - 1));
 			}
-				
+
 			if (action.contains("mirr")) {
 				JOptionPane.showMessageDialog(null, "Please enter \"x\", \"y\" or \"origin\"!");
 				functionActionsMenu(function);
 			}
-				
+
 		}
 
 	}
@@ -170,21 +170,21 @@ public class Main {
 			JOptionPane.showMessageDialog(null, prevFunctions);
 
 			//select prev functions
-			
+
 			String selection;
-			
+
 			if (functions.size() == 1) {
 				selection = "f";
 			} else {
 				selection = JOptionPane.showInputDialog("Which function would you like to select? (enter its letter)");
 			}
-			
+
 			if (selection == null || selection.equals("")) {
 				JOptionPane.showMessageDialog(null, "Nothing entered, going bach to main menu!");
 				return;
 			}
-			
-			
+
+
 			if (selection.charAt(0) - 97 - 5 > functions.size() - 1) { //test if that function exists
 				JOptionPane.showMessageDialog(null, "The requested function is not available!");
 				showAndSelectPreviousFunctions();
@@ -194,7 +194,7 @@ public class Main {
 		} else {
 			JOptionPane.showMessageDialog(null, "There are no previous functions saved! Create one first!");
 		}
-		
+
 	}
 
 	/**
@@ -256,11 +256,13 @@ public class Main {
 		Point p = new Point(readDoubleFromStringInput("x coordinate of point P: " ), readDoubleFromStringInput("y coordinate of point P: " ));
 		Point q = new Point(readDoubleFromStringInput("x coordinate of point Q: " ), readDoubleFromStringInput("y coordinate of point Q: " ));
 
-		((ExponentialFunction) functions.get(functions.size() - 1)).createThroughPoints(p, q);
+		boolean success = ((ExponentialFunction) functions.get(functions.size() - 1)).createThroughPoints(p, q);
 
-		JOptionPane.showMessageDialog(null, "Your function: f(x) = " + functions.get(functions.size() - 1));
+		if (success) {
+			JOptionPane.showMessageDialog(null, "Your function: f(x) = " + functions.get(functions.size() - 1));
 
-		functionActionsMenu(functions.get(functions.size() - 1));
+			functionActionsMenu(functions.get(functions.size() - 1));
+		}
 	}
 
 
