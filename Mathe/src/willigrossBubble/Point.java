@@ -68,5 +68,40 @@ public class Point {
 		this.x = x;
 		this.y = y;
 	}
+
+
+
+
+	/**
+	 * Overwriting of .equals()
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null)
+			return false;
+		if (this == obj)
+			return true;
+		if (getClass() != obj.getClass())
+			return false;
+		if (x == ((Point) obj).getX() && y == ((Point) obj).getY())
+			return true;
+		else 
+			return false;
+	}
+
+
+
+
+	/**
+	 * Overwriting of .hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		return (new Double(x + y)).hashCode();
+	}
+	
+	
+	
+	
 	
 }
