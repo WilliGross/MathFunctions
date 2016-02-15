@@ -153,11 +153,11 @@ public class Function {
 		String[] splitX = function.expression.split("x");
 		Function f = new Function();
 		
-		try {
-			f.setExpression(splitX[0] + "(-x)" + splitX[1]);
-		} catch (ArrayIndexOutOfBoundsException e) {
-			return function;
-		}
+		
+		f.setExpression(splitX[0] + "(-x)");
+		if (splitX.length >= 2)
+			f.setExpression(f.expression + splitX[1]);
+
 		
 		if (function instanceof ExponentialFunction)
 			return (ExponentialFunction) f;
