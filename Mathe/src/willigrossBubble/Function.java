@@ -50,7 +50,7 @@ public class Function {
 	 */
 	public void table(double start, double end, double step) {
 		
-		String tableString ="f(x) = " + expression + "\n\n";
+		StringBuffer sb = new StringBuffer("f(x) = " + expression + "\n\n");
 		
 		final DoubleEvaluator evaluator = new DoubleEvaluator();
 		final StaticVariableSet<Double> variables = new StaticVariableSet<Double>();
@@ -63,7 +63,7 @@ public class Function {
 				
 				variables.set("x", x);
 				
-				tableString += "f(" + x + ") = " + roundDouble(evaluator.evaluate(expression, variables), 3) + "\n";
+				sb.append("f(" + x + ") = " + roundDouble(evaluator.evaluate(expression, variables), 3) + "\n");
 				
 				x += step;
 			}
@@ -73,13 +73,13 @@ public class Function {
 				
 				variables.set("x", x);
 				
-				tableString += "f(" + x + ") = " + roundDouble(evaluator.evaluate(expression, variables), 3) + "\n";
+				sb.append("f(" + x + ") = " + roundDouble(evaluator.evaluate(expression, variables), 3) + "\n");
 				
 				x -= step;
 			}
 		}
 		
-		JOptionPane.showMessageDialog(null, tableString);
+		JOptionPane.showMessageDialog(null, sb.toString());
 		
 	}
 	
