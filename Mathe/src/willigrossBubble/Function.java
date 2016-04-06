@@ -32,10 +32,12 @@ public class Function {
 		
 		final DoubleEvaluator evaluator = new DoubleEvaluator();
 		final StaticVariableSet<Double> variables = new StaticVariableSet<Double>();
+		double value;
 		
 		variables.set("x", p.getX());
 		
-		if (evaluator.evaluate(expression, variables) == p.getY()) {
+		value = evaluator.evaluate(expression, variables);
+		if (value > p.getY() - 0.05 && value < p.getY() + 0.05) {
 			return true;
 		}
 		
