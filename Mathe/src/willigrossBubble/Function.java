@@ -105,84 +105,49 @@ public class Function {
 
 
 
-
-	public static Function mirrorX(Function function) {
-		
-		Function f;
-		
-		//avoid double -
-		if (function.expression.startsWith("-")) {
-			
-			if (function instanceof ExponentialFunction) {
-				f = new ExponentialFunction();
-			} else if (function instanceof LinearFunction) {
-				f = new LinearFunction();
-			} else {
-				f = new Function();
-			}
-			
-			f.setExpression(function.expression.substring(1));
-			
-		//add - otherwise	
-		} else {
-			
-			if (function instanceof ExponentialFunction) {
-				f = new ExponentialFunction();
-				f.setExpression("-" + function);
-				return f;
-			
-			} else if (function instanceof LinearFunction){
-				f = new LinearFunction();
-				f.setExpression("-(" + function + ")");
-				return f;
-			
-			} else {
-				f = new Function();
-				f.setExpression("-(" + function + ")");
-				return f;
-			}
-		}
-		
-		return f;
-
+	/**
+	 * Mirror a function on the x-axis
+	 * @return the new function
+	 */
+	public Function mirrorX() {
+			this.setExpression("-(" + this + ")");
+		return this;
 	}
 
 
 
+	/**
+	 * Mirror a function on the y-axis
+	 * @return the new function
+	 */
+	public Function mirrorY() {
 
-	public static Function mirrorY(Function function) {
+		boolean endsWithX = false;
+		if (this.expression.endsWith("x"))
+			endsWithX = true;
+			
+		String[] splitX = expression.split("x");
+		
+		this.setExpression(splitX[0]);
+		
+		for (int i = 1; i < splitX.length; i++)
+			this.setExpression(this.expression + "(-x)" + splitX[i]);
+		
+		if (endsWithX)
+			this.setExpression(this.expression + "(-x)");
 
-		String[] splitX = function.expression.split("x");
-		Function f = new Function();
-		
-		
-		f.setExpression(splitX[0] + "(-x)");
-		if (splitX.length >= 2)
-			f.setExpression(f.expression + splitX[1]);
-
-		
-		if (function instanceof ExponentialFunction)
-			return (ExponentialFunction) f;
-		else if (function instanceof LinearFunction)
-			return (LinearFunction) f;
-		else 
-			return f;
+		return this;
 	}
 
 
 
-
-	public static Function mirrorOrigin(Function function) {
+	/**
+	 * Mirror a function on the x-axis and y-axis => rotate it around the origin
+	 * @return the new function
+	 */
+	public Function mirrorOrigin() {
 		
-		Function f = mirrorX(function);
-		Function g = mirrorY(f);
-		
-		if (function instanceof ExponentialFunction)
-			return (ExponentialFunction) g;
-		else if (function instanceof LinearFunction)
-			return (LinearFunction) g;
-		else 
-			return g;
+		return this.mirrorX().mirrorY();
 	}
 	
 }

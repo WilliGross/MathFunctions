@@ -123,19 +123,19 @@ public class Main {
 				checkPointOnGraph(function);
 
 			if (action.contains("x") || action.contains("3")) {
-				functions.add(Function.mirrorX(function));
+				functions.add(function.mirrorX());
 				JOptionPane.showMessageDialog(null, "Your function: f(x) = " + functions.get(functions.size() - 1));
 				functionActionsMenu(functions.get(functions.size() - 1));
 			}
 
 			if (action.contains("y") || action.contains("4")) {
-				functions.add(Function.mirrorY(function));
+				functions.add(function.mirrorY());
 				JOptionPane.showMessageDialog(null, "Your function: f(x) = " + functions.get(functions.size() - 1));
 				functionActionsMenu(functions.get(functions.size() - 1));
 			}
 
 			if (action.contains("ori") || action.contains("5")) {
-				functions.add(Function.mirrorOrigin(function));
+				functions.add(function.mirrorOrigin());
 				JOptionPane.showMessageDialog(null, "Your function: f(x) = " + functions.get(functions.size() - 1));
 				functionActionsMenu(functions.get(functions.size() - 1));
 			}
