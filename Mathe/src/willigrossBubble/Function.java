@@ -13,6 +13,14 @@ public class Function {
 	protected String expression = "";
 	
 	/**
+	 * A string to represent the function
+	 */
+	public String toString() {
+		return expression;
+	}
+
+
+	/**
 	 * Directly enter the expression
 	 * @param expression - the expression to save as the function
 	 */
@@ -20,7 +28,18 @@ public class Function {
 		this.expression = expression;
 	}
 	
-
+	
+	/**
+	 * Evaluates the expression with a specified x value
+	 * @param x - the x value 
+	 * @return the corresponding y value
+	 */
+	public double evaluate(double x) {
+		final DoubleEvaluator evaluator = new DoubleEvaluator();
+		final StaticVariableSet<Double> variables = new StaticVariableSet<Double>();
+		variables.set("x", x);
+		return evaluator.evaluate(expression, variables);
+	}
 	
 	
 	/**
@@ -37,7 +56,7 @@ public class Function {
 		variables.set("x", p.getX());
 		
 		value = evaluator.evaluate(expression, variables);
-		if (value > p.getY() - 0.05 && value < p.getY() + 0.05) {
+		if (value > p.getY() - 0.05 && value < p.getY() + 0.05) { //tolerance of 0.05
 			return true;
 		}
 		
@@ -84,14 +103,6 @@ public class Function {
 		JOptionPane.showMessageDialog(null, sb.toString());
 		
 	}
-	
-	/**
-	 * A string to represent the function
-	 */
-	public String toString() {
-		return expression;
-	}
-	
 	
 	/**
 	 * Round a double value to a specified number of decimals
@@ -150,4 +161,73 @@ public class Function {
 		return this.mirrorX().mirrorY();
 	}
 	
+/*	/**
+	 * Find one intersection of two graphs
+	 * @param f - function f
+	 * @param g - function g
+	 * @return the intersection point
+	 "star"/
+	public static Point findIntersection(Function f, Function g) {
+		boolean found = false;
+		boolean tryIncreasingX = true;
+		int dirChanges = 1;
+		double yF = 0, yG = 0, prevYF, prevYG, currX, absDiff = 0, prevAbsDiff;
+		Point interS = new Point(0, 0);
+		
+		currX = Math.floor(Math.random() * 10);
+				
+		while (!found) {
+			prevYF = yF;
+			prevYG = yG;
+			prevAbsDiff = absDiff;
+			
+			yF = f.evaluate(currX);
+			yG = g.evaluate(currX);
+			absDiff = Math.abs(yF - yG);
+			
+			if (absDiff <= 0.05 && absDiff >= -0.05) { //correct x value found?
+				found = true;
+				interS.setX(currX);
+			} else { // not found yet :(
+				
+				//change checking direction?
+				if (prevAbsDiff <= absDiff) {
+					if (tryIncreasingX == true)
+						tryIncreasingX = false;
+					else
+						tryIncreasingX = true;
+				}
+				
+				//set next x value
+				if (tryIncreasingX) {
+					currX += absDiff / (10 * dirChanges);
+				} else {
+					currX -= absDiff / (10 * dirChanges);
+				}
+				
+			}
+			
+		}//end of while loop
+		
+		//check if integer x value is the exact intersection
+		prevYF = yF;
+		prevYG = yG;
+		prevAbsDiff = absDiff;
+		
+		currX = Math.round(currX);
+		
+		yF = f.evaluate(currX);
+		yG = g.evaluate(currX);
+		absDiff = Math.abs(yF - yG);
+		
+		if (absDiff == 0) {
+			interS.setX(currX);
+		}
+		
+		//calculate corresponding y - value
+		interS.setY(f.evaluate(interS.getX()));
+		
+		return interS;
+	}
+*/	
 }

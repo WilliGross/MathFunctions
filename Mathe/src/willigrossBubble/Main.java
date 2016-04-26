@@ -40,7 +40,7 @@ public class Main {
 	private void menu() {
 
 		String programMode = JOptionPane.showInputDialog("What would you like to do? \n"
-				+ "(CREATE a function, LOAD a previous function, CLOSE)");
+				+ "(CREATE a function, LOAD a previous function, calculate the INTERSECTION of two functions, CLOSE)");
 
 		if (programMode != null) {
 
@@ -54,9 +54,13 @@ public class Main {
 			if (programMode.contains("load") || programMode.contains("prev") || programMode.contains("2")) {
 				showAndSelectPreviousFunctions();
 			}
+			
+			if (programMode.contains("inter") || programMode.contains("3")) {
+				calcIntersection();
+			}
 
 			if (programMode.contains("close") || programMode.contains("exit") 
-					|| programMode.equals("") || programMode.contains("0") || programMode.contains("3")) {
+					|| programMode.equals("") || programMode.contains("0") || programMode.contains("4")) {
 			} else {
 				menu();
 			}
@@ -157,7 +161,7 @@ public class Main {
 
 		if (functions.size() > 0) {
 			//show prev functions
-			String prevFunctions = "The functions you've previously entered: \n\n";
+			String prevFunctions = "The functions you've previously entered: \n\n";//TODO use stringbuffer
 
 			for (int i = 0; i < functions.size(); i++) {
 				if ((i + 5) <= 25) {
@@ -284,6 +288,54 @@ public class Main {
 
 			functionActionsMenu(functions.get(functions.size() - 1));
 		}
+	}
+
+	private void calcIntersection() {
+		
+		//TODO DON'T COPY THE WHOLE showAndSelectPreviousFunctions() METHOD!!!
+		if (functions.size() > 0) {
+			//show prev functions
+			String prevFunctions = "The functions you've previously entered: \n\n"; //TODO use stringbuffer
+
+			for (int i = 0; i < functions.size(); i++) {
+				if ((i + 5) <= 25) {
+					prevFunctions += alphabet[i + 5] + "(x) = " + functions.get(i) + "\n";
+				} else {
+					JOptionPane.showMessageDialog(null, "You have to many functions! We can't display them all!");
+				}
+			}
+
+			JOptionPane.showMessageDialog(null, prevFunctions);
+
+			//select prev functions
+
+			String selection1, selection2;
+
+			if (functions.size() == 1) {
+				selection1 = "f";
+				selection2 = "f";
+			} else {
+				selection1 = JOptionPane.showInputDialog("Which function would you like to select as function 1? (enter its letter)");
+				selection2 = JOptionPane.showInputDialog("Which function would you like to select as function 2? (enter its letter)");
+			}
+
+			if (selection1 == null || selection1.equals("") || selection2 == null || selection2.equals("")) {
+				JOptionPane.showMessageDialog(null, "Nothing entered, going bach to main menu!");
+				return;
+			}
+
+
+			if (selection1.charAt(0) - 97 - 5 > functions.size() - 1 || selection2.charAt(0) - 97 - 5 > functions.size() - 1) { //test if that function exists
+				JOptionPane.showMessageDialog(null, "The requested function is not available!");
+				showAndSelectPreviousFunctions();
+			} else {
+				Intersection intersection = new Intersection(functions.get(selection1.charAt(0) - 97 - 5), functions.get(selection2.charAt(0) - 97 - 5)); //ASCII value of a = 97 ; -5 as functions start with f
+				JOptionPane.showMessageDialog(null, "The functions " + functions.get(selection1.charAt(0) - 97 - 5) + " and " + functions.get(selection2.charAt(0) - 97 - 5) + " intersect in the point: " + intersection);
+			}
+		} else {
+			JOptionPane.showMessageDialog(null, "There are no previous functions saved! Create one first!");
+		}
+		
 	}
 
 	/**

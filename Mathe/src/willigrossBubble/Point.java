@@ -54,7 +54,7 @@ public class Point {
 	 * A string to represent the point
 	 */
 	public String toString(){
-		return "(" + this.getX() + "," + this.getY() + ")";
+		return "(" + Function.roundDouble(this.getX(), 3) + "," + Function.roundDouble(this.getY(), 3) + ")";
 	}
 	
 	
