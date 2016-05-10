@@ -77,7 +77,7 @@ public class Intersection extends Point {
 			yG = g.evaluate(currX);
 			absDiff = Math.abs(yF - yG);
 
-			if (absDiff <= 0.005 && absDiff >= -0.005) { //correct x value found?
+			if (absDiff <= 0.00005 && absDiff >= -0.00005) { //correct x value found?
 				found = true;
 				this.setX(currX);
 			} else { // not found yet :(
