@@ -1,11 +1,13 @@
 package willigrossBubble;
 
+import java.io.Serializable;
+
 import javax.swing.JOptionPane;
 
 import com.fathzer.soft.javaluator.DoubleEvaluator;
 import com.fathzer.soft.javaluator.StaticVariableSet;
 
-public class Function {
+public class Function implements Serializable {
 	
 	/**
 	 * The actual function

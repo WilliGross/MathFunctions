@@ -1,8 +1,10 @@
 package willigrossBubble;
 
+import java.io.Serializable;
+
 import javax.swing.JOptionPane;
 
-public class ExponentialFunction extends Function {
+public class ExponentialFunction extends Function implements Serializable {
 
 	/**
 	 * Create a function whose graph runs through two given points

@@ -1,9 +1,13 @@
 package willigrossBubble;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import com.blogspot.debukkitsblog.Util.FileStorage;
 import com.fathzer.soft.javaluator.DoubleEvaluator;
 
 public class Main {
@@ -11,8 +15,12 @@ public class Main {
 	/**A utility array representing the alphabet */
 	public static char[] alphabet = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
 
+	/**Location where file is executed from*/
+	public URL location = Main.class.getProtectionDomain().getCodeSource().getLocation();
+	
 	/**A list where all functions are stored */
 	private ArrayList<Function> functions = new ArrayList<Function>();
+	
 
 
 	/**
@@ -20,7 +28,7 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-
+		
 		new Main();
 
 	} 
@@ -29,7 +37,6 @@ public class Main {
 	 * The constructor that calls the menu
 	 */
 	public Main() {
-
 		menu();
 	}
 
@@ -114,7 +121,8 @@ public class Main {
 
 		String action = JOptionPane.showInputDialog("Would you like to calculate a VALUE TABLE "
 				+ "or check if a specified POINT lies on your function's graph?" 
-				+ "\nYou can also create a MIRRORED version of your function (type X, Y or origin)");
+				+ "\nYou can also create a MIRRORED version of your function (type X, Y or origin)"
+				+ "\nWould you like to SAVE this function?");
 
 		if (action != null) {
 
@@ -148,11 +156,43 @@ public class Main {
 				JOptionPane.showMessageDialog(null, "Please enter \"x\", \"y\" or \"origin\"!");
 				functionActionsMenu(function);
 			}
+			
+			if (action.contains("save") || action.contains("file") || action.contains("6"))
+				save(function);
 
 		}
 
 	}
 
+
+	/**
+	 * Save the function to Functions.dat file in the execution environment
+	 * @param function - the function to save
+	 */
+	private void save(Function function) {
+		FileStorage fs = null;
+		String key;
+		System.out.println("save running");
+		try {
+			fs = new FileStorage(new File(location.getFile().substring(0, location.getFile().lastIndexOf('/') + 1) + "Functions.dat"));
+			System.out.println("file created");
+		} catch (IllegalArgumentException | IOException e) {
+			JOptionPane.showMessageDialog(null, "Error when saving!");
+			e.printStackTrace();
+			return;
+		}
+		
+		for (int i = 0; i < alphabet.length - 5; i++) {
+			key = "" + alphabet[i + 5];
+			System.out.println(fs.hasKey(key));
+			if (! fs.hasKey(key)) {
+				fs.store(key, function);
+				System.out.println("saved as " + key);
+				break;
+			}
+		}
+		System.out.println("save end");
+	}
 
 	/**
 	 * Displays previous functions and lets the user select one; calls the function actions menu

@@ -7,5 +7,6 @@
 			<attribute name="javadoc_location" value="jar:file:/D:/Users/Leonard/Documents/Java/eclipse/Basics/libs/javaluator-3.0.1-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="libs/SimpleFileStorage_lib.jar" sourcepath="libs/SimpleFileStorage-1.0.1.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
