@@ -17,10 +17,10 @@ public class Main {
 
 	/**Location where file is executed from*/
 	public URL location = Main.class.getProtectionDomain().getCodeSource().getLocation();
-	
+
 	/**A list where all functions are stored */
 	private ArrayList<Function> functions = new ArrayList<Function>();
-	
+
 
 
 	/**
@@ -28,7 +28,7 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
+
 		new Main();
 
 	} 
@@ -37,9 +37,39 @@ public class Main {
 	 * The constructor that calls the menu
 	 */
 	public Main() {
-		menu();
+		boolean success = loadFunctions();
+		if (success)
+			menu();
+		else
+			JOptionPane.showMessageDialog(null, "Error while loading file!");
 	}
 
+	/**
+	 * Loads all the functions from the save file and adds them to the functions list
+	 * @return true if the action was successful
+	 */
+	private boolean loadFunctions() {
+		FileStorage fs = null;
+		String key;
+		Function function;
+
+		try {
+			fs = new FileStorage(new File(location.getFile().substring(0, location.getFile().lastIndexOf('/') + 1) + "Functions.dat"));
+		} catch (IllegalArgumentException | IOException e) {
+			JOptionPane.showMessageDialog(null, "Error with file!");
+			e.printStackTrace();
+			return false;
+		}
+
+		for (int i = 5; i < alphabet.length; i++) {
+			key = "" + alphabet[i];
+			function = (Function) fs.get(key);
+			if (function != null)
+				functions.add((Function) function);
+		}
+
+		return true;
+	}
 
 	/**
 	 * Displays the menu and calls selected tasks
@@ -61,7 +91,7 @@ public class Main {
 			if (programMode.contains("load") || programMode.contains("prev") || programMode.contains("2")) {
 				showAndSelectPreviousFunctions();
 			}
-			
+
 			if (programMode.contains("inter") || programMode.contains("3")) {
 				calcIntersection();
 			}
@@ -122,7 +152,7 @@ public class Main {
 		String action = JOptionPane.showInputDialog("Would you like to calculate a VALUE TABLE "
 				+ "or check if a specified POINT lies on your function's graph?" 
 				+ "\nYou can also create a MIRRORED version of your function (type X, Y or origin)"
-				+ "\nWould you like to SAVE this function?");
+				+ "\nWould you like to SAVE this function or REMOVE it from the file (if it's already saved)?");
 
 		if (action != null) {
 
@@ -156,13 +186,34 @@ public class Main {
 				JOptionPane.showMessageDialog(null, "Please enter \"x\", \"y\" or \"origin\"!");
 				functionActionsMenu(function);
 			}
-			
-			if (action.contains("save") || action.contains("file") || action.contains("6"))
+
+			if (action.contains("save") || action.contains("6"))
 				save(function);
+			
+			if (action.contains("rem") || action.contains("7"))
+				removeFunctionFromFile(function);
 
 		}
 
 	}
+
+	/**
+	 * Removes a function from the save file but not from the functions list (-> effective after restart)
+	 * @param function - the function to remove
+	 */
+	private void removeFunctionFromFile(Function function) {
+		FileStorage fs = null;
+		
+		try {
+			fs = new FileStorage(new File(location.getFile().substring(0, location.getFile().lastIndexOf('/') + 1) + "Functions.dat"));
+		} catch (IllegalArgumentException | IOException e) {
+			JOptionPane.showMessageDialog(null, "Error with file!");
+			e.printStackTrace();
+			return;
+		}
+		fs.remove("" + alphabet[functions.indexOf(function) + 5]);
+	}
+
 
 
 	/**
@@ -172,26 +223,21 @@ public class Main {
 	private void save(Function function) {
 		FileStorage fs = null;
 		String key;
-		System.out.println("save running");
 		try {
 			fs = new FileStorage(new File(location.getFile().substring(0, location.getFile().lastIndexOf('/') + 1) + "Functions.dat"));
-			System.out.println("file created");
 		} catch (IllegalArgumentException | IOException e) {
 			JOptionPane.showMessageDialog(null, "Error when saving!");
 			e.printStackTrace();
 			return;
 		}
-		
+
 		for (int i = 0; i < alphabet.length - 5; i++) {
 			key = "" + alphabet[i + 5];
-			System.out.println(fs.hasKey(key));
 			if (! fs.hasKey(key)) {
 				fs.store(key, function);
-				System.out.println("saved as " + key);
 				break;
 			}
 		}
-		System.out.println("save end");
 	}
 
 	/**
@@ -331,7 +377,7 @@ public class Main {
 	}
 
 	private void calcIntersection() {
-		
+
 		//TODO DON'T COPY THE WHOLE showAndSelectPreviousFunctions() METHOD!!!
 		if (functions.size() > 0) {
 			//show prev functions
@@ -375,7 +421,7 @@ public class Main {
 		} else {
 			JOptionPane.showMessageDialog(null, "There are no previous functions saved! Create one first!");
 		}
-		
+
 	}
 
 	/**
@@ -390,6 +436,6 @@ public class Main {
 
 		return evaluator.evaluate(expression);
 	}
-	
+
 }
 
