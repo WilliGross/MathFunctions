@@ -14,6 +14,8 @@ public class Function implements Serializable {
 	 */
 	protected String expression = "";
 	
+	public static String s;
+	
 	/**
 	 * A string to represent the function
 	 */
@@ -73,7 +75,7 @@ public class Function implements Serializable {
 	 */
 	public void table(double start, double end, double step) {
 		
-		StringBuffer sb = new StringBuffer("f(x) = " + expression + "\n\n");
+		StringBuffer sb = new StringBuffer("<html>" + "f(x) = " + expression + "<p/> <p/>");
 		
 		final DoubleEvaluator evaluator = new DoubleEvaluator();
 		final StaticVariableSet<Double> variables = new StaticVariableSet<Double>();
@@ -86,7 +88,11 @@ public class Function implements Serializable {
 				
 				variables.set("x", x);
 				
-				sb.append("f(" + x + ") = " + roundDouble(evaluator.evaluate(expression, variables), 3) + "\n");
+				sb.append("f(" + x + ") = " + roundDouble(evaluator.evaluate(expression, variables), 3) + "<p/>");
+				
+				if (start == end) {
+					sb.append("<html/>");
+				}
 				
 				x += step;
 			}
@@ -96,13 +102,17 @@ public class Function implements Serializable {
 				
 				variables.set("x", x);
 				
-				sb.append("f(" + x + ") = " + roundDouble(evaluator.evaluate(expression, variables), 3) + "\n");
+				sb.append("f(" + x + ") = " + roundDouble(evaluator.evaluate(expression, variables), 3) + "<p/>");
+				
+				if (x == end) {
+					sb.append("<html/>");
+				}
 				
 				x -= step;
 			}
 		}
 		
-		JOptionPane.showMessageDialog(null, sb.toString());
+		s = sb.toString();
 		
 	}
 	

@@ -16,10 +16,12 @@ public class Main {
 	public static char[] alphabet = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
 
 	/**Location where file is executed from*/
-	public URL location = Main.class.getProtectionDomain().getCodeSource().getLocation();
+	public static URL location = Main.class.getProtectionDomain().getCodeSource().getLocation();
 
 	/**A list where all functions are stored */
-	private ArrayList<Function> functions = new ArrayList<Function>();
+	private static ArrayList<Function> functions = new ArrayList<Function>();
+	
+	public static int zahl = 0; 
 
 
 
@@ -37,6 +39,7 @@ public class Main {
 	 * The constructor that calls the menu
 	 */
 	public Main() {
+		new Frame();
 		boolean success = loadFunctions();
 		if (success)
 			menu();
@@ -75,8 +78,14 @@ public class Main {
 	 * Displays the menu and calls selected tasks
 	 */
 	private void menu() {
+		
+		Frame.label3.setVisible(true);
+		Frame.button1.setVisible(true);
+		Frame.button2.setVisible(true);
+		Frame.button3.setVisible(true);
+		Frame.button4.setVisible(true);
 
-		String programMode = JOptionPane.showInputDialog("What would you like to do? \n"
+		/*String programMode = JOptionPane.showInputDialog("What would you like to do? \n"
 				+ "(CREATE a function, LOAD a previous function, calculate the INTERSECTION of two functions, CLOSE)");
 
 		if (programMode != null) {
@@ -104,16 +113,17 @@ public class Main {
 
 		} else {
 			JOptionPane.showMessageDialog(null, "No operation entered! Exiting program!");
-		}
+		}*/
 	}
 
 
 	/**
 	 * Displays a menu for creating functions
 	 */
-	private void createFunctionsMenu() {
-
-		String functionType = JOptionPane.showInputDialog("How would you like to create your function? \n"
+	static void createFunctionsMenu() {		
+		Frame.frameFunctionsMenu();
+		
+		/*String functionType = JOptionPane.showInputDialog("How would you like to create your function? \n"
 				+ "(TYPE, create LINEAR f. through 2 points, create EXPONENTIAL f. through 2 points, go BACK to main menu)");
 
 		if (functionType != null) {
@@ -139,60 +149,74 @@ public class Main {
 		} else {
 			JOptionPane.showMessageDialog(null, "Nothing entered, going back to main menu!");
 			//going back automatically due to recursive method call in menu()
-		}
+		}*/
 
-	}
+	} 
 
 	/**
 	 * Displays a menu for a specific function
 	 * @param function - the function to interact with
 	 */
-	private void functionActionsMenu(Function function) {
+	static void functionActionsMenu(Function function) {
 
-		String action = JOptionPane.showInputDialog("Would you like to calculate a VALUE TABLE "
+		/*String action = JOptionPane.showInputDialog("Would you like to calculate a VALUE TABLE "
 				+ "or check if a specified POINT lies on your function's graph?" 
 				+ "\nYou can also create a MIRRORED version of your function (type X, Y or origin)"
-				+ "\nWould you like to SAVE this function or REMOVE it from the file (if it's already saved)?");
-
-		if (action != null) {
-
-			action.toLowerCase();
-
-			if (action.contains("val") || action.contains("table") || action.contains("1"))
+				+ "\nWould you like to SAVE this function or REMOVE it from the file (if it's already saved)?");*/
+		
+		if (zahl != 0) {
+			if (zahl == 1){
 				valueTable(function);
+				zahl = -1;
 
-			if (action.contains("check") || action.contains("point") || action.contains("2"))
+			}
+			if (zahl == 2) {
 				checkPointOnGraph(function);
-
-			if (action.contains("x") || action.contains("3")) {
+				zahl = -1;
+			}
+			if (zahl == 3) {
 				functions.add(function.mirrorX());
-				JOptionPane.showMessageDialog(null, "Your function: f(x) = " + functions.get(functions.size() - 1));
+				zahl = -1;
+				Frame.frameMirror();
+				String s = "" + functions.get(functions.size() - 1);
+				Frame.framausgabemirror(s);
 				functionActionsMenu(functions.get(functions.size() - 1));
 			}
 
-			if (action.contains("y") || action.contains("4")) {
+			if (zahl == 4) {
 				functions.add(function.mirrorY());
-				JOptionPane.showMessageDialog(null, "Your function: f(x) = " + functions.get(functions.size() - 1));
+				zahl = -1;
+				Frame.frameMirror();
+				String s = "" + functions.get(functions.size() - 1);
+				Frame.framausgabemirror(s);
+				functionActionsMenu(functions.get(functions.size() - 1));
+			}
+			
+			if (zahl == 5) {
+				functions.add(function.mirrorOrigin());
+				zahl = -1;
+				Frame.frameMirror();
+				String s = "" + functions.get(functions.size() - 1);
+				Frame.framausgabemirror(s);
 				functionActionsMenu(functions.get(functions.size() - 1));
 			}
 
-			if (action.contains("ori") || action.contains("5")) {
+			if (zahl == 6) {
 				functions.add(function.mirrorOrigin());
 				JOptionPane.showMessageDialog(null, "Your function: f(x) = " + functions.get(functions.size() - 1));
 				functionActionsMenu(functions.get(functions.size() - 1));
+				zahl = -1;
 			}
 
-			if (action.contains("mirr")) {
-				JOptionPane.showMessageDialog(null, "Please enter \"x\", \"y\" or \"origin\"!");
-				functionActionsMenu(function);
-			}
-
-			if (action.contains("save") || action.contains("6"))
+			if (zahl == 7) {
 				save(function);
+				zahl = -1;
 			
-			if (action.contains("rem") || action.contains("7"))
+			}	
+			if (zahl == 8) {
 				removeFunctionFromFile(function);
-
+				zahl = -1;
+			}
 		}
 
 	}
@@ -201,7 +225,7 @@ public class Main {
 	 * Removes a function from the save file but not from the functions list (-> effective after restart)
 	 * @param function - the function to remove
 	 */
-	private void removeFunctionFromFile(Function function) {
+	private static void removeFunctionFromFile(Function function) {
 		FileStorage fs = null;
 		
 		try {
@@ -220,7 +244,7 @@ public class Main {
 	 * Save the function to Functions.dat file in the execution environment
 	 * @param function - the function to save
 	 */
-	private void save(Function function) {
+	private static void save(Function function) {
 		FileStorage fs = null;
 		String key;
 		try {
@@ -243,7 +267,7 @@ public class Main {
 	/**
 	 * Displays previous functions and lets the user select one; calls the function actions menu
 	 */
-	private void showAndSelectPreviousFunctions() {
+	static void showAndSelectPreviousFunctions() {
 
 		if (functions.size() > 0) {
 			//show prev functions
@@ -291,10 +315,9 @@ public class Main {
 	 * Displays a value table for a function
 	 * @param function - the function the value table should be calculated for
 	 */
-	private void valueTable(Function function) {
+	private static void valueTable(Function function) {
 
-		String parameters = JOptionPane.showInputDialog("Enter START and END value for x and STEP, seperated by spaces: ");
-		String[] params = parameters.split(" ");
+		String[] params = {Frame.tfield2.getText(), Frame.tfield3.getText(), Frame.tfield4.getText()};
 
 		if (params.length < 3 || params.length > 3) { //check if there are 3 arguments
 			JOptionPane.showMessageDialog(null, "Please enter 3 arguments!");
@@ -309,7 +332,7 @@ public class Main {
 	 * Checks if a specified point lies on the graph
 	 * @param function - the function whose graph should be checked
 	 */
-	private void checkPointOnGraph(Function function) {
+	private static void checkPointOnGraph(Function function) {
 
 		Point p = new Point(readDoubleFromStringInput("x coordinate of point P: " ), readDoubleFromStringInput("y coordinate of point P: " ));
 
@@ -325,12 +348,16 @@ public class Main {
 	/**
 	 * Manually enter a function
 	 */
-	private void typeFunction() {
+	static void typeFunction(int i) {
+		
+		zahl = i;
 
-		String expression = JOptionPane.showInputDialog("Please enter your function: f(x) = ");
+		String expression = Frame.tfield1.getText();
 
 		functions.add(new Function());
 		functions.get(functions.size() - 1).setExpression(expression);
+		
+		
 
 		functionActionsMenu(functions.get(functions.size() - 1));
 	}
@@ -339,7 +366,7 @@ public class Main {
 	/**
 	 * Create an exponential function by specifying two points
 	 */
-	private void createExponentialFunction() {
+	private static void createExponentialFunction() {
 
 		functions.add(new ExponentialFunction());
 
@@ -359,7 +386,7 @@ public class Main {
 	/**
 	 * Create an linear function by specifying two points
 	 */
-	private void createLinearFunction() {
+	private static void createLinearFunction() {
 
 		functions.add(new LinearFunction());
 
@@ -376,7 +403,7 @@ public class Main {
 		}
 	}
 
-	private void calcIntersection() {
+	static void calcIntersection() {
 
 		//TODO DON'T COPY THE WHOLE showAndSelectPreviousFunctions() METHOD!!!
 		if (functions.size() > 0) {
@@ -429,7 +456,7 @@ public class Main {
 	 * @param displayMessage - the message that should be displayed when the user needs to enter the expression
 	 * @return the calculated double value
 	 */
-	private double readDoubleFromStringInput(String displayMessage) {
+	private static double readDoubleFromStringInput(String displayMessage) {
 
 		DoubleEvaluator evaluator = new DoubleEvaluator();
 		String expression = JOptionPane.showInputDialog(displayMessage);
