@@ -11,6 +11,7 @@ import java.awt.event.KeyListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
@@ -25,6 +26,8 @@ public class Frame {
 	static JLabel label1, label2, label3, label4, label5, label6, label7, label8, label9, label10, label11, label12, label13;
 	static JButton button1, button2, button3, button4, button5, button6, button7, button8, button9, button10, button11, button12, button13, button14, button15, button16, button17, button18, button19,
 	button20, button21;
+	
+	static JButton MainButton;
 	static JTextField tfield1, tfield2, tfield3, tfield4, tfield5, tfield6;
 	static JScrollPane sp;
 	
@@ -85,6 +88,8 @@ public class Frame {
 		
 		sp = new JScrollPane(label10, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 	            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		
+		MainButton = new JButton("Back to Main Menu");
 		
 		framemain();
 	}
@@ -184,6 +189,14 @@ public class Frame {
 		button8.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		button8.setVisible(true);
 		button8.addActionListener(new AListener());
+		
+		frame1.add(MainButton);
+		MainButton.setBounds(5, 335, 145, 30);
+		MainButton.setBackground(Color.CYAN);
+		MainButton.setForeground(Color.GREEN);
+		MainButton.addActionListener(new AListener());
+		MainButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		MainButton.setVisible(true);
 		
 	}
 	
@@ -355,6 +368,7 @@ public class Frame {
 		
 		label10.setText(Function.s);
 		label10.setFont(new Font("Calibri", Font.PLAIN, 15));
+		label10.setVisible(true);
 		
 		frame1.add(sp);
 		sp.setBounds(5, 5, 585, 290);
@@ -476,8 +490,8 @@ public class Frame {
 			}else if (ae.getSource() == Frame.button17) {
 				frameFunctionsMenu();
 			}else if (ae.getSource() == Frame.button18) {
-					Main.typeFunction(1);
-					framevalueausgabe();
+				framevalueausgabe();	
+				Main.typeFunction(1);					
 			}else if (ae.getSource() == Frame.button19) {
 				frameActionsMenu();
 			}else if (ae.getSource() == Frame.button20) {
