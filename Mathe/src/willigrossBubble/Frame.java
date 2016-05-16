@@ -253,6 +253,22 @@ public class Frame {
 		button24.addActionListener(new AListener());
 		button24.setVisible(true);
 		
+		frame1.add(MainButton);
+		MainButton.setBounds(5, 335, 145, 30);
+		MainButton.setBackground(new Color(0, 111, 174));
+		MainButton.setForeground(Color.WHITE);
+		MainButton.addActionListener(new AListener());
+		MainButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		MainButton.setVisible(true);
+		
+		frame1.add(back1);
+		back1.setBounds(445, 335, 145, 30);
+		back1.setBackground(new Color(0, 111, 174));
+		back1.setForeground(Color.WHITE);
+		back1.addActionListener(new AListener());
+		back1.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		back1.setVisible(true);
+		
 		
 	}
 	
@@ -374,7 +390,11 @@ public class Frame {
 		
 		frame1.add(label8);
 		label8.setBounds((frame1.getWidth()-400)/2, 210, 400, 30);
-		label8.setText("f(x) = " + tfield1.getText());
+		if (tfield1.getText().equals("")) {
+			label8.setText("f(x) = " + Main.t);
+		}else {
+			label8.setText("f(x) = " + tfield1.getText());
+		}
 		label8.setFont(new Font("Calibri", Font.PLAIN, 15));
 		label8.setVisible(true);
 		
@@ -499,14 +519,6 @@ public class Frame {
 		button20.addActionListener(new AListener());
 		button20.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		button20.setVisible(true);
-		
-		frame1.add(button21);
-		button21.setBounds(225, 335, 150, 30);
-		button21.setBackground(Color.lightGray);
-		button21.setForeground(Color.BLUE);
-		button21.addActionListener(new AListener());
-		button21.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		button21.setVisible(true);
 		
 		frame1.add(label13);
 		label13.setBounds(100, 200, 400, 40);

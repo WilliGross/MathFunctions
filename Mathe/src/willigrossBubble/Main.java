@@ -85,8 +85,6 @@ public class Main {
 				+ "or check if a specified POINT lies on your function's graph?" 
 				+ "\nYou can also create a MIRRORED version of your function (type X, Y or origin)"
 				+ "\nWould you like to SAVE this function or REMOVE it from the file (if it's already saved)?");*/
-		Frame.frameActionsMenu();
-		System.out.println(function);
 		if (zahl != 0) {
 			if (zahl == 1){
 				valueTable(function);
@@ -219,6 +217,8 @@ public class Main {
 			}
 	}
 	
+	public static String t = "";
+	
 	public static void selectPreviousFunctions() {
 		String selection;
 
@@ -238,7 +238,9 @@ public class Main {
 			JOptionPane.showMessageDialog(null, "The requested function is not available!");
 			selectPreviousFunctions();
 		} else {
+			t = "" + functions.get(selection.charAt(0) - 97 - 5);
 			functionActionsMenu(functions.get(selection.charAt(0) - 97 - 5)); //ASCII value of a = 97 ; -5 as functions start with f
+			Frame.frameActionsMenu();
 		}
 	}
 
