@@ -333,8 +333,6 @@ public class Main {
 	 * @param function - the function whose graph should be checked
 	 */
 	private static void checkPointOnGraph(Function function) {
-		
-		System.out.println("hallo");
 
 		Point p = new Point(Double.parseDouble(Frame.tfield5.getText()), Double.parseDouble(Frame.tfield6.getText() ));
 

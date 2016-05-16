@@ -238,6 +238,7 @@ public class Frame {
 		tfield1.setBounds(75, 285, 475, 30);
 		tfield1.setVisible(true);
 		tfield1.addKeyListener(new KListener());
+		tfield1.requestFocus();
 		
 		frame1.add(button9);
 		button9.setBounds(250, 320, 100, 30);
