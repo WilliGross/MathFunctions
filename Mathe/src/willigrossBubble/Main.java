@@ -333,15 +333,17 @@ public class Main {
 	 * @param function - the function whose graph should be checked
 	 */
 	private static void checkPointOnGraph(Function function) {
+		
+		System.out.println("hallo");
 
-		Point p = new Point(readDoubleFromStringInput("x coordinate of point P: " ), readDoubleFromStringInput("y coordinate of point P: " ));
+		Point p = new Point(Double.parseDouble(Frame.tfield5.getText()), Double.parseDouble(Frame.tfield6.getText() ));
 
 		boolean onGraph = function.testPointOnGraph(p);
 
 		if (onGraph)
-			JOptionPane.showMessageDialog(null, "The point lies on your function's graph");
+			Frame.frameanzeigepoint(1);
 		else
-			JOptionPane.showMessageDialog(null, "The point does not lie on your function's graph");
+			Frame.frameanzeigepoint(2);
 	}
 
 

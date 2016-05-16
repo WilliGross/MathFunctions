@@ -15,13 +15,15 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.WindowConstants;
+import javax.swing.text.JTextComponent;
 
 public class Frame {
 	
 	static JFrame frame1;
-	static JLabel label1, label2, label3, label4, label5, label6, label7, label8, label9, label10;;
-	static JButton button1, button2, button3, button4, button5, button6, button7, button8, button9, button10, button11, button12, button13, button14, button15, button16, button17, button18, button19;
-	static JTextField tfield1, tfield2, tfield3, tfield4;
+	static JLabel label1, label2, label3, label4, label5, label6, label7, label8, label9, label10, label11, label12;
+	static JButton button1, button2, button3, button4, button5, button6, button7, button8, button9, button10, button11, button12, button13, button14, button15, button16, button17, button18, button19,
+	button20;
+	static JTextField tfield1, tfield2, tfield3, tfield4, tfield5, tfield6;
 	static JScrollPane sp;
 	
 	public Frame() {
@@ -46,6 +48,8 @@ public class Frame {
 		label8 = new JLabel("", JLabel.CENTER);
 		label9 = new JLabel("Enter START and END value for x and STEP", JLabel.CENTER);
 		label10 = new JLabel("", JLabel.CENTER);
+		label11 = new JLabel("Check your point", JLabel.CENTER);
+		label12 = new JLabel("", JLabel.CENTER);
 		
 		button1 = new JButton("Create a function");
 		button2 = new JButton("Load a function");
@@ -66,11 +70,14 @@ public class Frame {
 		button17 = new JButton("Back");
 		button18 = new JButton("Go");
 		button19 = new JButton("Back");
+		button20 = new JButton("Go");
 		
 		tfield1 = new JTextField();
 		tfield2 = new JTextField("Start value for x");
 		tfield3 = new JTextField("End value for x");
 		tfield4 = new JTextField("Step");
+		tfield5 = new JTextField("X-Coordinate of Point p");
+		tfield6 = new JTextField("Y-Coordinate of Point p");
 		
 		sp = new JScrollPane(label10, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 	            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -358,6 +365,53 @@ public class Frame {
 		
 	}
 	
+	public static void framecheckpoint() {
+		setVisible();
+		
+		frame1.add(label11);
+		label11.setBounds(100, 20, 400, 30);
+		label1.setFont(new Font("Calibri", Font.PLAIN, 15));
+		label11.setVisible(true);
+		
+		frame1.add(tfield5);
+		tfield5.setForeground(Color.GRAY);
+		tfield5.setBounds(100, 100, 400, 30);
+		tfield5.addKeyListener(new KListener());
+		tfield5.setVisible(true);
+		tfield5.addFocusListener(new FListener());
+		
+		frame1.add(tfield6);
+		tfield6.setForeground(Color.GRAY);
+		tfield6.setBounds(100, 135, 400, 30);
+		tfield6.addKeyListener(new KListener());
+		tfield6.addFocusListener(new FListener());
+		tfield6.setVisible(true);
+		
+		frame1.add(button20);
+		button20.setBounds(225, 320, 150, 30);
+		button20.setBackground(Color.lightGray);
+		button20.setForeground(Color.BLUE);
+		button20.addActionListener(new AListener());
+		button20.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		button20.setVisible(true);
+		
+		
+	}
+	
+	public static void frameanzeigepoint(int i) {
+		frame1.add(label12);
+		label12.setBounds(100, 200, 400, 40);
+		label12.setFont(new Font("Calibri", Font.ITALIC, 17));
+		if (i == 1) {
+			label12.setText("The point DOES lie on your Graph");
+			label12.setForeground(Color.GREEN);
+			label12.setVisible(true);
+		}else if (i == 2) {
+			label12.setText("The point DOES NOT lie on your Graph");
+			label12.setForeground(Color.RED);
+			label12.setVisible(true);
+		}
+	}
 	static class AListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent ae) {
@@ -390,7 +444,7 @@ public class Frame {
 			}else if (ae.getSource() == Frame.button10) {
 				Frame.framevaluetable();				
 			}else if (ae.getSource() == Frame.button11) {
-				Main.typeFunction(2);
+				framecheckpoint();
 			}else if (ae.getSource() == Frame.button12) {
 				frameMirror();
 			}else if (ae.getSource() == Frame.button13) {
@@ -410,6 +464,8 @@ public class Frame {
 				}
 			}else if (ae.getSource() == Frame.button19) {
 				frameActionsMenu();
+			}else if (ae.getSource() == Frame.button20) {
+				Main.typeFunction(2);
 			}
 		}
 		
@@ -439,6 +495,14 @@ public class Frame {
 						Main.typeFunction(1);
 						framevalueausgabe();
 					}
+				}else if (e.getSource() == Frame.tfield5) {
+					if (tfield5.getText() != null && tfield6.getText() != null){
+						Main.typeFunction(2);
+					}
+				}else if (e.getSource() == Frame.tfield6) {
+					if (tfield5.getText() != null && tfield6.getText() != null){
+						Main.typeFunction(2);
+					}
 				}
 			}
 			
@@ -463,12 +527,22 @@ public class Frame {
 		public void focusGained(FocusEvent fe) {
 			if (fe.getSource() == Frame.tfield1){
 				tfield1.selectAll();
+				tfield1.setForeground(Color.BLACK);
 			}else if (fe.getSource() == Frame.tfield2) {
 				tfield2.selectAll();
+				tfield2.setForeground(Color.BLACK);
 			}else if (fe.getSource() == Frame.tfield3) {
 				tfield3.selectAll();
+				tfield3.setForeground(Color.BLACK);
 			}else if (fe.getSource() == Frame.tfield4) {
 				tfield4.selectAll();
+				tfield4.setForeground(Color.BLACK);
+			}else if (fe.getSource() == Frame.tfield5) {
+				tfield5.selectAll();
+				tfield5.setForeground(Color.BLACK);
+			}else if (fe.getSource() == Frame.tfield6) {
+				tfield6.selectAll();
+				tfield6.setForeground(Color.BLACK);
 			}
 			
 		}
@@ -500,11 +574,15 @@ public class Frame {
 		button16.setVisible(false);
 		button17.setVisible(false);
 		button18.setVisible(false);
+		button19.setVisible(false);
+		button20.setVisible(false);
 		
 		tfield1.setVisible(false);
 		tfield2.setVisible(false);
 		tfield3.setVisible(false);
 		tfield4.setVisible(false);
+		tfield5.setVisible(false);
+		tfield6.setVisible(false);
 		
 		label1.setVisible(false);
 		label2.setVisible(false);
