@@ -23,13 +23,13 @@ import willigrossBubble.Frame;
 public class Frame {
 	
 	static JFrame frame1;
-	static JLabel label1, label2, label3, label4, label5, label6, label7, label8, label9, label10, label11, label12, label13, label14, label15;
+	static JLabel label1, label2, label3, label4, label5, label6, label7, label8, label9, label10, label11, label12, label13, label14, label15, label16, label17;
 	static JButton button1, button2, button3, button4, button5, button6, button7, button8, button9, button10, button11, button12, button13, button14, button15, button16, button17, button18, button19,
-	button20, button21, button22, button23;
+	button20, button21, button22, button23, button24;
 	static JButton back1, back2, back3;
 	static JButton MainButton;
-	static JTextField tfield1, tfield2, tfield3, tfield4, tfield5, tfield6;
-	static JScrollPane sp;
+	static JTextField tfield1, tfield2, tfield3, tfield4, tfield5, tfield6, tfield7;
+	static JScrollPane sp, sp2;
 	
 	public Frame() {
 		frame1 = new JFrame();
@@ -58,6 +58,8 @@ public class Frame {
 		label13 = new JLabel("", JLabel.CENTER);
 		label14 = new JLabel("", JLabel.CENTER);
 		label15 = new JLabel("Do you want to save or remove your function?", JLabel.CENTER);
+		label16 = new JLabel("Which function do you want to reload?", JLabel.CENTER);
+		label17 = new JLabel("", JLabel.CENTER);
 		
 		button1 = new JButton("Create a function");
 		button2 = new JButton("Load a function");
@@ -81,6 +83,7 @@ public class Frame {
 		button21 = new JButton("Back");
 		button22 = new JButton("Save");
 		button23 = new JButton("Remove");
+		button24 = new JButton("Ok");
 		
 		back1 = new JButton("Back");
 		back2 = new JButton("Back");
@@ -92,8 +95,12 @@ public class Frame {
 		tfield4 = new JTextField("Step");
 		tfield5 = new JTextField("X-Coordinate of Point p");
 		tfield6 = new JTextField("Y-Coordinate of Point p");
+		tfield7 = new JTextField("Which function would you like to select?");
 		
 		sp = new JScrollPane(label10, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+	            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		
+		sp2 = new JScrollPane(label17, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 	            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
 		MainButton = new JButton("Back to Main Menu");
@@ -210,7 +217,42 @@ public class Frame {
 		
 	}
 	
-	public static void showAndSelectPrevious() {
+	public static void showAndSelectPrevious(String s) {
+		setVisible();
+		
+		String t = "";
+		t = s + "<html/>";
+		
+		frame1.add(label16);
+		label16.setBounds(100, 15, 400, 30);
+		label16.setVisible(true);
+		
+
+		label17.setText(t);
+		label17.setVisible(true);
+		label17.setFont(new Font("Calibri", Font.PLAIN, 15));
+		
+		frame1.add(sp2);
+		sp2.setBounds(10, 60, 575, 80);
+		sp2.setVisible(true);
+
+		
+		frame1.add(tfield7);
+		tfield7.setBounds(100, 150, 400, 30);
+		tfield7.setForeground(Color.GRAY);
+		tfield7.addKeyListener(new KListener());
+		tfield7.addFocusListener(new FListener());
+		tfield7.requestFocus();
+		tfield7.setVisible(true);
+		
+		frame1.add(button24);
+		button24.setBounds(225, 290, 150, 30);
+		button24.setBackground(Color.lightGray);
+		button24.setForeground(Color.BLUE);
+		button24.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		button24.addActionListener(new AListener());
+		button24.setVisible(true);
+		
 		
 	}
 	
@@ -548,7 +590,7 @@ public class Frame {
 				frameFunctionsMenu();
 				
 			}else if (ae.getSource() == Frame.button2) {
-				Main.showAndSelectPreviousFunctions();
+				Main.showPreviousFunctions();
 			}else if (ae.getSource() == Frame.button3) {
 				Main.calcIntersection();
 			}else if (ae.getSource() == Frame.button4) {
@@ -606,6 +648,8 @@ public class Frame {
 				Main.typeFunction(7);
 			}else if (ae.getSource() == Frame.button23) {
 				Main.typeFunction(8);
+			}else if (ae.getSource() == Frame.button24) {
+				Main.selectPreviousFunctions();
 			}
 		}
 		
@@ -682,6 +726,9 @@ public class Frame {
 			}else if (fe.getSource() == Frame.tfield6) {
 				tfield6.selectAll();
 				tfield6.setForeground(Color.BLACK);
+			}else if (fe.getSource() == Frame.tfield7) {
+				tfield7.selectAll();
+				tfield7.setForeground(Color.BLACK);
 			}
 			
 		}
@@ -717,6 +764,7 @@ public class Frame {
 		button21.setVisible(false);
 		button22.setVisible(false);
 		button23.setVisible(false);
+		button24.setVisible(false);
 		
 		tfield1.setVisible(false);
 		tfield2.setVisible(false);
@@ -724,6 +772,7 @@ public class Frame {
 		tfield4.setVisible(false);
 		tfield5.setVisible(false);
 		tfield6.setVisible(false);
+		tfield7.setVisible(false);
 		
 		label1.setVisible(false);
 		label2.setVisible(false);
@@ -740,8 +789,11 @@ public class Frame {
 		label13.setVisible(false);
 		label14.setVisible(false);
 		label15.setVisible(false);
+		label16.setVisible(false);
+		label17.setVisible(false);
 		
 		sp.setVisible(false);
+		sp2.setVisible(false);
 		
 		back1.setVisible(false);
 		back2.setVisible(false);

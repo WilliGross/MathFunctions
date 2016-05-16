@@ -23,6 +23,7 @@ public class Main {
 	private static ArrayList<Function> functions = new ArrayList<Function>();
 	
 	public static int zahl = 0; 
+	public static String s = "";
 
 
 
@@ -84,7 +85,8 @@ public class Main {
 				+ "or check if a specified POINT lies on your function's graph?" 
 				+ "\nYou can also create a MIRRORED version of your function (type X, Y or origin)"
 				+ "\nWould you like to SAVE this function or REMOVE it from the file (if it's already saved)?");*/
-		
+		Frame.frameActionsMenu();
+		System.out.println(function);
 		if (zahl != 0) {
 			if (zahl == 1){
 				valueTable(function);
@@ -198,48 +200,46 @@ public class Main {
 	/**
 	 * Displays previous functions and lets the user select one; calls the function actions menu
 	 */
-	static void showAndSelectPreviousFunctions() {
+	public static void showPreviousFunctions() {
 
 		if (functions.size() > 0) {
 			//show prev functions
-			String prevFunctions = "<html> The functions you've previously entered: <p/> <p/>";//TODO use stringbuffer
+			String prevFunctions = "<html>";//TODO use stringbuffer
 
 			for (int i = 0; i < functions.size(); i++) {
 				if ((i + 5) <= 25) {
-					prevFunctions += alphabet[i + 5] + "(x) = " + functions.get(i) + "\n";
+					prevFunctions += alphabet[i + 5] + "(x) = " + functions.get(i) + "<p/>";
 				} else {
 					JOptionPane.showMessageDialog(null, "You have to many functions! We can't display them all!");
 				}
 			}
-
-			JOptionPane.showMessageDialog(null, prevFunctions);
-
-			//select prev functions
-
-			String selection;
-
-			if (functions.size() == 1) {
-				selection = "f";
-			} else {
-				selection = JOptionPane.showInputDialog("Which function would you like to select? (enter its letter)");
-			}
-
-			if (selection == null || selection.equals("")) {
-				JOptionPane.showMessageDialog(null, "Nothing entered, going bach to main menu!");
-				return;
-			}
-
-
-			if (selection.charAt(0) - 97 - 5 > functions.size() - 1) { //test if that function exists
-				JOptionPane.showMessageDialog(null, "The requested function is not available!");
-				showAndSelectPreviousFunctions();
-			} else {
-				functionActionsMenu(functions.get(selection.charAt(0) - 97 - 5)); //ASCII value of a = 97 ; -5 as functions start with f
-			}
-		} else {
+			Frame.showAndSelectPrevious(prevFunctions);
+		}else {
 			JOptionPane.showMessageDialog(null, "There are no previous functions saved! Create one first!");
+			}
+	}
+	
+	public static void selectPreviousFunctions() {
+		String selection;
+
+		if (functions.size() == 1) {
+			selection = "f";
+		} else {
+			selection = Frame.tfield7.getText();
 		}
 
+		if (selection == null || selection.equals("")) {
+			JOptionPane.showMessageDialog(null, "Nothing entered, going bach to main menu!");
+			return;
+		}
+
+
+		if (selection.charAt(0) - 97 - 5 > functions.size() - 1) { //test if that function exists
+			JOptionPane.showMessageDialog(null, "The requested function is not available!");
+			selectPreviousFunctions();
+		} else {
+			functionActionsMenu(functions.get(selection.charAt(0) - 97 - 5)); //ASCII value of a = 97 ; -5 as functions start with f
+		}
 	}
 
 	/**
@@ -389,7 +389,7 @@ public class Main {
 
 			if (selection1.charAt(0) - 97 - 5 > functions.size() - 1 || selection2.charAt(0) - 97 - 5 > functions.size() - 1) { //test if that function exists
 				JOptionPane.showMessageDialog(null, "The requested function is not available!");
-				showAndSelectPreviousFunctions();
+				showPreviousFunctions();
 			} else {
 				Intersection intersection = new Intersection(functions.get(selection1.charAt(0) - 97 - 5), functions.get(selection2.charAt(0) - 97 - 5)); //ASCII value of a = 97 ; -5 as functions start with f
 				JOptionPane.showMessageDialog(null, "The functions " + functions.get(selection1.charAt(0) - 97 - 5) + " and " + functions.get(selection2.charAt(0) - 97 - 5) + " intersect in the point: " + intersection);

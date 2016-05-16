@@ -112,6 +112,7 @@ public class Function implements Serializable {
 			}
 		}
 		
+		System.out.println(sb);
 		s = sb.toString();
 		
 	}
