@@ -40,10 +40,9 @@ public class Main {
 	 * The constructor that calls the menu
 	 */
 	public Main() {
-		new Frame();
 		boolean success = loadFunctions();
 		if (success)
-			menu();
+			new Frame();
 		else
 			JOptionPane.showMessageDialog(null, "Error while loading file!");
 	}
@@ -75,47 +74,7 @@ public class Main {
 		return true;
 	}
 
-	/**
-	 * Displays the menu and calls selected tasks
-	 */
-	private void menu() {
-		
-		Frame.label3.setVisible(true);
-		Frame.button1.setVisible(true);
-		Frame.button2.setVisible(true);
-		Frame.button3.setVisible(true);
-		Frame.button4.setVisible(true);
 
-		/*String programMode = JOptionPane.showInputDialog("What would you like to do? \n"
-				+ "(CREATE a function, LOAD a previous function, calculate the INTERSECTION of two functions, CLOSE)");
-
-		if (programMode != null) {
-
-			programMode.toLowerCase();
-
-
-			if (programMode.contains("create") || programMode.contains("1")) {
-				createFunctionsMenu();
-			}
-
-			if (programMode.contains("load") || programMode.contains("prev") || programMode.contains("2")) {
-				showAndSelectPreviousFunctions();
-			}
-
-			if (programMode.contains("inter") || programMode.contains("3")) {
-				calcIntersection();
-			}
-
-			if (programMode.contains("close") || programMode.contains("exit") 
-					|| programMode.equals("") || programMode.contains("0") || programMode.contains("4")) {
-			} else {
-				menu();
-			}
-
-		} else {
-			JOptionPane.showMessageDialog(null, "No operation entered! Exiting program!");
-		}*/
-	}
 
 
 	/**
@@ -231,8 +190,13 @@ public class Main {
 		
 		try {
 			fs = new FileStorage(new File(location.getFile().substring(0, location.getFile().lastIndexOf('/') + 1) + "Functions.dat"));
+			Frame.label14.setText("Successfully removed your function");
+			Frame.label14.setForeground(Color.GRAY);
+			Frame.label14.setVisible(true);
 		} catch (IllegalArgumentException | IOException e) {
-			JOptionPane.showMessageDialog(null, "Error with file!");
+			Frame.label14.setText("Error with file!");
+			Frame.label14.setForeground(Color.RED);
+			Frame.label14.setVisible(true);
 			e.printStackTrace();
 			return;
 		}
@@ -250,8 +214,13 @@ public class Main {
 		String key;
 		try {
 			fs = new FileStorage(new File(location.getFile().substring(0, location.getFile().lastIndexOf('/') + 1) + "Functions.dat"));
+			Frame.label14.setText("Successfully saved your function");
+			Frame.label14.setForeground(Color.GREEN);
+			Frame.label14.setVisible(true);
 		} catch (IllegalArgumentException | IOException e) {
-			JOptionPane.showMessageDialog(null, "Error when saving!");
+			Frame.label14.setText("Error when saving!");
+			Frame.label14.setForeground(Color.RED);
+			Frame.label14.setVisible(true);
 			e.printStackTrace();
 			return;
 		}

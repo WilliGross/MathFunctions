@@ -23,10 +23,10 @@ import willigrossBubble.Frame;
 public class Frame {
 	
 	static JFrame frame1;
-	static JLabel label1, label2, label3, label4, label5, label6, label7, label8, label9, label10, label11, label12, label13;
+	static JLabel label1, label2, label3, label4, label5, label6, label7, label8, label9, label10, label11, label12, label13, label14, label15;
 	static JButton button1, button2, button3, button4, button5, button6, button7, button8, button9, button10, button11, button12, button13, button14, button15, button16, button17, button18, button19,
-	button20, button21;
-	
+	button20, button21, button22, button23;
+	static JButton back1, back2, back3;
 	static JButton MainButton;
 	static JTextField tfield1, tfield2, tfield3, tfield4, tfield5, tfield6;
 	static JScrollPane sp;
@@ -56,6 +56,8 @@ public class Frame {
 		label11 = new JLabel("Check your point", JLabel.CENTER);
 		label12 = new JLabel("", JLabel.CENTER);
 		label13 = new JLabel("", JLabel.CENTER);
+		label14 = new JLabel("", JLabel.CENTER);
+		label15 = new JLabel("Do you want to save or remove your function?", JLabel.CENTER);
 		
 		button1 = new JButton("Create a function");
 		button2 = new JButton("Load a function");
@@ -64,7 +66,6 @@ public class Frame {
 		button5 = new JButton("Type your function");
 		button6 = new JButton("Linear through 2 points");
 		button7 = new JButton("Exponential through 2 points");
-		button8 = new JButton("Back to Main Menu");
 		button9 = new JButton("Go");
 		button10 = new JButton("Value Table");
 		button11 = new JButton("Check a particular point");
@@ -78,6 +79,12 @@ public class Frame {
 		button19 = new JButton("Back");
 		button20 = new JButton("Go");
 		button21 = new JButton("Back");
+		button22 = new JButton("Save");
+		button23 = new JButton("Remove");
+		
+		back1 = new JButton("Back");
+		back2 = new JButton("Back");
+		back3 = new JButton("Back");
 		
 		tfield1 = new JTextField();
 		tfield2 = new JTextField("Start value for x");
@@ -95,6 +102,9 @@ public class Frame {
 	}
 	
 	public static void framemain() {
+		setVisible();
+		MainButton.setVisible(false);
+		
 		label1.setBounds(250, 185, 100, 30);
 		label1.setFont(new Font("Calibri", Font.PLAIN, 15));
 		label1.setForeground(Color.RED);
@@ -109,14 +119,14 @@ public class Frame {
 		
 		label3.setBounds((frame1.getWidth()-250)/2, 40, 250, 30);
 		label3.setFont(new Font("Calibri", Font.PLAIN, 17));
-		label3.setVisible(false);
+		label3.setVisible(true);
 		frame1.add(label3);
 	
 		button1.setBounds(50, 150, 200, 30);
 		button1.setBackground(Color.lightGray);
 		button1.setForeground(Color.BLUE);
 		button1.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		button1.setVisible(false);
+		button1.setVisible(true);
 		button1.addActionListener(new AListener());
 		frame1.add(button1);
 		
@@ -124,7 +134,7 @@ public class Frame {
 		button2.setBackground(Color.lightGray);
 		button2.setForeground(Color.BLUE);
 		button2.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		button2.setVisible(false);
+		button2.setVisible(true);
 		button2.addActionListener(new AListener());
 		frame1.add(button2);
 		
@@ -132,7 +142,7 @@ public class Frame {
 		button3.setBackground(Color.lightGray);
 		button3.setForeground(Color.BLUE);
 		button3.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		button3.setVisible(false);
+		button3.setVisible(true);
 		button3.addActionListener(new AListener());
 		frame1.add(button3);
 		
@@ -140,7 +150,7 @@ public class Frame {
 		button4.setBackground(Color.RED);
 		button4.setForeground(Color.BLACK);
 		button4.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		button4.setVisible(false);
+		button4.setVisible(true);
 		button4.addActionListener(new AListener());
 		frame1.add(button4);
 		
@@ -182,21 +192,21 @@ public class Frame {
 		button7.setVisible(true);
 		button7.addActionListener(new AListener());
 		
-		frame1.add(button8);
-		button8.setBounds(100, 205, 400, 30);
-		button8.setBackground(Color.lightGray);
-		button8.setForeground(Color.BLUE);
-		button8.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		button8.setVisible(true);
-		button8.addActionListener(new AListener());
-		
 		frame1.add(MainButton);
 		MainButton.setBounds(5, 335, 145, 30);
-		MainButton.setBackground(Color.CYAN);
-		MainButton.setForeground(Color.GREEN);
+		MainButton.setBackground(new Color(0, 111, 174));
+		MainButton.setForeground(Color.WHITE);
 		MainButton.addActionListener(new AListener());
 		MainButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		MainButton.setVisible(true);
+		
+		frame1.add(back1);
+		back1.setBounds(445, 335, 145, 30);
+		back1.setBackground(new Color(0, 111, 174));
+		back1.setForeground(Color.WHITE);
+		back1.addActionListener(new AListener());
+		back1.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		back1.setVisible(true);
 		
 	}
 	
@@ -242,23 +252,35 @@ public class Frame {
 		button13.setVisible(true);
 		button13.addActionListener(new AListener());
 		
+		frame1.add(back3);
+		back3.setBounds(445, 335, 145, 30);
+		back3.setBackground(new Color(0, 111, 174));
+		back3.setForeground(Color.WHITE);
+		back3.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		back3.addActionListener(new AListener());
+		back3.setVisible(true);
+		
+		frame1.add(label14);
+		label14.setBounds(100, 230, 400, 30);
+		label14.setFont(new Font("Calibri", Font.PLAIN, 16));
+		label14.setVisible(false);
 	}
 	
 	public static void framefunktioneingabe() {		
 		frame1.add(label5);	
-		label5.setBounds(25, 285, 50, 30);
+		label5.setBounds(25, 250, 50, 30);
 		label5.setVisible(true);
 		label5.setFont(new Font("Calibri", Font.PLAIN, 15));
 			
 		frame1.add(tfield1);
 		tfield1.setForeground(Color.BLACK);
-		tfield1.setBounds(75, 285, 475, 30);
+		tfield1.setBounds(75, 250, 475, 30);
 		tfield1.setVisible(true);
 		tfield1.addKeyListener(new KListener());
 		tfield1.requestFocus();
 		
 		frame1.add(button9);
-		button9.setBounds(250, 320, 100, 30);
+		button9.setBounds(250, 290, 100, 30);
 		button9.setBackground(Color.lightGray);
 		button9.setForeground(Color.BLUE);
 		button9.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -314,6 +336,14 @@ public class Frame {
 		button17.setVisible(true);
 		button17.addActionListener(new AListener());
 		
+		frame1.add(back2);
+		back2.setBounds(445, 335, 145, 30);
+		back2.setBackground(new Color(0, 111, 174));
+		back2.setForeground(Color.WHITE);
+		back2.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		back2.addActionListener(new AListener());
+		back2.setVisible(true);
+		
 	}
 	
 	static public void framausgabemirror(String s) {
@@ -359,7 +389,13 @@ public class Frame {
 		button18.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		button18.setVisible(true);
 		
-		frame1.add(button19);
+		frame1.add(back2);
+		back2.setBounds(445, 335, 145, 30);
+		back2.setBackground(new Color(0, 111, 174));
+		back2.setForeground(Color.WHITE);
+		back2.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		back2.addActionListener(new AListener());
+		back2.setVisible(true);
 		
 	}
 	
@@ -427,6 +463,14 @@ public class Frame {
 		label13.setFont(new Font("Calibri", Font.ITALIC, 17));
 		label13.setForeground(Color.MAGENTA);
 		
+		frame1.add(back2);
+		back2.setBounds(445, 335, 145, 30);
+		back2.setBackground(new Color(0, 111, 174));
+		back2.setForeground(Color.WHITE);
+		back2.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		back2.addActionListener(new AListener());
+		back2.setVisible(true);
+		
 	}
 	
 	public static void frameanzeigepoint(int i) {
@@ -444,6 +488,51 @@ public class Frame {
 			label12.setVisible(true);
 		}
 	}
+	
+	
+	public static void RemoveAndSave() {
+		setVisible();
+		
+		frame1.add(label15);
+		label15.setBounds((frame1.getWidth()-300)/2, 20, 300, 30);
+		label15.setVisible(true);
+		
+		frame1.add(button22);
+		button22.setBounds(100, 120, 400, 30);
+		button22.setBackground(Color.lightGray);
+		button22.setForeground(Color.BLUE);
+		button22.addActionListener(new AListener());
+		button22.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		button22.setVisible(true);
+		
+		frame1.add(button23);
+		button23.setBounds(100, 155, 400, 30);
+		button23.setBackground(Color.lightGray);
+		button23.setForeground(Color.BLUE);
+		button23.addActionListener(new AListener());
+		button23.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		button23.setVisible(true);
+		
+		frame1.add(label14);
+		label14.setBounds(100, 200, 400, 30);
+		label14.setFont(new Font("Calibri", Font.PLAIN, 16));
+		label14.setVisible(false);
+		
+		frame1.add(back2);
+		back2.setBounds(445, 335, 145, 30);
+		back2.setBackground(new Color(0, 111, 174));
+		back2.setForeground(Color.WHITE);
+		back2.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		back2.addActionListener(new AListener());
+		back2.setVisible(true);
+		
+		
+	}
+	
+	
+	
+	
+	
 	static class AListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent ae) {
@@ -466,8 +555,6 @@ public class Frame {
 				
 			}else if (ae.getSource() == Frame.button7) {
 				
-			}else if (ae.getSource() == Frame.button8) {
-				
 			}else if (ae.getSource() == Frame.button9) {
 				setVisible();
 				
@@ -480,7 +567,7 @@ public class Frame {
 			}else if (ae.getSource() == Frame.button12) {
 				frameMirror();
 			}else if (ae.getSource() == Frame.button13) {
-				
+				RemoveAndSave();
 			}else if (ae.getSource() == Frame.button14) {
 				Main.typeFunction(3);
 			}else if (ae.getSource() == Frame.button15) {
@@ -499,6 +586,18 @@ public class Frame {
 				Main.typeFunction(2);
 			}else if (ae.getSource() == Frame.button21) {
 				frameActionsMenu();
+			}else if (ae.getSource() == Frame.MainButton) {
+				framemain();
+			}else if (ae.getSource() == Frame.back1) {
+				framemain();
+			}else if (ae.getSource() == Frame.back2) {
+				frameActionsMenu();
+			}else if (ae.getSource() == Frame.back3) {
+				frameFunctionsMenu();
+			}else if (ae.getSource() == Frame.button22) {
+				Main.typeFunction(7);
+			}else if (ae.getSource() == Frame.button23) {
+				Main.typeFunction(8);
 			}
 		}
 		
@@ -595,7 +694,6 @@ public class Frame {
 		button5.setVisible(false);
 		button6.setVisible(false);
 		button7.setVisible(false);
-		button8.setVisible(false);
 		button9.setVisible(false);
 		button10.setVisible(false);
 		button11.setVisible(false);
@@ -609,6 +707,8 @@ public class Frame {
 		button19.setVisible(false);
 		button20.setVisible(false);
 		button21.setVisible(false);
+		button22.setVisible(false);
+		button23.setVisible(false);
 		
 		tfield1.setVisible(false);
 		tfield2.setVisible(false);
@@ -630,9 +730,13 @@ public class Frame {
 		label11.setVisible(false);
 		label12.setVisible(false);
 		label13.setVisible(false);
+		label14.setVisible(false);
+		label15.setVisible(false);
 		
 		sp.setVisible(false);
 		
+		back1.setVisible(false);
+		back2.setVisible(false);
+		back3.setVisible(false);
 	}
-
 }
