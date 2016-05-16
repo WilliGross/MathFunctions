@@ -74,45 +74,6 @@ public class Main {
 		return true;
 	}
 
-
-
-
-	/**
-	 * Displays a menu for creating functions
-	 */
-	static void createFunctionsMenu() {		
-		Frame.frameFunctionsMenu();
-		
-		/*String functionType = JOptionPane.showInputDialog("How would you like to create your function? \n"
-				+ "(TYPE, create LINEAR f. through 2 points, create EXPONENTIAL f. through 2 points, go BACK to main menu)");
-
-		if (functionType != null) {
-
-			functionType.toLowerCase();
-
-			if (functionType.contains("type") || functionType.contains("1")) {
-				typeFunction();
-			}
-
-			if (functionType.contains("lin") || functionType.contains("2")) {
-				createLinearFunction();
-			}
-
-			if (functionType.contains("exp") || functionType.contains("3")) {
-				createExponentialFunction();
-			}
-
-
-
-			//if nothing matches go back to main menu automatically due to recursive method call in menu()
-
-		} else {
-			JOptionPane.showMessageDialog(null, "Nothing entered, going back to main menu!");
-			//going back automatically due to recursive method call in menu()
-		}*/
-
-	} 
-
 	/**
 	 * Displays a menu for a specific function
 	 * @param function - the function to interact with
@@ -241,7 +202,7 @@ public class Main {
 
 		if (functions.size() > 0) {
 			//show prev functions
-			String prevFunctions = "The functions you've previously entered: \n\n";//TODO use stringbuffer
+			String prevFunctions = "<html> The functions you've previously entered: <p/> <p/>";//TODO use stringbuffer
 
 			for (int i = 0; i < functions.size(); i++) {
 				if ((i + 5) <= 25) {

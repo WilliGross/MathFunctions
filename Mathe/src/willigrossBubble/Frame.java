@@ -210,6 +210,14 @@ public class Frame {
 		
 	}
 	
+	public static void showAndSelectPrevious() {
+		
+	}
+	
+	
+	
+	
+	
 	public static void frameActionsMenu() {
 		setVisible();
 		
@@ -537,7 +545,7 @@ public class Frame {
 
 		public void actionPerformed(ActionEvent ae) {
 			if (ae.getSource() == Frame.button1) {			
-				Main.createFunctionsMenu();
+				frameFunctionsMenu();
 				
 			}else if (ae.getSource() == Frame.button2) {
 				Main.showAndSelectPreviousFunctions();
