@@ -1,5 +1,6 @@
 package willigrossBubble;
 
+import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -333,15 +334,33 @@ public class Main {
 	 * @param function - the function whose graph should be checked
 	 */
 	private static void checkPointOnGraph(Function function) {
+		try {
+			if (Frame.tfield5.getText().equals("")) {
+				throw new EingabeException("Please fill in the x-Coordinate of Point p!!");
+			}
+			if (Frame.tfield6.getText().equals("")) {
+				throw new EingabeException("Please fill in the y-coordinate of point p!!");
+			}
+			Point p = new Point(Double.parseDouble(Frame.tfield5.getText()), Double.parseDouble(Frame.tfield6.getText() ));
 
-		Point p = new Point(Double.parseDouble(Frame.tfield5.getText()), Double.parseDouble(Frame.tfield6.getText() ));
+			boolean onGraph = function.testPointOnGraph(p);
 
-		boolean onGraph = function.testPointOnGraph(p);
-
-		if (onGraph)
-			Frame.frameanzeigepoint(1);
-		else
-			Frame.frameanzeigepoint(2);
+			if (onGraph)
+				Frame.frameanzeigepoint(1);
+			else
+				Frame.frameanzeigepoint(2);
+			
+		}catch(EingabeException e) {
+			Frame.label13.setText(e.getMessage());
+			Frame.label13.setVisible(true);
+		}catch(NumberFormatException e) {
+			Frame.label13.setText("Ups! You've made an input error");
+			Frame.label13.setVisible(true);
+		}catch(Exception e) {
+			Frame.label13.setText("Ups! You've made an input error!!");
+			Frame.label13.setVisible(true);
+		}
+		
 	}
 
 
@@ -462,6 +481,15 @@ public class Main {
 		String expression = JOptionPane.showInputDialog(displayMessage);
 
 		return evaluator.evaluate(expression);
+	}
+	
+	public static class EingabeException extends NumberFormatException {
+		public EingabeException() {
+			super();
+		}
+		public EingabeException(String s){
+			super(s);
+		}
 	}
 
 }

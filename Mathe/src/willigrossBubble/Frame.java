@@ -17,12 +17,14 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.WindowConstants;
 import javax.swing.text.JTextComponent;
 
+import willigrossBubble.Frame;
+
 public class Frame {
 	
 	static JFrame frame1;
-	static JLabel label1, label2, label3, label4, label5, label6, label7, label8, label9, label10, label11, label12;
+	static JLabel label1, label2, label3, label4, label5, label6, label7, label8, label9, label10, label11, label12, label13;
 	static JButton button1, button2, button3, button4, button5, button6, button7, button8, button9, button10, button11, button12, button13, button14, button15, button16, button17, button18, button19,
-	button20;
+	button20, button21;
 	static JTextField tfield1, tfield2, tfield3, tfield4, tfield5, tfield6;
 	static JScrollPane sp;
 	
@@ -50,6 +52,7 @@ public class Frame {
 		label10 = new JLabel("", JLabel.CENTER);
 		label11 = new JLabel("Check your point", JLabel.CENTER);
 		label12 = new JLabel("", JLabel.CENTER);
+		label13 = new JLabel("", JLabel.CENTER);
 		
 		button1 = new JButton("Create a function");
 		button2 = new JButton("Load a function");
@@ -71,6 +74,7 @@ public class Frame {
 		button18 = new JButton("Go");
 		button19 = new JButton("Back");
 		button20 = new JButton("Go");
+		button21 = new JButton("Back");
 		
 		tfield1 = new JTextField();
 		tfield2 = new JTextField("Start value for x");
@@ -389,17 +393,30 @@ public class Frame {
 		tfield6.setVisible(true);
 		
 		frame1.add(button20);
-		button20.setBounds(225, 320, 150, 30);
+		button20.setBounds(225, 300, 150, 30);
 		button20.setBackground(Color.lightGray);
 		button20.setForeground(Color.BLUE);
 		button20.addActionListener(new AListener());
 		button20.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		button20.setVisible(true);
 		
+		frame1.add(button21);
+		button21.setBounds(225, 335, 150, 30);
+		button21.setBackground(Color.lightGray);
+		button21.setForeground(Color.BLUE);
+		button21.addActionListener(new AListener());
+		button21.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		button21.setVisible(true);
+		
+		frame1.add(label13);
+		label13.setBounds(100, 200, 400, 40);
+		label13.setFont(new Font("Calibri", Font.ITALIC, 17));
+		label13.setForeground(Color.MAGENTA);
 		
 	}
 	
 	public static void frameanzeigepoint(int i) {
+		label13.setVisible(false);
 		frame1.add(label12);
 		label12.setBounds(100, 200, 400, 40);
 		label12.setFont(new Font("Calibri", Font.ITALIC, 17));
@@ -459,14 +476,15 @@ public class Frame {
 			}else if (ae.getSource() == Frame.button17) {
 				frameFunctionsMenu();
 			}else if (ae.getSource() == Frame.button18) {
-				if (tfield2.getText() != null && tfield3.getText() != null && tfield4.getText() != null) {
 					Main.typeFunction(1);
 					framevalueausgabe();
-				}
 			}else if (ae.getSource() == Frame.button19) {
 				frameActionsMenu();
 			}else if (ae.getSource() == Frame.button20) {
+				label12.setVisible(false);
 				Main.typeFunction(2);
+			}else if (ae.getSource() == Frame.button21) {
+				frameActionsMenu();
 			}
 		}
 		
@@ -497,13 +515,12 @@ public class Frame {
 						framevalueausgabe();
 					}
 				}else if (e.getSource() == Frame.tfield5) {
-					if (tfield5.getText() != null && tfield6.getText() != null){
+						label12.setVisible(false);
 						Main.typeFunction(2);
-					}
+						
 				}else if (e.getSource() == Frame.tfield6) {
-					if (tfield5.getText() != null && tfield6.getText() != null){
+						label12.setVisible(false);
 						Main.typeFunction(2);
-					}
 				}
 			}
 			
@@ -577,6 +594,7 @@ public class Frame {
 		button18.setVisible(false);
 		button19.setVisible(false);
 		button20.setVisible(false);
+		button21.setVisible(false);
 		
 		tfield1.setVisible(false);
 		tfield2.setVisible(false);
@@ -594,6 +612,10 @@ public class Frame {
 		label7.setVisible(false);
 		label8.setVisible(false);
 		label9.setVisible(false);
+		label10.setVisible(false);
+		label11.setVisible(false);
+		label12.setVisible(false);
+		label13.setVisible(false);
 		
 		sp.setVisible(false);
 		
