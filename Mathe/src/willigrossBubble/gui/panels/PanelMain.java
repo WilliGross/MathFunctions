@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import willigrossBubble.gui.CustomButton;
 import willigrossBubble.gui.FrameMain;
 
-public class PanelMain extends JPanel{
+public class PanelMain extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 	CustomButton b1_create, b2_load, b3_intersection, b4_close; 
@@ -31,7 +31,6 @@ public class PanelMain extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("listener!");
 				FrameMain.instance.panelCreateFunction();			
 			}
 				

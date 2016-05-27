@@ -10,7 +10,6 @@ public class PanelCreateFunction extends JPanel {
 	private JLabel desc;
 	
 	public PanelCreateFunction() {
-		System.out.println("Konstruktor!");
 		desc = new JLabel("How would you like to create your function?");
 		add(desc);
 	}

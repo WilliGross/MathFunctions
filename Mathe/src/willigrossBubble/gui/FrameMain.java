@@ -5,6 +5,8 @@ import java.awt.Container;
 import java.awt.LayoutManager;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
 import willigrossBubble.gui.panels.PanelCreateFunction;
@@ -12,11 +14,12 @@ import willigrossBubble.gui.panels.PanelIntersection;
 import willigrossBubble.gui.panels.PanelLoadFunction;
 import willigrossBubble.gui.panels.PanelMain;
 
-public class FrameMain extends JFrame{
+public class FrameMain extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	public static FrameMain instance;
 	private Container c;
+	private JPanel panel;
 	
 	public FrameMain() {
 		instance = this;
@@ -32,6 +35,7 @@ public class FrameMain extends JFrame{
 		
 		c = getContentPane();
 		
+		panel = new JPanel();
 		panelMain();
 	}
 	
@@ -40,21 +44,27 @@ public class FrameMain extends JFrame{
 	}
 
 	public void panelMain() {
-		c.add(new PanelMain(), BorderLayout.CENTER);
+		c.remove(panel);
+		c.add(panel = new PanelMain(), BorderLayout.CENTER);
+		panel.revalidate();
 	}
 
 	public void panelCreateFunction() {
-		System.out.println("Methode in framemain!");
-		c.add(new PanelCreateFunction(), BorderLayout.CENTER);
-		revalidate();
+		c.remove(panel);
+		c.add(panel = new PanelCreateFunction(), BorderLayout.CENTER);
+		panel.revalidate();
 	}
 
 	public void panelLoadFunction() {
-		c.add(new PanelLoadFunction(), BorderLayout.CENTER);
+		c.remove(panel);
+		c.add(panel = new PanelLoadFunction(), BorderLayout.CENTER);
+		panel.revalidate();
 	}
 
 	public void panelIntersection() {
-		c.add(new PanelIntersection(), BorderLayout.CENTER);
+		c.remove(panel);
+		c.add(panel = new PanelIntersection(), BorderLayout.CENTER);
+		panel.revalidate();
 	}
 
 }
