@@ -1,4 +1,4 @@
-package willigrossBubble.gui.panels;
+package willigrossBubble.gui.customComponents.panels;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -9,21 +9,21 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import willigrossBubble.gui.CustomButtonMain;
 import willigrossBubble.gui.FrameMain;
+import willigrossBubble.gui.customComponents.buttons.CustomButtonSmall;
 
 public class PanelMain extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
-	CustomButtonMain b1_create, b2_load, b3_intersection, b4_close; 
+	CustomButtonSmall b1_create, b2_load, b3_intersection, b4_close; 
 	JLabel desc;
 	
 	public PanelMain() {
 
-		b1_create = new CustomButtonMain("Create a function");
-		b2_load = new CustomButtonMain("Load a function");
-		b3_intersection = new CustomButtonMain("Intersection of two functions");
-		b4_close = new CustomButtonMain("Close");
+		b1_create = new CustomButtonSmall("Create a function");
+		b2_load = new CustomButtonSmall("Load a function");
+		b3_intersection = new CustomButtonSmall("Intersection of two functions");
+		b4_close = new CustomButtonSmall("Close");
 		desc = new JLabel("What would you like to do?", SwingConstants.CENTER);
 		
 		setLayout(null);

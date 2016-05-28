@@ -7,13 +7,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import willigrossBubble.gui.panels.PanelCreateExponential;
-import willigrossBubble.gui.panels.PanelCreateFunction;
-import willigrossBubble.gui.panels.PanelCreateLinear;
-import willigrossBubble.gui.panels.PanelIntersection;
-import willigrossBubble.gui.panels.PanelLoadFunction;
-import willigrossBubble.gui.panels.PanelMain;
-import willigrossBubble.gui.panels.PanelTypeFunction;
+import willigrossBubble.gui.customComponents.panels.PanelCreateExponential;
+import willigrossBubble.gui.customComponents.panels.PanelCreateFunction;
+import willigrossBubble.gui.customComponents.panels.PanelCreateLinear;
+import willigrossBubble.gui.customComponents.panels.PanelIntersection;
+import willigrossBubble.gui.customComponents.panels.PanelLoadFunction;
+import willigrossBubble.gui.customComponents.panels.PanelMain;
+import willigrossBubble.gui.customComponents.panels.PanelTypeFunction;
 
 public class FrameMain extends JFrame {
 

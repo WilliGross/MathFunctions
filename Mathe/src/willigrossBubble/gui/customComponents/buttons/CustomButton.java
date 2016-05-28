@@ -1,4 +1,4 @@
-package willigrossBubble.gui;
+package willigrossBubble.gui.customComponents.buttons;
 
 import java.awt.Color;
 import java.awt.Cursor;
@@ -11,7 +11,6 @@ public class CustomButton extends JButton {
 
 	public CustomButton(String s) {
 		setText(s);
-		setSize(400, 30);
 		setBackground(Color.LIGHT_GRAY);
 		setForeground(Color.BLUE);
 		setCursor(new Cursor(Cursor.HAND_CURSOR));
