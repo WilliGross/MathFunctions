@@ -9,19 +9,20 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import willigrossBubble.gui.CustomButton;
+import willigrossBubble.gui.CustomButtonMain;
 import willigrossBubble.gui.FrameMain;
 
 public class PanelMain extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
-	CustomButton b1_create, b2_load, b3_intersection, b4_close; 
+	CustomButtonMain b1_create, b2_load, b3_intersection, b4_close; 
 	JLabel desc;
 	
 	public PanelMain() {
-		b1_create = new CustomButton("Create a function");
-		b2_load = new CustomButton("Load a function");
-		b3_intersection = new CustomButton("Intersection of two functions");
-		b4_close = new CustomButton("Close");
+		b1_create = new CustomButtonMain("Create a function");
+		b2_load = new CustomButtonMain("Load a function");
+		b3_intersection = new CustomButtonMain("Intersection of two functions");
+		b4_close = new CustomButtonMain("Close");
 		desc = new JLabel("What would you like to do?", JLabel.CENTER);
 		
 		setLayout(null);
