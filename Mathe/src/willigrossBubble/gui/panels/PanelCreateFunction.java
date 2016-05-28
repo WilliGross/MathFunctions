@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import willigrossBubble.gui.CustomButton;
+import willigrossBubble.gui.FrameMain;
 
 public class PanelCreateFunction extends JPanel {
 
@@ -29,8 +30,7 @@ public class PanelCreateFunction extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO 
-				
+				FrameMain.instance.typeFunction();
 			}
 			
 		});
@@ -42,8 +42,7 @@ public class PanelCreateFunction extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO 
-				
+				FrameMain.instance.createLinear();
 			}
 			
 		});
@@ -55,8 +54,7 @@ public class PanelCreateFunction extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO
-				
+				FrameMain.instance.createExponential();
 			}
 		});
 		

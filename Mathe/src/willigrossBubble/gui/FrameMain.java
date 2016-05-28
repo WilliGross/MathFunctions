@@ -71,4 +71,16 @@ public class FrameMain extends JFrame {
 		panel.revalidate();
 	}
 
+	public void createLinear() {
+		c.remove(panel);
+		c.add(panel = new PanelCreateLinear(), BorderLayout.CENTER);
+		panel.revalidate();
+	}
+
+	public void createExponential() {
+		c.remove(panel);
+		c.add(panel = new PanelCreateExponential(), BorderLayout.CENTER);
+		panel.revalidate();
+	}
+
 }
