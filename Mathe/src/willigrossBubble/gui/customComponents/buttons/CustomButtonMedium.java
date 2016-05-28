@@ -1,16 +1,16 @@
 package willigrossBubble.gui.customComponents.buttons;
 
 
-public class CustomButtonSmall extends CustomButton {
+public class CustomButtonMedium extends CustomButton {
 
 	private static final long serialVersionUID = 1L;
 	
-	public CustomButtonSmall(String text) {
+	public CustomButtonMedium(String text) {
 		super(text);
-		setSize(100, 30);
+		setSize(200, 30);
 	}
 	
-	public CustomButtonSmall() {
+	public CustomButtonMedium() {
 		this("");
 	}
 }

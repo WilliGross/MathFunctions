@@ -6,24 +6,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import willigrossBubble.gui.FrameMain;
-import willigrossBubble.gui.customComponents.buttons.CustomButtonSmall;
+import willigrossBubble.gui.customComponents.buttons.CustomButtonMedium;
 
-public class PanelMain extends JPanel {
+public class PanelMain extends CenterPanel {
 	
 	private static final long serialVersionUID = 1L;
-	CustomButtonSmall b1_create, b2_load, b3_intersection, b4_close; 
+	CustomButtonMedium b1_create, b2_load, b3_intersection, b4_close; 
 	JLabel desc;
 	
 	public PanelMain() {
 
-		b1_create = new CustomButtonSmall("Create a function");
-		b2_load = new CustomButtonSmall("Load a function");
-		b3_intersection = new CustomButtonSmall("Intersection of two functions");
-		b4_close = new CustomButtonSmall("Close");
+		b1_create = new CustomButtonMedium("Create a function");
+		b2_load = new CustomButtonMedium("Load a function");
+		b3_intersection = new CustomButtonMedium("Intersection of two functions");
+		b4_close = new CustomButtonMedium("Close");
 		desc = new JLabel("What would you like to do?", SwingConstants.CENTER);
 		
 		setLayout(null);
@@ -76,6 +75,11 @@ public class PanelMain extends JPanel {
 		desc.setFont(new Font("Calibri", Font.PLAIN, 15));
 		desc.setBounds((600-250)/2, 40, 250, 30);
 		add(desc);
+	}
+
+	@Override
+	public void back() {
+		
 	}
 
 }

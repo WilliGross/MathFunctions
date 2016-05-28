@@ -4,12 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import willigrossBubble.gui.FrameMain;
 import willigrossBubble.gui.customComponents.buttons.CustomButtonLarge;
 
-public class PanelCreateFunction extends JPanel {
+public class PanelCreateFunction extends CenterPanel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -60,6 +59,12 @@ public class PanelCreateFunction extends JPanel {
 		
 		add(b3_exponentialT2P);
 		
+	}
+
+
+	@Override
+	public void back() {
+		FrameMain.instance.panelMain();
 	}
 	
 }
