@@ -11,13 +11,11 @@ import java.awt.event.KeyListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
-import javax.swing.text.JTextComponent;
-
 import willigrossBubble.Frame;
 
 public class Frame {
@@ -43,23 +41,23 @@ public class Frame {
 	}
 	
 	public static void initialisierung() {
-		label1 = new JLabel("Error with file!", JLabel.CENTER);
-		label2 = new JLabel("Error while loading file!", JLabel.CENTER);
-		label3 = new JLabel("What would you like to do?", JLabel.CENTER);
-		label4 = new JLabel("How would you like to create your function?", JLabel.CENTER);
-		label5 = new JLabel("f(x) = ", JLabel.CENTER);
-		label6 = new JLabel("What do you want to do?", JLabel.CENTER);
-		label7 = new JLabel("How do you want to mirror your function?", JLabel.CENTER);
-		label8 = new JLabel("", JLabel.CENTER);
-		label9 = new JLabel("Enter START and END value for x and STEP", JLabel.CENTER);
-		label10 = new JLabel("", JLabel.CENTER);
-		label11 = new JLabel("Check your point", JLabel.CENTER);
-		label12 = new JLabel("", JLabel.CENTER);
-		label13 = new JLabel("", JLabel.CENTER);
-		label14 = new JLabel("", JLabel.CENTER);
-		label15 = new JLabel("Do you want to save or remove your function?", JLabel.CENTER);
-		label16 = new JLabel("Which function do you want to reload?", JLabel.CENTER);
-		label17 = new JLabel("", JLabel.CENTER);
+		label1 = new JLabel("Error with file!", SwingConstants.CENTER);
+		label2 = new JLabel("Error while loading file!", SwingConstants.CENTER);
+		label3 = new JLabel("What would you like to do?", SwingConstants.CENTER);
+		label4 = new JLabel("How would you like to create your function?", SwingConstants.CENTER);
+		label5 = new JLabel("f(x) = ", SwingConstants.CENTER);
+		label6 = new JLabel("What do you want to do?", SwingConstants.CENTER);
+		label7 = new JLabel("How do you want to mirror your function?", SwingConstants.CENTER);
+		label8 = new JLabel("", SwingConstants.CENTER);
+		label9 = new JLabel("Enter START and END value for x and STEP", SwingConstants.CENTER);
+		label10 = new JLabel("", SwingConstants.CENTER);
+		label11 = new JLabel("Check your point", SwingConstants.CENTER);
+		label12 = new JLabel("", SwingConstants.CENTER);
+		label13 = new JLabel("", SwingConstants.CENTER);
+		label14 = new JLabel("", SwingConstants.CENTER);
+		label15 = new JLabel("Do you want to save or remove your function?", SwingConstants.CENTER);
+		label16 = new JLabel("Which function do you want to reload?", SwingConstants.CENTER);
+		label17 = new JLabel("", SwingConstants.CENTER);
 		
 		button1 = new JButton("Create a function");
 		button2 = new JButton("Load a function");
@@ -597,6 +595,7 @@ public class Frame {
 	
 	static class AListener implements ActionListener {
 
+		@Override
 		public void actionPerformed(ActionEvent ae) {
 			if (ae.getSource() == Frame.button1) {			
 				frameFunctionsMenu();
@@ -719,6 +718,7 @@ public class Frame {
 	
 	static class FListener implements FocusListener {
 
+		@Override
 		public void focusGained(FocusEvent fe) {
 			if (fe.getSource() == Frame.tfield1){
 				tfield1.selectAll();

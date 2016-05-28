@@ -20,7 +20,7 @@ public class Main {
 	public static URL location = Main.class.getProtectionDomain().getCodeSource().getLocation();
 
 	/**A list where all functions are stored */
-	private static ArrayList<Function> functions = new ArrayList<Function>();
+	private static ArrayList<Function> functions = new ArrayList<>();
 	
 	public static int zahl = 0; 
 	public static String s = "";
@@ -31,6 +31,7 @@ public class Main {
 	 * The main method: creates a new instance of Main and keeps the program running
 	 * @param args
 	 */
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 
 		new Main();
@@ -40,6 +41,7 @@ public class Main {
 	/**
 	 * The constructor that calls the menu
 	 */
+	@SuppressWarnings("unused")
 	public Main() {
 		boolean success = loadFunctions();
 		if (success)
@@ -52,7 +54,7 @@ public class Main {
 	 * Loads all the functions from the save file and adds them to the functions list
 	 * @return true if the action was successful
 	 */
-	private boolean loadFunctions() {
+	private static boolean loadFunctions() {
 		FileStorage fs = null;
 		String key;
 		Function function;
@@ -69,7 +71,7 @@ public class Main {
 			key = "" + alphabet[i];
 			function = (Function) fs.get(key);
 			if (function != null)
-				functions.add((Function) function);
+				functions.add(function);
 		}
 
 		return true;
@@ -79,6 +81,7 @@ public class Main {
 	 * Displays a menu for a specific function
 	 * @param function - the function to interact with
 	 */
+	@SuppressWarnings("hiding")
 	static void functionActionsMenu(Function function) {
 
 		/*String action = JOptionPane.showInputDialog("Would you like to calculate a VALUE TABLE "
@@ -288,9 +291,11 @@ public class Main {
 		}catch(NumberFormatException e) {
 			Frame.label13.setText("Ups! You've made an input error");
 			Frame.label13.setVisible(true);
+			System.err.println(e);
 		}catch(Exception e) {
 			Frame.label13.setText("Ups! You've made an input error!!");
 			Frame.label13.setVisible(true);
+			System.err.println(e);
 		}
 		
 	}
@@ -317,6 +322,7 @@ public class Main {
 	/**
 	 * Create an exponential function by specifying two points
 	 */
+	@SuppressWarnings("unused")
 	private static void createExponentialFunction() {
 
 		functions.add(new ExponentialFunction());
@@ -337,6 +343,7 @@ public class Main {
 	/**
 	 * Create an linear function by specifying two points
 	 */
+	@SuppressWarnings("unused")
 	private static void createLinearFunction() {
 
 		functions.add(new LinearFunction());
@@ -416,6 +423,7 @@ public class Main {
 	}
 	
 	public static class EingabeException extends NumberFormatException {
+		private static final long serialVersionUID = 1L;
 		public EingabeException() {
 			super();
 		}

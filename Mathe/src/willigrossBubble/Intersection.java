@@ -31,7 +31,7 @@ public class Intersection extends Point {
 
 	/**
 	 * Set the intersection point's first function
-	 * @param - f the function to set
+	 * @param f the function to set
 	 */
 	public void setF(Function f) {
 		this.f = f;
@@ -40,7 +40,7 @@ public class Intersection extends Point {
 
 	/**
 	 * Set the intersection point's second function
-	 * @param - g the function to set
+	 * @param g the function to set
 	 */
 	public void setG(Function g) {
 		this.g = g;
@@ -61,15 +61,12 @@ public class Intersection extends Point {
 		boolean found = false;
 		boolean tryIncreasingX = true;
 		int dirChanges = 1, tries = 0;
-		double yF = 0, yG = 0, prevYF, prevYG, currX, absDiff = 0, prevAbsDiff;
+		double yF = 0, yG = 0, currX, absDiff = 0, prevAbsDiff;
 
 		currX = Math.floor(Math.random() * 10);
 
 		while (!found) {
 			tries++;
-			//save previous values
-			prevYF = yF;
-			prevYG = yG;
 			prevAbsDiff = absDiff;
 
 			//calculate new values
@@ -107,9 +104,6 @@ public class Intersection extends Point {
 
 		}//end of while loop
 
-		//check if integer x value is the exact intersection
-		prevYF = yF;
-		prevYG = yG;
 		prevAbsDiff = absDiff;
 
 		currX = Math.round(currX);

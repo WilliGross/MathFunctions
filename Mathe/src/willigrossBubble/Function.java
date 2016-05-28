@@ -2,13 +2,13 @@ package willigrossBubble;
 
 import java.io.Serializable;
 
-import javax.swing.JOptionPane;
-
 import com.fathzer.soft.javaluator.DoubleEvaluator;
 import com.fathzer.soft.javaluator.StaticVariableSet;
 
 public class Function implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * The actual function
 	 */
@@ -19,6 +19,7 @@ public class Function implements Serializable {
 	/**
 	 * A string to represent the function
 	 */
+	@Override
 	public String toString() {
 		return expression;
 	}
@@ -40,7 +41,7 @@ public class Function implements Serializable {
 	 */
 	public double evaluate(double x) {
 		final DoubleEvaluator evaluator = new DoubleEvaluator();
-		final StaticVariableSet<Double> variables = new StaticVariableSet<Double>();
+		final StaticVariableSet<Double> variables = new StaticVariableSet<>();
 		variables.set("x", x);
 		return evaluator.evaluate(expression, variables);
 	}
@@ -54,7 +55,7 @@ public class Function implements Serializable {
 	public boolean testPointOnGraph(Point p) {
 		
 		final DoubleEvaluator evaluator = new DoubleEvaluator();
-		final StaticVariableSet<Double> variables = new StaticVariableSet<Double>();
+		final StaticVariableSet<Double> variables = new StaticVariableSet<>();
 		double value;
 		
 		variables.set("x", p.getX());
@@ -78,7 +79,7 @@ public class Function implements Serializable {
 		StringBuffer sb = new StringBuffer("<html>" + "f(x) = " + expression + "<p/> <p/>");
 		
 		final DoubleEvaluator evaluator = new DoubleEvaluator();
-		final StaticVariableSet<Double> variables = new StaticVariableSet<Double>();
+		final StaticVariableSet<Double> variables = new StaticVariableSet<>();
 		
 		double x = start;
 		

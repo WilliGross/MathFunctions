@@ -53,6 +53,7 @@ public class Point {
 	/**
 	 * A string to represent the point
 	 */
+	@Override
 	public String toString(){
 		return "(" + Function.roundDouble(this.getX(), 3) + "," + Function.roundDouble(this.getY(), 3) + ")";
 	}
@@ -85,8 +86,7 @@ public class Point {
 			return false;
 		if (x == ((Point) obj).getX() && y == ((Point) obj).getY())
 			return true;
-		else 
-			return false;
+		return false;
 	}
 
 

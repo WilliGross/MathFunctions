@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import willigrossBubble.gui.CustomButton;
 import willigrossBubble.gui.FrameMain;
@@ -22,7 +23,7 @@ public class PanelMain extends JPanel {
 		b2_load = new CustomButton("Load a function");
 		b3_intersection = new CustomButton("Intersection of two functions");
 		b4_close = new CustomButton("Close");
-		desc = new JLabel("What would you like to do?", JLabel.CENTER);
+		desc = new JLabel("What would you like to do?", SwingConstants.CENTER);
 		
 		setLayout(null);
 		

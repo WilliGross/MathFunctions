@@ -2,11 +2,9 @@ package willigrossBubble.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.LayoutManager;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
 import willigrossBubble.gui.panels.PanelCreateFunction;
@@ -22,7 +20,6 @@ public class FrameMain extends JFrame {
 	private JPanel panel;
 	
 	public FrameMain() {
-		instance = this;
 		
 		setTitle("Mathe");
 		setSize(600, 400);
@@ -40,7 +37,7 @@ public class FrameMain extends JFrame {
 	}
 	
 	public static void main(String[] args) {
-		new FrameMain();
+		instance = new FrameMain();
 	}
 
 	public void panelMain() {
