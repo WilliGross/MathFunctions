@@ -1,4 +1,4 @@
-package willigrossBubble.gui;
+package willigrossBubble.gui.panels;
 
 import javax.swing.JPanel;
 

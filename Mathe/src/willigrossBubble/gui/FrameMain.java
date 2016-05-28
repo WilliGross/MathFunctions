@@ -7,7 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
+import willigrossBubble.gui.panels.PanelCreateExponential;
 import willigrossBubble.gui.panels.PanelCreateFunction;
+import willigrossBubble.gui.panels.PanelCreateLinear;
 import willigrossBubble.gui.panels.PanelIntersection;
 import willigrossBubble.gui.panels.PanelLoadFunction;
 import willigrossBubble.gui.panels.PanelMain;
