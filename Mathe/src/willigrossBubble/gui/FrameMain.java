@@ -11,6 +11,7 @@ import willigrossBubble.gui.panels.PanelCreateFunction;
 import willigrossBubble.gui.panels.PanelIntersection;
 import willigrossBubble.gui.panels.PanelLoadFunction;
 import willigrossBubble.gui.panels.PanelMain;
+import willigrossBubble.gui.panels.PanelTypeFunction;
 
 public class FrameMain extends JFrame {
 
@@ -61,6 +62,12 @@ public class FrameMain extends JFrame {
 	public void panelIntersection() {
 		c.remove(panel);
 		c.add(panel = new PanelIntersection(), BorderLayout.CENTER);
+		panel.revalidate();
+	}
+	
+	public void typeFunction() {
+		c.remove(panel);
+		c.add(panel = new PanelTypeFunction(), BorderLayout.CENTER);
 		panel.revalidate();
 	}
 

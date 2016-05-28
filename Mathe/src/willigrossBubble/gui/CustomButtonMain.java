@@ -5,20 +5,19 @@ import java.awt.Cursor;
 
 import javax.swing.JButton;
 
-public class CustomButton extends JButton {
-	
+public class CustomButtonMain extends JButton {
+		
 	private static final long serialVersionUID = 1L;
 
-	public CustomButton(String s) {
-		setText(s);
-		setSize(400, 30);
+	public CustomButtonMain(String s) {
+		super(s);
+		setSize(200, 30);
 		setBackground(Color.LIGHT_GRAY);
 		setForeground(Color.BLUE);
 		setCursor(new Cursor(Cursor.HAND_CURSOR));
 	}
 	
-	public CustomButton() {
-		this("Button");
+	public CustomButtonMain() {
+		this("");
 	}
-
 }
