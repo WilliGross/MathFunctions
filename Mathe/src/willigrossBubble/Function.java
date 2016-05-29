@@ -12,9 +12,23 @@ public class Function implements Serializable {
 	/**
 	 * The actual function
 	 */
-	protected String expression = "";
+	private String expression = "";
 	
+	
+	/**
+	 * @return the expression
+	 */
+	public String getExpression() {
+		return expression;
+	}
+
+
+
 	public static String s;
+	
+	public Function(String expression) {
+		this.expression = expression;
+	}
 	
 	/**
 	 * A string to represent the function
@@ -175,73 +189,4 @@ public class Function implements Serializable {
 		return this.mirrorX().mirrorY();
 	}
 	
-/*	/**
-	 * Find one intersection of two graphs
-	 * @param f - function f
-	 * @param g - function g
-	 * @return the intersection point
-	 "star"/
-	public static Point findIntersection(Function f, Function g) {
-		boolean found = false;
-		boolean tryIncreasingX = true;
-		int dirChanges = 1;
-		double yF = 0, yG = 0, prevYF, prevYG, currX, absDiff = 0, prevAbsDiff;
-		Point interS = new Point(0, 0);
-		
-		currX = Math.floor(Math.random() * 10);
-				
-		while (!found) {
-			prevYF = yF;
-			prevYG = yG;
-			prevAbsDiff = absDiff;
-			
-			yF = f.evaluate(currX);
-			yG = g.evaluate(currX);
-			absDiff = Math.abs(yF - yG);
-			
-			if (absDiff <= 0.05 && absDiff >= -0.05) { //correct x value found?
-				found = true;
-				interS.setX(currX);
-			} else { // not found yet :(
-				
-				//change checking direction?
-				if (prevAbsDiff <= absDiff) {
-					if (tryIncreasingX == true)
-						tryIncreasingX = false;
-					else
-						tryIncreasingX = true;
-				}
-				
-				//set next x value
-				if (tryIncreasingX) {
-					currX += absDiff / (10 * dirChanges);
-				} else {
-					currX -= absDiff / (10 * dirChanges);
-				}
-				
-			}
-			
-		}//end of while loop
-		
-		//check if integer x value is the exact intersection
-		prevYF = yF;
-		prevYG = yG;
-		prevAbsDiff = absDiff;
-		
-		currX = Math.round(currX);
-		
-		yF = f.evaluate(currX);
-		yG = g.evaluate(currX);
-		absDiff = Math.abs(yF - yG);
-		
-		if (absDiff == 0) {
-			interS.setX(currX);
-		}
-		
-		//calculate corresponding y - value
-		interS.setY(f.evaluate(interS.getX()));
-		
-		return interS;
-	}
-*/	
 }

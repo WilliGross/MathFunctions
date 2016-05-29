@@ -1,5 +1,6 @@
 package willigrossBubble.gui.customComponents.panels;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -8,16 +9,19 @@ import java.awt.event.KeyEvent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 
+import willigrossBubble.Function;
+import willigrossBubble.Functions;
 import willigrossBubble.gui.FrameMain;
 import willigrossBubble.gui.customComponents.buttons.CustomButtonLarge;
 import willigrossBubble.gui.customComponents.buttons.CustomButtonSmall;
 import willigrossBubble.gui.customComponents.panels.PanelNavigation.ButtonStates;
 
 public class PanelCreateFunction extends CenterPanel {
-
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	private JLabel desc;
 	private CustomButtonLarge b1_type, b2_linearT2P, b3_exponentialT2P;
 	
@@ -37,11 +41,12 @@ public class PanelCreateFunction extends CenterPanel {
 		b1_type = new CustomButtonLarge("Type your function");
 		b1_type.setLocation(100, 100);
 		b1_type.addActionListener(new ActionListener() {
-
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				FrameMain.getInstance().getPanelSouth().activateButtons(ButtonStates.BOTH);
 				setTypeFunctionVisible(true);
+				go.setEnabled(false);
 				function.requestFocusInWindow();
 				
 			}
@@ -52,7 +57,7 @@ public class PanelCreateFunction extends CenterPanel {
 		b2_linearT2P = new CustomButtonLarge("Linear function through 2 points");
 		b2_linearT2P.setLocation(100, 135);
 		b2_linearT2P.addActionListener(new ActionListener() {
-
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				FrameMain.getInstance().createLinear();
@@ -83,14 +88,22 @@ public class PanelCreateFunction extends CenterPanel {
 		function = new JTextField();
 		function.setBounds(75, 240, 475, 30);
 		function.setVisible(false);
+		function.setBorder(new LineBorder(Color.RED, 2));
 		function.addKeyListener(new KeyAdapter() {
-
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode() == KeyEvent.VK_ENTER)
-					go.doClick();
-			}
 			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if (!Functions.isExpressionValid(function.getText())) {
+					function.setBorder(new LineBorder(Color.RED, 2));
+					go.setEnabled(false);
+				} else {
+					function.setBorder(new LineBorder(Color.BLACK));
+					go.setEnabled(true);
+				}
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					go.doClick();
+				}
+			}
 		});
 		add(function);
 		
@@ -101,19 +114,20 @@ public class PanelCreateFunction extends CenterPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//TODO
+				FrameMain.getInstance().getMainLogic().storeFunction(new Function(function.getText()));
 			}
 		});
 		add(go);
 	}
-
-
+	
+	
 	@Override
 	public void back() {
 		if (f.isVisible()) {
-			FrameMain.getInstance().getPanelSouth().activateButtons(ButtonStates.NONE);
+			FrameMain.getInstance().getPanelSouth().activateButtons(ButtonStates.MAIN_MENU);
 			setTypeFunctionVisible(false);
 			function.setText("");
+			function.setBorder(new LineBorder(Color.RED, 2));
 		} else
 			FrameMain.getInstance().panelMain();
 	}

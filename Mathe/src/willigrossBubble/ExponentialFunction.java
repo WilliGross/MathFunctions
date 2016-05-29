@@ -6,12 +6,18 @@ public class ExponentialFunction extends Function {
 
 	private static final long serialVersionUID = 1L;
 
+	private ExponentialFunction(String expression) {
+		super(expression);
+	}
+	
 	/**
 	 * Create a function whose graph runs through two given points
 	 * @param p - point 1
 	 * @param q - point 2
 	 */
-	public boolean createThroughPoints(Point p, Point q) {
+	public static ExponentialFunction createThroughPoints(Point p, Point q) {
+		
+		String expression = "";
 		
 		double a, b;
 		
@@ -23,14 +29,14 @@ public class ExponentialFunction extends Function {
 			else
 				expression += Function.roundDouble(a, 3) + "^x";
 			
-			return true;
+			return new ExponentialFunction(expression);
 		}
 		
 		
 		if (p.getX() == q.getX() || p.getY() == q.getY()) {
 			JOptionPane.showMessageDialog(null, "Invalid points, exponential functions' graphs are never perfectly horizontal or vertical!");
 			expression = "Invalid points!";
-			return false;
+			return null;
 		}
 		
 		
@@ -55,8 +61,7 @@ public class ExponentialFunction extends Function {
 			
 			
 		}
-		return true;
-
+		return new ExponentialFunction(expression);
 	}
 
 }

@@ -6,16 +6,22 @@ public class LinearFunction extends Function {
 
 	private static final long serialVersionUID = 1L;
 
+	private LinearFunction(String expression) {
+		super(expression);
+	}
+	
 	/**
 	 * Create a function whose graph runs through two given points
 	 * @param p - point 1
 	 * @param q - point 2
 	 */
-	public boolean createThroughPoints(Point p, Point q) {
+	public static LinearFunction createThroughPoints(Point p, Point q) {
+		
+		String expression = "";
 		
 		if (p.getX() == q.getX() && !p.equals(q)) {
 			JOptionPane.showMessageDialog(null, "There is no function f(x) for a vertical straight line!");
-			return false;
+			return null;
 		}
 			
 		
@@ -41,8 +47,7 @@ public class LinearFunction extends Function {
 			expression += (t != 0.0) ? (int) t : "";
 		else
 			expression += (t != 0.0) ? Function.roundDouble(t, 3) : "";
-		return true;
-
+		return new LinearFunction(expression);
 	}
 
 
