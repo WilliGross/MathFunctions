@@ -101,7 +101,7 @@ public class Frame {
 		sp2 = new JScrollPane(label17, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 	            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
-		MainButton = new JButton("Back to Main Menu");
+		MainButton = new JButton("Back to Main_old Menu");
 		
 		framemain();
 	}
@@ -389,7 +389,7 @@ public class Frame {
 		frame1.add(label8);
 		label8.setBounds((frame1.getWidth()-400)/2, 210, 400, 30);
 		if (tfield1.getText().equals("")) {
-			label8.setText("f(x) = " + Main.t);
+			label8.setText("f(x) = " + Main_old.t);
 		}else {
 			label8.setText("f(x) = " + tfield1.getText());
 		}
@@ -601,9 +601,9 @@ public class Frame {
 				frameFunctionsMenu();
 				
 			}else if (ae.getSource() == Frame.button2) {
-				Main.showPreviousFunctions();
+				Main_old.showPreviousFunctions();
 			}else if (ae.getSource() == Frame.button3) {
-				Main.calcIntersection();
+				Main_old.calcIntersection();
 			}else if (ae.getSource() == Frame.button4) {
 				System.exit(0);
 				
@@ -630,21 +630,21 @@ public class Frame {
 			}else if (ae.getSource() == Frame.button13) {
 				RemoveAndSave();
 			}else if (ae.getSource() == Frame.button14) {
-				Main.typeFunction(3);
+				Main_old.typeFunction(3);
 			}else if (ae.getSource() == Frame.button15) {
-				Main.typeFunction(4);
+				Main_old.typeFunction(4);
 			}else if (ae.getSource() == Frame.button16) {
-				Main.typeFunction(5);
+				Main_old.typeFunction(5);
 			}else if (ae.getSource() == Frame.button17) {
 				frameFunctionsMenu();
 			}else if (ae.getSource() == Frame.button18) {
 				framevalueausgabe();	
-				Main.typeFunction(1);					
+				Main_old.typeFunction(1);					
 			}else if (ae.getSource() == Frame.button19) {
 				frameActionsMenu();
 			}else if (ae.getSource() == Frame.button20) {
 				label12.setVisible(false);
-				Main.typeFunction(2);
+				Main_old.typeFunction(2);
 			}else if (ae.getSource() == Frame.button21) {
 				frameActionsMenu();
 			}else if (ae.getSource() == Frame.MainButton) {
@@ -656,11 +656,11 @@ public class Frame {
 			}else if (ae.getSource() == Frame.back3) {
 				frameFunctionsMenu();
 			}else if (ae.getSource() == Frame.button22) {
-				Main.typeFunction(7);
+				Main_old.typeFunction(7);
 			}else if (ae.getSource() == Frame.button23) {
-				Main.typeFunction(8);
+				Main_old.typeFunction(8);
 			}else if (ae.getSource() == Frame.button24) {
-				Main.selectPreviousFunctions();
+				Main_old.selectPreviousFunctions();
 			}
 		}
 		
@@ -677,26 +677,26 @@ public class Frame {
 					frameActionsMenu();
 				}else if (e.getSource() == Frame.tfield2) {
 					if (tfield2.getText() != null && tfield3.getText() != null && tfield4.getText() != null) {
-						Main.typeFunction(1);
+						Main_old.typeFunction(1);
 						framevalueausgabe();
 					}
 				}else if (e.getSource() == Frame.tfield3) {
 					if (tfield2.getText() != null && tfield3.getText() != null && tfield4.getText() != null) {
-						Main.typeFunction(1);
+						Main_old.typeFunction(1);
 						framevalueausgabe();
 					}
 				}else if (e.getSource() == Frame.tfield4) {
 					if (tfield2.getText() != null && tfield3.getText() != null && tfield4.getText() != null) {
-						Main.typeFunction(1);
+						Main_old.typeFunction(1);
 						framevalueausgabe();
 					}
 				}else if (e.getSource() == Frame.tfield5) {
 						label12.setVisible(false);
-						Main.typeFunction(2);
+						Main_old.typeFunction(2);
 						
 				}else if (e.getSource() == Frame.tfield6) {
 						label12.setVisible(false);
-						Main.typeFunction(2);
+						Main_old.typeFunction(2);
 				}
 			}
 			

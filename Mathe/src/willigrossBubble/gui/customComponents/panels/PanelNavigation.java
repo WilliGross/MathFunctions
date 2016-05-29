@@ -29,7 +29,7 @@ public class PanelNavigation extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FrameMain.instance.panelMain();
+				FrameMain.getInstance().panelMain();
 			}
 		});
 		add(mainMenu);
@@ -42,13 +42,13 @@ public class PanelNavigation extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FrameMain.instance.back();
+				FrameMain.getInstance().back();
 			}
 		});
 		add(back);
 	}
 	
-	public void setVisibility(boolean mainMenu, boolean back) {
+	public void setButtonVisibility(boolean mainMenu, boolean back) {
 		if (mainMenu)
 			this.mainMenu.setEnabled(true);
 		else
@@ -57,5 +57,31 @@ public class PanelNavigation extends JPanel {
 			this.back.setEnabled(true);
 		else
 			this.back.setEnabled(false);
+	}
+	
+	public void activateButtons(ButtonStates state) {
+		switch (state) {
+			case BOTH:
+				this.mainMenu.setEnabled(true);
+				this.back.setEnabled(true);
+				break;
+			case NONE:
+				this.mainMenu.setEnabled(false);
+				this.back.setEnabled(false);
+				break;
+			case MAIN_MENU:
+				this.mainMenu.setEnabled(true);
+				this.back.setEnabled(false);
+				break;
+			case BACK:
+				this.mainMenu.setEnabled(false);
+				this.back.setEnabled(true);
+				break;
+			default:
+				break;
+		}
+	}
+	public enum ButtonStates {
+		BOTH, NONE, MAIN_MENU, BACK;
 	}
 }

@@ -32,7 +32,7 @@ public class PanelMain extends CenterPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FrameMain.instance.panelCreateFunction();			
+				FrameMain.getInstance().panelCreateFunction();			
 			}
 				
 		});
@@ -43,7 +43,7 @@ public class PanelMain extends CenterPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FrameMain.instance.panelLoadFunction();
+				FrameMain.getInstance().panelLoadFunction();
 			}
 			
 		});
@@ -54,7 +54,7 @@ public class PanelMain extends CenterPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FrameMain.instance.panelIntersection();
+				FrameMain.getInstance().panelIntersection();
 			}
 			
 		});

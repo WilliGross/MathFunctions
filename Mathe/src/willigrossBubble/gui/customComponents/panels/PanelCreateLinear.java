@@ -9,7 +9,7 @@ public class PanelCreateLinear extends CenterPanel {
 
 	@Override
 	public void back() {
-		FrameMain.instance.panelCreateFunction();
+		FrameMain.getInstance().panelCreateFunction();
 	}
 	
 }

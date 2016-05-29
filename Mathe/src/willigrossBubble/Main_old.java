@@ -11,13 +11,13 @@ import javax.swing.JOptionPane;
 import com.blogspot.debukkitsblog.Util.FileStorage;
 import com.fathzer.soft.javaluator.DoubleEvaluator;
 
-public class Main {
+public class Main_old {
 
 	/**A utility array representing the alphabet */
 	public static char[] alphabet = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
 
 	/**Location where file is executed from*/
-	public static URL location = Main.class.getProtectionDomain().getCodeSource().getLocation();
+	public static URL location = Main_old.class.getProtectionDomain().getCodeSource().getLocation();
 
 	/**A list where all functions are stored */
 	private static ArrayList<Function> functions = new ArrayList<>();
@@ -28,13 +28,13 @@ public class Main {
 
 
 	/**
-	 * The main method: creates a new instance of Main and keeps the program running
+	 * The main method: creates a new instance of Main_old and keeps the program running
 	 * @param args
 	 */
 	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 
-		new Main();
+		new Main_old();
 
 	} 
 
@@ -42,7 +42,7 @@ public class Main {
 	 * The constructor that calls the menu
 	 */
 	@SuppressWarnings("unused")
-	public Main() {
+	public Main_old() {
 		boolean success = loadFunctions();
 		if (success)
 			new Frame();

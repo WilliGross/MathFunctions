@@ -1,6 +1,6 @@
 package willigrossBubble.gui.customComponents.buttons;
 
-
+/** For "Go" buttons */
 public class CustomButtonSmall extends CustomButton {
 
 	private static final long serialVersionUID = 1L;

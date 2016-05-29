@@ -8,7 +8,7 @@ public class PanelIntersection extends CenterPanel {
 
 	@Override
 	public void back() {
-		FrameMain.instance.panelMain();
+		FrameMain.getInstance().panelMain();
 	}
 
 }

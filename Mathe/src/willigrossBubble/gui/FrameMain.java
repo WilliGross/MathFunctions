@@ -6,6 +6,7 @@ import java.awt.Container;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
+import willigrossBubble.MainLogic;
 import willigrossBubble.gui.customComponents.panels.CenterPanel;
 import willigrossBubble.gui.customComponents.panels.PanelCreateExponential;
 import willigrossBubble.gui.customComponents.panels.PanelCreateFunction;
@@ -14,16 +15,42 @@ import willigrossBubble.gui.customComponents.panels.PanelIntersection;
 import willigrossBubble.gui.customComponents.panels.PanelLoadFunction;
 import willigrossBubble.gui.customComponents.panels.PanelMain;
 import willigrossBubble.gui.customComponents.panels.PanelNavigation;
-import willigrossBubble.gui.customComponents.panels.PanelTypeFunction;
+import willigrossBubble.gui.customComponents.panels.PanelNavigation.ButtonStates;
 
 public class FrameMain extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	public static FrameMain instance;
+	private static FrameMain instance;
 	private Container c;
 	private CenterPanel panelCenter;
 	private PanelNavigation panelSouth;
 	
+	private MainLogic mainLogic;
+	
+	
+	/**
+	 * @return the instance
+	 */
+	public static FrameMain getInstance() {
+		return instance;
+	}
+
+	
+	/**
+	 * @return the panelSouth
+	 */
+	public PanelNavigation getPanelSouth() {
+		return panelSouth;
+	}
+
+	
+	/**
+	 * @return the mainLogic
+	 */
+	public MainLogic getMainLogic() {
+		return mainLogic;
+	}
+
 	public FrameMain() {
 		
 		setTitle("Mathe");
@@ -41,6 +68,9 @@ public class FrameMain extends JFrame {
 		c.add(panelSouth, BorderLayout.SOUTH);
 		panelCenter = new PanelMain();
 		panelMain();
+		
+		
+		mainLogic = new MainLogic();
 	}
 	
 	public static void main(String[] args) {
@@ -54,50 +84,47 @@ public class FrameMain extends JFrame {
 	public void panelMain() {
 		c.remove(panelCenter);
 		c.add(panelCenter = new PanelMain(), BorderLayout.CENTER);
-		panelSouth.setVisibility(false, false);
+		panelSouth.activateButtons(ButtonStates.NONE);
 		panelCenter.revalidate();
 	}
 
 	public void panelCreateFunction() {
 		c.remove(panelCenter);
 		c.add(panelCenter = new PanelCreateFunction(), BorderLayout.CENTER);
-		panelSouth.setVisibility(true, false);
+		panelSouth.activateButtons(ButtonStates.MAIN_MENU);
 		panelCenter.revalidate();
 	}
 
 	public void panelLoadFunction() {
 		c.remove(panelCenter);
 		c.add(panelCenter = new PanelLoadFunction(), BorderLayout.CENTER);
-		panelSouth.setVisibility(true, false);
+		panelSouth.activateButtons(ButtonStates.MAIN_MENU);
 		panelCenter.revalidate();
 	}
 
 	public void panelIntersection() {
 		c.remove(panelCenter);
 		c.add(panelCenter = new PanelIntersection(), BorderLayout.CENTER);
-		panelSouth.setVisibility(true, false);
+		panelSouth.activateButtons(ButtonStates.MAIN_MENU);
 		panelCenter.revalidate();
 	}
 	
-	public void typeFunction() {
-		c.remove(panelCenter);
-		c.add(panelCenter = new PanelTypeFunction(), BorderLayout.CENTER);
-		panelSouth.setVisibility(true, true);
-		panelCenter.revalidate();
-	}
 
 	public void createLinear() {
 		c.remove(panelCenter);
 		c.add(panelCenter = new PanelCreateLinear(), BorderLayout.CENTER);
-		panelSouth.setVisibility(true, true);
+		panelSouth.activateButtons(ButtonStates.BOTH);
 		panelCenter.revalidate();
 	}
 
 	public void createExponential() {
 		c.remove(panelCenter);
 		c.add(panelCenter = new PanelCreateExponential(), BorderLayout.CENTER);
-		panelSouth.setVisibility(true, true);
+		panelSouth.activateButtons(ButtonStates.BOTH);
 		panelCenter.revalidate();
 	}
+	
+	
 
+	
 }

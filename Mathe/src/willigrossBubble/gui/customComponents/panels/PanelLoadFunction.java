@@ -8,7 +8,7 @@ public class PanelLoadFunction extends CenterPanel {
 
 	@Override
 	public void back() {
-		FrameMain.instance.panelMain();		
+		FrameMain.getInstance().panelMain();		
 	}
 
 }
