@@ -8,9 +8,7 @@ import javax.swing.WindowConstants;
 
 import willigrossBubble.MainLogic;
 import willigrossBubble.gui.customComponents.panels.CenterPanel;
-import willigrossBubble.gui.customComponents.panels.PanelCreateExponential;
 import willigrossBubble.gui.customComponents.panels.PanelCreateFunction;
-import willigrossBubble.gui.customComponents.panels.PanelCreateLinear;
 import willigrossBubble.gui.customComponents.panels.PanelIntersection;
 import willigrossBubble.gui.customComponents.panels.PanelLoadFunction;
 import willigrossBubble.gui.customComponents.panels.PanelMain;
@@ -54,10 +52,10 @@ public class FrameMain extends JFrame {
 	public FrameMain() {
 		
 		setTitle("Mathe");
-		setSize(600, 400);
+		setSize(600, 600);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setResizable(true);
+		setResizable(false);
 		setVisible(true);
 		
 		
@@ -108,23 +106,5 @@ public class FrameMain extends JFrame {
 		panelSouth.activateButtons(ButtonStates.MAIN_MENU);
 		panelCenter.revalidate();
 	}
-	
-
-	public void createLinear() {
-		c.remove(panelCenter);
-		c.add(panelCenter = new PanelCreateLinear(), BorderLayout.CENTER);
-		panelSouth.activateButtons(ButtonStates.BOTH);
-		panelCenter.revalidate();
-	}
-
-	public void createExponential() {
-		c.remove(panelCenter);
-		c.add(panelCenter = new PanelCreateExponential(), BorderLayout.CENTER);
-		panelSouth.activateButtons(ButtonStates.BOTH);
-		panelCenter.revalidate();
-	}
-	
-	
-
 	
 }

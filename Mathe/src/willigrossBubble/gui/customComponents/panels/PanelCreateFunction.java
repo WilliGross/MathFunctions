@@ -1,141 +1,69 @@
 package willigrossBubble.gui.customComponents.panels;
 
-import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
 
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.border.LineBorder;
+import javax.swing.JPanel;
 
-import willigrossBubble.Function;
-import willigrossBubble.Functions;
 import willigrossBubble.gui.FrameMain;
-import willigrossBubble.gui.customComponents.buttons.CustomButtonLarge;
-import willigrossBubble.gui.customComponents.buttons.CustomButtonSmall;
 import willigrossBubble.gui.customComponents.panels.PanelNavigation.ButtonStates;
 
 public class PanelCreateFunction extends CenterPanel {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private JLabel desc;
-	private CustomButtonLarge b1_type, b2_linearT2P, b3_exponentialT2P;
-	
-	//for type function
-	private JLabel f;
-	private JTextField function;
-	private CustomButtonSmall go;
-	
+	private static PanelCreateFunction instance;
+	private PanelCreateFunction_Menu menu;
+	private JPanel createFunction;
 	
 	public PanelCreateFunction() {
-		setLayout(null);
 		
-		desc = new JLabel("How would you like to create your function?");
-		desc.setBounds(175, 40, 250, 30);
-		add(desc);
+		instance = this;
 		
-		b1_type = new CustomButtonLarge("Type your function");
-		b1_type.setLocation(100, 100);
-		b1_type.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				FrameMain.getInstance().getPanelSouth().activateButtons(ButtonStates.BOTH);
-				setTypeFunctionVisible(true);
-				go.setEnabled(false);
-				function.requestFocusInWindow();
-				
-			}
-			
-		});
-		add(b1_type);
+		menu = new PanelCreateFunction_Menu();
+		createFunction = new PanelCreateFunction_TypeFunction();
 		
-		b2_linearT2P = new CustomButtonLarge("Linear function through 2 points");
-		b2_linearT2P.setLocation(100, 135);
-		b2_linearT2P.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				FrameMain.getInstance().createLinear();
-			}
-			
-		});
-		add(b2_linearT2P);
+		setLayout(new GridLayout(2, 1));
+		add(menu);
 		
-		b3_exponentialT2P = new CustomButtonLarge("Exponential function through 2 points");
-		b3_exponentialT2P.setLocation(100, 170);
-		b3_exponentialT2P.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				FrameMain.getInstance().createExponential();
-			}
-		});
-		
-		add(b3_exponentialT2P);
-		
-		
-		//for type function
-		f = new JLabel("f(x) = ", SwingConstants.CENTER);
-		f.setBounds(25, 240, 50, 30);
-		f.setVisible(false);
-		add(f);
-		
-		function = new JTextField();
-		function.setBounds(75, 240, 475, 30);
-		function.setVisible(false);
-		function.setBorder(new LineBorder(Color.RED, 2));
-		function.addKeyListener(new KeyAdapter() {
-			
-			@Override
-			public void keyReleased(KeyEvent e) {
-				if (!Functions.isExpressionValid(function.getText())) {
-					function.setBorder(new LineBorder(Color.RED, 2));
-					go.setEnabled(false);
-				} else {
-					function.setBorder(new LineBorder(Color.BLACK));
-					go.setEnabled(true);
-				}
-				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					go.doClick();
-				}
-			}
-		});
-		add(function);
-		
-		go = new CustomButtonSmall("Go");
-		go.setBounds(250, 280, 100, 30);
-		go.setVisible(false);
-		go.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				FrameMain.getInstance().getMainLogic().storeFunction(new Function(function.getText()));
-			}
-		});
-		add(go);
 	}
 	
 	
+	/**
+	 * @return the instance
+	 */
+	public static PanelCreateFunction getInstance() {
+		return instance;
+	}
+	
+	public void typeFunction() {
+		remove(createFunction);
+		add(createFunction = new PanelCreateFunction_TypeFunction(), BorderLayout.CENTER);
+		FrameMain.getInstance().getPanelSouth().activateButtons(ButtonStates.BOTH);
+		createFunction.revalidate();
+	}
+	
+	public void createLinear() {
+		remove(createFunction);
+		add(createFunction = new PanelCreateFunction_CreateLinear(), BorderLayout.CENTER);
+		FrameMain.getInstance().getPanelSouth().activateButtons(ButtonStates.BOTH);
+		createFunction.revalidate();
+	}
+
+	public void createExponential() {
+		remove(createFunction);
+		add(createFunction = new PanelCreateFunction_CreateExponential(), BorderLayout.CENTER);
+		FrameMain.getInstance().getPanelSouth().activateButtons(ButtonStates.BOTH);
+		createFunction.revalidate();
+	}
+
+
 	@Override
 	public void back() {
-		if (f.isVisible()) {
+		if (createFunction.isVisible()) {
+			createFunction.setVisible(false);
 			FrameMain.getInstance().getPanelSouth().activateButtons(ButtonStates.MAIN_MENU);
-			setTypeFunctionVisible(false);
-			function.setText("");
-			function.setBorder(new LineBorder(Color.RED, 2));
 		} else
 			FrameMain.getInstance().panelMain();
 	}
-	
-	public void setTypeFunctionVisible(boolean visible) {
-		f.setVisible(visible);
-		function.setVisible(visible);
-		go.setVisible(visible);
-	}
-	
 }

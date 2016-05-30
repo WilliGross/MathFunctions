@@ -1,7 +1,11 @@
 package willigrossBubble;
 
-public class Point {
+import java.io.Serializable;
 
+public class Point implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * The x and y coordinate of the point
 	 */
