@@ -30,11 +30,11 @@ public class PanelCreateFunction_TypeFunction extends JPanel {
 		setLayout(null);
 		
 		f = new JLabel("f(x) = ", SwingConstants.CENTER);
-		f.setBounds(25, 40, 50, 30);
+		f.setBounds(50, 40, 50, 30);
 		add(f);
 		
 		function = new JTextField();
-		function.setBounds(75, 40, 475, 30);
+		function.setBounds(100, 40, 400, 30);
 		function.setBorder(new LineBorder(Color.RED, 2));
 		function.addKeyListener(new KeyAdapter() {
 			
