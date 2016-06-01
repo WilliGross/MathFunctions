@@ -1,7 +1,5 @@
 package willigrossBubble;
 
-import javax.swing.JOptionPane;
-
 public class ExponentialFunction extends Function {
 
 	private static final long serialVersionUID = 1L;
@@ -14,8 +12,19 @@ public class ExponentialFunction extends Function {
 	 * Create a function whose graph runs through two given points
 	 * @param p - point 1
 	 * @param q - point 2
+	 * @throws InvalidPointConfigurationException 
 	 */
-	public static ExponentialFunction createThroughPoints(Point p, Point q) {
+	public static ExponentialFunction createThroughPoints(Point p, Point q) throws InvalidPointConfigurationException {
+		
+//		if (p.equals(q))
+//			throw new InvalidPointConfigurationException("Invalid point configuration: Points are equal to each other, can't create a unique function!");
+		
+		if (!p.equals(q)) {
+			if (Utility.arePointsOnHorzontalLine(p, q))
+				throw new InvalidPointConfigurationException("Invalid point configuration: same y coordinates"); //"Invalid point configuration: Points have the same y coordinate, exponential functions can never be perfectly horizontal!"
+			if (Utility.arePointsOnVerticalLine(p, q))
+				throw new InvalidPointConfigurationException("Invalid point configuration: same x coordinates"); //"Invalid point configuration: Points have the same x coordinate, exponential functions can never be perfectly vertical!"
+		}
 		
 		String expression = "";
 		
@@ -30,13 +39,6 @@ public class ExponentialFunction extends Function {
 				expression += Function.roundDouble(a, 3) + "^x";
 			
 			return new ExponentialFunction(expression);
-		}
-		
-		
-		if (p.getX() == q.getX() || p.getY() == q.getY()) {
-			JOptionPane.showMessageDialog(null, "Invalid points, exponential functions' graphs are never perfectly horizontal or vertical!");
-			expression = "Invalid points!";
-			return null;
 		}
 		
 		

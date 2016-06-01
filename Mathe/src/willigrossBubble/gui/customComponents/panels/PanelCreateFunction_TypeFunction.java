@@ -13,7 +13,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import willigrossBubble.Function;
-import willigrossBubble.Functions;
+import willigrossBubble.Validations;
 import willigrossBubble.gui.FrameMain;
 import willigrossBubble.gui.customComponents.buttons.CustomButtonSmall;
 
@@ -35,12 +35,12 @@ public class PanelCreateFunction_TypeFunction extends JPanel {
 		
 		function = new JTextField();
 		function.setBounds(100, 40, 400, 30);
-		function.setBorder(new LineBorder(Color.RED, 2));
+//		function.setBorder(new LineBorder(Color.RED, 2));
 		function.addKeyListener(new KeyAdapter() {
 			
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if (!Functions.isExpressionValid(function.getText())) {
+				if (!Validations.doesExpressionContainValidCharacters(function.getText())) {
 					function.setBorder(new LineBorder(Color.RED, 2));
 					go.setEnabled(false);
 				} else {
@@ -55,7 +55,7 @@ public class PanelCreateFunction_TypeFunction extends JPanel {
 		add(function);
 		
 		go = new CustomButtonSmall("Go");
-		go.setBounds(250, 80, 100, 30);
+		go.setLocation(250, 85);
 		go.addActionListener(new ActionListener() {
 			
 			@Override

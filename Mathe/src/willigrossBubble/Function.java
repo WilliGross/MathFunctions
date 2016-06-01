@@ -5,6 +5,8 @@ import java.io.Serializable;
 import com.fathzer.soft.javaluator.DoubleEvaluator;
 import com.fathzer.soft.javaluator.StaticVariableSet;
 
+import willigrossBubble.gui.FrameMain;
+
 public class Function implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -23,19 +25,37 @@ public class Function implements Serializable {
 	}
 
 
+	public char name;
 
 	public static String s;
 	
 	public Function(String expression) {
 		this.expression = expression;
+		name = FrameMain.getInstance().getMainLogic().getNextName();
 	}
 	
+	
+	/**
+	 * @return the name
+	 */
+	public char getName() {
+		return name;
+	}
+
+	
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(char name) {
+		this.name = name;
+	}
+
 	/**
 	 * A string to represent the function
 	 */
 	@Override
 	public String toString() {
-		return expression;
+		return name + "(x) = " + expression;
 	}
 
 

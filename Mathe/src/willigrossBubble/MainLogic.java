@@ -19,6 +19,7 @@ public class MainLogic {
 		if (functions.containsValue(function)) 
 			return null;
 		char name = getNextName();
+		function.setName(name);
 		functions.put(name, function);
 		System.out.println(functions.get(names[functions.size() -1]));
 		return name;
@@ -37,7 +38,7 @@ public class MainLogic {
 	 * @param name the key
 	 * @return the function
 	 */
-	public Function getFunction(Character name) {
+	public Function getFunction(char name) {
 		return functions.get(name);
 	}
 	
