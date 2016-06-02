@@ -2,6 +2,7 @@ package willigrossBubble;
 
 public class Intersection extends Point {
 
+	private static final long serialVersionUID = 1L;
 	/** the two functions used to calculate the intersection point's coordinates */
 	private Function f, g;
 

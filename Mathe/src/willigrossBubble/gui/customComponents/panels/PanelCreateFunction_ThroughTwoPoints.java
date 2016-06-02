@@ -1,6 +1,7 @@
 package willigrossBubble.gui.customComponents.panels;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -16,7 +17,9 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import willigrossBubble.ExponentialFunction;
+import willigrossBubble.Function;
 import willigrossBubble.InvalidPointConfigurationException;
+import willigrossBubble.LinearFunction;
 import willigrossBubble.Point;
 import willigrossBubble.Utility;
 import willigrossBubble.Validations;
@@ -24,20 +27,33 @@ import willigrossBubble.gui.FrameMain;
 import willigrossBubble.gui.customComponents.buttons.CustomButtonSmall;
 
 
-public class PanelCreateFunction_CreateExponential extends JPanel {
+public class PanelCreateFunction_ThroughTwoPoints extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 	private JTextField p1x, p1y, p2x, p2y;
-	private JLabel p1, p2, result;
+	private JLabel p1, p2, result, heading;
 //	private JTextPane resultPane;
 	private CustomButtonSmall go;
-	private ExponentialFunction function;
+	private Function function;
+	private FunctionType type;
 	
-	public PanelCreateFunction_CreateExponential() {
+	
+	public PanelCreateFunction_ThroughTwoPoints(FunctionType type) {
+	
+		this.type = type;
 		
 		setLayout(null);
 		
 		KeyAdapter keyListener = new KeyListeneR();
+		
+		if (type == FunctionType.EXPONENTIAL)
+			heading = new JLabel("Create exponential function", SwingConstants.CENTER);
+		else if (type == FunctionType.LINEAR)
+			heading = new JLabel("Create linear function", SwingConstants.CENTER);
+		heading.setBounds(100, 0, 400, 30);
+		heading.setFont(new Font(getFont().getName(), getFont().getStyle(), 15));
+		add(heading);
+		
 		
 		p1 = new JLabel("Point 1:", SwingConstants.RIGHT);
 		p1.setBounds(40, 40, 50, 30);
@@ -125,7 +141,11 @@ public class PanelCreateFunction_CreateExponential extends JPanel {
 					qx = Utility.readDoubleFromStringInput(p2x.getText()),
 					qy = Utility.readDoubleFromStringInput(p2y.getText());
 			Point p = new Point(px, py), q = new Point(qx, qy);
-			function = ExponentialFunction.createThroughPoints(p, q);
+			
+			if (type == FunctionType.EXPONENTIAL)
+				function = ExponentialFunction.createThroughPoints(p, q);
+			else if (type == FunctionType.LINEAR)
+				function = LinearFunction.createThroughPoints(p, q);
 			//TODO Display warning when p.equals(q)
 		} catch (IllegalArgumentException | InvalidPointConfigurationException e) {
 			result.setText(e.getMessage());
@@ -165,6 +185,10 @@ public class PanelCreateFunction_CreateExponential extends JPanel {
 				go.doClick();
 			}
 		}
+	}
+	
+	public enum FunctionType {
+		EXPONENTIAL, LINEAR
 	}
 	
 }

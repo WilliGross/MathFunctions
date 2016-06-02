@@ -24,7 +24,7 @@ public class ExponentialFunction extends Function {
 				throw new InvalidPointConfigurationException("Invalid point configuration: same y coordinates"); //"Invalid point configuration: Points have the same y coordinate, exponential functions can never be perfectly horizontal!"
 			if (Utility.arePointsOnVerticalLine(p, q))
 				throw new InvalidPointConfigurationException("Invalid point configuration: same x coordinates"); //"Invalid point configuration: Points have the same x coordinate, exponential functions can never be perfectly vertical!"
-		}
+		} //TODO filter points in wrong quadrants
 		
 		String expression = "";
 		

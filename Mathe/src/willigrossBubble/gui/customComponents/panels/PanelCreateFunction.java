@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import javax.swing.JPanel;
 
 import willigrossBubble.gui.FrameMain;
+import willigrossBubble.gui.customComponents.panels.PanelCreateFunction_ThroughTwoPoints.FunctionType;
 import willigrossBubble.gui.customComponents.panels.PanelNavigation.ButtonStates;
 
 public class PanelCreateFunction extends CenterPanel {
@@ -45,14 +46,14 @@ public class PanelCreateFunction extends CenterPanel {
 	
 	public void createLinear() {
 		remove(createFunction);
-		add(createFunction = new PanelCreateFunction_CreateLinear(), BorderLayout.CENTER);
+		add(createFunction = new PanelCreateFunction_ThroughTwoPoints(FunctionType.LINEAR), BorderLayout.CENTER);
 		FrameMain.getInstance().getPanelSouth().activateButtons(ButtonStates.BOTH);
 		createFunction.revalidate();
 	}
 
 	public void createExponential() {
 		remove(createFunction);
-		add(createFunction = new PanelCreateFunction_CreateExponential(), BorderLayout.CENTER);
+		add(createFunction = new PanelCreateFunction_ThroughTwoPoints(FunctionType.EXPONENTIAL), BorderLayout.CENTER);
 		FrameMain.getInstance().getPanelSouth().activateButtons(ButtonStates.BOTH);
 		createFunction.revalidate();
 	}
