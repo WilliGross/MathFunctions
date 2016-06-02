@@ -1,6 +1,7 @@
 package willigrossBubble.gui.customComponents.panels;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -24,10 +25,17 @@ public class PanelCreateFunction_TypeFunction extends JPanel {
 	private JLabel f;
 	private JTextField function;
 	private CustomButtonSmall go;
+	private JLabel heading;
 	
 	
 	public PanelCreateFunction_TypeFunction() {
+		
 		setLayout(null);
+		
+		heading = new JLabel("Type your function", SwingConstants.CENTER);
+		heading.setBounds(100, 0, 400, 30);
+		heading.setFont(new Font(getFont().getName(), getFont().getStyle(), 15));
+		add(heading);
 		
 		f = new JLabel("f(x) = ", SwingConstants.CENTER);
 		f.setBounds(50, 40, 50, 30);
