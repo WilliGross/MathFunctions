@@ -51,5 +51,13 @@ public class MainLogic {
 		return functions.inverse().get(function);
 	}
 	
+	/**
+	 * Get the latest function
+	 * @return the requested function
+	 */
+	public Function getLatestFunction() {
+		return functions.get(names[functions.size()]);
+	}
+	
 	
 }

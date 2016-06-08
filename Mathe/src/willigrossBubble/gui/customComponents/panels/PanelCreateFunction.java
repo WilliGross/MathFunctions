@@ -11,6 +11,7 @@ import willigrossBubble.gui.customComponents.panels.PanelNavigation.ButtonStates
 
 public class PanelCreateFunction extends CenterPanel {
 	
+	
 	private static final long serialVersionUID = 1L;
 	
 	private static PanelCreateFunction instance;
@@ -26,7 +27,7 @@ public class PanelCreateFunction extends CenterPanel {
 		
 		setLayout(new GridLayout(2, 1));
 		add(menu);
-		
+
 	}
 	
 	
@@ -67,4 +68,5 @@ public class PanelCreateFunction extends CenterPanel {
 		} else
 			FrameMain.getInstance().panelMain();
 	}
+
 }

@@ -6,9 +6,11 @@ import java.awt.Container;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
+import willigrossBubble.Function;
 import willigrossBubble.MainLogic;
 import willigrossBubble.gui.customComponents.panels.CenterPanel;
 import willigrossBubble.gui.customComponents.panels.PanelCreateFunction;
+import willigrossBubble.gui.customComponents.panels.PanelFunctionActionsMenu;
 import willigrossBubble.gui.customComponents.panels.PanelIntersection;
 import willigrossBubble.gui.customComponents.panels.PanelLoadFunction;
 import willigrossBubble.gui.customComponents.panels.PanelMain;
@@ -48,6 +50,24 @@ public class FrameMain extends JFrame {
 	public MainLogic getMainLogic() {
 		return mainLogic;
 	}
+
+	
+	/**
+	 * @return the panelCenter
+	 */
+	public CenterPanel getPanelCenter() {
+		return panelCenter;
+	}
+
+
+	public void setPanelCenter(CenterPanel panel) {
+		c.remove(panelCenter);
+		c.add(panelCenter = panel, BorderLayout.CENTER);
+		panelSouth.activateButtons(ButtonStates.BOTH);
+		panelCenter.revalidate();
+		panelCenter.repaint();
+	}
+
 
 	public FrameMain() {
 		
@@ -104,6 +124,20 @@ public class FrameMain extends JFrame {
 		c.remove(panelCenter);
 		c.add(panelCenter = new PanelIntersection(), BorderLayout.CENTER);
 		panelSouth.activateButtons(ButtonStates.MAIN_MENU);
+		panelCenter.revalidate();
+	}
+	
+//	public void panelFunctionActionsMenu(Function f, Caller caller) {
+//		c.remove(panelCenter);
+//		c.add(panelCenter = new PanelFunctionActionsMenu(f, caller), BorderLayout.CENTER);
+//		panelSouth.activateButtons(ButtonStates.BOTH);
+//		panelCenter.revalidate();
+//	}
+	
+	public void panelFunctionActionsMenu(Function f, CenterPanel caller) {
+		c.remove(panelCenter);
+		c.add(panelCenter = new PanelFunctionActionsMenu(f, caller), BorderLayout.CENTER);
+		panelSouth.activateButtons(ButtonStates.BOTH);
 		panelCenter.revalidate();
 	}
 	

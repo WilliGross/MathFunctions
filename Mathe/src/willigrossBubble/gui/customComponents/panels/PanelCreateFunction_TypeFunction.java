@@ -43,7 +43,6 @@ public class PanelCreateFunction_TypeFunction extends JPanel {
 		
 		function = new JTextField();
 		function.setBounds(100, 40, 400, 30);
-//		function.setBorder(new LineBorder(Color.RED, 2));
 		function.addKeyListener(new KeyAdapter() {
 			
 			@Override
@@ -64,11 +63,13 @@ public class PanelCreateFunction_TypeFunction extends JPanel {
 		
 		go = new CustomButtonSmall("Go");
 		go.setLocation(250, 85);
+		go.setEnabled(false);
 		go.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				FrameMain.getInstance().getMainLogic().storeFunction(new Function(function.getText()));
+				FrameMain.getInstance().panelFunctionActionsMenu(FrameMain.getInstance().getMainLogic().getLatestFunction(), FrameMain.getInstance().getPanelCenter());
 			}
 		});
 		add(go);

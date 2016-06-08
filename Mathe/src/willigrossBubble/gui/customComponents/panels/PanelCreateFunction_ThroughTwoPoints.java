@@ -32,14 +32,15 @@ public class PanelCreateFunction_ThroughTwoPoints extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTextField p1x, p1y, p2x, p2y;
 	private JLabel p1, p2, result, heading;
-//	private JTextPane resultPane;
 	private CustomButtonSmall go;
 	private Function function;
 	private FunctionType type;
+
 	
 	
 	public PanelCreateFunction_ThroughTwoPoints(FunctionType type) {
 	
+		
 		this.type = type;
 		
 		setLayout(null);
@@ -126,6 +127,8 @@ public class PanelCreateFunction_ThroughTwoPoints extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				FrameMain.getInstance().getMainLogic().storeFunction(function);
+					FrameMain.getInstance().panelFunctionActionsMenu(function, FrameMain.getInstance().getPanelCenter());
+				
 			}
 			
 		});
