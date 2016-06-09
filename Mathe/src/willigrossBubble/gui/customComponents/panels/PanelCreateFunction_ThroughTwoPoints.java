@@ -51,8 +51,8 @@ public class PanelCreateFunction_ThroughTwoPoints extends JPanel {
 			heading = new JLabel("Create exponential function", SwingConstants.CENTER);
 		else if (type == FunctionType.LINEAR)
 			heading = new JLabel("Create linear function", SwingConstants.CENTER);
+		heading.setFont(FrameMain.getGlobalFont());
 		heading.setBounds(100, 0, 400, 30);
-		heading.setFont(new Font(getFont().getName(), getFont().getStyle(), 15));
 		add(heading);
 		
 		

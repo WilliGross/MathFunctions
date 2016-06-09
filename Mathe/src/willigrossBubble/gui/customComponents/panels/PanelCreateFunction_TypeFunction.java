@@ -34,7 +34,7 @@ public class PanelCreateFunction_TypeFunction extends JPanel {
 		
 		heading = new JLabel("Type your function", SwingConstants.CENTER);
 		heading.setBounds(100, 0, 400, 30);
-		heading.setFont(new Font(getFont().getName(), getFont().getStyle(), 15));
+		heading.setFont(FrameMain.getGlobalFont());
 		add(heading);
 		
 		f = new JLabel("f(x) = ", SwingConstants.CENTER);

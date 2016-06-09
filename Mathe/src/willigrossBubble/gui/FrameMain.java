@@ -2,6 +2,7 @@ package willigrossBubble.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
@@ -20,6 +21,8 @@ import willigrossBubble.gui.customComponents.panels.PanelNavigation.ButtonStates
 public class FrameMain extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	private static Font globalFont = new Font("Dialog", Font.PLAIN, 15);
+	private static Font globalFont_Bold = new Font("Dialog", Font.BOLD, 15);
 	private static FrameMain instance;
 	private Container c;
 	private CenterPanel panelCenter;
@@ -28,6 +31,19 @@ public class FrameMain extends JFrame {
 	private MainLogic mainLogic;
 	
 	
+	/**
+	 * @return the font
+	 */
+	public static Font getGlobalFont() {
+		return globalFont;
+	}
+
+
+	public static Font getGlobalFont_Bold() {
+		return globalFont_Bold;
+	}
+
+
 	/**
 	 * @return the instance
 	 */
@@ -126,13 +142,6 @@ public class FrameMain extends JFrame {
 		panelSouth.activateButtons(ButtonStates.MAIN_MENU);
 		panelCenter.revalidate();
 	}
-	
-//	public void panelFunctionActionsMenu(Function f, Caller caller) {
-//		c.remove(panelCenter);
-//		c.add(panelCenter = new PanelFunctionActionsMenu(f, caller), BorderLayout.CENTER);
-//		panelSouth.activateButtons(ButtonStates.BOTH);
-//		panelCenter.revalidate();
-//	}
 	
 	public void panelFunctionActionsMenu(Function f, CenterPanel caller) {
 		c.remove(panelCenter);

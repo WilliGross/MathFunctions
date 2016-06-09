@@ -56,7 +56,7 @@ public class MainLogic {
 	 * @return the requested function
 	 */
 	public Function getLatestFunction() {
-		return functions.get(names[functions.size()]);
+		return functions.get(names[functions.size() - 1]);
 	}
 	
 	

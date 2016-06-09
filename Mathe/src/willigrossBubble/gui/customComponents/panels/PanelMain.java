@@ -18,15 +18,16 @@ public class PanelMain extends CenterPanel {
 	JLabel desc;
 	
 	public PanelMain() {
-
-		b1_create = new CustomButtonMedium("Create a function");
-		b2_load = new CustomButtonMedium("Load a function");
-		b3_intersection = new CustomButtonMedium("Intersection of two functions");
-		b4_close = new CustomButtonMedium("Close");
-		desc = new JLabel("What would you like to do?", SwingConstants.CENTER);
 		
 		setLayout(null);
 		
+		
+		desc = new JLabel("What would you like to do?", SwingConstants.CENTER);
+		desc.setFont(FrameMain.getGlobalFont());
+		desc.setBounds((600-250)/2, 40, 250, 30);
+		add(desc);
+
+		b1_create = new CustomButtonMedium("Create a function");
 		b1_create.setLocation(50, 150);
 		b1_create.addActionListener(new ActionListener() {
 
@@ -38,6 +39,7 @@ public class PanelMain extends CenterPanel {
 		});
 		add(b1_create);
 
+		b2_load = new CustomButtonMedium("Load a function");
 		b2_load.setLocation(350, 150);
 		b2_load.addActionListener(new ActionListener() {
 
@@ -49,6 +51,7 @@ public class PanelMain extends CenterPanel {
 		});
 		add(b2_load);
 		
+		b3_intersection = new CustomButtonMedium("Intersection of two functions");
 		b3_intersection.setLocation(50, 200);
 		b3_intersection.addActionListener(new ActionListener() {
 
@@ -60,6 +63,7 @@ public class PanelMain extends CenterPanel {
 		});
 		add(b3_intersection);
 		
+		b4_close = new CustomButtonMedium("Close");
 		b4_close.setLocation(350, 200);
 		b4_close.setBackground(Color.RED);
 		b4_close.setForeground(Color.BLACK);
@@ -71,10 +75,6 @@ public class PanelMain extends CenterPanel {
 			}			
 		});
 		add(b4_close);
-		
-		desc.setFont(new Font("Calibri", Font.PLAIN, 15));
-		desc.setBounds((600-250)/2, 40, 250, 30);
-		add(desc);
 	}
 
 	@Override
