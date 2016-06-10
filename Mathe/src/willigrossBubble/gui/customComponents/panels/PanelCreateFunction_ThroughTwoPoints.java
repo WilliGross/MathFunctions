@@ -1,18 +1,14 @@
 package willigrossBubble.gui.customComponents.panels;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-//import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
@@ -23,6 +19,7 @@ import willigrossBubble.LinearFunction;
 import willigrossBubble.Point;
 import willigrossBubble.Utility;
 import willigrossBubble.Validations;
+import willigrossBubble.gui.FocusAdapter_SelectAll;
 import willigrossBubble.gui.FrameMain;
 import willigrossBubble.gui.customComponents.buttons.CustomButtonSmall;
 
@@ -39,11 +36,12 @@ public class PanelCreateFunction_ThroughTwoPoints extends JPanel {
 	
 	
 	public PanelCreateFunction_ThroughTwoPoints(FunctionType type) {
-	
 		
 		this.type = type;
 		
 		setLayout(null);
+		
+		FocusAdapter_SelectAll focusAdapter_SelectAll = new FocusAdapter_SelectAll();
 		
 		KeyAdapter keyListener = new KeyListeneR();
 		
@@ -62,25 +60,13 @@ public class PanelCreateFunction_ThroughTwoPoints extends JPanel {
 		
 		p1x = new JTextField("x-coordinate");
 		p1x.setBounds(100, 40, 190, 30);
-		p1x.addFocusListener(new FocusAdapter() {
-			
-			@Override
-			public void focusGained(FocusEvent e) {
-				p1x.selectAll();
-			}
-		});
+		p1x.addFocusListener(focusAdapter_SelectAll);
 		p1x.addKeyListener(keyListener);
 		add(p1x);
 		
 		p1y = new JTextField("y-coordinate");
 		p1y.setBounds(310, 40, 190, 30);
-		p1y.addFocusListener(new FocusAdapter() {
-			
-			@Override
-			public void focusGained(FocusEvent e) {
-				p1y.selectAll();
-			}
-		});
+		p1y.addFocusListener(focusAdapter_SelectAll);
 		p1y.addKeyListener(keyListener);
 		add(p1y);
 		
@@ -91,25 +77,13 @@ public class PanelCreateFunction_ThroughTwoPoints extends JPanel {
 		
 		p2x = new JTextField("x-coordinate");
 		p2x.setBounds(100, 75, 190, 30);
-		p2x.addFocusListener(new FocusAdapter() {
-			
-			@Override
-			public void focusGained(FocusEvent e) {
-				p2x.selectAll();
-			}
-		});
+		p2x.addFocusListener(focusAdapter_SelectAll);
 		p2x.addKeyListener(keyListener);
 		add(p2x);
 		
 		p2y = new JTextField("y-coordinate");
 		p2y.setBounds(310, 75, 190, 30);
-		p2y.addFocusListener(new FocusAdapter() {
-			
-			@Override
-			public void focusGained(FocusEvent e) {
-				p2y.selectAll();
-			}
-		});
+		p2y.addFocusListener(focusAdapter_SelectAll);
 		p2y.addKeyListener(keyListener);
 		add(p2y);
 		
@@ -127,7 +101,7 @@ public class PanelCreateFunction_ThroughTwoPoints extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				FrameMain.getInstance().getMainLogic().storeFunction(function);
-					FrameMain.getInstance().panelFunctionActionsMenu(function, FrameMain.getInstance().getPanelCenter());
+				FrameMain.getInstance().panelFunctionActionsMenu(function, FrameMain.getInstance().getPanelCenter());
 				
 			}
 			
@@ -169,7 +143,7 @@ public class PanelCreateFunction_ThroughTwoPoints extends JPanel {
 				source.setBorder(new LineBorder(Color.RED, 2));
 				go.setEnabled(false);
 			} else {
-				source.setBorder(new LineBorder(Color.BLACK));
+				source.setBorder(new LineBorder(Color.GRAY));
 				if (	Validations.canConvertToNumber(p1x.getText()) && 
 						Validations.canConvertToNumber(p1y.getText()) &&
 						Validations.canConvertToNumber(p2x.getText()) &&

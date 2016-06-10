@@ -1,5 +1,7 @@
 package willigrossBubble;
 
+import com.fathzer.soft.javaluator.DoubleEvaluator;
+import com.fathzer.soft.javaluator.StaticVariableSet;
 
 public class Validations {
 	
@@ -9,9 +11,19 @@ public class Validations {
 	 */
 	public static boolean doesExpressionContainValidCharacters(String expression) {
 		
-		if (expression.matches("[x\\d\\s+-\\\\*/()\\\\^\\\\.]+"))
+		DoubleEvaluator evaluator = new DoubleEvaluator();
+		
+		try {
+			final StaticVariableSet<Double> variables = new StaticVariableSet<>();
+			variables.set("x", (double) 1);
+			evaluator.evaluate(expression, variables);
 			return true;
-		return false;
+		} catch (@SuppressWarnings("unused") IllegalArgumentException e) {
+//			System.err.println(e);
+			return false;
+		}
+		
+//		if (expression.matches("[x\\d\\s+-\\\\*/()\\\\^\\\\.]+"))
 	}
 	
 	/**
@@ -20,9 +32,17 @@ public class Validations {
 	 */
 	public static boolean canConvertToNumber(String expression) {
 		
-		if (expression.matches("[\\d\\s+-\\\\*/()\\\\^\\\\.]+"))
+		DoubleEvaluator evaluator = new DoubleEvaluator();
+		
+		try {
+			evaluator.evaluate(expression);
 			return true;
-		return false;
+		} catch (@SuppressWarnings("unused") IllegalArgumentException e) {
+//			System.err.println(e);
+			return false;
+		}
+		
+//		if (expression.matches("[\\d\\s+-\\\\*/()\\\\^\\\\.]+"))
 	}
 	
 }

@@ -43,14 +43,14 @@ public class PanelFunctionActionsMenu extends CenterPanel {
 
 	public void table() {
 		remove(option);
-		add(option = new PanelFunctionActionsMenu_Table());
+		add(option = new PanelFunctionActionsMenu_Table(function));
 		option.revalidate();
 	}
 
 
 	public void point() {
 		remove(option);
-		add(option = new PanelFunctionActionsMenu_Point());
+		add(option = new PanelFunctionActionsMenu_Point(function));
 		option.revalidate();
 	}
 

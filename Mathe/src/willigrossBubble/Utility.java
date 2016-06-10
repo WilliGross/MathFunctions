@@ -12,11 +12,9 @@ public class Utility {
 	 */
 	public static double readDoubleFromStringInput(String input) throws IllegalArgumentException {
 
-		if (!Validations.canConvertToNumber(input))
-			throw new IllegalArgumentException("Can't convert input into a number!");
-		
 		DoubleEvaluator evaluator = new DoubleEvaluator();
-
+		
+		evaluator.evaluate(input);
 		return evaluator.evaluate(input);
 	}
 	

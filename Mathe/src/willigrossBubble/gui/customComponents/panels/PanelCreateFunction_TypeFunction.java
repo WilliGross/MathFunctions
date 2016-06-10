@@ -1,7 +1,6 @@
 package willigrossBubble.gui.customComponents.panels;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -51,7 +50,7 @@ public class PanelCreateFunction_TypeFunction extends JPanel {
 					function.setBorder(new LineBorder(Color.RED, 2));
 					go.setEnabled(false);
 				} else {
-					function.setBorder(new LineBorder(Color.BLACK));
+					function.setBorder(new LineBorder(Color.GRAY));
 					go.setEnabled(true);
 				}
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {

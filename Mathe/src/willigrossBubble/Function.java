@@ -1,6 +1,7 @@
 package willigrossBubble;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import com.fathzer.soft.javaluator.DoubleEvaluator;
 import com.fathzer.soft.javaluator.StaticVariableSet;
@@ -108,48 +109,30 @@ public class Function implements Serializable {
 	 * @param end - end value for x
 	 * @param step - the step between x values
 	 */
-	public void table(double start, double end, double step) {
-		
-		StringBuffer sb = new StringBuffer("<html>" + "f(x) = " + expression + "<p/> <p/>");
+	public String[] table(double start, double end, double step) {
+
+		ArrayList<String> table = new ArrayList<>();
 		
 		final DoubleEvaluator evaluator = new DoubleEvaluator();
 		final StaticVariableSet<Double> variables = new StaticVariableSet<>();
 		
-		double x = start;
-		
-		if (start <= end) {
-			//increasing x
-			while (x <= end) {
-				
+		if (start <= end) {	//increasing x
+
+			for (double x = start; x <= end; x += step) {
 				variables.set("x", x);
-				
-				sb.append("f(" + x + ") = " + roundDouble(evaluator.evaluate(expression, variables), 3) + "<p/>");
-				
-				if (start == end) {
-					sb.append("<html/>");
-				}
-				
-				x += step;
+				table.add(name + "(" + x + ") = " + roundDouble(evaluator.evaluate(expression, variables), 3));
 			}
-		} else {
-			//decreasing x
-			while (x >= end) {
-				
+			
+		} else {//decreasing x
+			
+			for (double x = start; x >= end; x -= step) {
 				variables.set("x", x);
-				
-				sb.append("f(" + x + ") = " + roundDouble(evaluator.evaluate(expression, variables), 3) + "<p/>");
-				
-				if (x == end) {
-					sb.append("<html/>");
-				}
-				
-				x -= step;
+				table.add(name + "(" + x + ") = " + roundDouble(evaluator.evaluate(expression, variables), 3));
 			}
+			
 		}
 		
-		System.out.println(sb);
-		s = sb.toString();
-		
+		return table.toArray(new String[table.size()]);
 	}
 	
 	/**
