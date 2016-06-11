@@ -59,7 +59,7 @@ public class Point implements Serializable {
 	 */
 	@Override
 	public String toString(){
-		return "(" + Function.roundDouble(this.getX(), 3) + "," + Function.roundDouble(this.getY(), 3) + ")";
+		return "(" + Utility.roundDouble(this.getX(), 3) + "," + Utility.roundDouble(this.getY(), 3) + ")";
 	}
 	
 	

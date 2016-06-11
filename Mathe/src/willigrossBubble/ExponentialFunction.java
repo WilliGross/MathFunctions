@@ -36,7 +36,7 @@ public class ExponentialFunction extends Function {
 			if (a - (int) a == 0)
 				expression += (int) a + "^x";
 			else
-				expression += Function.roundDouble(a, 3) + "^x";
+				expression += Utility.roundDouble(a, 3) + "^x";
 			
 			return new ExponentialFunction(expression);
 		}
@@ -53,13 +53,13 @@ public class ExponentialFunction extends Function {
 			if (b - (int) b == 0)
 				expression += (b != 1.0) ? (int) b + " * " : ""; 
 			else
-				expression += (b != 1.0) ? Function.roundDouble(b, 3) + " * " : "";
+				expression += (b != 1.0) ? Utility.roundDouble(b, 3) + " * " : "";
 
 				
 			if (a - (int) a == 0)
 				expression += (int) a + "^x";
 			else
-				expression += Function.roundDouble(a, 3) + "^x";
+				expression += Utility.roundDouble(a, 3) + "^x";
 			
 			
 		}

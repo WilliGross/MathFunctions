@@ -41,4 +41,14 @@ public class Utility {
 			return true;
 		return false;
 	}
+	
+	/**
+	 * Round a double value to a specified number of decimals
+	 * @param doubleValue - the object to be rounded
+	 * @param decimals - the number of decimals
+	 * @return the rounded double
+	 */
+	public static double roundDouble(double doubleValue, int decimals) {
+		return Math.round(Math.pow(10, decimals) * doubleValue) / Math.pow(10, decimals);
+	}
 }

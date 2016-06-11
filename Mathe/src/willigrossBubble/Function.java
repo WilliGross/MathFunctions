@@ -1,5 +1,10 @@
 package willigrossBubble;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -11,11 +16,13 @@ import willigrossBubble.gui.FrameMain;
 public class Function implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * The actual function
 	 */
 	private String expression = "";
+	
+	private char name;
 	
 	
 	/**
@@ -24,11 +31,7 @@ public class Function implements Serializable {
 	public String getExpression() {
 		return expression;
 	}
-
-
-	public char name;
-
-	public static String s;
+	
 	
 	public Function(String expression) {
 		this.expression = expression;
@@ -42,7 +45,7 @@ public class Function implements Serializable {
 	public char getName() {
 		return name;
 	}
-
+	
 	
 	/**
 	 * @param name the name to set
@@ -50,7 +53,7 @@ public class Function implements Serializable {
 	public void setName(char name) {
 		this.name = name;
 	}
-
+	
 	/**
 	 * A string to represent the function
 	 */
@@ -58,8 +61,8 @@ public class Function implements Serializable {
 	public String toString() {
 		return name + "(x) = " + expression;
 	}
-
-
+	
+	
 	/**
 	 * Directly enter the expression
 	 * @param expression - the expression to save as the function
@@ -110,24 +113,24 @@ public class Function implements Serializable {
 	 * @param step - the step between x values
 	 */
 	public String[] table(double start, double end, double step) {
-
+		
 		ArrayList<String> table = new ArrayList<>();
 		
 		final DoubleEvaluator evaluator = new DoubleEvaluator();
 		final StaticVariableSet<Double> variables = new StaticVariableSet<>();
 		
 		if (start <= end) {	//increasing x
-
+			
 			for (double x = start; x <= end; x += step) {
 				variables.set("x", x);
-				table.add(name + "(" + x + ") = " + roundDouble(evaluator.evaluate(expression, variables), 3));
+				table.add(name + "(" + x + ") = " + Utility.roundDouble(evaluator.evaluate(expression, variables), 3));
 			}
 			
 		} else {//decreasing x
 			
 			for (double x = start; x >= end; x -= step) {
 				variables.set("x", x);
-				table.add(name + "(" + x + ") = " + roundDouble(evaluator.evaluate(expression, variables), 3));
+				table.add(name + "(" + x + ") = " + Utility.roundDouble(evaluator.evaluate(expression, variables), 3));
 			}
 			
 		}
@@ -135,61 +138,91 @@ public class Function implements Serializable {
 		return table.toArray(new String[table.size()]);
 	}
 	
-	/**
-	 * Round a double value to a specified number of decimals
-	 * @param doubleValue - the object to be rounded
-	 * @param decimals - the number of decimals
-	 * @return the rounded double
-	 */
-	public static double roundDouble(double doubleValue, int decimals) {
-		return Math.round(Math.pow(10, decimals) * doubleValue) / Math.pow(10, decimals);
-	}
-
-
-
+	
 	/**
 	 * Mirror a function on the x-axis
-	 * @return the new function
+	 * @return the new function, null if something went wrong in deepCopy()
 	 */
 	public Function mirrorX() {
-			this.setExpression("-(" + this + ")");
-		return this;
+		try {
+			Function copy = deepCopy();
+			if (copy.getExpression().startsWith("-(") && copy.getExpression().endsWith(")"))
+				copy.setExpression(copy.getExpression().substring(2, copy.getExpression().length() - 1));
+			else {
+				copy.setExpression("-(" + copy.getExpression() + ")");
+				copy.setName(FrameMain.getInstance().getMainLogic().getNextName());
+			}
+			return copy;
+		} catch (ClassNotFoundException | IOException e) {
+			System.err.println(e);
+		}
+		return null;
 	}
-
-
-
+	
+	
+	
 	/**
 	 * Mirror a function on the y-axis
-	 * @return the new function
+	 * @return the new function, null if something went wrong in deepCopy()
 	 */
 	public Function mirrorY() {
-
-		boolean endsWithX = false;
-		if (this.expression.endsWith("x"))
-			endsWithX = true;
+		try {
+			Function copy = deepCopy();
+			boolean endsWithX = false;
+			if (copy.getExpression().endsWith("x"))
+				endsWithX = true;
 			
-		String[] splitX = expression.split("x");
-		
-		this.setExpression(splitX[0]);
-		
-		for (int i = 1; i < splitX.length; i++)
-			this.setExpression(this.expression + "(-x)" + splitX[i]);
-		
-		if (endsWithX)
-			this.setExpression(this.expression + "(-x)");
-
-		return this;
+			String[] splitX = copy.getExpression().split("x");
+			
+			copy.setExpression(splitX[0]);
+			
+			for (int i = 1; i < splitX.length; i++)
+				copy.setExpression(copy.getExpression() + "(-x)" + splitX[i]);
+			
+			if (endsWithX)
+				copy.setExpression(copy.getExpression() + "(-x)");
+			
+			copy.setName(FrameMain.getInstance().getMainLogic().getNextName());
+			return copy;
+		} catch (ClassNotFoundException | IOException e) {
+			System.err.println(e);
+		}
+		return null;
 	}
-
-
-
+	
+	
+	
 	/**
 	 * Mirror a function on the x-axis and y-axis => rotate it around the origin
-	 * @return the new function
+	 * @return the new function, null if something went wrong in deepCopy()
 	 */
 	public Function mirrorOrigin() {
 		
-		return this.mirrorX().mirrorY();
+		return mirrorX().mirrorY();
 	}
+	
+	
+	/**
+	 * Creates a deep copy of the function using serialization and deserialization 
+	 * @return the copy of the function
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 */
+	public Function deepCopy() throws ClassNotFoundException, IOException {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ObjectOutputStream out = new ObjectOutputStream(baos);
+		out.writeObject(this);
+		
+		ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+		ObjectInputStream in = new ObjectInputStream(bais);
+		Object copy = in.readObject();
+		
+		if (this instanceof ExponentialFunction)
+			return (ExponentialFunction) copy;
+		if (this instanceof LinearFunction)
+			return (LinearFunction) copy;
+		return (Function) copy;
+	}
+	
 	
 }

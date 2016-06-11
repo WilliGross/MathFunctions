@@ -37,7 +37,7 @@ public class LinearFunction extends Function {
 			if (m - (int) m == 0)
 				expression += (m != 1.0) ? (int) m + " * x" : "x"; 
 			else
-				expression += (m != 1.0) ? Function.roundDouble(m, 3) + " * x" : "x";
+				expression += (m != 1.0) ? Utility.roundDouble(m, 3) + " * x" : "x";
 		}
 		
 		if (!expression.equals("") && t != 0)
@@ -46,7 +46,7 @@ public class LinearFunction extends Function {
 		if (t - (int) t == 0)
 			expression += (t != 0.0) ? (int) t : "";
 		else
-			expression += (t != 0.0) ? Function.roundDouble(t, 3) : "";
+			expression += (t != 0.0) ? Utility.roundDouble(t, 3) : "";
 		return new LinearFunction(expression);
 	}
 

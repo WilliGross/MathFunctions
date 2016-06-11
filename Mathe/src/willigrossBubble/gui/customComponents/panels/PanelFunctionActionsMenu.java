@@ -57,7 +57,7 @@ public class PanelFunctionActionsMenu extends CenterPanel {
 
 	public void mirror() {
 		remove(option);
-		add(option = new PanelFunctionActionsMenu_Mirror());
+		add(option = new PanelFunctionActionsMenu_Mirror(function));
 		option.revalidate();
 	}	
 	
