@@ -128,7 +128,7 @@ public class PanelCreateFunction_ThroughTwoPoints extends JPanel {
 			result.setText(e.getMessage());
 			result.setForeground(Color.RED);
 //			resultPane.setText(e.getMessage());
-			throw new Exception("Error when claculating expression!");
+			throw new Exception("Error when calculating expression!");
 		}
 	}
 	

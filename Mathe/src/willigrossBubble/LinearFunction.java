@@ -1,7 +1,5 @@
 package willigrossBubble;
 
-import javax.swing.JOptionPane;
-
 public class LinearFunction extends Function {
 
 	private static final long serialVersionUID = 1L;
@@ -14,14 +12,14 @@ public class LinearFunction extends Function {
 	 * Create a function whose graph runs through two given points
 	 * @param p - point 1
 	 * @param q - point 2
+	 * @throws InvalidPointConfigurationException if px = qx but points are not identical because there is no function f(x) for a vertical straight line
 	 */
-	public static LinearFunction createThroughPoints(Point p, Point q) {
+	public static LinearFunction createThroughPoints(Point p, Point q) throws InvalidPointConfigurationException {
 		
 		String expression = "";
 		
 		if (p.getX() == q.getX() && !p.equals(q)) {
-			JOptionPane.showMessageDialog(null, "There is no function f(x) for a vertical straight line!");
-			return null;
+			throw new InvalidPointConfigurationException("There is no function f(x) for a vertical straight line!");
 		}
 			
 		

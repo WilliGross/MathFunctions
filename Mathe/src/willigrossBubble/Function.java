@@ -153,7 +153,7 @@ public class Function implements Serializable {
 				copy.setName(FrameMain.getInstance().getMainLogic().getNextName());
 			}
 			return copy;
-		} catch (ClassNotFoundException | IOException e) {
+		} catch (IOException e) {
 			System.err.println(e);
 		}
 		return null;
@@ -184,7 +184,7 @@ public class Function implements Serializable {
 			
 			copy.setName(FrameMain.getInstance().getMainLogic().getNextName());
 			return copy;
-		} catch (ClassNotFoundException | IOException e) {
+		} catch (IOException e) {
 			System.err.println(e);
 		}
 		return null;
@@ -204,24 +204,55 @@ public class Function implements Serializable {
 	
 	/**
 	 * Creates a deep copy of the function using serialization and deserialization 
-	 * @return the copy of the function
-	 * @throws ClassNotFoundException
+	 * @return the copy of the function, null if something went wrong
 	 * @throws IOException
 	 */
-	public Function deepCopy() throws ClassNotFoundException, IOException {
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		ObjectOutputStream out = new ObjectOutputStream(baos);
-		out.writeObject(this);
-		
-		ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-		ObjectInputStream in = new ObjectInputStream(bais);
-		Object copy = in.readObject();
-		
-		if (this instanceof ExponentialFunction)
-			return (ExponentialFunction) copy;
-		if (this instanceof LinearFunction)
-			return (LinearFunction) copy;
-		return (Function) copy;
+	public Function deepCopy() throws IOException {
+		ObjectOutputStream out = null;
+		ObjectInputStream in = null;
+		try {
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			out = new ObjectOutputStream(baos);
+			out.writeObject(this);
+			
+			ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+			in = new ObjectInputStream(bais);
+			Object copy = in.readObject();
+			
+			if (this instanceof ExponentialFunction)
+				return (ExponentialFunction) copy;
+			if (this instanceof LinearFunction)
+				return (LinearFunction) copy;
+			return (Function) copy;
+		} catch (ClassNotFoundException | IOException e) {
+			System.err.println(e);
+		} finally {
+			if (out != null)
+				out.close();
+			if (in != null)
+				in.close();
+		}
+		return null;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) 
+			return false;
+		if (obj == this) 
+			return true;
+		if (! (obj instanceof Function)) 
+			return false;
+		if (((Function) obj).getExpression().equals(getExpression()))
+			return true;
+		return false;
+	}
+
+
+	@Override
+	public int hashCode() {
+		return getExpression().hashCode();
 	}
 	
 	

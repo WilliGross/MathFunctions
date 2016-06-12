@@ -2,6 +2,8 @@ package willigrossBubble.gui.customComponents.panels;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -68,8 +70,21 @@ public class PanelFunctionActionsMenu_Menu extends JPanel {
 		add(b3_mirror);
 		
 		saveInFile = new JCheckBox("Save this function in 'Functions.dat'?");
-		saveInFile.setToolTipText("Enable this to keep your function after a restart of the program");
-		saveInFile.setBounds(100, 210, 400, 30);
+		saveInFile.setToolTipText("Check this to keep your function after a restart of the program");
+		saveInFile.setHorizontalAlignment(SwingConstants.CENTER);
+		saveInFile.setBounds(100, 220, 400, 30);
+		saveInFile.addItemListener(new ItemListener() {
+			
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if (saveInFile.isSelected())
+					FrameMain.getInstance().getMainLogic().saveFunctionInFile(function);
+				else
+					FrameMain.getInstance().getMainLogic().removeFunctionFromFile(function);
+				FrameMain.getInstance().getMainLogic().displayFunctionsDat();
+			}
+		});
+		add(saveInFile);
 		
 	}
 }

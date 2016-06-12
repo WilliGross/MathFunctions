@@ -36,7 +36,6 @@ public class PanelFunctionActionsMenu_Mirror extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				functionMirrored = functionBase.mirrorX();
-				System.out.println(functionBase);
 				result.setText(functionMirrored.toString());
 				go.setEnabled(true);
 			}
