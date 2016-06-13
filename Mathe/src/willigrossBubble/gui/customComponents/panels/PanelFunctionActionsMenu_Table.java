@@ -93,6 +93,10 @@ public class PanelFunctionActionsMenu_Table extends JPanel {
 			if (!Validations.canConvertToNumber(source.getText())) {
 				source.setBorder(new LineBorder(Color.RED, 2));
 			} else {
+				if (source == step && Utility.readDoubleFromStringInput(step.getText()) == 0) {
+					source.setBorder(new LineBorder(Color.RED, 2));
+					return;
+				}
 				source.setBorder(new LineBorder(Color.GRAY));
 				if (Validations.canConvertToNumber(start.getText()) && Validations.canConvertToNumber(end.getText()) && Validations.canConvertToNumber(step.getText())) {
 					double 	startValue 	= Utility.readDoubleFromStringInput(start.getText()	), 

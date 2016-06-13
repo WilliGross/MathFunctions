@@ -31,7 +31,9 @@ public class PanelCreateFunction_Menu extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				PanelCreateFunction.getInstance().typeFunction();
+				CenterPanel instance = FrameMain.getInstance().getPanelCenter();
+				if (instance instanceof PanelCreateFunction)
+					((PanelCreateFunction) instance).typeFunction();
 			}
 			
 		});
@@ -43,7 +45,9 @@ public class PanelCreateFunction_Menu extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				PanelCreateFunction.getInstance().createLinear();
+				CenterPanel instance = FrameMain.getInstance().getPanelCenter();
+				if (instance instanceof PanelCreateFunction)
+					((PanelCreateFunction) instance).createLinear();
 			}
 			
 		});
@@ -55,7 +59,9 @@ public class PanelCreateFunction_Menu extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				PanelCreateFunction.getInstance().createExponential();
+				CenterPanel instance = FrameMain.getInstance().getPanelCenter();
+				if (instance instanceof PanelCreateFunction)
+					((PanelCreateFunction) instance).createExponential();
 			}
 		});
 		add(b3_exponentialT2P);

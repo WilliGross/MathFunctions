@@ -18,6 +18,13 @@ public class MainLogic {
 	/** The file where functions are saved to make them survive a program restart */
 	private File functionsDat = new File(MainLogic.class.getProtectionDomain().getCodeSource().getLocation().getFile().substring(0, MainLogic.class.getProtectionDomain().getCodeSource().getLocation().getFile().lastIndexOf('/') + 1) + "Functions.dat");
 	
+	/**
+	 * Constructor of MainLogic that loads functions from file on call
+	 */
+	public MainLogic() {
+		loadFunctions();
+		displayFunctions();
+	}
 	
 	/**
 	 * @return the names
@@ -111,6 +118,24 @@ public class MainLogic {
 	}
 
 	/**
+	 * Loads all the functions from the save file and adds them to the functions map
+	 */
+	private void loadFunctions() {
+		Function function;
+		try {
+			FileStorage fileStorage = new FileStorage(functionsDat);
+			for (int i = 0; i < names.length; i++) {
+				function = (Function) fileStorage.get("" + names[i]);
+				if (function != null)
+					functions.put(getNextName(), function);
+			}
+		} catch (IllegalArgumentException | IOException e) {
+			System.err.println(e);
+		}
+	
+	}
+
+	/**
 	 * Debug method: displays the content of 'Functions.dat'
 	 */
 	public void displayFunctionsDat() {
@@ -122,5 +147,11 @@ public class MainLogic {
 		}
 	}
 	
+	/**
+	 * Debug method: displays the content of 'functions'
+	 */
+	public void displayFunctions() {
+	System.out.println(functions);
+	}
 	
 }

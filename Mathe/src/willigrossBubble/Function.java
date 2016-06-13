@@ -114,6 +114,9 @@ public class Function implements Serializable {
 	 */
 	public String[] table(double start, double end, double step) {
 		
+		if (step == 0)
+			throw new IllegalArgumentException("Step may not be 0");
+		
 		ArrayList<String> table = new ArrayList<>();
 		
 		final DoubleEvaluator evaluator = new DoubleEvaluator();

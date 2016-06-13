@@ -14,13 +14,10 @@ public class PanelCreateFunction extends CenterPanel {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private static PanelCreateFunction instance;
 	private PanelCreateFunction_Menu menu;
 	private JPanel createFunction;
 	
 	public PanelCreateFunction() {
-		
-		instance = this;
 		
 		menu = new PanelCreateFunction_Menu();
 		createFunction = new PanelCreateFunction_TypeFunction();
@@ -29,14 +26,7 @@ public class PanelCreateFunction extends CenterPanel {
 		add(menu);
 
 	}
-	
-	
-	/**
-	 * @return the instance
-	 */
-	public static PanelCreateFunction getInstance() {
-		return instance;
-	}
+
 	
 	public void typeFunction() {
 		remove(createFunction);

@@ -40,7 +40,9 @@ public class PanelFunctionActionsMenu_Menu extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				PanelFunctionActionsMenu.getInstance().table();
+				CenterPanel instance = FrameMain.getInstance().getPanelCenter();
+				if (instance instanceof PanelFunctionActionsMenu)
+					((PanelFunctionActionsMenu) instance).table();
 			}
 			
 		});
@@ -52,7 +54,9 @@ public class PanelFunctionActionsMenu_Menu extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				PanelFunctionActionsMenu.getInstance().point();
+				CenterPanel instance = FrameMain.getInstance().getPanelCenter();
+				if (instance instanceof PanelFunctionActionsMenu)
+					((PanelFunctionActionsMenu) instance).point();
 			}
 			
 		});
@@ -64,7 +68,9 @@ public class PanelFunctionActionsMenu_Menu extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				PanelFunctionActionsMenu.getInstance().mirror();
+				CenterPanel instance = FrameMain.getInstance().getPanelCenter();
+				if (instance instanceof PanelFunctionActionsMenu)
+					((PanelFunctionActionsMenu) instance).mirror();
 			}
 		});
 		add(b3_mirror);

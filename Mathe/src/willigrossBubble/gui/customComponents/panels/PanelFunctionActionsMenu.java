@@ -10,7 +10,6 @@ import willigrossBubble.gui.FrameMain;
 public class PanelFunctionActionsMenu extends CenterPanel {
 	
 	private static final long serialVersionUID = 1L;
-	private static PanelFunctionActionsMenu instance;
 	private CenterPanel caller;
 	private Function function;
 	private PanelFunctionActionsMenu_Menu menu;
@@ -19,7 +18,6 @@ public class PanelFunctionActionsMenu extends CenterPanel {
 	public PanelFunctionActionsMenu(Function f, CenterPanel caller) {
 		this.caller = caller;
 		function = f;
-		instance = this;
 		menu = new PanelFunctionActionsMenu_Menu(function);
 		option = new JPanel(); //TODO
 		
@@ -27,14 +25,6 @@ public class PanelFunctionActionsMenu extends CenterPanel {
 		add(menu);
 	}
 	
-	
-	/**
-	 * @return the instance
-	 */
-	public static PanelFunctionActionsMenu getInstance() {
-		return instance;
-	}
-
 	@Override
 	public void back() {
 		FrameMain.getInstance().setPanelCenter(caller);
