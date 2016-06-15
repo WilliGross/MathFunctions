@@ -8,6 +8,10 @@ public class ExponentialFunction extends Function {
 		super(expression);
 	}
 	
+	private ExponentialFunction(String expression, String expressionRounded) {
+		super(expression, expressionRounded);
+	}
+
 	/**
 	 * Create a function whose graph runs through two given points
 	 * @param p - point 1
@@ -27,18 +31,22 @@ public class ExponentialFunction extends Function {
 		} //TODO filter points in wrong quadrants
 		
 		String expression = "";
+		String expressionRounded = "";
 		
 		double a, b;
 		
 		if (p.equals(q)) {
 			a = Math.pow(p.getY(), 1 / p.getX());
 			
-			if (a - (int) a == 0)
+			if (a - (int) a == 0) {
 				expression += (int) a + "^x";
-			else
+				expressionRounded += (int) a + "^x";
+			} else {
+				expression += a + "^x";
 				expression += Utility.roundDouble(a, 3) + "^x";
+			}
 			
-			return new ExponentialFunction(expression);
+			return new ExponentialFunction(expression, expressionRounded);
 		}
 		
 		
@@ -46,24 +54,29 @@ public class ExponentialFunction extends Function {
 		b = p.getY() / Math.pow(a, p.getX());
 		
 
-		if ( a == 0 || b == 0)
+		if ( a == 0 || b == 0) {
 			expression = "0";
-		else {
+			expressionRounded = "0";
+		} else {
 
-			if (b - (int) b == 0)
+			if (b - (int) b == 0) {
 				expression += (b != 1.0) ? (int) b + " * " : ""; 
-			else
-				expression += (b != 1.0) ? Utility.roundDouble(b, 3) + " * " : "";
-
+				expressionRounded += (b != 1.0) ? (int) b + " * " : ""; 
+			} else {
+				expression += (b != 1.0) ? b + " * " : "";
+				expressionRounded += (b != 1.0) ? Utility.roundDouble(b, 3) + " * " : "";
+			}
 				
-			if (a - (int) a == 0)
+			if (a - (int) a == 0) {
 				expression += (int) a + "^x";
-			else
-				expression += Utility.roundDouble(a, 3) + "^x";
-			
+				expressionRounded += (int) a + "^x";
+			} else {
+				expression += a + "^x";
+				expressionRounded += Utility.roundDouble(a, 3) + "^x";
+			}
 			
 		}
-		return new ExponentialFunction(expression);
+		return new ExponentialFunction(expression, expressionRounded);
 	}
 
 }

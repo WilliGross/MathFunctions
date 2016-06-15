@@ -18,13 +18,29 @@ public class Function implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	/**
-	 * The actual function
+	 * not rounded expression for internal use
 	 */
 	private String expression = "";
+	
+	/**
+	 * rounded expression for display 
+	 */
+	private String expressionRounded = "";
 	
 	private char name;
 	
 	
+	public Function(String expression) {
+		this(expression, expression);
+	}
+	
+	public Function(String expression, String expressionRounded) {
+		this.expression = expression;
+		this.expressionRounded = expressionRounded;
+		name = FrameMain.getInstance().getMainLogic().getNextName();
+	}
+
+
 	/**
 	 * @return the expression
 	 */
@@ -33,12 +49,14 @@ public class Function implements Serializable {
 	}
 	
 	
-	public Function(String expression) {
-		this.expression = expression;
-		name = FrameMain.getInstance().getMainLogic().getNextName();
+	/**
+	 * @return the expressionRounded
+	 */
+	public String getExpressionRounded() {
+		return expressionRounded;
 	}
-	
-	
+
+
 	/**
 	 * @return the name
 	 */
@@ -47,6 +65,16 @@ public class Function implements Serializable {
 	}
 	
 	
+	/**
+	 * Directly enter the expression (updates rounded expression as well)
+	 * @param expression - the expression to save as the function
+	 */
+	public void setExpression(String expression) {
+		this.expression = expression;
+		expressionRounded = expression;
+	}
+
+
 	/**
 	 * @param name the name to set
 	 */
@@ -59,16 +87,7 @@ public class Function implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return name + "(x) = " + expression;
-	}
-	
-	
-	/**
-	 * Directly enter the expression
-	 * @param expression - the expression to save as the function
-	 */
-	public void setExpression(String expression) {
-		this.expression = expression;
+		return name + "(x) = " + expressionRounded;
 	}
 	
 	
@@ -99,7 +118,7 @@ public class Function implements Serializable {
 		variables.set("x", p.getX());
 		
 		value = evaluator.evaluate(expression, variables);
-		if (value > p.getY() - 0.05 && value < p.getY() + 0.05) { //tolerance of 0.05
+		if (value > p.getY() - 0.00001 && value < p.getY() + 0.00001) { //tolerance of 0.00001
 			return true;
 		}
 		

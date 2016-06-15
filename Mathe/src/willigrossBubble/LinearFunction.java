@@ -1,11 +1,15 @@
 package willigrossBubble;
 
 public class LinearFunction extends Function {
-
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	private LinearFunction(String expression) {
 		super(expression);
+	}
+	
+	private LinearFunction(String expression, String expressionRounded) {
+		super(expression, expressionRounded);
 	}
 	
 	/**
@@ -17,11 +21,12 @@ public class LinearFunction extends Function {
 	public static LinearFunction createThroughPoints(Point p, Point q) throws InvalidPointConfigurationException {
 		
 		String expression = "";
+		String expressionRounded = "";
 		
 		if (p.getX() == q.getX() && !p.equals(q)) {
 			throw new InvalidPointConfigurationException("There is no function f(x) for a vertical straight line!");
 		}
-			
+		
 		
 		double m = (q.getY() - p.getY()) / (q.getX() - p.getX());
 		
@@ -32,21 +37,29 @@ public class LinearFunction extends Function {
 		
 		
 		if ( m != 0) {
-			if (m - (int) m == 0)
+			if (m - (int) m == 0) {
 				expression += (m != 1.0) ? (int) m + " * x" : "x"; 
-			else
-				expression += (m != 1.0) ? Utility.roundDouble(m, 3) + " * x" : "x";
+				expressionRounded += (m != 1.0) ? (int) m + " * x" : "x"; 
+			} else {
+				expression += (m != 1.0) ? m + " * x" : "x";
+				expressionRounded += (m != 1.0) ? Utility.roundDouble(m, 3) + " * x" : "x";
+			}
 		}
 		
-		if (!expression.equals("") && t != 0)
+		if (!expression.equals("") && t != 0) {
 			expression += " + ";
-			
-		if (t - (int) t == 0)
+			expressionRounded += " + ";
+		}
+		if (t - (int) t == 0) {
 			expression += (t != 0.0) ? (int) t : "";
-		else
-			expression += (t != 0.0) ? Utility.roundDouble(t, 3) : "";
-		return new LinearFunction(expression);
+			expressionRounded += (t != 0.0) ? (int) t : "";
+		} else {
+			expression += (t != 0.0) ? t : "";
+			expressionRounded += (t != 0.0) ? Utility.roundDouble(t, 3) : "";
+		}
+		
+		return new LinearFunction(expression, expressionRounded);
 	}
-
-
+	
+	
 }
