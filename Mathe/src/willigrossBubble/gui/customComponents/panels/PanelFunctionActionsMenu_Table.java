@@ -4,11 +4,13 @@ import java.awt.Color;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
@@ -24,7 +26,8 @@ public class PanelFunctionActionsMenu_Table extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JLabel heading, startLabel, endLabel, stepLabel, resultLabel;
 	private JTextField start, end, step;
-	private JTextArea result;
+	private DefaultListModel<String> listModel;
+	private JList<String> result;
 	private JScrollPane resultScrollPane;
 	private Function function;
 	
@@ -76,8 +79,9 @@ public class PanelFunctionActionsMenu_Table extends JPanel {
 		resultLabel.setBounds(50, 90, 45, 30);
 		add(resultLabel);
 		
-		result = new JTextArea();
-		result.setEditable(false);
+		listModel = new DefaultListModel<>();
+		result = new JList<>(listModel);
+		result.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		resultScrollPane = new JScrollPane(result);
 		resultScrollPane.setBounds(100, 90, 400, 160);
@@ -88,7 +92,6 @@ public class PanelFunctionActionsMenu_Table extends JPanel {
 	private class KeyListeneR extends KeyAdapter {
 		@Override
 		public void keyReleased(KeyEvent e) {
-			result.setText("");
 			JTextField source = (JTextField) e.getSource();
 			if (!Validations.canConvertToNumber(source.getText())) {
 				source.setBorder(new LineBorder(Color.RED, 2));
@@ -103,9 +106,8 @@ public class PanelFunctionActionsMenu_Table extends JPanel {
 							endValue 	= Utility.readDoubleFromStringInput(end.getText()	), 
 							stepValue 	= Utility.readDoubleFromStringInput(step.getText()	);
 					String[] tableAsArray = function.table(startValue, endValue, stepValue);
-					for (int i = 0; i < tableAsArray.length; i++) {
-						result.append(tableAsArray[i] + "\n");
-					}
+					for (int i = 0; i < tableAsArray.length; i++)
+						listModel.addElement(tableAsArray[i]);
 				}
 			}
 		}

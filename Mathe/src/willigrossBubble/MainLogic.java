@@ -151,7 +151,7 @@ public class MainLogic {
 	 * Debug method: displays the content of 'functions'
 	 */
 	public void displayFunctions() {
-	System.out.println(functions);
+		System.out.println(functions);
 	}
 	
 }
