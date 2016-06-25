@@ -89,7 +89,6 @@ public class MainLogic {
 	public void saveFunctionInFile(Function function) {
 		try {
 			FileStorage fileStorage = new FileStorage(functionsDat);
-			
 			for (int i = 0; i < names.length; i++) {
 				if (! fileStorage.hasKey("" + names[i])) {
 					fileStorage.store("" + names[i], function);
