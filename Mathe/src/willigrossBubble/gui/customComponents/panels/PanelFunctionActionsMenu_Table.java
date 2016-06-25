@@ -15,6 +15,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import willigrossBubble.Function;
+import willigrossBubble.UnselectableListSelectionModel;
 import willigrossBubble.Utility;
 import willigrossBubble.Validations;
 import willigrossBubble.gui.FocusAdapter_SelectAll;
@@ -82,6 +83,7 @@ public class PanelFunctionActionsMenu_Table extends JPanel {
 		listModel = new DefaultListModel<>();
 		result = new JList<>(listModel);
 		result.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		result.setSelectionModel(new UnselectableListSelectionModel());
 		
 		resultScrollPane = new JScrollPane(result);
 		resultScrollPane.setBounds(100, 90, 400, 160);
