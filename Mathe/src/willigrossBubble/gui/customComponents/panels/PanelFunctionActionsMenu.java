@@ -51,7 +51,10 @@ public class PanelFunctionActionsMenu extends CenterPanel {
 
 	@Override
 	public void back() {
-		FrameMain.getInstance().setPanelCenter(caller, ButtonStates.BOTH);
+		if (option.isVisible()) {
+			option.setVisible(false);
+		} else
+			FrameMain.getInstance().setPanelCenter(caller, ButtonStates.BOTH);
 	}
 	
 }
