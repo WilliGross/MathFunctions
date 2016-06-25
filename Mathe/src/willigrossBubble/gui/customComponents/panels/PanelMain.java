@@ -14,8 +14,8 @@ import willigrossBubble.gui.customComponents.buttons.CustomButtonMedium;
 public class PanelMain extends CenterPanel {
 	
 	private static final long serialVersionUID = 1L;
-	CustomButtonMedium b1_create, b2_load, b3_intersection, b4_close; 
-	JLabel desc;
+	private CustomButtonMedium b1_create, b2_load, b3_intersection, b4_close; 
+	private JLabel desc;
 	
 	public PanelMain() {
 		
@@ -75,6 +75,8 @@ public class PanelMain extends CenterPanel {
 			}			
 		});
 		add(b4_close);
+		
+		setDefaultComponent(b1_create);
 	}
 
 	@Override

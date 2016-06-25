@@ -7,7 +7,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
@@ -24,7 +23,7 @@ import willigrossBubble.gui.FrameMain;
 import willigrossBubble.gui.customComponents.buttons.CustomButtonSmall;
 
 
-public class PanelCreateFunction_ThroughTwoPoints extends JPanel {
+public class PanelCreateFunction_ThroughTwoPoints extends RequestFocusForDefaultComponentPanel {
 	
 	private static final long serialVersionUID = 1L;
 	private JTextField p1x, p1y, p2x, p2y;
@@ -90,8 +89,6 @@ public class PanelCreateFunction_ThroughTwoPoints extends JPanel {
 		result = new JLabel("", SwingConstants.CENTER);
 		result.setBounds(100, 120, 400, 30);
 		add(result);
-//		resultPane = new JTextPane();
-//		resultPane.setBounds(100, 120, 400, 60);
 		
 		go = new CustomButtonSmall("Go");
 		go.setLocation(250, 160);
@@ -108,6 +105,7 @@ public class PanelCreateFunction_ThroughTwoPoints extends JPanel {
 		});
 		add(go);
 		
+		setDefaultComponent(p1x);
 	}
 	
 	private void calcFunction() throws Exception {
@@ -127,7 +125,6 @@ public class PanelCreateFunction_ThroughTwoPoints extends JPanel {
 		} catch (IllegalArgumentException | InvalidPointConfigurationException e) {
 			result.setText(e.getMessage());
 			result.setForeground(Color.RED);
-//			resultPane.setText(e.getMessage());
 			throw new Exception("Error when calculating expression!");
 		}
 	}

@@ -31,6 +31,34 @@ public class FrameMain extends JFrame {
 	private MainLogic mainLogic;
 	
 	
+	public FrameMain() {
+		
+		setTitle("Mathe");
+		setSize(600, 600);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		setResizable(false);
+		setVisible(true);
+		
+		
+		c = getContentPane();
+		
+	
+		panelSouth = new PanelNavigation();
+		c.add(panelSouth, BorderLayout.SOUTH);
+		panelCenter = new PanelMain();
+		panelMain();
+		
+		
+		mainLogic = new MainLogic();
+	}
+
+
+	public static void main(String[] args) {
+		instance = new FrameMain();
+	}
+
+
 	/**
 	 * @return the font
 	 */
@@ -76,78 +104,39 @@ public class FrameMain extends JFrame {
 	}
 
 
-	public void setPanelCenter(CenterPanel panel) {
+	public void setPanelCenter(CenterPanel panel, ButtonStates buttonState) {
 		c.remove(panelCenter);
 		c.add(panelCenter = panel, BorderLayout.CENTER);
-		panelSouth.activateButtons(ButtonStates.BOTH);
+		panelSouth.activateButtons(buttonState);
 		panelCenter.revalidate();
 		panelCenter.repaint();
+		panelCenter.requestFocusInWindow();
 	}
 
-
-	public FrameMain() {
-		
-		setTitle("Mathe");
-		setSize(600, 600);
-		setLocationRelativeTo(null);
-		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setResizable(false);
-		setVisible(true);
-		
-		
-		c = getContentPane();
-		
-
-		panelSouth = new PanelNavigation();
-		c.add(panelSouth, BorderLayout.SOUTH);
-		panelCenter = new PanelMain();
-		panelMain();
-		
-		
-		mainLogic = new MainLogic();
-	}
-	
-	public static void main(String[] args) {
-		instance = new FrameMain();
-	}
-
-	public void back() {
-		panelCenter.back();
-	}
 
 	public void panelMain() {
-		c.remove(panelCenter);
-		c.add(panelCenter = new PanelMain(), BorderLayout.CENTER);
-		panelSouth.activateButtons(ButtonStates.NONE);
-		panelCenter.revalidate();
+		setPanelCenter(new PanelMain(), ButtonStates.NONE);
 	}
 
 	public void panelCreateFunction() {
-		c.remove(panelCenter);
-		c.add(panelCenter = new PanelCreateFunction(), BorderLayout.CENTER);
-		panelSouth.activateButtons(ButtonStates.MAIN_MENU);
-		panelCenter.revalidate();
+		setPanelCenter(new PanelCreateFunction(), ButtonStates.BOTH);
 	}
 
 	public void panelLoadFunction() {
-		c.remove(panelCenter);
-		c.add(panelCenter = new PanelLoadFunction(), BorderLayout.CENTER);
-		panelSouth.activateButtons(ButtonStates.MAIN_MENU);
-		panelCenter.revalidate();
+		setPanelCenter(new PanelLoadFunction(), ButtonStates.MAIN_MENU);
 	}
 
 	public void panelIntersection() {
-		c.remove(panelCenter);
-		c.add(panelCenter = new PanelIntersection(), BorderLayout.CENTER);
-		panelSouth.activateButtons(ButtonStates.MAIN_MENU);
-		panelCenter.revalidate();
+		setPanelCenter(new PanelIntersection(), ButtonStates.MAIN_MENU);
 	}
 	
 	public void panelFunctionActionsMenu(Function f, CenterPanel caller) {
-		c.remove(panelCenter);
-		c.add(panelCenter = new PanelFunctionActionsMenu(f, caller), BorderLayout.CENTER);
-		panelSouth.activateButtons(ButtonStates.BOTH);
-		panelCenter.revalidate();
+		setPanelCenter(new PanelFunctionActionsMenu(f, caller), ButtonStates.BOTH);
+	}
+
+
+	public void back() {
+		panelCenter.back();
 	}
 	
 }

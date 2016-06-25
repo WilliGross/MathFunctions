@@ -1,8 +1,6 @@
 package willigrossBubble.gui.customComponents.panels;
 
-import javax.swing.JPanel;
-
-public abstract class CenterPanel extends JPanel {
+public abstract class CenterPanel extends RequestFocusForDefaultComponentPanel {
 
 	private static final long serialVersionUID = 1L;
 

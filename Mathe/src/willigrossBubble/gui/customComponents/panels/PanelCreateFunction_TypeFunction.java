@@ -7,7 +7,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
@@ -18,7 +17,7 @@ import willigrossBubble.gui.FrameMain;
 import willigrossBubble.gui.customComponents.buttons.CustomButtonSmall;
 
 
-public class PanelCreateFunction_TypeFunction extends JPanel {
+public class PanelCreateFunction_TypeFunction extends RequestFocusForDefaultComponentPanel {
 	
 	private static final long serialVersionUID = 1L;
 	private JLabel f;
@@ -72,6 +71,8 @@ public class PanelCreateFunction_TypeFunction extends JPanel {
 			}
 		});
 		add(go);
+		
+		setDefaultComponent(function);
 	}
 	
 }

@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import willigrossBubble.Function;
@@ -12,7 +11,7 @@ import willigrossBubble.gui.FrameMain;
 import willigrossBubble.gui.customComponents.buttons.CustomButtonSmall;
 
 
-public class PanelFunctionActionsMenu_Mirror extends JPanel {
+public class PanelFunctionActionsMenu_Mirror extends RequestFocusForDefaultComponentPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JLabel heading, result;
@@ -84,6 +83,8 @@ public class PanelFunctionActionsMenu_Mirror extends JPanel {
 			}
 		});
 		add(go);
+		
+		setDefaultComponent(x);
 	}
 	
 }

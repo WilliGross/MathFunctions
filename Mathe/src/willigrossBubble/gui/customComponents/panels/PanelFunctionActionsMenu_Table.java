@@ -7,7 +7,6 @@ import java.awt.event.KeyEvent;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
@@ -22,7 +21,7 @@ import willigrossBubble.gui.FocusAdapter_SelectAll;
 import willigrossBubble.gui.FrameMain;
 
 
-public class PanelFunctionActionsMenu_Table extends JPanel {
+public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultComponentPanel {
 	
 	private static final long serialVersionUID = 1L;
 	private JLabel heading, startLabel, endLabel, stepLabel, resultLabel;
@@ -89,6 +88,7 @@ public class PanelFunctionActionsMenu_Table extends JPanel {
 		resultScrollPane.setBounds(100, 90, 400, 160);
 		add(resultScrollPane);
 		
+		setDefaultComponent(start);
 	}
 	
 	private class KeyListeneR extends KeyAdapter {

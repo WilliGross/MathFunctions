@@ -5,7 +5,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
@@ -18,7 +17,7 @@ import willigrossBubble.gui.FocusAdapter_SelectAll;
 import willigrossBubble.gui.FrameMain;
 
 
-public class PanelFunctionActionsMenu_Point extends JPanel {
+public class PanelFunctionActionsMenu_Point extends RequestFocusForDefaultComponentPanel {
 	
 	private static final long serialVersionUID = 1L;
 	private JTextField p1x, p1y;
@@ -60,6 +59,7 @@ public class PanelFunctionActionsMenu_Point extends JPanel {
 		result.setBounds(100, 120, 400, 30);
 		add(result);
 		
+		setDefaultComponent(p1x);
 	}
 	
 	private class KeyListeneR extends KeyAdapter {

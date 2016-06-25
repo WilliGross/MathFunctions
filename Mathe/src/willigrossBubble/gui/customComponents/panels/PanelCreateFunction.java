@@ -1,6 +1,5 @@
 package willigrossBubble.gui.customComponents.panels;
 
-import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
 import javax.swing.JPanel;
@@ -24,29 +23,29 @@ public class PanelCreateFunction extends CenterPanel {
 		
 		setLayout(new GridLayout(2, 1));
 		add(menu);
-
+		
+		setDefaultComponent(menu);
 	}
 
 	
 	public void typeFunction() {
-		remove(createFunction);
-		add(createFunction = new PanelCreateFunction_TypeFunction(), BorderLayout.CENTER);
-		FrameMain.getInstance().getPanelSouth().activateButtons(ButtonStates.BOTH);
-		createFunction.revalidate();
+		setSubpanelSouth(new PanelCreateFunction_TypeFunction());
 	}
 	
 	public void createLinear() {
-		remove(createFunction);
-		add(createFunction = new PanelCreateFunction_ThroughTwoPoints(FunctionType.LINEAR), BorderLayout.CENTER);
-		FrameMain.getInstance().getPanelSouth().activateButtons(ButtonStates.BOTH);
-		createFunction.revalidate();
+		setSubpanelSouth(new PanelCreateFunction_ThroughTwoPoints(FunctionType.LINEAR));
 	}
 
 	public void createExponential() {
+		setSubpanelSouth(new PanelCreateFunction_ThroughTwoPoints(FunctionType.EXPONENTIAL));
+	}
+	
+	private void setSubpanelSouth(JPanel panel) {
 		remove(createFunction);
-		add(createFunction = new PanelCreateFunction_ThroughTwoPoints(FunctionType.EXPONENTIAL), BorderLayout.CENTER);
+		add(createFunction = panel);
 		FrameMain.getInstance().getPanelSouth().activateButtons(ButtonStates.BOTH);
 		createFunction.revalidate();
+		createFunction.requestFocusInWindow();
 	}
 
 

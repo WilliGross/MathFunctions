@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 
 import willigrossBubble.Function;
 import willigrossBubble.gui.FrameMain;
+import willigrossBubble.gui.customComponents.panels.PanelNavigation.ButtonStates;
 
 public class PanelFunctionActionsMenu extends CenterPanel {
 	
@@ -19,40 +20,38 @@ public class PanelFunctionActionsMenu extends CenterPanel {
 		this.caller = caller;
 		function = f;
 		menu = new PanelFunctionActionsMenu_Menu(function);
-		option = new JPanel(); //TODO
+		option = new JPanel();
 		
 		setLayout(new GridLayout(2, 1));
 		add(menu);
+		
+		setDefaultComponent(menu);
 	}
 	
-	@Override
-	public void back() {
-		FrameMain.getInstance().setPanelCenter(caller);
-	}
-
-
 	public void table() {
-		remove(option);
-		add(option = new PanelFunctionActionsMenu_Table(function));
-		option.revalidate();
+		setSubpanelSouth(new PanelFunctionActionsMenu_Table(function));
 	}
 
 
 	public void point() {
-		remove(option);
-		add(option = new PanelFunctionActionsMenu_Point(function));
-		option.revalidate();
+		setSubpanelSouth(new PanelFunctionActionsMenu_Point(function));
 	}
 
 
 	public void mirror() {
-		remove(option);
-		add(option = new PanelFunctionActionsMenu_Mirror(function));
-		option.revalidate();
+		setSubpanelSouth(new PanelFunctionActionsMenu_Mirror(function));
 	}	
 	
-	
-	
-	
+	public void setSubpanelSouth(JPanel panel) {
+		remove(option);
+		add(option = panel);
+		option.revalidate();
+		option.requestFocusInWindow();
+	}
+
+	@Override
+	public void back() {
+		FrameMain.getInstance().setPanelCenter(caller, ButtonStates.BOTH);
+	}
 	
 }

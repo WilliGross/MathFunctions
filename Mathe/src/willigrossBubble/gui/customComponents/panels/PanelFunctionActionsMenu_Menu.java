@@ -7,14 +7,13 @@ import java.awt.event.ItemListener;
 
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import willigrossBubble.Function;
 import willigrossBubble.gui.FrameMain;
 import willigrossBubble.gui.customComponents.buttons.CustomButtonLarge;
 
-public class PanelFunctionActionsMenu_Menu extends JPanel {
+public class PanelFunctionActionsMenu_Menu extends RequestFocusForDefaultComponentPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JLabel desc, function;
@@ -92,5 +91,6 @@ public class PanelFunctionActionsMenu_Menu extends JPanel {
 		});
 		add(saveInFile);
 		
+		setDefaultComponent(b1_table);
 	}
 }
