@@ -12,16 +12,12 @@ public class Point implements Serializable {
 	private double x, y;
 	
 
-	
-
 	/**Get the point's x coordinate
 	 * @return the point's x coordinate
 	 */
 	public double getX() {
 		return x;
 	}
-
-
 
 
 	/**Get the point's x coordinate
@@ -32,8 +28,6 @@ public class Point implements Serializable {
 	}
 
 
-
-
 	/**Set the point's x coordinate
 	 * @param x - the x coordinate to set
 	 */
@@ -42,16 +36,12 @@ public class Point implements Serializable {
 	}
 
 
-
-
 	/**Set the point's y coordinate
 	 * @param y - the y coordinate to set
 	 */
 	public void setY(double y) {
 		this.y = y;
 	}
-
-
 
 
 	/**
@@ -63,7 +53,6 @@ public class Point implements Serializable {
 	}
 	
 	
-	
 	/**
 	 * A point's constructor
 	 * @param x - the x coordinate
@@ -73,8 +62,6 @@ public class Point implements Serializable {
 		this.x = x;
 		this.y = y;
 	}
-
-
 
 
 	/**
@@ -94,8 +81,6 @@ public class Point implements Serializable {
 	}
 
 
-
-
 	/**
 	 * Overwriting of .hashCode()
 	 */
@@ -103,9 +88,5 @@ public class Point implements Serializable {
 	public int hashCode() {
 		return (new Double(x + y)).hashCode();
 	}
-	
-	
-	
-	
 	
 }
