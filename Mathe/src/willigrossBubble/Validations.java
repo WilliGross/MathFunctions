@@ -19,7 +19,6 @@ public class Validations {
 			evaluator.evaluate(expression, variables);
 			return true;
 		} catch (@SuppressWarnings("unused") IllegalArgumentException e) {
-//			System.err.println(e);
 			return false;
 		}
 		
@@ -38,7 +37,6 @@ public class Validations {
 			evaluator.evaluate(expression);
 			return true;
 		} catch (@SuppressWarnings("unused") IllegalArgumentException e) {
-//			System.err.println(e);
 			return false;
 		}
 		
