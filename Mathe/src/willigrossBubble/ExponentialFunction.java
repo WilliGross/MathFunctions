@@ -28,8 +28,12 @@ public class ExponentialFunction extends Function {
 				throw new InvalidPointConfigurationException("Invalid point configuration: same y coordinates"); //"Invalid point configuration: Points have the same y coordinate, exponential functions can never be perfectly horizontal!"
 			if (Utility.arePointsOnVerticalLine(p, q))
 				throw new InvalidPointConfigurationException("Invalid point configuration: same x coordinates"); //"Invalid point configuration: Points have the same x coordinate, exponential functions can never be perfectly vertical!"
-		} //TODO filter points in wrong quadrants
+		}
 		
+		if ( 	((p.getQuadrant() == 1 || p.getQuadrant() == 2) && (q.getQuadrant() == 3 || q.getQuadrant() == 4)) || 	// p above x and q below
+				((q.getQuadrant() == 1 || q.getQuadrant() == 2) && (p.getQuadrant() == 3 || p.getQuadrant() == 4)) )	// q above x and p below
+			throw new InvalidPointConfigurationException("Invalid point configuration: points in invalid quadrants");
+			
 		String expression = "";
 		String expressionRounded = "";
 		

@@ -3,7 +3,7 @@ package willigrossBubble;
 import java.io.Serializable;
 
 public class Point implements Serializable {
-
+	
 	private static final long serialVersionUID = 1L;
 	
 	/**
@@ -11,45 +11,36 @@ public class Point implements Serializable {
 	 */
 	private double x, y;
 	
-
+	
 	/**Get the point's x coordinate
 	 * @return the point's x coordinate
 	 */
 	public double getX() {
 		return x;
 	}
-
-
+	
+	
 	/**Get the point's x coordinate
 	 * @return the point's y coordinate
 	 */
 	public double getY() {
 		return y;
 	}
-
-
+	
+	
 	/**Set the point's x coordinate
 	 * @param x - the x coordinate to set
 	 */
 	public void setX(double x) {
 		this.x = x;
 	}
-
-
+	
+	
 	/**Set the point's y coordinate
 	 * @param y - the y coordinate to set
 	 */
 	public void setY(double y) {
 		this.y = y;
-	}
-
-
-	/**
-	 * A string to represent the point
-	 */
-	@Override
-	public String toString(){
-		return "(" + Utility.roundDouble(this.getX(), 3) + "," + Utility.roundDouble(this.getY(), 3) + ")";
 	}
 	
 	
@@ -62,8 +53,41 @@ public class Point implements Serializable {
 		this.x = x;
 		this.y = y;
 	}
-
-
+	
+	
+	/**
+	 * Checks in which quadrant the point is in: top right (1), top left (2), bottom left (3), bottom right (4)
+	 * Number is (5) if the point lies on the y - axis, (6) if it lies on the x-axis and (7) if it's on both
+	 * @return the quadrant
+	 */
+	public int getQuadrant() {
+		if (y == 0) {
+			if (x == 0)
+				return 7; 	//both
+			return 5;		//y-axis only
+		}
+		if (x == 0)
+			return 6;		//x-axis only
+		if (y > 0) {
+			if (x > 0)
+				return 1;	//top right
+			return 2;		//top left
+		}
+		if (x < 0)
+			return 3;		//bottom left
+		return 4;			//bottom right
+	}
+	
+	
+	/**
+	 * A string to represent the point
+	 */
+	@Override
+	public String toString(){
+		return "(" + Utility.roundDouble(this.getX(), 3) + "," + Utility.roundDouble(this.getY(), 3) + ")";
+	}
+	
+	
 	/**
 	 * Overwriting of .equals()
 	 */
@@ -79,8 +103,8 @@ public class Point implements Serializable {
 			return true;
 		return false;
 	}
-
-
+	
+	
 	/**
 	 * Overwriting of .hashCode()
 	 */
