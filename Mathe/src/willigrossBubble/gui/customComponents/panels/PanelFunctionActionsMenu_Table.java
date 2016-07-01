@@ -104,15 +104,19 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 		@Override
 		public void keyReleased(KeyEvent e) {
 			JTextField source = (JTextField) e.getSource();
+			//validate source
 			if (!Validations.canConvertToNumber(source.getText())) {
 				source.setBorder(new LineBorder(Color.RED, 2));
 			} else {
+				//filter invalid step
 				if (source == step && Utility.readDoubleFromStringInput(step.getText()) == 0) {
 					source.setBorder(new LineBorder(Color.RED, 2));
 					return;
 				}
 				source.setBorder(new LineBorder(Color.GRAY));
+				//calc new table
 				if (Validations.canConvertToNumber(start.getText()) && Validations.canConvertToNumber(end.getText()) && Validations.canConvertToNumber(step.getText())) {
+					listModel.clear();
 					double 	startValue 	= Utility.readDoubleFromStringInput(start.getText()	), 
 							endValue 	= Utility.readDoubleFromStringInput(end.getText()	), 
 							stepValue 	= Utility.readDoubleFromStringInput(step.getText()	);
