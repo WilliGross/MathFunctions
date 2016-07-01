@@ -1,11 +1,15 @@
 package willigrossBubble;
 
+import java.io.EOFException;
 import java.io.File;
 import java.io.IOException;
-import java.util.Map.Entry;
+import java.io.StreamCorruptedException;
 
-import com.blogspot.debukkitsblog.Util.FileStorage;
+import javax.swing.JOptionPane;
+
 import com.google.common.collect.HashBiMap;
+
+import willigrossBubble.gui.FrameMain;
 
 public class MainLogic {
 	
@@ -107,10 +111,7 @@ public class MainLogic {
 	public void removeFunctionFromFile(Function function) {
 		try {
 			FileStorage fileStorage = new FileStorage(functionsDat);
-			for (Entry<String, Object> entry : fileStorage.getAll().entrySet()) {
-				if (function.equals(entry.getValue()))
-					fileStorage.remove(entry.getKey());
-			}
+			fileStorage.remove(function);
 		} catch (IllegalArgumentException | IOException e) {
 			System.err.println(e);
 		}
@@ -120,7 +121,7 @@ public class MainLogic {
 	 * Loads all the functions from the save file and adds them to the functions map
 	 */
 	private void loadFunctions() {
-		Function function;
+		Function function = null;
 		try {
 			FileStorage fileStorage = new FileStorage(functionsDat);
 			for (int i = 0; i < names.length; i++) {
@@ -128,6 +129,10 @@ public class MainLogic {
 				if (function != null)
 					functions.put(getNextName(), function);
 			}
+			
+		} catch (@SuppressWarnings("unused") StreamCorruptedException | EOFException e) {
+			JOptionPane.showMessageDialog(FrameMain.getInstance(), "Functions.dat corrupted!\nDeleting it!", "Error", JOptionPane.ERROR_MESSAGE);
+			functionsDat.delete();
 		} catch (IllegalArgumentException | IOException e) {
 			System.err.println(e);
 		}
@@ -140,6 +145,7 @@ public class MainLogic {
 	public void displayFunctionsDat() {
 		try {
 			FileStorage fileStorage = new FileStorage(functionsDat);
+			
 			System.out.println(fileStorage.getAll());
 		} catch (IllegalArgumentException | IOException e) {
 			System.err.println(e);

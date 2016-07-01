@@ -12,6 +12,5 @@
 			<attribute name="javadoc_location" value="jar:platform:/resource/Mathe/libs/guava-19.0-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="libs/SimpleFileStorage_lib.jar" sourcepath="libs/SimpleFileStorage-1.0.1.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
