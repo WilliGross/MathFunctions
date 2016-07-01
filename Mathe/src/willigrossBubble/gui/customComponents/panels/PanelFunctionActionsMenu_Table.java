@@ -5,6 +5,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.DefaultListModel;
+import javax.swing.DefaultListSelectionModel;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
@@ -12,9 +13,10 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import willigrossBubble.Function;
-import willigrossBubble.UnselectableListSelectionModel;
 import willigrossBubble.Utility;
 import willigrossBubble.Validations;
 import willigrossBubble.gui.FocusAdapter_SelectAll;
@@ -82,7 +84,14 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 		listModel = new DefaultListModel<>();
 		result = new JList<>(listModel);
 		result.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		result.setSelectionModel(new UnselectableListSelectionModel());
+		result.setSelectionModel(new DefaultListSelectionModel());
+		result.addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				result.clearSelection();
+			}
+		});
 		
 		resultScrollPane = new JScrollPane(result);
 		resultScrollPane.setBounds(100, 90, 400, 160);
