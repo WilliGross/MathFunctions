@@ -20,7 +20,6 @@ public class PanelFunctionActionsMenu extends CenterPanel {
 		this.caller = caller;
 		function = f;
 		menu = new PanelFunctionActionsMenu_Menu(function);
-		option = new JPanel();
 		
 		setLayout(new GridLayout(2, 1));
 		add(menu);
@@ -43,7 +42,8 @@ public class PanelFunctionActionsMenu extends CenterPanel {
 	}	
 	
 	public void setSubpanelSouth(JPanel panel) {
-		remove(option);
+		if (option != null)
+			remove(option);
 		add(option = panel);
 		option.revalidate();
 		option.requestFocusInWindow();
@@ -51,8 +51,10 @@ public class PanelFunctionActionsMenu extends CenterPanel {
 
 	@Override
 	public void back() {
-		if (option.isVisible()) {
-			option.setVisible(false);
+		if (option != null) {
+			remove(option);
+			option = null;
+			repaint();
 		} else
 			FrameMain.getInstance().setPanelCenter(caller, ButtonStates.BOTH);
 	}

@@ -119,7 +119,7 @@ public class FrameMain extends JFrame {
 	}
 
 	public void panelCreateFunction() {
-		setPanelCenter(new PanelCreateFunction(), ButtonStates.BOTH);
+		setPanelCenter(new PanelCreateFunction(), ButtonStates.MAIN_MENU);
 	}
 
 	public void panelLoadFunction() {

@@ -19,7 +19,6 @@ public class PanelCreateFunction extends CenterPanel {
 	public PanelCreateFunction() {
 		
 		menu = new PanelCreateFunction_Menu();
-		createFunction = new PanelCreateFunction_TypeFunction();
 		
 		setLayout(new GridLayout(2, 1));
 		add(menu);
@@ -41,7 +40,8 @@ public class PanelCreateFunction extends CenterPanel {
 	}
 	
 	private void setSubpanelSouth(JPanel panel) {
-		remove(createFunction);
+		if (createFunction != null)
+			remove(createFunction);
 		add(createFunction = panel);
 		FrameMain.getInstance().getPanelSouth().activateButtons(ButtonStates.BOTH);
 		createFunction.revalidate();
@@ -51,11 +51,13 @@ public class PanelCreateFunction extends CenterPanel {
 
 	@Override
 	public void back() {
-		if (createFunction.isVisible()) {
-			createFunction.setVisible(false);
+		if (createFunction != null) {
+			remove(createFunction);
+			createFunction = null;
+			repaint();
 			FrameMain.getInstance().getPanelSouth().activateButtons(ButtonStates.MAIN_MENU);
 		} else
-			FrameMain.getInstance().panelMain();
+			FrameMain.getInstance().panelMain(); //should never be executed since only main menu button is showing when this would be needed
 	}
 
 }
