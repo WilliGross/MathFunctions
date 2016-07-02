@@ -26,6 +26,7 @@ import willigrossBubble.gui.FrameMain;
 public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultComponentPanel {
 	
 	private static final long serialVersionUID = 1L;
+	private static final int MAX_VALUE = 100000, MIN_VALUE = -100000;
 	private JLabel heading, startLabel, endLabel, stepLabel, resultLabel;
 	private JTextField start, end, step;
 	private DefaultListModel<String> listModel;
@@ -100,31 +101,104 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 		setDefaultComponent(start);
 	}
 	
+	
 	private class KeyListeneR extends KeyAdapter {
 		@Override
 		public void keyReleased(KeyEvent e) {
-			JTextField source = (JTextField) e.getSource();
-			//validate source
-			if (!Validations.canConvertToNumber(source.getText())) {
-				source.setBorder(new LineBorder(Color.RED, 2));
-			} else {
-				//filter invalid step
-				if (source == step && Utility.readDoubleFromStringInput(step.getText()) == 0) {
-					source.setBorder(new LineBorder(Color.RED, 2));
-					return;
+			
+			String errorStart = "Enter a number for 'start'!", errorEnd = "Enter a number for 'end'!", errorStep = "Enter a number for 'step'!";
+			String 	valueWarnStart 	= "Enter a value between " + MIN_VALUE + " and " + MAX_VALUE + " for 'start'!",
+					valueWarnEnd 	= "Enter a value between " + MIN_VALUE + " and " + MAX_VALUE + " for 'end'!",
+					valueWarnStep 	= "Step mustn't be 0!";
+			boolean startValidationOne = false, startValidationTwo = false, endValidationOne = false, endValidationTwo = false, stepValidationOne = false, stepValidationTwo = false;
+			
+			listModel.clear();
+			
+			//validate start
+			if (!start.getText().equals("start value")) {
+				if (Validations.canConvertToNumber(start.getText())) {
+					if (Utility.readDoubleFromStringInput(start.getText()) > MAX_VALUE || Utility.readDoubleFromStringInput(start.getText()) < MIN_VALUE) {
+						if (!listModel.contains(valueWarnStart))
+							listModel.addElement(valueWarnStart);
+						startValidationTwo = false;
+					} else {
+						listModel.removeElement(valueWarnStart);
+						startValidationTwo = true;
+					}
+					listModel.removeElement(errorStart);
+					startValidationOne = true;
+				} else {
+					if (!listModel.contains(errorStart))
+						listModel.addElement(errorStart);
+					startValidationOne = false;
 				}
-				source.setBorder(new LineBorder(Color.GRAY));
-				//calc new table
-				if (Validations.canConvertToNumber(start.getText()) && Validations.canConvertToNumber(end.getText()) && Validations.canConvertToNumber(step.getText())) {
-					listModel.clear();
-					double 	startValue 	= Utility.readDoubleFromStringInput(start.getText()	), 
-							endValue 	= Utility.readDoubleFromStringInput(end.getText()	), 
-							stepValue 	= Utility.readDoubleFromStringInput(step.getText()	);
-					String[] tableAsArray = function.table(startValue, endValue, stepValue);
-					for (int i = 0; i < tableAsArray.length; i++)
-						listModel.addElement(tableAsArray[i]);
-				}
+				
+				if (startValidationOne && startValidationTwo)
+					start.setBorder(new LineBorder(Color.GRAY));
+				else
+					start.setBorder(new LineBorder(Color.RED, 2));
 			}
+
+			//validate end
+			if (!end.getText().equals("end value")) {
+				if (Validations.canConvertToNumber(end.getText())) {
+					if (Utility.readDoubleFromStringInput(end.getText()) > MAX_VALUE || Utility.readDoubleFromStringInput(end.getText()) < MIN_VALUE) {
+						if (!listModel.contains(valueWarnEnd))
+							listModel.addElement(valueWarnEnd);
+						endValidationTwo = false;
+					} else {
+						listModel.removeElement(valueWarnEnd);
+						endValidationTwo = true;
+					}
+					listModel.removeElement(errorEnd);
+					endValidationOne = true;
+				} else {
+					if (!listModel.contains(errorEnd))
+						listModel.addElement(errorEnd);
+					endValidationOne = false;
+				}
+				
+				if (endValidationOne && endValidationTwo)
+					end.setBorder(new LineBorder(Color.GRAY));
+				else
+					end.setBorder(new LineBorder(Color.RED, 2));
+			}
+			
+			//validate step
+			if (!step.getText().equals("step")) {
+				if (Validations.canConvertToNumber(step.getText())) {
+					if (Utility.readDoubleFromStringInput(step.getText()) == 0) {
+						if (!listModel.contains(valueWarnStep))
+							listModel.addElement(valueWarnStep);
+						stepValidationTwo = false;
+					} else {
+						listModel.removeElement(valueWarnStep);
+						stepValidationTwo = true;
+					}
+					listModel.removeElement(errorStep);
+					stepValidationOne = true;
+				} else {
+					if (!listModel.contains(errorStep))
+						listModel.addElement(errorStep);
+					stepValidationOne = false;
+				}
+				
+				if (stepValidationOne && stepValidationTwo)
+					step.setBorder(new LineBorder(Color.GRAY));
+				else
+					step.setBorder(new LineBorder(Color.RED, 2));
+			}
+			
+			//calculate and display value table
+			if (Validations.canConvertToNumber(start.getText()) && Validations.canConvertToNumber(end.getText()) && Validations.canConvertToNumber(step.getText()) && startValidationOne && startValidationTwo && endValidationOne && endValidationTwo && stepValidationOne && stepValidationTwo) {
+				double 	startValue 	= Utility.readDoubleFromStringInput(start.getText()	), 
+						endValue 	= Utility.readDoubleFromStringInput(end.getText()	), 
+						stepValue 	= Utility.readDoubleFromStringInput(step.getText()	);
+				String[] tableAsArray = function.table(startValue, endValue, stepValue);
+				for (int i = 0; i < tableAsArray.length; i++)
+					listModel.addElement(tableAsArray[i]);
+			}
+			
 		}
 	}
 	
