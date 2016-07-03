@@ -61,12 +61,12 @@ public class Point implements Serializable {
 	 * @return the quadrant
 	 */
 	public int getQuadrant() {
-		if (y == 0) {
-			if (x == 0)
+		if (x == 0) {
+			if (y == 0)
 				return 7; 	//both
 			return 5;		//y-axis only
 		}
-		if (x == 0)
+		if (y == 0)
 			return 6;		//x-axis only
 		if (y > 0) {
 			if (x > 0)

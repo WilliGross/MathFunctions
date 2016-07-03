@@ -33,7 +33,10 @@ public class ExponentialFunction extends Function {
 		if ( 	((p.getQuadrant() == 1 || p.getQuadrant() == 2) && (q.getQuadrant() == 3 || q.getQuadrant() == 4)) || 	// p above x and q below
 				((q.getQuadrant() == 1 || q.getQuadrant() == 2) && (p.getQuadrant() == 3 || p.getQuadrant() == 4)) )	// q above x and p below
 			throw new InvalidPointConfigurationException("Invalid point configuration: points in invalid quadrants");
-			
+		
+		if (p.getQuadrant() == 6 || q.getQuadrant() == 6)
+			throw new InvalidPointConfigurationException("Invalid point configuration: points can't be on x-axis");
+		
 		String expression = "";
 		String expressionRounded = "";
 		
