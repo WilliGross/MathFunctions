@@ -27,13 +27,22 @@ public class Function implements Serializable {
 	 */
 	private String expressionRounded = "";
 	
+	/**name of the function*/
 	private char name;
 	
-	
+	/**
+	 * constructor that sets the expression and gives the function a name.
+	 * @param expression the function's expression 
+	 */
 	public Function(String expression) {
 		this(expression, expression);
 	}
 	
+	/**
+	 * constructor that sets the expression and a rounded version of the expression. It also sets a new name for the function.
+	 * @param expression the function's expression 
+	 * @param expressionRounded expression with rounded numbers (for displaying purposes)
+	 */
 	public Function(String expression, String expressionRounded) {
 		this.expression = expression;
 		this.expressionRounded = expressionRounded;
