@@ -4,13 +4,16 @@ public class LinearFunction extends Function {
 	
 	private static final long serialVersionUID = 1L;
 	
+	/**Implementation of super constructor*/
 	private LinearFunction(String expression) {
 		super(expression);
 	}
 	
+	/**Implementation of super constructor*/
 	private LinearFunction(String expression, String expressionRounded) {
 		super(expression, expressionRounded);
 	}
+	
 	
 	/**
 	 * Create a function whose graph runs through two given points

@@ -30,6 +30,7 @@ public class Function implements Serializable {
 	/**name of the function*/
 	private char name;
 	
+	
 	/**
 	 * constructor that sets the expression and gives the function a name.
 	 * @param expression the function's expression 
@@ -37,6 +38,7 @@ public class Function implements Serializable {
 	public Function(String expression) {
 		this(expression, expression);
 	}
+	
 	
 	/**
 	 * constructor that sets the expression and a rounded version of the expression. It also sets a new name for the function.
@@ -91,6 +93,7 @@ public class Function implements Serializable {
 		this.name = name;
 	}
 	
+	
 	/**
 	 * A string to represent the function
 	 */
@@ -133,7 +136,8 @@ public class Function implements Serializable {
 		
 		return false;
 	}
-	
+
+
 	/**
 	 * Displays a value table for the expression
 	 * @param start - start value for x
@@ -191,7 +195,6 @@ public class Function implements Serializable {
 	}
 	
 	
-	
 	/**
 	 * Mirror a function on the y-axis
 	 * @return the new function, null if something went wrong in deepCopy()
@@ -220,7 +223,6 @@ public class Function implements Serializable {
 		}
 		return null;
 	}
-	
 	
 	
 	/**
@@ -267,6 +269,9 @@ public class Function implements Serializable {
 	}
 
 
+	/**
+	 * override .equals so that two functions that have the same expression are equal 
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) 
@@ -281,6 +286,9 @@ public class Function implements Serializable {
 	}
 
 
+	/**
+	 * override. hashcode by generating the hash with the expression of the function 
+	 */
 	@Override
 	public int hashCode() {
 		return getExpression().hashCode();

@@ -9,6 +9,7 @@ import javax.swing.JTextField;
 
 public class FocusAdapter_SelectAll extends FocusAdapter {
 
+	/**If source is a instance of JTextField select text when focus gained*/
 	@Override
 	public void focusGained(FocusEvent e) {
 		Component source = e.getComponent();
