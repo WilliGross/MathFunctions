@@ -47,7 +47,7 @@ public class FrameMain extends JFrame {
 	private MainLogic mainLogic;
 	
 	
-	/**Constructor of FrameMain*/
+	/**Constructor of FrameMain that sets properties and creates navigation and main panel*/
 	public FrameMain() {
 		
 		setTitle("Mathe");
