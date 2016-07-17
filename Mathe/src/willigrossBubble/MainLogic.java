@@ -43,8 +43,8 @@ public class MainLogic {
 	 * @return the function's name as a Character object
 	 */
 	public Character storeFunction(Function function) {
-		if (functions.containsValue(function)) 
-			return null;
+		if (functions.containsValue(function))
+			return functions.inverse().get(function);
 		char name = getNextName();
 		function.setName(name);
 		functions.put(name, function);

@@ -97,9 +97,10 @@ public class PanelCreateFunction_ThroughTwoPoints extends RequestFocusForDefault
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FrameMain.getInstance().getMainLogic().storeFunction(function);
-				FrameMain.getInstance().panelFunctionActionsMenu(function, FrameMain.getInstance().getPanelCenter());
-				
+				FrameMain.getInstance().panelFunctionActionsMenu(
+						FrameMain.getInstance().getMainLogic().getFunction(
+								FrameMain.getInstance().getMainLogic().storeFunction(function)), 
+						FrameMain.getInstance().getPanelCenter());
 			}
 			
 		});

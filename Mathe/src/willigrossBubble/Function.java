@@ -35,7 +35,7 @@ public class Function implements Serializable {
 	}
 	
 	public Function(String expression, String expressionRounded) {
-		this.expression = expression;
+		this.expression = expression.replaceAll("\\s", "");
 		this.expressionRounded = expressionRounded;
 		name = FrameMain.getInstance().getMainLogic().getNextName();
 	}

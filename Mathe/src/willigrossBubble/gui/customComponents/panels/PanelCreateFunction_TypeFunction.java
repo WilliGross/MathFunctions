@@ -66,8 +66,10 @@ public class PanelCreateFunction_TypeFunction extends RequestFocusForDefaultComp
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FrameMain.getInstance().getMainLogic().storeFunction(new Function(function.getText()));
-				FrameMain.getInstance().panelFunctionActionsMenu(FrameMain.getInstance().getMainLogic().getLatestFunction(), FrameMain.getInstance().getPanelCenter());
+				FrameMain.getInstance().panelFunctionActionsMenu(
+						FrameMain.getInstance().getMainLogic().getFunction(
+								FrameMain.getInstance().getMainLogic().storeFunction(new Function(function.getText()))), 
+						FrameMain.getInstance().getPanelCenter());
 			}
 		});
 		add(go);
