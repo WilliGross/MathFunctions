@@ -125,6 +125,7 @@ public class Function implements Serializable {
 		return false;
 	}
 	
+	
 	/**
 	 * Displays a value table for the expression
 	 * @param start - start value for x
@@ -182,7 +183,6 @@ public class Function implements Serializable {
 	}
 	
 	
-	
 	/**
 	 * Mirror a function on the y-axis
 	 * @return the new function, null if something went wrong in deepCopy()
@@ -211,8 +211,7 @@ public class Function implements Serializable {
 		}
 		return null;
 	}
-	
-	
+		
 	
 	/**
 	 * Mirror a function on the x-axis and y-axis => rotate it around the origin
@@ -258,6 +257,9 @@ public class Function implements Serializable {
 	}
 
 
+	/**
+ 	 * override .equals so that two functions that have the same expression are equal 
+ 	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) 
@@ -271,7 +273,10 @@ public class Function implements Serializable {
 		return false;
 	}
 
-
+	
+	/**
+	 * override. hashcode by generating the hash with the expression of the function 
+	 */
 	@Override
 	public int hashCode() {
 		return getExpression().hashCode();

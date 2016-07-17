@@ -13,9 +13,13 @@ public class PanelCreateFunction extends CenterPanel {
 	
 	private static final long serialVersionUID = 1L;
 	
+	/**object that holds the subpanel menu*/
 	private PanelCreateFunction_Menu menu;
+	
+	/**object that holds the subpanel for creating functions*/
 	private JPanel createFunction;
 	
+	/**Constructor that creates the subpanel menu and sets some properties*/
 	public PanelCreateFunction() {
 		
 		menu = new PanelCreateFunction_Menu();
@@ -26,19 +30,25 @@ public class PanelCreateFunction extends CenterPanel {
 		setDefaultComponent(menu);
 	}
 
-	
+	/**Creates subpanel for typing functions*/
 	public void typeFunction() {
 		setSubpanelSouth(new PanelCreateFunction_TypeFunction());
 	}
 	
+	/**Creates subpanel for creating linear functions*/
 	public void createLinear() {
 		setSubpanelSouth(new PanelCreateFunction_ThroughTwoPoints(FunctionType.LINEAR));
 	}
 
+	/**Creates subpanel for creating exponential functions*/
 	public void createExponential() {
 		setSubpanelSouth(new PanelCreateFunction_ThroughTwoPoints(FunctionType.EXPONENTIAL));
 	}
 	
+	/**
+	 * Sets the southern panel and rebalidates components
+	 * @param panel the new panel to be set
+	 */
 	private void setSubpanelSouth(JPanel panel) {
 		if (createFunction != null)
 			remove(createFunction);
@@ -49,6 +59,7 @@ public class PanelCreateFunction extends CenterPanel {
 	}
 
 
+	/**Implementation of back () method from superclass */
 	@Override
 	public void back() {
 		if (createFunction != null) {

@@ -89,7 +89,7 @@ public class Point implements Serializable {
 	
 	
 	/**
-	 * Overwriting of .equals()
+	 * Override .equals()
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -106,7 +106,7 @@ public class Point implements Serializable {
 	
 	
 	/**
-	 * Overwriting of .hashCode()
+	 * Override .hashCode()
 	 */
 	@Override
 	public int hashCode() {

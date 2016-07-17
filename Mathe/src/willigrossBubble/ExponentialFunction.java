@@ -4,10 +4,12 @@ public class ExponentialFunction extends Function {
 
 	private static final long serialVersionUID = 1L;
 
+	/**Implementation of super constructor*/
 	private ExponentialFunction(String expression) {
 		super(expression);
 	}
 	
+	/**Implementation of super constructor*/
 	private ExponentialFunction(String expression, String expressionRounded) {
 		super(expression, expressionRounded);
 	}
