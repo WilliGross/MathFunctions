@@ -27,7 +27,7 @@ public class LinearFunction extends Function {
 		String expressionRounded = "";
 		
 		if (p.getX() == q.getX() && !p.equals(q)) {
-			throw new InvalidPointConfigurationException("There is no function f(x) for a vertical straight line!");
+			throw new InvalidPointConfigurationException("Invalid point configuration: same x coordinates", "There is no function f(x) for a vertical straight line!");
 		}
 		
 		

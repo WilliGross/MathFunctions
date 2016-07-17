@@ -27,17 +27,17 @@ public class ExponentialFunction extends Function {
 		
 		if (!p.equals(q)) {
 			if (Utility.arePointsOnHorzontalLine(p, q))
-				throw new InvalidPointConfigurationException("Invalid point configuration: same y coordinates"); //"Invalid point configuration: Points have the same y coordinate, exponential functions can never be perfectly horizontal!"
+				throw new InvalidPointConfigurationException("Invalid point configuration: same y coordinates", "Exponential functions can never be perfectly horizontal!"); //"Invalid point configuration: Points have the same y coordinate, exponential functions can never be perfectly horizontal!"
 			if (Utility.arePointsOnVerticalLine(p, q))
-				throw new InvalidPointConfigurationException("Invalid point configuration: same x coordinates"); //"Invalid point configuration: Points have the same x coordinate, exponential functions can never be perfectly vertical!"
+				throw new InvalidPointConfigurationException("Invalid point configuration: same x coordinates", "Exponential functions can never be perfectly vertical!"); //"Invalid point configuration: Points have the same x coordinate, exponential functions can never be perfectly vertical!"
 		}
 		
 		if ( 	((p.getQuadrant() == 1 || p.getQuadrant() == 2) && (q.getQuadrant() == 3 || q.getQuadrant() == 4)) || 	// p above x and q below
 				((q.getQuadrant() == 1 || q.getQuadrant() == 2) && (p.getQuadrant() == 3 || p.getQuadrant() == 4)) )	// q above x and p below
-			throw new InvalidPointConfigurationException("Invalid point configuration: points in invalid quadrants");
+			throw new InvalidPointConfigurationException("Invalid point configuration: points in invalid quadrants", "Exponential functions can't have positive AND negative values!");
 		
 		if (p.getQuadrant() == 6 || q.getQuadrant() == 6)
-			throw new InvalidPointConfigurationException("Invalid point configuration: points can't be on x-axis");
+			throw new InvalidPointConfigurationException("Invalid point configuration: points can't be on x-axis", "exponential functions never reach the x-axis");
 		
 		String expression = "";
 		String expressionRounded = "";

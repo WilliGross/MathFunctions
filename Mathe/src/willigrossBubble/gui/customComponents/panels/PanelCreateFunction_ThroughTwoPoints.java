@@ -126,6 +126,8 @@ public class PanelCreateFunction_ThroughTwoPoints extends RequestFocusForDefault
 		} catch (IllegalArgumentException | InvalidPointConfigurationException e) {
 			result.setText(e.getMessage());
 			result.setForeground(Color.RED);
+			if (e instanceof InvalidPointConfigurationException && ((InvalidPointConfigurationException) e).hasTooltip())
+				result.setToolTipText(((InvalidPointConfigurationException) e).getTooltip());
 			throw new Exception("Error when calculating expression!");
 		}
 	}
