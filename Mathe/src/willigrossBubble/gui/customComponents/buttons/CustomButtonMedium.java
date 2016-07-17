@@ -13,6 +13,6 @@ public class CustomButtonMedium extends CustomButton {
 	
 	/**Implementation of super constructor with button size 200 x 30 (medium)*/
 	public CustomButtonMedium() {
-		this("");
+		this(""); //$NON-NLS-1$
 	}
 }

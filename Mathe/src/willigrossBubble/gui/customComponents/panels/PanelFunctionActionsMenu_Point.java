@@ -11,6 +11,7 @@ import javax.swing.border.LineBorder;
 
 import willigrossBubble.Function;
 import willigrossBubble.Point;
+import willigrossBubble.Strings;
 import willigrossBubble.Utility;
 import willigrossBubble.Validations;
 import willigrossBubble.gui.FocusAdapter_SelectAll;
@@ -32,30 +33,30 @@ public class PanelFunctionActionsMenu_Point extends RequestFocusForDefaultCompon
 		
 		FocusAdapter_SelectAll focusAdapter_SelectAll = new FocusAdapter_SelectAll();
 		
-		heading = new JLabel("Check if a specified point lies on the function's graph", SwingConstants.CENTER);
+		heading = new JLabel(Strings.getString("PanelFunctionActionsMenu_Point.label_heading"), SwingConstants.CENTER); //$NON-NLS-1$
 		heading.setFont(FrameMain.getGlobalFont());
 		heading.setBounds(100, 0, 400, 30);
 		add(heading);
 		
 		KeyAdapter keyListener = new KeyListeneR();
 		
-		p1 = new JLabel("Point:", SwingConstants.RIGHT);
+		p1 = new JLabel(Strings.getString("PanelFunctionActionsMenu_Point.label_point"), SwingConstants.RIGHT); //$NON-NLS-1$
 		p1.setBounds(40, 40, 50, 30);
 		add(p1);
 		
-		p1x = new JTextField("x-coordinate");
+		p1x = new JTextField(Strings.getString("PanelFunctionActionsMenu_Point.textFieldPlaceholder_x-coordinate")); //$NON-NLS-1$
 		p1x.setBounds(100, 40, 190, 30);
 		p1x.addFocusListener(focusAdapter_SelectAll);
 		p1x.addKeyListener(keyListener);
 		add(p1x);
 		
-		p1y = new JTextField("y-coordinate");
+		p1y = new JTextField(Strings.getString("PanelFunctionActionsMenu_Point.textFieldPlaceholder_y-coordinate")); //$NON-NLS-1$
 		p1y.setBounds(310, 40, 190, 30);
 		p1y.addFocusListener(focusAdapter_SelectAll);
 		p1y.addKeyListener(keyListener);
 		add(p1y);
 		
-		result = new JLabel("", SwingConstants.CENTER);
+		result = new JLabel("", SwingConstants.CENTER); //$NON-NLS-1$
 		result.setBounds(100, 120, 400, 30);
 		add(result);
 		
@@ -66,7 +67,7 @@ public class PanelFunctionActionsMenu_Point extends RequestFocusForDefaultCompon
 		@Override
 		public void keyReleased(KeyEvent e) {
 			
-			result.setText("");
+			result.setText(""); //$NON-NLS-1$
 			
 			JTextField source = (JTextField) e.getSource();
 			if (!Validations.canConvertToNumber(source.getText())) {
@@ -80,9 +81,9 @@ public class PanelFunctionActionsMenu_Point extends RequestFocusForDefaultCompon
 					Point p = new Point(px, py);
 					
 					if (function.testPointOnGraph(p))
-						result.setText("The point DOES lie on the function's graph");
+						result.setText(Strings.getString("PanelFunctionActionsMenu_Point.label_result_onGraph")); //$NON-NLS-1$
 					else
-						result.setText("The point does NOT lie on the function's graph");
+						result.setText(Strings.getString("PanelFunctionActionsMenu_Point.label_result_notOnGraph")); //$NON-NLS-1$
 					
 				}
 			}

@@ -34,7 +34,7 @@ public class FileStorage {
 		this.storageFile = file;
 		
 		if(storageFile.isDirectory()){
-			throw new IllegalArgumentException("storageFile must not be a directory");
+			throw new IllegalArgumentException(Strings.getString("FileStorage.exception_directory")); //$NON-NLS-1$
 		}
 		
 		if(storageFile.createNewFile()){
@@ -128,7 +128,7 @@ public class FileStorage {
 	 */
 	public void printAll(){
 		for(String cKey : storageMap.keySet()) {
-			System.out.println(cKey + " :: " + storageMap.get(cKey));
+			System.out.println(cKey + " :: " + storageMap.get(cKey)); //$NON-NLS-1$
 		}
 	}
 	
@@ -177,9 +177,9 @@ public class FileStorage {
 	 */
 	@Override
 	public String toString() {
-		String s = "";
+		String s = ""; //$NON-NLS-1$
 		for(String cKey : storageMap.keySet()) {
-			s += cKey + " :: " + storageMap.get(cKey) + "\n";
+			s += cKey + " :: " + storageMap.get(cKey) + "\n"; //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		return s.trim();
 	}

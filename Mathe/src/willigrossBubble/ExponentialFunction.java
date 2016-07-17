@@ -27,20 +27,20 @@ public class ExponentialFunction extends Function {
 		
 		if (!p.equals(q)) {
 			if (Utility.arePointsOnHorzontalLine(p, q))
-				throw new InvalidPointConfigurationException("Invalid point configuration: same y coordinates", "Exponential functions can never be perfectly horizontal!"); //"Invalid point configuration: Points have the same y coordinate, exponential functions can never be perfectly horizontal!"
+				throw new InvalidPointConfigurationException(Strings.getString("ExponentialFunction.IPCE_sameYValues_message"), Strings.getString("ExponentialFunction.IPCE_sameYValues_tooltip")); //"Invalid point configuration: Points have the same y coordinate, exponential functions can never be perfectly horizontal!" //$NON-NLS-1$ //$NON-NLS-2$
 			if (Utility.arePointsOnVerticalLine(p, q))
-				throw new InvalidPointConfigurationException("Invalid point configuration: same x coordinates", "Exponential functions can never be perfectly vertical!"); //"Invalid point configuration: Points have the same x coordinate, exponential functions can never be perfectly vertical!"
+				throw new InvalidPointConfigurationException(Strings.getString("ExponentialFunction.IPCE_sameXValues_message"), Strings.getString("ExponentialFunction.IPCE_sameXValues_tooltip")); //"Invalid point configuration: Points have the same x coordinate, exponential functions can never be perfectly vertical!" //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		
 		if ( 	((p.getQuadrant() == 1 || p.getQuadrant() == 2) && (q.getQuadrant() == 3 || q.getQuadrant() == 4)) || 	// p above x and q below
 				((q.getQuadrant() == 1 || q.getQuadrant() == 2) && (p.getQuadrant() == 3 || p.getQuadrant() == 4)) )	// q above x and p below
-			throw new InvalidPointConfigurationException("Invalid point configuration: points in invalid quadrants", "Exponential functions can't have positive AND negative values!");
+			throw new InvalidPointConfigurationException(Strings.getString("ExponentialFunction.IPCE_invalidQuadrants_message"), Strings.getString("ExponentialFunction.IPCE_invalidQuadrants_tooltip")); //$NON-NLS-1$ //$NON-NLS-2$
 		
 		if (p.getQuadrant() == 6 || q.getQuadrant() == 6)
-			throw new InvalidPointConfigurationException("Invalid point configuration: points can't be on x-axis", "exponential functions never reach the x-axis");
+			throw new InvalidPointConfigurationException(Strings.getString("ExponentialFunction.IPCE_x-axis_message"), Strings.getString("ExponentialFunction.IPCE_x-axis_tooltip")); //$NON-NLS-1$ //$NON-NLS-2$
 		
-		String expression = "";
-		String expressionRounded = "";
+		String expression = ""; //$NON-NLS-1$
+		String expressionRounded = ""; //$NON-NLS-1$
 		
 		double a, b;
 		
@@ -48,11 +48,11 @@ public class ExponentialFunction extends Function {
 			a = Math.pow(p.getY(), 1 / p.getX());
 			
 			if (a - (int) a == 0) {
-				expression += (int) a + "^x";
-				expressionRounded += (int) a + "^x";
+				expression += (int) a + "^x"; //$NON-NLS-1$
+				expressionRounded += (int) a + "^x"; //$NON-NLS-1$
 			} else {
-				expression += a + "^x";
-				expression += Utility.roundDouble(a, 3) + "^x";
+				expression += a + "^x"; //$NON-NLS-1$
+				expression += Utility.roundDouble(a, 3) + "^x"; //$NON-NLS-1$
 			}
 			
 			return new ExponentialFunction(expression, expressionRounded);
@@ -64,24 +64,24 @@ public class ExponentialFunction extends Function {
 		
 
 		if ( a == 0 || b == 0) {
-			expression = "0";
-			expressionRounded = "0";
+			expression = "0"; //$NON-NLS-1$
+			expressionRounded = "0"; //$NON-NLS-1$
 		} else {
 
 			if (b - (int) b == 0) {
-				expression += (b != 1.0) ? (int) b + " * " : ""; 
-				expressionRounded += (b != 1.0) ? (int) b + " * " : ""; 
+				expression += (b != 1.0) ? (int) b + " * " : "";  //$NON-NLS-1$ //$NON-NLS-2$
+				expressionRounded += (b != 1.0) ? (int) b + " * " : "";  //$NON-NLS-1$ //$NON-NLS-2$
 			} else {
-				expression += (b != 1.0) ? b + " * " : "";
-				expressionRounded += (b != 1.0) ? Utility.roundDouble(b, 3) + " * " : "";
+				expression += (b != 1.0) ? b + " * " : ""; //$NON-NLS-1$ //$NON-NLS-2$
+				expressionRounded += (b != 1.0) ? Utility.roundDouble(b, 3) + " * " : ""; //$NON-NLS-1$ //$NON-NLS-2$
 			}
 				
 			if (a - (int) a == 0) {
-				expression += (int) a + "^x";
-				expressionRounded += (int) a + "^x";
+				expression += (int) a + "^x"; //$NON-NLS-1$
+				expressionRounded += (int) a + "^x"; //$NON-NLS-1$
 			} else {
-				expression += a + "^x";
-				expressionRounded += Utility.roundDouble(a, 3) + "^x";
+				expression += a + "^x"; //$NON-NLS-1$
+				expressionRounded += Utility.roundDouble(a, 3) + "^x"; //$NON-NLS-1$
 			}
 			
 		}

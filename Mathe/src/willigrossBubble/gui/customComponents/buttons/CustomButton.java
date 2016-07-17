@@ -21,7 +21,7 @@ public class CustomButton extends JButton {
 	
 	/**Creates a custom button with the text "Button"*/
 	public CustomButton() {
-		this("Button");
+		this("Button"); //$NON-NLS-1$
 	}
 
 }

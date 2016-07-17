@@ -9,6 +9,7 @@ import javax.swing.WindowConstants;
 
 import willigrossBubble.Function;
 import willigrossBubble.MainLogic;
+import willigrossBubble.Strings;
 import willigrossBubble.gui.customComponents.panels.CenterPanel;
 import willigrossBubble.gui.customComponents.panels.PanelCreateFunction;
 import willigrossBubble.gui.customComponents.panels.PanelFunctionActionsMenu;
@@ -23,10 +24,10 @@ public class FrameMain extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	/**Global font*/
-	private static Font globalFont = new Font("Dialog", Font.PLAIN, 15);
+	private static Font globalFont = new Font(Strings.getString("FrameMain.globalFont"), Font.PLAIN, 15); //$NON-NLS-1$
 	
 	/**Global font bold*/
-	private static Font globalFont_Bold = new Font("Dialog", Font.BOLD, 15);
+	private static Font globalFont_Bold = new Font(Strings.getString("FrameMain.globalFont_Bold"), Font.BOLD, 15); //$NON-NLS-1$
 	
 	/**Instance of FrameMain that is set on program start*/
 	private static FrameMain instance; //TODO Can be final?
@@ -50,7 +51,7 @@ public class FrameMain extends JFrame {
 	/**Constructor of FrameMain that sets properties and creates navigation and main panel*/
 	public FrameMain() {
 		
-		setTitle("Mathe");
+		setTitle(Strings.getString("FrameMain.title")); //$NON-NLS-1$
 		setSize(600, 600);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

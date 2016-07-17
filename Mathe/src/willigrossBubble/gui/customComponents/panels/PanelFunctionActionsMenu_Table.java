@@ -17,6 +17,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import willigrossBubble.Function;
+import willigrossBubble.Strings;
 import willigrossBubble.Utility;
 import willigrossBubble.Validations;
 import willigrossBubble.gui.FocusAdapter_SelectAll;
@@ -43,42 +44,42 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 		FocusAdapter_SelectAll focusAdapter_SelectAll = new FocusAdapter_SelectAll();
 		KeyListeneR keyListener = new KeyListeneR();
 		
-		heading = new JLabel("Calculate a value table", SwingConstants.CENTER);
+		heading = new JLabel(Strings.getString("PanelFunctionActionsMenu_Table.label_heading"), SwingConstants.CENTER); //$NON-NLS-1$
 		heading.setFont(FrameMain.getGlobalFont());
 		heading.setBounds(100, 0, 400, 30);
 		add(heading);
 		
-		startLabel = new JLabel("Start:", SwingConstants.RIGHT);
+		startLabel = new JLabel(Strings.getString("PanelFunctionActionsMenu_Table.label_start"), SwingConstants.RIGHT); //$NON-NLS-1$
 		startLabel.setBounds(50, 40, 45, 30);
 		add(startLabel);
 		
-		endLabel = new JLabel("End:", SwingConstants.RIGHT);
+		endLabel = new JLabel(Strings.getString("PanelFunctionActionsMenu_Table.label_end"), SwingConstants.RIGHT); //$NON-NLS-1$
 		endLabel.setBounds(200, 40, 45, 30);
 		add(endLabel);
 		
-		stepLabel = new JLabel("Step:", SwingConstants.RIGHT);
+		stepLabel = new JLabel(Strings.getString("PanelFunctionActionsMenu_Table.label_step"), SwingConstants.RIGHT); //$NON-NLS-1$
 		stepLabel.setBounds(350, 40, 45, 30);
 		add(stepLabel);
 		
-		start = new JTextField("start value");
+		start = new JTextField(Strings.getString("PanelFunctionActionsMenu_Table.textField_start")); //$NON-NLS-1$
 		start.setBounds(100, 40, 100, 30);
 		start.addFocusListener(focusAdapter_SelectAll);
 		start.addKeyListener(keyListener);
 		add(start);
 		
-		end = new JTextField("end value");
+		end = new JTextField(Strings.getString("PanelFunctionActionsMenu_Table.textField_end")); //$NON-NLS-1$
 		end.setBounds(250, 40, 100, 30);
 		end.addFocusListener(focusAdapter_SelectAll);
 		end.addKeyListener(keyListener);
 		add(end);
 		
-		step = new JTextField("step");
+		step = new JTextField(Strings.getString("PanelFunctionActionsMenu_Table.textField_step")); //$NON-NLS-1$
 		step.setBounds(400, 40, 100, 30);
 		step.addFocusListener(focusAdapter_SelectAll);
 		step.addKeyListener(keyListener);
 		add(step);
 		
-		resultLabel = new JLabel("Result:");
+		resultLabel = new JLabel(Strings.getString("PanelFunctionActionsMenu_Table.label_result")); //$NON-NLS-1$
 		resultLabel.setBounds(50, 90, 45, 30);
 		add(resultLabel);
 		
@@ -102,11 +103,11 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 	}
 	
 	private boolean validateStart() {
-		String errorStart = "Enter a number for 'start'!";
-		String 	valueWarnStart 	= "Enter a value between " + MIN_VALUE + " and " + MAX_VALUE + " for 'start'!";
+		String errorStart = Strings.getString("PanelFunctionActionsMenu_Table.error_start_enterNumber"); //$NON-NLS-1$
+		String 	valueWarnStart 	= Strings.getString("PanelFunctionActionsMenu_Table.error_enterInterval_valueBetween") + MIN_VALUE + Strings.getString("PanelFunctionActionsMenu_Table.error_enterInterval_and") + MAX_VALUE + Strings.getString("PanelFunctionActionsMenu_Table.error_enterInterval_forStart"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		boolean startValidationOne = false, startValidationTwo = false;
 		
-		if (start.getText().equals("start value"))
+		if (start.getText().equals(Strings.getString("PanelFunctionActionsMenu_Table.textField_start"))) //$NON-NLS-1$
 			return true;
 		
 		if (Validations.canConvertToNumber(start.getText())) {
@@ -132,11 +133,11 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 	}
 	
 	private boolean validateEnd() {
-		String errorEnd = "Enter a number for 'end'!";
-		String valueWarnEnd 	= "Enter a value between " + MIN_VALUE + " and " + MAX_VALUE + " for 'end'!";
+		String errorEnd = Strings.getString("PanelFunctionActionsMenu_Table.error_end_enterNumber"); //$NON-NLS-1$
+		String valueWarnEnd 	= Strings.getString("PanelFunctionActionsMenu_Table.error_enterInterval_valueBetween") + MIN_VALUE + Strings.getString("PanelFunctionActionsMenu_Table.error_enterInterval_and") + MAX_VALUE + Strings.getString("PanelFunctionActionsMenu_Table.error_enterInterval_forEnd"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		boolean endValidationOne = false, endValidationTwo = false;
 		
-		if (end.getText().equals("end value"))
+		if (end.getText().equals(Strings.getString("PanelFunctionActionsMenu_Table.textField_end"))) //$NON-NLS-1$
 			return true;
 		
 		if (Validations.canConvertToNumber(end.getText())) {
@@ -162,11 +163,11 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 	}
 	
 	private boolean validateStep() {
-		String errorStep = "Enter a number for 'step'!";
-		String valueWarnStep 	= "Step mustn't be 0!";
+		String errorStep = Strings.getString("PanelFunctionActionsMenu_Table.error_step_enterNumber"); //$NON-NLS-1$
+		String valueWarnStep 	= Strings.getString("PanelFunctionActionsMenu_Table.error_stepZero"); //$NON-NLS-1$
 		boolean stepValidationOne = false, stepValidationTwo = false;
 		
-		if (step.getText().equals("step"))
+		if (step.getText().equals(Strings.getString("PanelFunctionActionsMenu_Table.textField_step"))) //$NON-NLS-1$
 			return true;
 		
 		if (Validations.canConvertToNumber(step.getText())) {
@@ -200,28 +201,28 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 			boolean startValidation = validateStart(), endValidation = validateEnd(), stepValidation = validateStep();
 			
 			//validate start
-			if (!start.getText().equals("start value"))
+			if (!start.getText().equals(Strings.getString("PanelFunctionActionsMenu_Table.textField_start"))) //$NON-NLS-1$
 				if (startValidation)
 					start.setBorder(new LineBorder(Color.GRAY));
 				else
 					start.setBorder(new LineBorder(Color.RED, 2));
 			
 			//validate end
-			if (!end.getText().equals("end value"))
+			if (!end.getText().equals(Strings.getString("PanelFunctionActionsMenu_Table.textField_end"))) //$NON-NLS-1$
 				if (endValidation)
 					end.setBorder(new LineBorder(Color.GRAY));
 				else
 					end.setBorder(new LineBorder(Color.RED, 2));
 			
 			//validate step
-			if (!step.getText().equals("step"))
+			if (!step.getText().equals(Strings.getString("PanelFunctionActionsMenu_Table.textField_step"))) //$NON-NLS-1$
 				if (stepValidation)
 					step.setBorder(new LineBorder(Color.GRAY));
 				else
 					step.setBorder(new LineBorder(Color.RED, 2));
 			
 			//calculate and display value table
-			if (!start.getText().equals("start value") && !end.getText().equals("end value") && !step.getText().equals("step") && startValidation && endValidation && stepValidation) {
+			if (!start.getText().equals(Strings.getString("PanelFunctionActionsMenu_Table.textField_start")) && !end.getText().equals(Strings.getString("PanelFunctionActionsMenu_Table.textField_end")) && !step.getText().equals(Strings.getString("PanelFunctionActionsMenu_Table.textField_step")) && startValidation && endValidation && stepValidation) { //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				double 	startValue 	= Utility.readDoubleFromStringInput(start.getText()	), 
 						endValue 	= Utility.readDoubleFromStringInput(end.getText()	), 
 						stepValue 	= Utility.readDoubleFromStringInput(step.getText()	);

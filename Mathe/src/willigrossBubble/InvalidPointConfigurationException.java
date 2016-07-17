@@ -57,7 +57,7 @@ public class InvalidPointConfigurationException extends Exception {
 	 * @return true if exception has a tooltip set
 	 */
 	public boolean hasTooltip() {
-		if (tooltip != null && !tooltip.equals(""))
+		if (tooltip != null && !tooltip.equals("")) //$NON-NLS-1$
 			return true;
 		return false;
 	}

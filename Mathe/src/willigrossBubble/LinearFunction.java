@@ -23,11 +23,11 @@ public class LinearFunction extends Function {
 	 */
 	public static LinearFunction createThroughPoints(Point p, Point q) throws InvalidPointConfigurationException {
 		
-		String expression = "";
-		String expressionRounded = "";
+		String expression = ""; //$NON-NLS-1$
+		String expressionRounded = ""; //$NON-NLS-1$
 		
 		if (p.getX() == q.getX() && !p.equals(q)) {
-			throw new InvalidPointConfigurationException("Invalid point configuration: same x coordinates", "There is no function f(x) for a vertical straight line!");
+			throw new InvalidPointConfigurationException(Strings.getString("LinearFunction.IPCE_sameXValues_message"), Strings.getString("LinearFunction.IPCE_sameXValues_tooltip")); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		
 		
@@ -41,24 +41,24 @@ public class LinearFunction extends Function {
 		
 		if ( m != 0) {
 			if (m - (int) m == 0) {
-				expression += (m != 1.0) ? (int) m + " * x" : "x"; 
-				expressionRounded += (m != 1.0) ? (int) m + " * x" : "x"; 
+				expression += (m != 1.0) ? (int) m + " * x" : "x";  //$NON-NLS-1$ //$NON-NLS-2$
+				expressionRounded += (m != 1.0) ? (int) m + " * x" : "x";  //$NON-NLS-1$ //$NON-NLS-2$
 			} else {
-				expression += (m != 1.0) ? m + " * x" : "x";
-				expressionRounded += (m != 1.0) ? Utility.roundDouble(m, 3) + " * x" : "x";
+				expression += (m != 1.0) ? m + " * x" : "x"; //$NON-NLS-1$ //$NON-NLS-2$
+				expressionRounded += (m != 1.0) ? Utility.roundDouble(m, 3) + " * x" : "x"; //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		}
 		
-		if (!expression.equals("") && t != 0) {
-			expression += " + ";
-			expressionRounded += " + ";
+		if (!expression.equals("") && t != 0) { //$NON-NLS-1$
+			expression += " + "; //$NON-NLS-1$
+			expressionRounded += " + "; //$NON-NLS-1$
 		}
 		if (t - (int) t == 0) {
-			expression += (t != 0.0) ? (int) t : "";
-			expressionRounded += (t != 0.0) ? (int) t : "";
+			expression += (t != 0.0) ? (int) t : ""; //$NON-NLS-1$
+			expressionRounded += (t != 0.0) ? (int) t : ""; //$NON-NLS-1$
 		} else {
-			expression += (t != 0.0) ? t : "";
-			expressionRounded += (t != 0.0) ? Utility.roundDouble(t, 3) : "";
+			expression += (t != 0.0) ? t : ""; //$NON-NLS-1$
+			expressionRounded += (t != 0.0) ? Utility.roundDouble(t, 3) : ""; //$NON-NLS-1$
 		}
 		
 		return new LinearFunction(expression, expressionRounded);

@@ -20,12 +20,12 @@ public class Function implements Serializable {
 	/**
 	 * not rounded expression for internal use
 	 */
-	private String expression = "";
+	private String expression = ""; //$NON-NLS-1$
 	
 	/**
 	 * rounded expression for display 
 	 */
-	private String expressionRounded = "";
+	private String expressionRounded = ""; //$NON-NLS-1$
 	
 	private char name;
 	
@@ -35,7 +35,7 @@ public class Function implements Serializable {
 	}
 	
 	public Function(String expression, String expressionRounded) {
-		this.expression = expression.replaceAll("\\s", "");
+		this.expression = expression.replaceAll("\\s", ""); //$NON-NLS-1$ //$NON-NLS-2$
 		this.expressionRounded = expressionRounded;
 		name = FrameMain.getInstance().getMainLogic().getNextName();
 	}
@@ -87,7 +87,7 @@ public class Function implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return name + "(x) = " + expressionRounded;
+		return name + "(x) = " + expressionRounded; //$NON-NLS-1$
 	}
 	
 	
@@ -99,7 +99,7 @@ public class Function implements Serializable {
 	public double evaluate(double x) {
 		final DoubleEvaluator evaluator = new DoubleEvaluator();
 		final StaticVariableSet<Double> variables = new StaticVariableSet<>();
-		variables.set("x", x);
+		variables.set("x", x); //$NON-NLS-1$
 		return evaluator.evaluate(expression, variables);
 	}
 	
@@ -115,7 +115,7 @@ public class Function implements Serializable {
 		final StaticVariableSet<Double> variables = new StaticVariableSet<>();
 		double value;
 		
-		variables.set("x", p.getX());
+		variables.set("x", p.getX()); //$NON-NLS-1$
 		
 		value = evaluator.evaluate(expression, variables);
 		if (value > p.getY() - 0.00001 && value < p.getY() + 0.00001) { //tolerance of 0.00001
@@ -135,7 +135,7 @@ public class Function implements Serializable {
 	public String[] table(double start, double end, double step) {
 		
 		if (step == 0)
-			throw new IllegalArgumentException("Step may not be 0");
+			throw new IllegalArgumentException(Strings.getString("Function.IAE_stepZero")); //$NON-NLS-1$
 		
 		ArrayList<String> table = new ArrayList<>();
 		
@@ -145,15 +145,15 @@ public class Function implements Serializable {
 		if (start <= end) {	//increasing x
 			
 			for (double x = start; x <= end; x += step) {
-				variables.set("x", x);
-				table.add(name + "(" + x + ") = " + Utility.roundDouble(evaluator.evaluate(expression, variables), 3));
+				variables.set("x", x); //$NON-NLS-1$
+				table.add(name + "(" + x + ") = " + Utility.roundDouble(evaluator.evaluate(expression, variables), 3)); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 			
 		} else {//decreasing x
 			
 			for (double x = start; x >= end; x -= step) {
-				variables.set("x", x);
-				table.add(name + "(" + x + ") = " + Utility.roundDouble(evaluator.evaluate(expression, variables), 3));
+				variables.set("x", x); //$NON-NLS-1$
+				table.add(name + "(" + x + ") = " + Utility.roundDouble(evaluator.evaluate(expression, variables), 3)); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 			
 		}
@@ -169,10 +169,10 @@ public class Function implements Serializable {
 	public Function mirrorX() {
 		try {
 			Function copy = deepCopy();
-			if (copy.getExpression().startsWith("-(") && copy.getExpression().endsWith(")"))
+			if (copy.getExpression().startsWith("-(") && copy.getExpression().endsWith(")")) //$NON-NLS-1$ //$NON-NLS-2$
 				copy.setExpression(copy.getExpression().substring(2, copy.getExpression().length() - 1));
 			else {
-				copy.setExpression("-(" + copy.getExpression() + ")");
+				copy.setExpression("-(" + copy.getExpression() + ")"); //$NON-NLS-1$ //$NON-NLS-2$
 				copy.setName(FrameMain.getInstance().getMainLogic().getNextName());
 			}
 			return copy;
@@ -191,18 +191,18 @@ public class Function implements Serializable {
 		try {
 			Function copy = deepCopy();
 			boolean endsWithX = false;
-			if (copy.getExpression().endsWith("x"))
+			if (copy.getExpression().endsWith("x")) //$NON-NLS-1$
 				endsWithX = true;
 			
-			String[] splitX = copy.getExpression().split("x");
+			String[] splitX = copy.getExpression().split("x"); //$NON-NLS-1$
 			
 			copy.setExpression(splitX[0]);
 			
 			for (int i = 1; i < splitX.length; i++)
-				copy.setExpression(copy.getExpression() + "(-x)" + splitX[i]);
+				copy.setExpression(copy.getExpression() + "(-x)" + splitX[i]); //$NON-NLS-1$
 			
 			if (endsWithX)
-				copy.setExpression(copy.getExpression() + "(-x)");
+				copy.setExpression(copy.getExpression() + "(-x)"); //$NON-NLS-1$
 			
 			copy.setName(FrameMain.getInstance().getMainLogic().getNextName());
 			return copy;

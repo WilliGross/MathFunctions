@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import willigrossBubble.Strings;
 import willigrossBubble.gui.FrameMain;
 import willigrossBubble.gui.customComponents.buttons.CustomButtonMedium;
 
@@ -15,19 +16,19 @@ public class PanelMain extends CenterPanel {
 	
 	private static final long serialVersionUID = 1L;
 	private CustomButtonMedium b1_create, b2_load, b3_intersection, b4_close; 
-	private JLabel desc;
+	private JLabel heading;
 	
 	public PanelMain() {
 		
 		setLayout(null);
 		
 		
-		desc = new JLabel("What would you like to do?", SwingConstants.CENTER);
-		desc.setFont(FrameMain.getGlobalFont());
-		desc.setBounds((600-250)/2, 40, 250, 30);
-		add(desc);
+		heading = new JLabel(Strings.getString("PanelMain.label_heading"), SwingConstants.CENTER); //$NON-NLS-1$
+		heading.setFont(FrameMain.getGlobalFont());
+		heading.setBounds((600-250)/2, 40, 250, 30);
+		add(heading);
 
-		b1_create = new CustomButtonMedium("Create a function");
+		b1_create = new CustomButtonMedium(Strings.getString("PanelMain.button_create")); //$NON-NLS-1$
 		b1_create.setLocation(50, 150);
 		b1_create.addActionListener(new ActionListener() {
 
@@ -39,7 +40,7 @@ public class PanelMain extends CenterPanel {
 		});
 		add(b1_create);
 
-		b2_load = new CustomButtonMedium("Load a function");
+		b2_load = new CustomButtonMedium(Strings.getString("PanelMain.button_load")); //$NON-NLS-1$
 		b2_load.setLocation(350, 150);
 		b2_load.addActionListener(new ActionListener() {
 
@@ -51,7 +52,7 @@ public class PanelMain extends CenterPanel {
 		});
 		add(b2_load);
 		
-		b3_intersection = new CustomButtonMedium("Intersection of two functions");
+		b3_intersection = new CustomButtonMedium(Strings.getString("PanelMain.button_intersection")); //$NON-NLS-1$
 		b3_intersection.setLocation(50, 200);
 		b3_intersection.addActionListener(new ActionListener() {
 
@@ -63,11 +64,11 @@ public class PanelMain extends CenterPanel {
 		});
 		add(b3_intersection);
 		
-		b4_close = new CustomButtonMedium("Close");
+		b4_close = new CustomButtonMedium(Strings.getString("PanelMain.button_close")); //$NON-NLS-1$
 		b4_close.setLocation(350, 200);
 		b4_close.setBackground(Color.RED);
 		b4_close.setForeground(Color.BLACK);
-		b4_close.setFont(new Font("Calibri", Font.ITALIC, 15));
+		b4_close.setFont(new Font(Strings.getString("PanelMain.button_close_font"), Font.ITALIC, 15)); //$NON-NLS-1$
 		b4_close.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

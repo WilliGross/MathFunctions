@@ -15,7 +15,7 @@ public class Validations {
 		
 		try {
 			final StaticVariableSet<Double> variables = new StaticVariableSet<>();
-			variables.set("x", (double) 1);
+			variables.set("x", (double) 1); //$NON-NLS-1$
 			evaluator.evaluate(expression, variables);
 			return true;
 		} catch (@SuppressWarnings("unused") IllegalArgumentException e) {

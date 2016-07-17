@@ -16,6 +16,7 @@ import willigrossBubble.Function;
 import willigrossBubble.InvalidPointConfigurationException;
 import willigrossBubble.LinearFunction;
 import willigrossBubble.Point;
+import willigrossBubble.Strings;
 import willigrossBubble.Utility;
 import willigrossBubble.Validations;
 import willigrossBubble.gui.FocusAdapter_SelectAll;
@@ -45,52 +46,52 @@ public class PanelCreateFunction_ThroughTwoPoints extends RequestFocusForDefault
 		KeyAdapter keyListener = new KeyListeneR();
 		
 		if (type == FunctionType.EXPONENTIAL)
-			heading = new JLabel("Create exponential function", SwingConstants.CENTER);
+			heading = new JLabel(Strings.getString("PanelCreateFunction_ThroughTwoPoints.label_heading_exponential"), SwingConstants.CENTER); //$NON-NLS-1$
 		else if (type == FunctionType.LINEAR)
-			heading = new JLabel("Create linear function", SwingConstants.CENTER);
+			heading = new JLabel(Strings.getString("PanelCreateFunction_ThroughTwoPoints.label_heading_linear"), SwingConstants.CENTER); //$NON-NLS-1$
 		heading.setFont(FrameMain.getGlobalFont());
 		heading.setBounds(100, 0, 400, 30);
 		add(heading);
 		
 		
-		p1 = new JLabel("Point 1:", SwingConstants.RIGHT);
+		p1 = new JLabel(Strings.getString("PanelCreateFunction_ThroughTwoPoints.label_pointOne"), SwingConstants.RIGHT); //$NON-NLS-1$
 		p1.setBounds(40, 40, 50, 30);
 		add(p1);
 		
-		p1x = new JTextField("x-coordinate");
+		p1x = new JTextField(Strings.getString("PanelCreateFunction_ThroughTwoPoints.textField_pointOne_x")); //$NON-NLS-1$
 		p1x.setBounds(100, 40, 190, 30);
 		p1x.addFocusListener(focusAdapter_SelectAll);
 		p1x.addKeyListener(keyListener);
 		add(p1x);
 		
-		p1y = new JTextField("y-coordinate");
+		p1y = new JTextField(Strings.getString("PanelCreateFunction_ThroughTwoPoints.textField_pointOne_y")); //$NON-NLS-1$
 		p1y.setBounds(310, 40, 190, 30);
 		p1y.addFocusListener(focusAdapter_SelectAll);
 		p1y.addKeyListener(keyListener);
 		add(p1y);
 		
 		
-		p2 = new JLabel("Point 2:", SwingConstants.RIGHT);
+		p2 = new JLabel(Strings.getString("PanelCreateFunction_ThroughTwoPoints.label_pointTwo"), SwingConstants.RIGHT); //$NON-NLS-1$
 		p2.setBounds(40, 75, 50, 30);
 		add(p2);	
 		
-		p2x = new JTextField("x-coordinate");
+		p2x = new JTextField(Strings.getString("PanelCreateFunction_ThroughTwoPoints.textField_pointTwo_x")); //$NON-NLS-1$
 		p2x.setBounds(100, 75, 190, 30);
 		p2x.addFocusListener(focusAdapter_SelectAll);
 		p2x.addKeyListener(keyListener);
 		add(p2x);
 		
-		p2y = new JTextField("y-coordinate");
+		p2y = new JTextField(Strings.getString("PanelCreateFunction_ThroughTwoPoints.textField_pointTwo_y")); //$NON-NLS-1$
 		p2y.setBounds(310, 75, 190, 30);
 		p2y.addFocusListener(focusAdapter_SelectAll);
 		p2y.addKeyListener(keyListener);
 		add(p2y);
 		
-		result = new JLabel("", SwingConstants.CENTER);
+		result = new JLabel("", SwingConstants.CENTER); //$NON-NLS-1$
 		result.setBounds(100, 120, 400, 30);
 		add(result);
 		
-		go = new CustomButtonSmall("Go");
+		go = new CustomButtonSmall(Strings.getString("PanelCreateFunction_ThroughTwoPoints.button_go")); //$NON-NLS-1$
 		go.setLocation(250, 160);
 		go.setEnabled(false);
 		go.addActionListener(new ActionListener() {
@@ -128,7 +129,7 @@ public class PanelCreateFunction_ThroughTwoPoints extends RequestFocusForDefault
 			result.setForeground(Color.RED);
 			if (e instanceof InvalidPointConfigurationException && ((InvalidPointConfigurationException) e).hasTooltip())
 				result.setToolTipText(((InvalidPointConfigurationException) e).getTooltip());
-			throw new Exception("Error when calculating expression!");
+			throw new Exception(Strings.getString("PanelCreateFunction_ThroughTwoPoints.error_calculation")); //$NON-NLS-1$
 		}
 	}
 	
@@ -136,7 +137,7 @@ public class PanelCreateFunction_ThroughTwoPoints extends RequestFocusForDefault
 		@Override
 		public void keyReleased(KeyEvent e) {
 			
-			result.setText("");
+			result.setText(""); //$NON-NLS-1$
 			
 			JTextField source = (JTextField) e.getSource();
 			if (!Validations.canConvertToNumber(source.getText())) {

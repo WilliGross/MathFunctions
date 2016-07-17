@@ -12,6 +12,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import willigrossBubble.Function;
+import willigrossBubble.Strings;
 import willigrossBubble.Validations;
 import willigrossBubble.gui.FrameMain;
 import willigrossBubble.gui.customComponents.buttons.CustomButtonSmall;
@@ -30,12 +31,12 @@ public class PanelCreateFunction_TypeFunction extends RequestFocusForDefaultComp
 		
 		setLayout(null);
 		
-		heading = new JLabel("Type your function", SwingConstants.CENTER);
+		heading = new JLabel(Strings.getString("PanelCreateFunction_TypeFunction.label_heading"), SwingConstants.CENTER); //$NON-NLS-1$
 		heading.setBounds(100, 0, 400, 30);
 		heading.setFont(FrameMain.getGlobalFont());
 		add(heading);
 		
-		f = new JLabel("f(x) = ", SwingConstants.CENTER);
+		f = new JLabel("f(x) = ", SwingConstants.CENTER); //$NON-NLS-1$
 		f.setBounds(50, 40, 50, 30);
 		add(f);
 		
@@ -59,7 +60,7 @@ public class PanelCreateFunction_TypeFunction extends RequestFocusForDefaultComp
 		});
 		add(function);
 		
-		go = new CustomButtonSmall("Go");
+		go = new CustomButtonSmall(Strings.getString("PanelCreateFunction_TypeFunction.button_go")); //$NON-NLS-1$
 		go.setLocation(250, 85);
 		go.setEnabled(false);
 		go.addActionListener(new ActionListener() {

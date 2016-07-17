@@ -13,6 +13,6 @@ public class CustomButtonLarge extends CustomButton {
 	
 	/**Implementation of super constructor with button size 400 x 30 (large)*/
 	public CustomButtonLarge() {
-		this("");
+		this(""); //$NON-NLS-1$
 	}
 }

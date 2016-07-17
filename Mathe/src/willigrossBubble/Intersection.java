@@ -125,7 +125,7 @@ public class Intersection extends Point {
 	/** string representation of the intersection point */
 	@Override
 	public String toString() {
-		return "I" + super.toString();
+		return Strings.getString("Intersection.toString_prefix") + super.toString(); //$NON-NLS-1$
 	}
 
 }

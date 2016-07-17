@@ -20,7 +20,7 @@ public class MainLogic {
 	private HashBiMap<Character, Function> functions = HashBiMap.create(names.length);
 	
 	/** The file where functions are saved to make them survive a program restart */
-	private File functionsDat = new File(MainLogic.class.getProtectionDomain().getCodeSource().getLocation().getFile().substring(0, MainLogic.class.getProtectionDomain().getCodeSource().getLocation().getFile().lastIndexOf('/') + 1) + "Functions.dat");
+	private File functionsDat = new File(MainLogic.class.getProtectionDomain().getCodeSource().getLocation().getFile().substring(0, MainLogic.class.getProtectionDomain().getCodeSource().getLocation().getFile().lastIndexOf('/') + 1) + Strings.getString("MainLogic.functionStorageFileName")); //$NON-NLS-1$
 	
 	/**
 	 * Constructor of MainLogic that loads functions from file on call
@@ -94,8 +94,8 @@ public class MainLogic {
 		try {
 			FileStorage fileStorage = new FileStorage(functionsDat);
 			for (int i = 0; i < names.length; i++) {
-				if (! fileStorage.hasKey("" + names[i])) {
-					fileStorage.store("" + names[i], function);
+				if (! fileStorage.hasKey("" + names[i])) { //$NON-NLS-1$
+					fileStorage.store("" + names[i], function); //$NON-NLS-1$
 					break;
 				}
 			}
@@ -125,13 +125,13 @@ public class MainLogic {
 		try {
 			FileStorage fileStorage = new FileStorage(functionsDat);
 			for (int i = 0; i < names.length; i++) {
-				function = (Function) fileStorage.get("" + names[i]);
+				function = (Function) fileStorage.get("" + names[i]); //$NON-NLS-1$
 				if (function != null)
 					functions.put(getNextName(), function);
 			}
 			
 		} catch (@SuppressWarnings("unused") StreamCorruptedException | EOFException e) {
-			JOptionPane.showMessageDialog(FrameMain.getInstance(), "Functions.dat corrupted!\nDeleting it!", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(FrameMain.getInstance(), Strings.getString("MainLogic.functionStorageFileCorrupted_message"), Strings.getString("MainLogic.functionStorageFileCorrupted_title"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
 			functionsDat.delete();
 		} catch (IllegalArgumentException | IOException e) {
 			System.err.println(e);
