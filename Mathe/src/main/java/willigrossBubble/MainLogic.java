@@ -4,6 +4,8 @@ import java.io.EOFException;
 import java.io.File;
 import java.io.IOException;
 import java.io.StreamCorruptedException;
+import java.util.ArrayList;
+import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
 
@@ -85,6 +87,19 @@ public class MainLogic {
 	public Function getLatestFunction() {
 		return functions.get(names[functions.size() - 1]);
 	}
+	
+	
+	/**
+	 * Get all functions
+	 * @return all functions as an entry set
+	 */
+	public Function[] getAllFunctions() {
+		ArrayList<Function> functionsArrayList = new ArrayList<>();
+		for (Entry<Character, Function> entry : functions.entrySet())
+			functionsArrayList.add(entry.getValue());
+		return functionsArrayList.toArray(new Function[functionsArrayList.size()]);
+	}
+	
 	
 	/**
 	 * Save a function in 'Functions.dat'
