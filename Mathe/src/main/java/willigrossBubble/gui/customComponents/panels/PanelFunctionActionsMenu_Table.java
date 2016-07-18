@@ -34,8 +34,14 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 	private JList<String> result;
 	private JScrollPane resultScrollPane;
 	private Function function;
+	private String valueWarn;
+	
 	
 	public PanelFunctionActionsMenu_Table(Function f) {
+		
+		valueWarn 	= Strings.getString("PanelFunctionActionsMenu_Table.error_enterInterval");
+		valueWarn 	= valueWarn.replace("$MIN_VALUE$", String.valueOf(MIN_VALUE));
+		valueWarn 	= valueWarn.replace("$MAX_VALUE$", String.valueOf(MAX_VALUE));
 		
 		function = f;
 		
@@ -104,7 +110,8 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 	
 	private boolean validateStart() {
 		String errorStart = Strings.getString("PanelFunctionActionsMenu_Table.error_start_enterNumber"); //$NON-NLS-1$
-		String 	valueWarnStart 	= Strings.getString("PanelFunctionActionsMenu_Table.error_enterInterval_valueBetween") + MIN_VALUE + Strings.getString("PanelFunctionActionsMenu_Table.error_enterInterval_and") + MAX_VALUE + Strings.getString("PanelFunctionActionsMenu_Table.error_enterInterval_forStart"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		String valueWarnStart = valueWarn.replace("$FIELD$", "start");
+//		String 	valueWarnStart 	= Strings.getString("PanelFunctionActionsMenu_Table.error_enterInterval_valueBetween") + MIN_VALUE + Strings.getString("PanelFunctionActionsMenu_Table.error_enterInterval_and") + MAX_VALUE + Strings.getString("PanelFunctionActionsMenu_Table.error_enterInterval_forStart"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		boolean startValidationOne = false, startValidationTwo = false;
 		
 		if (start.getText().equals(Strings.getString("PanelFunctionActionsMenu_Table.textField_start"))) //$NON-NLS-1$
@@ -134,7 +141,7 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 	
 	private boolean validateEnd() {
 		String errorEnd = Strings.getString("PanelFunctionActionsMenu_Table.error_end_enterNumber"); //$NON-NLS-1$
-		String valueWarnEnd 	= Strings.getString("PanelFunctionActionsMenu_Table.error_enterInterval_valueBetween") + MIN_VALUE + Strings.getString("PanelFunctionActionsMenu_Table.error_enterInterval_and") + MAX_VALUE + Strings.getString("PanelFunctionActionsMenu_Table.error_enterInterval_forEnd"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		String valueWarnEnd = valueWarn.replace("$FIELD$", "end");
 		boolean endValidationOne = false, endValidationTwo = false;
 		
 		if (end.getText().equals(Strings.getString("PanelFunctionActionsMenu_Table.textField_end"))) //$NON-NLS-1$
@@ -164,14 +171,16 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 	
 	private boolean validateStep() {
 		String errorStep = Strings.getString("PanelFunctionActionsMenu_Table.error_step_enterNumber"); //$NON-NLS-1$
-		String valueWarnStep 	= Strings.getString("PanelFunctionActionsMenu_Table.error_stepZero"); //$NON-NLS-1$
+		String valueWarnStep = valueWarn.replace("$FIELD$", "step");
 		boolean stepValidationOne = false, stepValidationTwo = false;
 		
 		if (step.getText().equals(Strings.getString("PanelFunctionActionsMenu_Table.textField_step"))) //$NON-NLS-1$
 			return true;
 		
 		if (Validations.canConvertToNumber(step.getText())) {
-			if (Utility.readDoubleFromStringInput(step.getText()) == 0) {
+			if (Utility.readDoubleFromStringInput(step.getText()) == 0 || Utility.readDoubleFromStringInput(step.getText()) > MAX_VALUE || Utility.readDoubleFromStringInput(step.getText()) < MIN_VALUE) {
+				if (Utility.readDoubleFromStringInput(step.getText()) == 0)
+					valueWarnStep = Strings.getString("PanelFunctionActionsMenu_Table.error_stepZero");
 				if (!listModel.contains(valueWarnStep))
 					listModel.addElement(valueWarnStep);
 				stepValidationTwo = false;
