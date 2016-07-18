@@ -34,14 +34,16 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 	private JList<String> result;
 	private JScrollPane resultScrollPane;
 	private Function function;
-	private String valueWarn;
+	private String errorNumber, valueWarn;
 	
 	
 	public PanelFunctionActionsMenu_Table(Function f) {
 		
-		valueWarn 	= Strings.getString("PanelFunctionActionsMenu_Table.error_enterInterval");
-		valueWarn 	= valueWarn.replace("$MIN_VALUE$", String.valueOf(MIN_VALUE));
-		valueWarn 	= valueWarn.replace("$MAX_VALUE$", String.valueOf(MAX_VALUE));
+		errorNumber = Strings.getString("PanelFunctionActionsMenu_Table.errorNumber"); //$NON-NLS-1$
+		
+		valueWarn 	= Strings.getString("PanelFunctionActionsMenu_Table.error_enterInterval"); //$NON-NLS-1$
+		valueWarn 	= valueWarn.replace("$MIN_VALUE$", String.valueOf(MIN_VALUE)); //$NON-NLS-1$
+		valueWarn 	= valueWarn.replace("$MAX_VALUE$", String.valueOf(MAX_VALUE)); //$NON-NLS-1$
 		
 		function = f;
 		
@@ -109,9 +111,8 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 	}
 	
 	private boolean validateStart() {
-		String errorStart = Strings.getString("PanelFunctionActionsMenu_Table.error_start_enterNumber"); //$NON-NLS-1$
-		String valueWarnStart = valueWarn.replace("$FIELD$", "start");
-//		String 	valueWarnStart 	= Strings.getString("PanelFunctionActionsMenu_Table.error_enterInterval_valueBetween") + MIN_VALUE + Strings.getString("PanelFunctionActionsMenu_Table.error_enterInterval_and") + MAX_VALUE + Strings.getString("PanelFunctionActionsMenu_Table.error_enterInterval_forStart"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		String errorNumberStart = errorNumber.replace("$FIELD$", "start"); //$NON-NLS-1$ //$NON-NLS-2$
+		String valueWarnStart = valueWarn.replace("$FIELD$", "start"); //$NON-NLS-1$ //$NON-NLS-2$
 		boolean startValidationOne = false, startValidationTwo = false;
 		
 		if (start.getText().equals(Strings.getString("PanelFunctionActionsMenu_Table.textField_start"))) //$NON-NLS-1$
@@ -126,11 +127,11 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 				listModel.removeElement(valueWarnStart);
 				startValidationTwo = true;
 			}
-			listModel.removeElement(errorStart);
+			listModel.removeElement(errorNumberStart);
 			startValidationOne = true;
 		} else {
-			if (!listModel.contains(errorStart))
-				listModel.addElement(errorStart);
+			if (!listModel.contains(errorNumberStart))
+				listModel.addElement(errorNumberStart);
 			startValidationOne = false;
 		}
 		
@@ -140,8 +141,8 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 	}
 	
 	private boolean validateEnd() {
-		String errorEnd = Strings.getString("PanelFunctionActionsMenu_Table.error_end_enterNumber"); //$NON-NLS-1$
-		String valueWarnEnd = valueWarn.replace("$FIELD$", "end");
+		String errorNumberEnd = errorNumber.replace("$FIELD$", "end"); //$NON-NLS-1$ //$NON-NLS-2$
+		String valueWarnEnd = valueWarn.replace("$FIELD$", "end"); //$NON-NLS-1$ //$NON-NLS-2$
 		boolean endValidationOne = false, endValidationTwo = false;
 		
 		if (end.getText().equals(Strings.getString("PanelFunctionActionsMenu_Table.textField_end"))) //$NON-NLS-1$
@@ -156,11 +157,11 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 				listModel.removeElement(valueWarnEnd);
 				endValidationTwo = true;
 			}
-			listModel.removeElement(errorEnd);
+			listModel.removeElement(errorNumberEnd);
 			endValidationOne = true;
 		} else {
-			if (!listModel.contains(errorEnd))
-				listModel.addElement(errorEnd);
+			if (!listModel.contains(errorNumberEnd))
+				listModel.addElement(errorNumberEnd);
 			endValidationOne = false;
 		}
 		
@@ -170,8 +171,8 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 	}
 	
 	private boolean validateStep() {
-		String errorStep = Strings.getString("PanelFunctionActionsMenu_Table.error_step_enterNumber"); //$NON-NLS-1$
-		String valueWarnStep = valueWarn.replace("$FIELD$", "step");
+		String errorNumberStep = errorNumber.replace("$FIELD$", "step"); //$NON-NLS-1$ //$NON-NLS-2$
+		String valueWarnStep = valueWarn.replace("$FIELD$", "step"); //$NON-NLS-1$ //$NON-NLS-2$
 		boolean stepValidationOne = false, stepValidationTwo = false;
 		
 		if (step.getText().equals(Strings.getString("PanelFunctionActionsMenu_Table.textField_step"))) //$NON-NLS-1$
@@ -180,7 +181,7 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 		if (Validations.canConvertToNumber(step.getText())) {
 			if (Utility.readDoubleFromStringInput(step.getText()) == 0 || Utility.readDoubleFromStringInput(step.getText()) > MAX_VALUE || Utility.readDoubleFromStringInput(step.getText()) < MIN_VALUE) {
 				if (Utility.readDoubleFromStringInput(step.getText()) == 0)
-					valueWarnStep = Strings.getString("PanelFunctionActionsMenu_Table.error_stepZero");
+					valueWarnStep = Strings.getString("PanelFunctionActionsMenu_Table.error_stepZero"); //$NON-NLS-1$
 				if (!listModel.contains(valueWarnStep))
 					listModel.addElement(valueWarnStep);
 				stepValidationTwo = false;
@@ -188,11 +189,11 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 				listModel.removeElement(valueWarnStep);
 				stepValidationTwo = true;
 			}
-			listModel.removeElement(errorStep);
+			listModel.removeElement(errorNumberStep);
 			stepValidationOne = true;
 		} else {
-			if (!listModel.contains(errorStep))
-				listModel.addElement(errorStep);
+			if (!listModel.contains(errorNumberStep))
+				listModel.addElement(errorNumberStep);
 			stepValidationOne = false;
 		}
 		
