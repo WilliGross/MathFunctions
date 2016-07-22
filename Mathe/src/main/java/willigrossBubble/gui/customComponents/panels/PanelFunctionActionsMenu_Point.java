@@ -33,14 +33,14 @@ public class PanelFunctionActionsMenu_Point extends RequestFocusForDefaultCompon
 		
 		FocusAdapter_SelectAll focusAdapter_SelectAll = new FocusAdapter_SelectAll();
 		
-		heading = new JLabel(Strings.getString("PanelFunctionActionsMenu_Point.label_heading"), SwingConstants.CENTER); //$NON-NLS-1$
+		heading = new JLabel(Strings.getStringAsHTML("PanelFunctionActionsMenu_Point.label_heading"), SwingConstants.CENTER); //$NON-NLS-1$
 		heading.setFont(FrameMain.getGlobalFont());
 		heading.setBounds(100, 0, 400, 30);
 		add(heading);
 		
 		KeyAdapter keyListener = new KeyListeneR();
 		
-		p1 = new JLabel(Strings.getString("PanelFunctionActionsMenu_Point.label_point"), SwingConstants.RIGHT); //$NON-NLS-1$
+		p1 = new JLabel(Strings.getStringAsHTML("PanelFunctionActionsMenu_Point.label_point"), SwingConstants.RIGHT); //$NON-NLS-1$
 		p1.setBounds(40, 40, 50, 30);
 		add(p1);
 		
@@ -81,9 +81,9 @@ public class PanelFunctionActionsMenu_Point extends RequestFocusForDefaultCompon
 					Point p = new Point(px, py);
 					
 					if (function.testPointOnGraph(p))
-						result.setText(Strings.getString("PanelFunctionActionsMenu_Point.label_result_onGraph")); //$NON-NLS-1$
+						result.setText(Strings.getStringAsHTML("PanelFunctionActionsMenu_Point.label_result_onGraph")); //$NON-NLS-1$
 					else
-						result.setText(Strings.getString("PanelFunctionActionsMenu_Point.label_result_notOnGraph")); //$NON-NLS-1$
+						result.setText(Strings.getStringAsHTML("PanelFunctionActionsMenu_Point.label_result_notOnGraph")); //$NON-NLS-1$
 					
 				}
 			}

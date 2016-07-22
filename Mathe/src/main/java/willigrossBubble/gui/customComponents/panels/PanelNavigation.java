@@ -22,7 +22,7 @@ public class PanelNavigation extends JPanel {
 		setPreferredSize(new Dimension(600, 50));
 		Color c = new Color(0, 111, 174);
 		
-		mainMenu = new CustomButton(Strings.getString("PanelNavigation.button_mainMenu")); //$NON-NLS-1$
+		mainMenu = new CustomButton(Strings.getStringAsHTML("PanelNavigation.button_mainMenu")); //$NON-NLS-1$
 		mainMenu.setBackground(c);
 		mainMenu.setForeground(Color.WHITE);
 		mainMenu.setBounds(10, 10, 145, 30);
@@ -35,7 +35,7 @@ public class PanelNavigation extends JPanel {
 		});
 		add(mainMenu);
 		
-		back = new CustomButton(Strings.getString("PanelNavigation.button_back")); //$NON-NLS-1$
+		back = new CustomButton(Strings.getStringAsHTML("PanelNavigation.button_back")); //$NON-NLS-1$
 		back.setBackground(c);
 		back.setForeground(Color.WHITE);
 		back.setBounds(430, 10, 145, 30);

@@ -146,10 +146,11 @@ public class MainLogic {
 			}
 			
 		} catch (@SuppressWarnings("unused") StreamCorruptedException | EOFException e) {
-			JOptionPane.showMessageDialog(FrameMain.getInstance(), Strings.getString("MainLogic.functionStorageFileCorrupted_message"), Strings.getString("MainLogic.functionStorageFileCorrupted_title"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
+			JOptionPane.showMessageDialog(FrameMain.getInstance(), Strings.getStringAsHTML("MainLogic.functionStorageFileCorrupted_message"), Strings.getStringAsHTML("MainLogic.functionStorageFileCorrupted_title"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
 			functionsDat.delete();
 		} catch (IllegalArgumentException | IOException e) {
-			System.err.println(e);
+//			System.err.println(e);
+			e.printStackTrace();
 		}
 	
 	}

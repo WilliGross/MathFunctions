@@ -9,7 +9,12 @@ public class Strings {
 	
 	private static final ResourceBundle	RESOURCE_BUNDLE	= ResourceBundle.getBundle(BUNDLE_NAME);
 	
-	private Strings() {
+	public static String getStringAsHTML(String key) {
+		try {
+			return Utility.convertToHTML(RESOURCE_BUNDLE.getString(key));
+		} catch (@SuppressWarnings("unused") MissingResourceException e) {
+			return '!' + key + '!';
+		}
 	}
 	
 	public static String getString(String key) {

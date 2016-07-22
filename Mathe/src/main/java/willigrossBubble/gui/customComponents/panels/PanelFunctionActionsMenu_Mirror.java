@@ -24,12 +24,12 @@ public class PanelFunctionActionsMenu_Mirror extends RequestFocusForDefaultCompo
 		functionBase = f;
 		setLayout(null);
 		
-		heading = new JLabel(Strings.getString("PanelFunctionActionsMenu_Mirror.label_heading"), SwingConstants.CENTER); //$NON-NLS-1$
+		heading = new JLabel(Strings.getStringAsHTML("PanelFunctionActionsMenu_Mirror.label_heading"), SwingConstants.CENTER); //$NON-NLS-1$
 		heading.setFont(FrameMain.getGlobalFont());
 		heading.setBounds(100, 0, 400, 30);
 		add(heading);
 		
-		x = new CustomButtonSmall(Strings.getString("PanelFunctionActionsMenu_Mirror.button_x-axis")); //$NON-NLS-1$
+		x = new CustomButtonSmall(Strings.getStringAsHTML("PanelFunctionActionsMenu_Mirror.button_x-axis")); //$NON-NLS-1$
 		x.setLocation(100, 40);
 		x.addActionListener(new ActionListener() {
 			
@@ -42,7 +42,7 @@ public class PanelFunctionActionsMenu_Mirror extends RequestFocusForDefaultCompo
 		});
 		add(x);
 		
-		y = new CustomButtonSmall(Strings.getString("PanelFunctionActionsMenu_Mirror.button_y-axis")); //$NON-NLS-1$
+		y = new CustomButtonSmall(Strings.getStringAsHTML("PanelFunctionActionsMenu_Mirror.button_y-axis")); //$NON-NLS-1$
 		y.setLocation(250, 40);
 		y.addActionListener(new ActionListener() {
 			
@@ -55,7 +55,7 @@ public class PanelFunctionActionsMenu_Mirror extends RequestFocusForDefaultCompo
 		});
 		add(y);
 		
-		origin = new CustomButtonSmall(Strings.getString("PanelFunctionActionsMenu_Mirror.button_origin")); //$NON-NLS-1$
+		origin = new CustomButtonSmall(Strings.getStringAsHTML("PanelFunctionActionsMenu_Mirror.button_origin")); //$NON-NLS-1$
 		origin.setLocation(400, 40);
 		origin.addActionListener(new ActionListener() {
 			
@@ -72,7 +72,7 @@ public class PanelFunctionActionsMenu_Mirror extends RequestFocusForDefaultCompo
 		result.setBounds(100, 90, 400, 30);
 		add(result);
 		
-		go = new CustomButtonSmall(Strings.getString("PanelFunctionActionsMenu_Mirror.button_go")); //$NON-NLS-1$
+		go = new CustomButtonSmall(Strings.getStringAsHTML("PanelFunctionActionsMenu_Mirror.button_go")); //$NON-NLS-1$
 		go.setLocation(250, 130);
 		go.setEnabled(false);
 		go.addActionListener(new ActionListener() {

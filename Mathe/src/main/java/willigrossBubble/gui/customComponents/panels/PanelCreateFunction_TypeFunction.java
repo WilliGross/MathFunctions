@@ -31,7 +31,7 @@ public class PanelCreateFunction_TypeFunction extends RequestFocusForDefaultComp
 		
 		setLayout(null);
 		
-		heading = new JLabel(Strings.getString("PanelCreateFunction_TypeFunction.label_heading"), SwingConstants.CENTER); //$NON-NLS-1$
+		heading = new JLabel(Strings.getStringAsHTML("PanelCreateFunction_TypeFunction.label_heading"), SwingConstants.CENTER); //$NON-NLS-1$
 		heading.setBounds(100, 0, 400, 30);
 		heading.setFont(FrameMain.getGlobalFont());
 		add(heading);
@@ -60,7 +60,7 @@ public class PanelCreateFunction_TypeFunction extends RequestFocusForDefaultComp
 		});
 		add(function);
 		
-		go = new CustomButtonSmall(Strings.getString("PanelCreateFunction_TypeFunction.button_go")); //$NON-NLS-1$
+		go = new CustomButtonSmall(Strings.getStringAsHTML("PanelCreateFunction_TypeFunction.button_go")); //$NON-NLS-1$
 		go.setLocation(250, 85);
 		go.setEnabled(false);
 		go.addActionListener(new ActionListener() {

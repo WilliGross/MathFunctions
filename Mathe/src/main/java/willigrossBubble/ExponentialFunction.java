@@ -27,17 +27,17 @@ public class ExponentialFunction extends Function {
 		
 		if (!p.equals(q)) {
 			if (Utility.arePointsOnHorzontalLine(p, q))
-				throw new InvalidPointConfigurationException(Strings.getString("ExponentialFunction.IPCE_sameYValues_message"), Strings.getString("ExponentialFunction.IPCE_sameYValues_tooltip")); //"Invalid point configuration: Points have the same y coordinate, exponential functions can never be perfectly horizontal!" //$NON-NLS-1$ //$NON-NLS-2$
+				throw new InvalidPointConfigurationException(Strings.getStringAsHTML("ExponentialFunction.IPCE_sameYValues_message"), Strings.getStringAsHTML("ExponentialFunction.IPCE_sameYValues_tooltip")); //"Invalid point configuration: Points have the same y coordinate, exponential functions can never be perfectly horizontal!" //$NON-NLS-1$ //$NON-NLS-2$
 			if (Utility.arePointsOnVerticalLine(p, q))
-				throw new InvalidPointConfigurationException(Strings.getString("ExponentialFunction.IPCE_sameXValues_message"), Strings.getString("ExponentialFunction.IPCE_sameXValues_tooltip")); //"Invalid point configuration: Points have the same x coordinate, exponential functions can never be perfectly vertical!" //$NON-NLS-1$ //$NON-NLS-2$
+				throw new InvalidPointConfigurationException(Strings.getStringAsHTML("ExponentialFunction.IPCE_sameXValues_message"), Strings.getStringAsHTML("ExponentialFunction.IPCE_sameXValues_tooltip")); //"Invalid point configuration: Points have the same x coordinate, exponential functions can never be perfectly vertical!" //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		
 		if ( 	((p.getQuadrant() == 1 || p.getQuadrant() == 2) && (q.getQuadrant() == 3 || q.getQuadrant() == 4)) || 	// p above x and q below
 				((q.getQuadrant() == 1 || q.getQuadrant() == 2) && (p.getQuadrant() == 3 || p.getQuadrant() == 4)) )	// q above x and p below
-			throw new InvalidPointConfigurationException(Strings.getString("ExponentialFunction.IPCE_invalidQuadrants_message"), Strings.getString("ExponentialFunction.IPCE_invalidQuadrants_tooltip")); //$NON-NLS-1$ //$NON-NLS-2$
+			throw new InvalidPointConfigurationException(Strings.getStringAsHTML("ExponentialFunction.IPCE_invalidQuadrants_message"), Strings.getStringAsHTML("ExponentialFunction.IPCE_invalidQuadrants_tooltip")); //$NON-NLS-1$ //$NON-NLS-2$
 		
 		if (p.getQuadrant() == 6 || q.getQuadrant() == 6)
-			throw new InvalidPointConfigurationException(Strings.getString("ExponentialFunction.IPCE_x-axis_message"), Strings.getString("ExponentialFunction.IPCE_x-axis_tooltip")); //$NON-NLS-1$ //$NON-NLS-2$
+			throw new InvalidPointConfigurationException(Strings.getStringAsHTML("ExponentialFunction.IPCE_x-axis_message"), Strings.getStringAsHTML("ExponentialFunction.IPCE_x-axis_tooltip")); //$NON-NLS-1$ //$NON-NLS-2$
 		
 		String expression = ""; //$NON-NLS-1$
 		String expressionRounded = ""; //$NON-NLS-1$

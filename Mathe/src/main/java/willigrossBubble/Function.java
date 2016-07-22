@@ -135,7 +135,7 @@ public class Function implements Serializable {
 	public String[] table(double start, double end, double step) {
 		
 		if (step == 0)
-			throw new IllegalArgumentException(Strings.getString("Function.IAE_stepZero")); //$NON-NLS-1$
+			throw new IllegalArgumentException(Strings.getStringAsHTML("Function.IAE_stepZero")); //$NON-NLS-1$
 		
 		ArrayList<String> table = new ArrayList<>();
 		

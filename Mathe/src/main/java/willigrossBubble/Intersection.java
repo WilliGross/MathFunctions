@@ -11,7 +11,7 @@ public class Intersection extends Point {
 		super(0, 0);
 		this.f = f;
 		this.g = g;
-		calc();
+		update();
 	}
 
 	/**
@@ -36,7 +36,7 @@ public class Intersection extends Point {
 	 */
 	public void setF(Function f) {
 		this.f = f;
-		calc();
+		update();
 	}
 
 	/**
@@ -45,12 +45,29 @@ public class Intersection extends Point {
 	 */
 	public void setG(Function g) {
 		this.g = g;
-		calc();
+		update();
 	}
 
 
+	private void update() {
+		if (!f.getExpression().contains("x") && !g.getExpression().contains("x")) //$NON-NLS-1$//$NON-NLS-2$
+			calcNoX();
+		else
+			calcBothX();
+	}
+
+	
+	/** 'calculates' the intersection of two constants */
+	private void calcNoX() {
+		if (f.evaluate(0) == g.evaluate(0)) {
+			setX(0);
+			setY(f.evaluate(0));
+		}
+	}
+
+	
 	/** calculates the intersection */
-	private void calc() {
+	private void calcBothX() {
 		
 		if (f.equals(g)) {
 			this.setX(Double.POSITIVE_INFINITY);
@@ -97,7 +114,8 @@ public class Intersection extends Point {
 
 			}
 			
-			if (dirChanges > 30 || tries > 50) {
+			if (dirChanges > 10000 || tries > 20000) {
+				System.out.println("Can't find intersection!"); //$NON-NLS-1$
 				this.setX(Double.NaN);
 				this.setY(Double.NaN);
 				return;
@@ -119,7 +137,6 @@ public class Intersection extends Point {
 
 		//calculate corresponding y - value
 		this.setY(f.evaluate(this.getX()));
-
 	}
 
 	/** string representation of the intersection point */

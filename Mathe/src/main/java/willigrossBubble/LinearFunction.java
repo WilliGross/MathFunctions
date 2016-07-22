@@ -27,7 +27,7 @@ public class LinearFunction extends Function {
 		String expressionRounded = ""; //$NON-NLS-1$
 		
 		if (p.getX() == q.getX() && !p.equals(q)) {
-			throw new InvalidPointConfigurationException(Strings.getString("LinearFunction.IPCE_sameXValues_message"), Strings.getString("LinearFunction.IPCE_sameXValues_tooltip")); //$NON-NLS-1$ //$NON-NLS-2$
+			throw new InvalidPointConfigurationException(Strings.getStringAsHTML("LinearFunction.IPCE_sameXValues_message"), Strings.getStringAsHTML("LinearFunction.IPCE_sameXValues_tooltip")); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		
 		

@@ -14,6 +14,7 @@ import willigrossBubble.gui.customComponents.panels.CenterPanel;
 import willigrossBubble.gui.customComponents.panels.PanelCreateFunction;
 import willigrossBubble.gui.customComponents.panels.PanelFunctionActionsMenu;
 import willigrossBubble.gui.customComponents.panels.PanelIntersection;
+import willigrossBubble.gui.customComponents.panels.PanelIntersection_FunctionSelection;
 import willigrossBubble.gui.customComponents.panels.PanelLoadFunction;
 import willigrossBubble.gui.customComponents.panels.PanelMain;
 import willigrossBubble.gui.customComponents.panels.PanelNavigation;
@@ -24,10 +25,10 @@ public class FrameMain extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	/**Global font*/
-	private static Font globalFont = new Font(Strings.getString("FrameMain.globalFont"), Font.PLAIN, 15); //$NON-NLS-1$
+	private static Font globalFont = new Font(Strings.getStringAsHTML("FrameMain.globalFont"), Font.PLAIN, 15); //$NON-NLS-1$
 	
 	/**Global font bold*/
-	private static Font globalFont_Bold = new Font(Strings.getString("FrameMain.globalFont_Bold"), Font.BOLD, 15); //$NON-NLS-1$
+	private static Font globalFont_Bold = new Font(Strings.getStringAsHTML("FrameMain.globalFont_Bold"), Font.BOLD, 15); //$NON-NLS-1$
 	
 	/**Instance of FrameMain that is set on program start*/
 	private static FrameMain instance; //TODO Can be final?
@@ -158,9 +159,15 @@ public class FrameMain extends JFrame {
 	}
 
 
-	/**Create PanelIntersection */
-	public void panelIntersection() {
-		setPanelCenter(new PanelIntersection(), ButtonStates.MAIN_MENU);
+	/**Create PanelIntersection_FunctionSelection */
+	public void panelIntersection_FunctionSelection() {
+		setPanelCenter(new PanelIntersection_FunctionSelection(), ButtonStates.MAIN_MENU);
+	}
+	
+	
+	/**Create PanelIntersection*/
+	public void panelIntersection(Function function1, Function function2) {
+		setPanelCenter(new PanelIntersection(function1, function2), ButtonStates.BOTH);
 	}
 	
 	

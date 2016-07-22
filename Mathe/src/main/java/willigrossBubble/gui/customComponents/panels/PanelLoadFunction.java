@@ -12,6 +12,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
 import willigrossBubble.Function;
+import willigrossBubble.Strings;
 import willigrossBubble.gui.FrameMain;
 
 public class PanelLoadFunction extends CenterPanel {
@@ -26,7 +27,7 @@ public class PanelLoadFunction extends CenterPanel {
 		
 		setLayout(null);
 		
-		heading = new JLabel("Load function", SwingConstants.CENTER);
+		heading = new JLabel(Strings.getStringAsHTML("PanelLoadFunction.label_heading"), SwingConstants.CENTER); //$NON-NLS-1$
 		heading.setFont(FrameMain.getGlobalFont());
 		heading.setBounds(100, 40, 400, 30);
 		add(heading);

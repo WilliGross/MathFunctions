@@ -46,15 +46,15 @@ public class PanelCreateFunction_ThroughTwoPoints extends RequestFocusForDefault
 		KeyAdapter keyListener = new KeyListeneR();
 		
 		if (type == FunctionType.EXPONENTIAL)
-			heading = new JLabel(Strings.getString("PanelCreateFunction_ThroughTwoPoints.label_heading_exponential"), SwingConstants.CENTER); //$NON-NLS-1$
+			heading = new JLabel(Strings.getStringAsHTML("PanelCreateFunction_ThroughTwoPoints.label_heading_exponential"), SwingConstants.CENTER); //$NON-NLS-1$
 		else if (type == FunctionType.LINEAR)
-			heading = new JLabel(Strings.getString("PanelCreateFunction_ThroughTwoPoints.label_heading_linear"), SwingConstants.CENTER); //$NON-NLS-1$
+			heading = new JLabel(Strings.getStringAsHTML("PanelCreateFunction_ThroughTwoPoints.label_heading_linear"), SwingConstants.CENTER); //$NON-NLS-1$
 		heading.setFont(FrameMain.getGlobalFont());
 		heading.setBounds(100, 0, 400, 30);
 		add(heading);
 		
 		
-		p1 = new JLabel(Strings.getString("PanelCreateFunction_ThroughTwoPoints.label_pointOne"), SwingConstants.RIGHT); //$NON-NLS-1$
+		p1 = new JLabel(Strings.getStringAsHTML("PanelCreateFunction_ThroughTwoPoints.label_pointOne"), SwingConstants.RIGHT); //$NON-NLS-1$
 		p1.setBounds(40, 40, 50, 30);
 		add(p1);
 		
@@ -71,7 +71,7 @@ public class PanelCreateFunction_ThroughTwoPoints extends RequestFocusForDefault
 		add(p1y);
 		
 		
-		p2 = new JLabel(Strings.getString("PanelCreateFunction_ThroughTwoPoints.label_pointTwo"), SwingConstants.RIGHT); //$NON-NLS-1$
+		p2 = new JLabel(Strings.getStringAsHTML("PanelCreateFunction_ThroughTwoPoints.label_pointTwo"), SwingConstants.RIGHT); //$NON-NLS-1$
 		p2.setBounds(40, 75, 50, 30);
 		add(p2);	
 		
@@ -91,7 +91,7 @@ public class PanelCreateFunction_ThroughTwoPoints extends RequestFocusForDefault
 		result.setBounds(100, 120, 400, 30);
 		add(result);
 		
-		go = new CustomButtonSmall(Strings.getString("PanelCreateFunction_ThroughTwoPoints.button_go")); //$NON-NLS-1$
+		go = new CustomButtonSmall(Strings.getStringAsHTML("PanelCreateFunction_ThroughTwoPoints.button_go")); //$NON-NLS-1$
 		go.setLocation(250, 160);
 		go.setEnabled(false);
 		go.addActionListener(new ActionListener() {
@@ -129,7 +129,7 @@ public class PanelCreateFunction_ThroughTwoPoints extends RequestFocusForDefault
 			result.setForeground(Color.RED);
 			if (e instanceof InvalidPointConfigurationException && ((InvalidPointConfigurationException) e).hasTooltip())
 				result.setToolTipText(((InvalidPointConfigurationException) e).getTooltip());
-			throw new Exception(Strings.getString("PanelCreateFunction_ThroughTwoPoints.error_calculation")); //$NON-NLS-1$
+			throw new Exception(Strings.getStringAsHTML("PanelCreateFunction_ThroughTwoPoints.error_calculation")); //$NON-NLS-1$
 		}
 	}
 	

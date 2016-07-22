@@ -24,7 +24,7 @@ public class PanelFunctionActionsMenu_Menu extends RequestFocusForDefaultCompone
 	public PanelFunctionActionsMenu_Menu(Function function) {
 		setLayout(null);
 		
-		heading = new JLabel(Strings.getString("PanelFunctionActionsMenu_Menu.label_heading"), SwingConstants.CENTER); //$NON-NLS-1$
+		heading = new JLabel(Strings.getStringAsHTML("PanelFunctionActionsMenu_Menu.label_heading"), SwingConstants.CENTER); //$NON-NLS-1$
 		heading.setFont(FrameMain.getGlobalFont());
 		heading.setBounds(100, 40, 400, 30);
 		add(heading);
@@ -34,7 +34,7 @@ public class PanelFunctionActionsMenu_Menu extends RequestFocusForDefaultCompone
 		this.function.setBounds(100, 70, 400, 30);
 		add(this.function);
 		
-		b1_table = new CustomButtonLarge(Strings.getString("PanelFunctionActionsMenu_Menu.button_table")); //$NON-NLS-1$
+		b1_table = new CustomButtonLarge(Strings.getStringAsHTML("PanelFunctionActionsMenu_Menu.button_table")); //$NON-NLS-1$
 		b1_table.setLocation(100, 110);
 		b1_table.addActionListener(new ActionListener() {
 			
@@ -48,7 +48,7 @@ public class PanelFunctionActionsMenu_Menu extends RequestFocusForDefaultCompone
 		});
 		add(b1_table);
 		
-		b2_point = new CustomButtonLarge(Strings.getString("PanelFunctionActionsMenu_Menu.button_point")); //$NON-NLS-1$
+		b2_point = new CustomButtonLarge(Strings.getStringAsHTML("PanelFunctionActionsMenu_Menu.button_point")); //$NON-NLS-1$
 		b2_point.setLocation(100, 145);
 		b2_point.addActionListener(new ActionListener() {
 			
@@ -62,7 +62,7 @@ public class PanelFunctionActionsMenu_Menu extends RequestFocusForDefaultCompone
 		});
 		add(b2_point);
 		
-		b3_mirror = new CustomButtonLarge(Strings.getString("PanelFunctionActionsMenu_Menu.button_mirror")); //$NON-NLS-1$
+		b3_mirror = new CustomButtonLarge(Strings.getStringAsHTML("PanelFunctionActionsMenu_Menu.button_mirror")); //$NON-NLS-1$
 		b3_mirror.setLocation(100, 180);
 		b3_mirror.addActionListener(new ActionListener() {
 			
@@ -75,8 +75,8 @@ public class PanelFunctionActionsMenu_Menu extends RequestFocusForDefaultCompone
 		});
 		add(b3_mirror);
 		
-		saveInFile = new JCheckBox(Strings.getString("PanelFunctionActionsMenu_Menu.checkBox_save_message")); //$NON-NLS-1$
-		saveInFile.setToolTipText(Strings.getString("PanelFunctionActionsMenu_Menu.checkBox_save_tooltip")); //$NON-NLS-1$
+		saveInFile = new JCheckBox(Strings.getStringAsHTML("PanelFunctionActionsMenu_Menu.checkBox_save_message")); //$NON-NLS-1$
+		saveInFile.setToolTipText(Strings.getStringAsHTML("PanelFunctionActionsMenu_Menu.checkBox_save_tooltip")); //$NON-NLS-1$
 		saveInFile.setHorizontalAlignment(SwingConstants.CENTER);
 		saveInFile.setBounds(100, 220, 400, 30);
 		saveInFile.addItemListener(new ItemListener() {

@@ -34,7 +34,7 @@ public class FileStorage {
 		this.storageFile = file;
 		
 		if(storageFile.isDirectory()){
-			throw new IllegalArgumentException(Strings.getString("FileStorage.exception_directory")); //$NON-NLS-1$
+			throw new IllegalArgumentException(Strings.getStringAsHTML("FileStorage.exception_directory")); //$NON-NLS-1$
 		}
 		
 		if(storageFile.createNewFile()){

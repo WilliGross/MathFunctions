@@ -84,7 +84,7 @@ public class Point implements Serializable {
 	 */
 	@Override
 	public String toString(){
-		return "(" + Utility.roundDouble(this.getX(), 3) + "," + Utility.roundDouble(this.getY(), 3) + ")"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		return "(" + Utility.roundDouble(this.getX(), 3) + "|" + Utility.roundDouble(this.getY(), 3) + ")"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 	
 	
