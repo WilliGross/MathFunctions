@@ -15,7 +15,7 @@ import willigrossBubble.gui.FrameMain;
 
 public class Function implements Serializable {
 	
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 4513726210175983231L;
 	
 	/**
 	 * not rounded expression for internal use
