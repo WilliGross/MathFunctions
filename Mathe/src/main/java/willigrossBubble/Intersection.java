@@ -6,8 +6,9 @@ public class Intersection extends Point {
 	/** the two functions used to calculate the intersection point's coordinates */
 	private Function f, g;
 
-	/** the intersection point's constructor */
-	public Intersection(Function f, Function g) {
+	/** the intersection point's constructor 
+	 * @throws IntersectionNotFoundException */
+	public Intersection(Function f, Function g) throws IntersectionNotFoundException {
 		super(0, 0);
 		this.f = f;
 		this.g = g;
@@ -33,8 +34,9 @@ public class Intersection extends Point {
 	/**
 	 * Set the intersection point's first function
 	 * @param f the function to set
+	 * @throws IntersectionNotFoundException 
 	 */
-	public void setF(Function f) {
+	public void setF(Function f) throws IntersectionNotFoundException {
 		this.f = f;
 		update();
 	}
@@ -42,14 +44,15 @@ public class Intersection extends Point {
 	/**
 	 * Set the intersection point's second function
 	 * @param g the function to set
+	 * @throws IntersectionNotFoundException 
 	 */
-	public void setG(Function g) {
+	public void setG(Function g) throws IntersectionNotFoundException {
 		this.g = g;
 		update();
 	}
 
 
-	private void update() {
+	private void update() throws IntersectionNotFoundException {
 		if (!f.getExpression().contains("x") && !g.getExpression().contains("x")) //$NON-NLS-1$//$NON-NLS-2$
 			calcNoX();
 		else
@@ -66,8 +69,11 @@ public class Intersection extends Point {
 	}
 
 	
-	/** calculates the intersection */
-	private void calcBothX() {
+	/** 
+	 * calculates the intersection 
+	 * @throws IntersectionNotFoundException 
+	 * */
+	private void calcBothX() throws IntersectionNotFoundException {
 		
 		if (f.equals(g)) {
 			this.setX(Double.POSITIVE_INFINITY);
@@ -118,7 +124,7 @@ public class Intersection extends Point {
 				System.out.println("Can't find intersection!"); //$NON-NLS-1$
 				this.setX(Double.NaN);
 				this.setY(Double.NaN);
-				return;
+				throw new IntersectionNotFoundException(Strings.getString("Intersection.intersectionNotFound")); //$NON-NLS-1$
 			}
 
 		}//end of while loop

@@ -9,6 +9,7 @@ import javax.swing.border.LineBorder;
 
 import willigrossBubble.Function;
 import willigrossBubble.Intersection;
+import willigrossBubble.IntersectionNotFoundException;
 import willigrossBubble.Strings;
 import willigrossBubble.gui.FrameMain;
 
@@ -20,8 +21,6 @@ public class PanelIntersection extends CenterPanel {
 	
 	
 	public PanelIntersection(Function function1, Function function2) {
-		
-		intersectionPoint = new Intersection(function1, function2);
 		
 		setLayout(null);
 		
@@ -38,8 +37,14 @@ public class PanelIntersection extends CenterPanel {
 		intersection_desc.setBounds(100, 150, 400, 30);
 		add(intersection_desc);
 		
-		intersection = new JLabel(intersectionPoint.toString(), SwingConstants.CENTER);
-		intersection.setBounds(200, 190, 200, 30);
+		intersection = new JLabel("", SwingConstants.CENTER); //$NON-NLS-1$
+		try {
+			intersectionPoint = new Intersection(function1, function2);
+			intersection.setText(intersectionPoint.toString());
+		} catch (IntersectionNotFoundException e) {
+			intersection.setText(e.getMessage());
+		}
+		intersection.setBounds(150, 190, 300, 30);
 		intersection.setBackground(Color.WHITE);
 		intersection.setOpaque(true);
 		intersection.setBorder(new LineBorder(Color.GRAY));

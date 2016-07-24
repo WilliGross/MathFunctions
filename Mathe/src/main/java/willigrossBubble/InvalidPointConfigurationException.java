@@ -7,7 +7,7 @@ public class InvalidPointConfigurationException extends Exception {
 	private String tooltip;
 	
     /**
-     * Constructs an <code>IllegalArgumentException</code> with no
+     * Constructs an <code>InvalidPointConfigurationException</code> with no
      * detail message.
      */
 	public InvalidPointConfigurationException() {
@@ -15,7 +15,7 @@ public class InvalidPointConfigurationException extends Exception {
 	}
 	
     /**
-     * Constructs an <code>IllegalArgumentException</code> with the
+     * Constructs an <code>InvalidPointConfigurationException</code> with the
      * specified detail message.
      *
      * @param   s   the detail message.
@@ -26,7 +26,7 @@ public class InvalidPointConfigurationException extends Exception {
 	
 	
     /**
-     * Constructs an <code>IllegalArgumentException</code> with the
+     * Constructs an <code>InvalidPointConfigurationException</code> with the
      * specified detail message and tooltip.
      *
      * @param   s   the detail message.
