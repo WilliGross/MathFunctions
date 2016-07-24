@@ -39,8 +39,8 @@ public class Function implements Serializable {
 		this.expressionRounded = expressionRounded;
 		name = FrameMain.getInstance().getMainLogic().getNextName();
 	}
-
-
+	
+	
 	/**
 	 * @return the expression
 	 */
@@ -55,8 +55,8 @@ public class Function implements Serializable {
 	public String getExpressionRounded() {
 		return expressionRounded;
 	}
-
-
+	
+	
 	/**
 	 * @return the name
 	 */
@@ -66,14 +66,20 @@ public class Function implements Serializable {
 	
 	
 	/**
-	 * Directly enter the expression (updates rounded expression as well)
 	 * @param expression - the expression to save as the function
 	 */
 	public void setExpression(String expression) {
 		this.expression = expression;
-		expressionRounded = expression;
 	}
-
+	
+	
+	
+	/**
+	 * @param expressionRounded the expressionRounded to set
+	 */
+	public void setExpressionRounded(String expressionRounded) {
+		this.expressionRounded = expressionRounded;
+	}
 
 	/**
 	 * @param name the name to set
@@ -169,10 +175,12 @@ public class Function implements Serializable {
 	public Function mirrorX() {
 		try {
 			Function copy = deepCopy();
-			if (copy.getExpression().startsWith("-(") && copy.getExpression().endsWith(")")) //$NON-NLS-1$ //$NON-NLS-2$
+			if (copy.getExpression().startsWith("-(") && copy.getExpression().endsWith(")")) { //$NON-NLS-1$ //$NON-NLS-2$
 				copy.setExpression(copy.getExpression().substring(2, copy.getExpression().length() - 1));
-			else {
+				copy.setExpressionRounded(copy.getExpressionRounded().substring(2, copy.getExpressionRounded().length() - 1));
+			} else {
 				copy.setExpression("-(" + copy.getExpression() + ")"); //$NON-NLS-1$ //$NON-NLS-2$
+				copy.setExpressionRounded("-(" + copy.getExpressionRounded() + ")"); //$NON-NLS-1$ //$NON-NLS-2$
 				copy.setName(FrameMain.getInstance().getMainLogic().getNextName());
 			}
 			return copy;
@@ -195,14 +203,20 @@ public class Function implements Serializable {
 				endsWithX = true;
 			
 			String[] splitX = copy.getExpression().split("x"); //$NON-NLS-1$
+			String[] splitXRounded = copy.getExpressionRounded().split("x"); //$NON-NLS-1$
 			
 			copy.setExpression(splitX[0]);
+			copy.setExpressionRounded(splitXRounded[0]);
 			
-			for (int i = 1; i < splitX.length; i++)
+			for (int i = 1; i < splitX.length; i++) {
 				copy.setExpression(copy.getExpression() + "(-x)" + splitX[i]); //$NON-NLS-1$
-			
-			if (endsWithX)
+				copy.setExpressionRounded(copy.getExpressionRounded() + "(-x)" + splitXRounded[i]); //$NON-NLS-1$
+			}
+				
+			if (endsWithX) {
 				copy.setExpression(copy.getExpression() + "(-x)"); //$NON-NLS-1$
+				copy.setExpressionRounded(copy.getExpressionRounded() + "(-x)"); //$NON-NLS-1$
+			}
 			
 			copy.setName(FrameMain.getInstance().getMainLogic().getNextName());
 			return copy;
@@ -211,7 +225,7 @@ public class Function implements Serializable {
 		}
 		return null;
 	}
-		
+	
 	
 	/**
 	 * Mirror a function on the x-axis and y-axis => rotate it around the origin
@@ -255,11 +269,11 @@ public class Function implements Serializable {
 		}
 		return null;
 	}
-
-
+	
+	
 	/**
- 	 * override .equals so that two functions that have the same expression are equal 
- 	 */
+	 * override .equals so that two functions that have the same expression are equal 
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) 
@@ -272,7 +286,7 @@ public class Function implements Serializable {
 			return true;
 		return false;
 	}
-
+	
 	
 	/**
 	 * override. hashcode by generating the hash with the expression of the function 
