@@ -115,7 +115,7 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 		String valueWarnStart = valueWarn.replace("$FIELD$", "start"); //$NON-NLS-1$ //$NON-NLS-2$
 		boolean startValidationOne = false, startValidationTwo = false;
 		
-		if (start.getText().equals(Strings.getStringAsHTML("PanelFunctionActionsMenu_Table.textField_start"))) //$NON-NLS-1$
+		if (start.getText().equals(Strings.getString("PanelFunctionActionsMenu_Table.textField_start"))) //$NON-NLS-1$
 			return true;
 		
 		if (Validations.canConvertToNumber(start.getText())) {
@@ -145,7 +145,7 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 		String valueWarnEnd = valueWarn.replace("$FIELD$", "end"); //$NON-NLS-1$ //$NON-NLS-2$
 		boolean endValidationOne = false, endValidationTwo = false;
 		
-		if (end.getText().equals(Strings.getStringAsHTML("PanelFunctionActionsMenu_Table.textField_end"))) //$NON-NLS-1$
+		if (end.getText().equals(Strings.getString("PanelFunctionActionsMenu_Table.textField_end"))) //$NON-NLS-1$
 			return true;
 		
 		if (Validations.canConvertToNumber(end.getText())) {
@@ -175,7 +175,7 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 		String valueWarnStep = valueWarn.replace("$FIELD$", "step"); //$NON-NLS-1$ //$NON-NLS-2$
 		boolean stepValidationOne = false, stepValidationTwo = false;
 		
-		if (step.getText().equals(Strings.getStringAsHTML("PanelFunctionActionsMenu_Table.textField_step"))) //$NON-NLS-1$
+		if (step.getText().equals(Strings.getString("PanelFunctionActionsMenu_Table.textField_step"))) //$NON-NLS-1$
 			return true;
 		
 		if (Validations.canConvertToNumber(step.getText())) {
@@ -211,28 +211,28 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 			boolean startValidation = validateStart(), endValidation = validateEnd(), stepValidation = validateStep();
 			
 			//validate start
-			if (!start.getText().equals(Strings.getStringAsHTML("PanelFunctionActionsMenu_Table.textField_start"))) //$NON-NLS-1$
+			if (!start.getText().equals(Strings.getString("PanelFunctionActionsMenu_Table.textField_start"))) //$NON-NLS-1$
 				if (startValidation)
 					start.setBorder(new LineBorder(Color.GRAY));
 				else
 					start.setBorder(new LineBorder(Color.RED, 2));
 			
 			//validate end
-			if (!end.getText().equals(Strings.getStringAsHTML("PanelFunctionActionsMenu_Table.textField_end"))) //$NON-NLS-1$
+			if (!end.getText().equals(Strings.getString("PanelFunctionActionsMenu_Table.textField_end"))) //$NON-NLS-1$
 				if (endValidation)
 					end.setBorder(new LineBorder(Color.GRAY));
 				else
 					end.setBorder(new LineBorder(Color.RED, 2));
 			
 			//validate step
-			if (!step.getText().equals(Strings.getStringAsHTML("PanelFunctionActionsMenu_Table.textField_step"))) //$NON-NLS-1$
+			if (!step.getText().equals(Strings.getString("PanelFunctionActionsMenu_Table.textField_step"))) //$NON-NLS-1$
 				if (stepValidation)
 					step.setBorder(new LineBorder(Color.GRAY));
 				else
 					step.setBorder(new LineBorder(Color.RED, 2));
 			
 			//calculate and display value table
-			if (!start.getText().equals(Strings.getStringAsHTML("PanelFunctionActionsMenu_Table.textField_start")) && !end.getText().equals(Strings.getStringAsHTML("PanelFunctionActionsMenu_Table.textField_end")) && !step.getText().equals(Strings.getStringAsHTML("PanelFunctionActionsMenu_Table.textField_step")) && startValidation && endValidation && stepValidation) { //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			if (!start.getText().equals(Strings.getString("PanelFunctionActionsMenu_Table.textField_start")) && !end.getText().equals(Strings.getString("PanelFunctionActionsMenu_Table.textField_end")) && !step.getText().equals(Strings.getString("PanelFunctionActionsMenu_Table.textField_step")) && startValidation && endValidation && stepValidation) { //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				double 	startValue 	= Utility.readDoubleFromStringInput(start.getText()	), 
 						endValue 	= Utility.readDoubleFromStringInput(end.getText()	), 
 						stepValue 	= Utility.readDoubleFromStringInput(step.getText()	);
