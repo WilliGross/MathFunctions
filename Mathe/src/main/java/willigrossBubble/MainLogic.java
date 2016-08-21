@@ -91,7 +91,7 @@ public class MainLogic {
 	
 	/**
 	 * Get all functions
-	 * @return all functions as an entry set
+	 * @return all functions as an array
 	 */
 	public Function[] getAllFunctions() {
 		ArrayList<Function> functionsArrayList = new ArrayList<>();
