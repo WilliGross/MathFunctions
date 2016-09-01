@@ -1,9 +1,14 @@
 package willigrossBubble.gui.customComponents.panels;
 
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -24,6 +29,7 @@ public class PanelFunctionActionsMenu_Point extends RequestFocusForDefaultCompon
 	private JTextField p1x, p1y;
 	private JLabel p1, result, heading;
 	private Function function;
+	private Image symbol;
 	
 	public PanelFunctionActionsMenu_Point(Function f) {
 		
@@ -63,11 +69,22 @@ public class PanelFunctionActionsMenu_Point extends RequestFocusForDefaultCompon
 		setDefaultComponent(p1x);
 	}
 	
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+	 */
+	@Override
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.drawImage(symbol, 275, 150, null);
+	}
+
 	private class KeyListeneR extends KeyAdapter {
 		@Override
 		public void keyReleased(KeyEvent e) {
 			
 			result.setText(""); //$NON-NLS-1$
+			symbol = null;
+			repaint();
 			
 			JTextField source = (JTextField) e.getSource();
 			if (!Validations.canConvertToNumber(source.getText())) {
@@ -80,11 +97,26 @@ public class PanelFunctionActionsMenu_Point extends RequestFocusForDefaultCompon
 							py = Utility.readDoubleFromStringInput(p1y.getText());
 					Point p = new Point(px, py);
 					
-					if (function.testPointOnGraph(p))
+					if (function.testPointOnGraph(p)) {
 						result.setText(Strings.getStringAsHTML("PanelFunctionActionsMenu_Point.label_result_onGraph")); //$NON-NLS-1$
-					else
+						
+						try {
+							symbol = ImageIO.read(new File(getClass().getClassLoader().getResource("assets/images/greenCheckMark.png").getFile())).getScaledInstance(50, 50, Image.SCALE_DEFAULT); //$NON-NLS-1$
+							repaint();
+						} catch (IOException ex) {
+							ex.printStackTrace();
+						}
+						
+					} else {
 						result.setText(Strings.getStringAsHTML("PanelFunctionActionsMenu_Point.label_result_notOnGraph")); //$NON-NLS-1$
-					
+						
+						try {
+							symbol = ImageIO.read(new File(getClass().getClassLoader().getResource("assets/images/redX.png").getFile())).getScaledInstance(50, 50, Image.SCALE_DEFAULT); //$NON-NLS-1$
+							repaint();
+						} catch (IOException ex) {
+							ex.printStackTrace();
+						}
+					}
 				}
 			}
 		}
