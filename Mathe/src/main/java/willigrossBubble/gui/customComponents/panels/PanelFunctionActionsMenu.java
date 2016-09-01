@@ -9,37 +9,35 @@ import willigrossBubble.gui.FrameMain;
 import willigrossBubble.gui.customComponents.panels.PanelNavigation.ButtonStates;
 
 public class PanelFunctionActionsMenu extends CenterPanel {
-	
-	private static final long serialVersionUID = 1L;
-	private CenterPanel caller;
-	private Function function;
-	private PanelFunctionActionsMenu_Menu menu;
-	private JPanel option;
-	
+
+	private static final long					serialVersionUID	= 1L;
+	private final CenterPanel					caller;
+	private final Function						function;
+	private final PanelFunctionActionsMenu_Menu	menu;
+	private JPanel								option;
+
 	public PanelFunctionActionsMenu(Function f, CenterPanel caller) {
 		this.caller = caller;
 		function = f;
 		menu = new PanelFunctionActionsMenu_Menu(function);
-		
+
 		setLayout(new GridLayout(2, 1));
 		add(menu);
-		
+
 		setDefaultComponent(menu);
 	}
-	
+
 	public void table() {
 		setSubpanelSouth(new PanelFunctionActionsMenu_Table(function));
 	}
-
-
+	
 	public void point() {
 		setSubpanelSouth(new PanelFunctionActionsMenu_Point(function));
 	}
-
-
+	
 	public void mirror() {
 		setSubpanelSouth(new PanelFunctionActionsMenu_Mirror(function));
-	}	
+	}
 	
 	public void setSubpanelSouth(JPanel panel) {
 		if (option != null)
@@ -48,7 +46,7 @@ public class PanelFunctionActionsMenu extends CenterPanel {
 		option.revalidate();
 		option.requestFocusInWindow();
 	}
-
+	
 	@Override
 	public void back() {
 		if (option != null) {
@@ -58,5 +56,5 @@ public class PanelFunctionActionsMenu extends CenterPanel {
 		} else
 			FrameMain.getInstance().setPanelCenter(caller, ButtonStates.BOTH);
 	}
-	
+
 }
