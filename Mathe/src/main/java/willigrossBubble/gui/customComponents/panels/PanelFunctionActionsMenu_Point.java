@@ -5,7 +5,6 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -33,7 +32,7 @@ public class PanelFunctionActionsMenu_Point extends RequestFocusForDefaultCompon
 	public PanelFunctionActionsMenu_Point(Function f) {
 
 		function = f;
-		
+
 		setLayout(null);
 
 		final FocusAdapter_SelectAll focusAdapter_SelectAll = new FocusAdapter_SelectAll();
@@ -78,9 +77,9 @@ public class PanelFunctionActionsMenu_Point extends RequestFocusForDefaultCompon
 		super.paintComponent(g);
 		g.drawImage(symbol, 275, 150, null);
 	}
-	
+
 	private class KeyListeneR extends KeyAdapter {
-		
+
 		@Override
 		public void keyReleased(KeyEvent e) {
 
@@ -104,8 +103,8 @@ public class PanelFunctionActionsMenu_Point extends RequestFocusForDefaultCompon
 
 						try {
 							symbol = ImageIO
-									.read(new File(getClass().getClassLoader()
-											.getResource("assets/images/greenCheckMark.png").getFile())) //$NON-NLS-1$
+									.read(getClass().getClassLoader()
+											.getResourceAsStream("assets/images/greenCheckMark.png")) //$NON-NLS-1$
 									.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
 							repaint();
 						} catch (final IOException ex) {
@@ -117,8 +116,8 @@ public class PanelFunctionActionsMenu_Point extends RequestFocusForDefaultCompon
 								Strings.getStringAsHTML("PanelFunctionActionsMenu_Point.label_result_notOnGraph")); //$NON-NLS-1$
 
 						try {
-							symbol = ImageIO.read(new File(
-									getClass().getClassLoader().getResource("assets/images/redX.png").getFile())) //$NON-NLS-1$
+							symbol = ImageIO
+									.read(getClass().getClassLoader().getResourceAsStream("assets/images/redX.png")) //$NON-NLS-1$
 									.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
 							repaint();
 						} catch (final IOException ex) {
