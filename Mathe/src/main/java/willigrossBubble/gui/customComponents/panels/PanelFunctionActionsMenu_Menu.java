@@ -61,6 +61,8 @@ public class PanelFunctionActionsMenu_Menu extends RequestFocusForDefaultCompone
 		saveInFile.setToolTipText(Strings.getStringAsHTML("PanelFunctionActionsMenu_Menu.checkBox_save_tooltip")); //$NON-NLS-1$
 		saveInFile.setHorizontalAlignment(SwingConstants.CENTER);
 		saveInFile.setBounds(100, 220, 400, 30);
+		if (FrameMain.getInstance().getMainLogic().isFunctionSaved(function))
+			saveInFile.setSelected(true);
 		saveInFile.addItemListener(e -> {
 			if (saveInFile.isSelected())
 				FrameMain.getInstance().getMainLogic().saveFunctionInFile(function);

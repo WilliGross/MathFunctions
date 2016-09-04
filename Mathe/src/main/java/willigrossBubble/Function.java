@@ -94,7 +94,7 @@ public class Function implements Serializable {
 	
 	/**
 	 * Evaluates the expression with a specified x value
-	 * 
+	 *
 	 * @param x
 	 *            - the x value
 	 * @return the corresponding y value
@@ -108,7 +108,7 @@ public class Function implements Serializable {
 	
 	/**
 	 * This checks whether a point is on the graph
-	 * 
+	 *
 	 * @param p
 	 *            - the point that is checked
 	 * @return true, if point is on graph; false, if not
@@ -130,7 +130,7 @@ public class Function implements Serializable {
 	
 	/**
 	 * Displays a value table for the expression
-	 * 
+	 *
 	 * @param start
 	 *            - start value for x
 	 * @param end
@@ -164,7 +164,7 @@ public class Function implements Serializable {
 	
 	/**
 	 * Mirror a function on the x-axis
-	 * 
+	 *
 	 * @return the new function, null if something went wrong in deepCopy()
 	 */
 	public Function mirrorX() {
@@ -188,7 +188,7 @@ public class Function implements Serializable {
 	
 	/**
 	 * Mirror a function on the y-axis
-	 * 
+	 *
 	 * @return the new function, null if something went wrong in deepCopy()
 	 */
 	public Function mirrorY() {
@@ -224,7 +224,7 @@ public class Function implements Serializable {
 	
 	/**
 	 * Mirror a function on the x-axis and y-axis => rotate it around the origin
-	 * 
+	 *
 	 * @return the new function, null if something went wrong in deepCopy()
 	 */
 	public Function mirrorOrigin() {
@@ -234,7 +234,7 @@ public class Function implements Serializable {
 	
 	/**
 	 * Creates a deep copy of the function using serialization and deserialization
-	 * 
+	 *
 	 * @return the copy of the function, null if something went wrong
 	 * @throws IOException
 	 */
