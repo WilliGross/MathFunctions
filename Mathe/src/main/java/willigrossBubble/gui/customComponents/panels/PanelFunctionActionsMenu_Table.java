@@ -1,6 +1,7 @@
 package willigrossBubble.gui.customComponents.panels;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -97,6 +98,7 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 		result.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		result.setSelectionModel(new DefaultListSelectionModel());
 		result.addListSelectionListener(e -> result.clearSelection());
+		result.setFont(FrameMain.getMonospacedFont().deriveFont(Font.BOLD));
 
 		resultScrollPane = new JScrollPane(result);
 		resultScrollPane.setBounds(100, 90, 400, 160);
@@ -241,8 +243,16 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 						endValue = Utility.readDoubleFromStringInput(end.getText()),
 						stepValue = Utility.readDoubleFromStringInput(step.getText());
 				final String[] tableAsArray = function.table(startValue, endValue, stepValue);
+				int equalsIndex = 0;
 				for (final String element : tableAsArray)
+					if (element.indexOf('=') > equalsIndex)
+						equalsIndex = element.indexOf('=');
+				for (String element : tableAsArray) {
+					for (int i = element.indexOf('='); i < equalsIndex; i++)
+						element = element.substring(0, 2) + ' ' + element.substring(2);
 					listModel.addElement(element);
+				}
+
 			}
 
 		}

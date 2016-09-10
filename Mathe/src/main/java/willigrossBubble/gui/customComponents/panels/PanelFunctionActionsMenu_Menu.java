@@ -1,5 +1,7 @@
 package willigrossBubble.gui.customComponents.panels;
 
+import java.awt.Font;
+
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -26,7 +28,7 @@ public class PanelFunctionActionsMenu_Menu extends RequestFocusForDefaultCompone
 		add(heading);
 
 		this.function = new JLabel(function.toString(), SwingConstants.CENTER);
-		this.function.setFont(FrameMain.getGlobalFont_Bold());
+		this.function.setFont(FrameMain.getGlobalFont().deriveFont(Font.BOLD));
 		this.function.setBounds(100, 70, 400, 30);
 		add(this.function);
 

@@ -3,6 +3,9 @@ package willigrossBubble.gui;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
@@ -25,12 +28,11 @@ public class FrameMain extends JFrame {
 	private static final long		serialVersionUID	= 1L;
 	
 	/** Global font */
-	private static Font				globalFont			= new Font(Strings.getStringAsHTML("FrameMain.globalFont"),						//$NON-NLS-1$
+	private static Font				globalFont			= new Font(Strings.getStringAsHTML("FrameMain.globalFont"),					//$NON-NLS-1$
 			Font.PLAIN, 15);
-
-	/** Global font bold */
-	private static Font				globalFont_Bold		= new Font(Strings.getStringAsHTML("FrameMain.globalFont_Bold"),				//$NON-NLS-1$
-			Font.BOLD, 15);
+	
+	/** Monospaced Font */
+	private static Font				monospacedFont;
 
 	/** Instance of FrameMain that is set on program start */
 	private static FrameMain		instance;
@@ -39,7 +41,7 @@ public class FrameMain extends JFrame {
 	private final Container			c;
 	
 	/**
-	 * Placeholder for subclasses of CenterPanel Will be instantiated with different panels for example memus
+	 * Placeholder for subclasses of CenterPanel Will be instantiated with different panels for example menus
 	 */
 	private CenterPanel				panelCenter;
 	
@@ -48,6 +50,19 @@ public class FrameMain extends JFrame {
 	
 	/** Main logic controller object */
 	private final MainLogic			mainLogic;
+	
+	/** Initializes monospaced font */
+	static {
+		try {
+			monospacedFont = Font
+					.createFont(Font.TRUETYPE_FONT,
+							System.class.getResourceAsStream("/assets/fonts/mplus-1m-regular.ttf")) //$NON-NLS-1$
+					.deriveFont(Font.PLAIN, 13);
+			GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(monospacedFont);
+		} catch (IOException | FontFormatException e) {
+			e.printStackTrace();
+		}
+	}
 
 	/** Constructor of FrameMain that sets properties and creates navigation and main panel */
 	public FrameMain() {
@@ -82,10 +97,10 @@ public class FrameMain extends JFrame {
 	}
 
 	/**
-	 * @return the global font in font style bold
+	 * @return the monospacedFont
 	 */
-	public static Font getGlobalFont_Bold() {
-		return globalFont_Bold;
+	public static Font getMonospacedFont() {
+		return monospacedFont;
 	}
 
 	/**

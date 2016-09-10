@@ -1,5 +1,6 @@
 package willigrossBubble.gui.customComponents.panels;
 
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -16,13 +17,13 @@ import willigrossBubble.Strings;
 import willigrossBubble.gui.FrameMain;
 
 public class PanelLoadFunction extends CenterPanel {
-
+	
 	private static final long					serialVersionUID	= 1L;
 	private final JLabel						heading;
 	private final DefaultListModel<Function>	listModel;
 	private final JList<Function>				result;
 	private final JScrollPane					resultScrollPane;
-
+	
 	public PanelLoadFunction() {
 
 		setLayout(null);
@@ -47,15 +48,16 @@ public class PanelLoadFunction extends CenterPanel {
 							FrameMain.getInstance().getPanelCenter());
 			}
 		});
+		result.setFont(FrameMain.getMonospacedFont().deriveFont(Font.BOLD, 14));
 
 		resultScrollPane = new JScrollPane(result);
 		resultScrollPane.setBounds(100, 90, 400, 400);
 		add(resultScrollPane);
 	}
-
+	
 	@Override
 	public void back() {
 		FrameMain.getInstance().panelMain();
 	}
-
+	
 }
