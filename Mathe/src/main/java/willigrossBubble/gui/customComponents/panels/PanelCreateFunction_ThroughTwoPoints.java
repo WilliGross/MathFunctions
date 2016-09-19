@@ -48,46 +48,46 @@ public class PanelCreateFunction_ThroughTwoPoints extends RequestFocusForDefault
 		else if (type == FunctionType.LINEAR)
 			heading = new JLabel(Strings.getStringAsHTML("PanelCreateFunction_ThroughTwoPoints.label_heading_linear"), //$NON-NLS-1$
 					SwingConstants.CENTER);
-		heading.setFont(FrameMain.getGlobalFont());
-		heading.setBounds(100, 0, 400, 30);
+		heading.setFont(FrameMain.getHeadingFont());
+		heading.setBounds(100, 0, 400, 50);
 		add(heading);
 		
 		p1 = new JLabel(Strings.getStringAsHTML("PanelCreateFunction_ThroughTwoPoints.label_pointOne"), //$NON-NLS-1$
 				SwingConstants.RIGHT);
-		p1.setBounds(40, 40, 50, 30);
+		p1.setBounds(30, 55, 65, 30);
 		add(p1);
 		
 		p1x = new JTextField(Strings.getString("PanelCreateFunction_ThroughTwoPoints.textField_pointOne_x")); //$NON-NLS-1$
-		p1x.setBounds(100, 40, 190, 30);
+		p1x.setBounds(100, 55, 190, 30);
 		p1x.addFocusListener(focusAdapter_SelectAll);
 		p1x.addKeyListener(keyListener);
 		add(p1x);
 		
 		p1y = new JTextField(Strings.getString("PanelCreateFunction_ThroughTwoPoints.textField_pointOne_y")); //$NON-NLS-1$
-		p1y.setBounds(310, 40, 190, 30);
+		p1y.setBounds(310, 55, 190, 30);
 		p1y.addFocusListener(focusAdapter_SelectAll);
 		p1y.addKeyListener(keyListener);
 		add(p1y);
 		
 		p2 = new JLabel(Strings.getStringAsHTML("PanelCreateFunction_ThroughTwoPoints.label_pointTwo"), //$NON-NLS-1$
 				SwingConstants.RIGHT);
-		p2.setBounds(40, 75, 50, 30);
+		p2.setBounds(30, 90, 65, 30);
 		add(p2);
 		
 		p2x = new JTextField(Strings.getString("PanelCreateFunction_ThroughTwoPoints.textField_pointTwo_x")); //$NON-NLS-1$
-		p2x.setBounds(100, 75, 190, 30);
+		p2x.setBounds(100, 90, 190, 30);
 		p2x.addFocusListener(focusAdapter_SelectAll);
 		p2x.addKeyListener(keyListener);
 		add(p2x);
 		
 		p2y = new JTextField(Strings.getString("PanelCreateFunction_ThroughTwoPoints.textField_pointTwo_y")); //$NON-NLS-1$
-		p2y.setBounds(310, 75, 190, 30);
+		p2y.setBounds(310, 90, 190, 30);
 		p2y.addFocusListener(focusAdapter_SelectAll);
 		p2y.addKeyListener(keyListener);
 		add(p2y);
 		
 		result = new JLabel("", SwingConstants.CENTER); //$NON-NLS-1$
-		result.setBounds(100, 120, 400, 30);
+		result.setBounds(100, 135, 400, 30);
 		add(result);
 		
 		go = new CustomButtonSmall(Strings.getStringAsHTML("PanelCreateFunction_ThroughTwoPoints.button_go")); //$NON-NLS-1$

@@ -17,22 +17,22 @@ import willigrossBubble.Strings;
 import willigrossBubble.gui.FrameMain;
 
 public class PanelLoadFunction extends CenterPanel {
-	
+
 	private static final long					serialVersionUID	= 1L;
 	private final JLabel						heading;
 	private final DefaultListModel<Function>	listModel;
 	private final JList<Function>				result;
 	private final JScrollPane					resultScrollPane;
-	
+
 	public PanelLoadFunction() {
-
+		
 		setLayout(null);
-
+		
 		heading = new JLabel(Strings.getStringAsHTML("PanelLoadFunction.label_heading"), SwingConstants.CENTER); //$NON-NLS-1$
-		heading.setFont(FrameMain.getGlobalFont());
-		heading.setBounds(100, 40, 400, 30);
+		heading.setFont(FrameMain.getHeadingFont());
+		heading.setBounds(100, 40, 400, 50);
 		add(heading);
-
+		
 		listModel = new DefaultListModel<>();
 		for (final Function f : FrameMain.getInstance().getMainLogic().getAllFunctions())
 			listModel.addElement(f);
@@ -40,7 +40,7 @@ public class PanelLoadFunction extends CenterPanel {
 		result.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		result.setSelectionModel(new DefaultListSelectionModel());
 		result.addMouseListener(new MouseAdapter() {
-
+			
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (!result.isSelectionEmpty())
@@ -49,15 +49,15 @@ public class PanelLoadFunction extends CenterPanel {
 			}
 		});
 		result.setFont(FrameMain.getMonospacedFont().deriveFont(Font.BOLD, 14));
-
+		
 		resultScrollPane = new JScrollPane(result);
 		resultScrollPane.setBounds(100, 90, 400, 400);
 		add(resultScrollPane);
 	}
-	
+
 	@Override
 	public void back() {
 		FrameMain.getInstance().panelMain();
 	}
-	
+
 }

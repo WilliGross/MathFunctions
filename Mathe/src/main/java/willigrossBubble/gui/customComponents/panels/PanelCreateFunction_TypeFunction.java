@@ -29,16 +29,16 @@ public class PanelCreateFunction_TypeFunction extends RequestFocusForDefaultComp
 
 		heading = new JLabel(Strings.getStringAsHTML("PanelCreateFunction_TypeFunction.label_heading"), //$NON-NLS-1$
 				SwingConstants.CENTER);
-		heading.setBounds(100, 0, 400, 30);
-		heading.setFont(FrameMain.getGlobalFont());
+		heading.setBounds(100, 0, 400, 50);
+		heading.setFont(FrameMain.getHeadingFont());
 		add(heading);
 
-		f = new JLabel("f(x) = ", SwingConstants.CENTER); //$NON-NLS-1$
-		f.setBounds(50, 40, 50, 30);
+		f = new JLabel(Strings.getString("PanelCreateFunction_TypeFunction.label_f(x)"), SwingConstants.CENTER); //$NON-NLS-1$
+		f.setBounds(50, 55, 55, 30);
 		add(f);
 
 		function = new JTextField();
-		function.setBounds(100, 40, 400, 30);
+		function.setBounds(100, 55, 400, 30);
 		function.addKeyListener(new KeyAdapter() {
 
 			@Override
@@ -57,7 +57,7 @@ public class PanelCreateFunction_TypeFunction extends RequestFocusForDefaultComp
 		add(function);
 
 		go = new CustomButtonSmall(Strings.getStringAsHTML("PanelCreateFunction_TypeFunction.button_go")); //$NON-NLS-1$
-		go.setLocation(250, 85);
+		go.setLocation(250, 100);
 		go.setEnabled(false);
 		go.addActionListener(
 				e -> FrameMain.getInstance()

@@ -27,13 +27,13 @@ public class PanelIntersection extends CenterPanel {
 		headingRaw = headingRaw.replace("$FUNCTION1$", function1.toString()); //$NON-NLS-1$
 		headingRaw = headingRaw.replace("$FUNCTION2$", function2.toString()); //$NON-NLS-1$
 		heading = new JLabel(headingRaw, SwingConstants.CENTER);
-		heading.setFont(FrameMain.getGlobalFont());
+		heading.setFont(FrameMain.getHeadingFont());
 		heading.setBounds(100, 40, 400, 50);
 		add(heading);
 		
 		intersection_desc = new JLabel(Strings.getStringAsHTML("PanelIntersection.label_intersection_desc"), //$NON-NLS-1$
 				SwingConstants.CENTER);
-		intersection_desc.setFont(FrameMain.getGlobalFont());
+		intersection_desc.setFont(FrameMain.getHeadingFont());
 		intersection_desc.setBounds(100, 150, 400, 30);
 		add(intersection_desc);
 
