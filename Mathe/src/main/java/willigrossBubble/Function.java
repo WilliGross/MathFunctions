@@ -28,7 +28,7 @@ public class Function implements Serializable {
 	private String				expressionRounded	= "";					//$NON-NLS-1$
 
 	private char				name;
-	
+
 	public Function(String expression) {
 		this(expression, expression);
 	}
@@ -38,28 +38,28 @@ public class Function implements Serializable {
 		this.expressionRounded = expressionRounded;
 		name = FrameMain.getInstance().getMainLogic().getNextName();
 	}
-	
+
 	/**
 	 * @return the expression
 	 */
 	public String getExpression() {
 		return expression;
 	}
-	
+
 	/**
 	 * @return the expressionRounded
 	 */
 	public String getExpressionRounded() {
 		return expressionRounded;
 	}
-	
+
 	/**
 	 * @return the name
 	 */
 	public char getName() {
 		return name;
 	}
-	
+
 	/**
 	 * @param expression
 	 *            - the expression to save as the function
@@ -67,7 +67,7 @@ public class Function implements Serializable {
 	public void setExpression(String expression) {
 		this.expression = expression;
 	}
-	
+
 	/**
 	 * @param expressionRounded
 	 *            the expressionRounded to set
@@ -75,7 +75,7 @@ public class Function implements Serializable {
 	public void setExpressionRounded(String expressionRounded) {
 		this.expressionRounded = expressionRounded;
 	}
-	
+
 	/**
 	 * @param name
 	 *            the name to set
@@ -91,7 +91,7 @@ public class Function implements Serializable {
 	public String toString() {
 		return name + "(x) = " + expressionRounded; //$NON-NLS-1$
 	}
-	
+
 	/**
 	 * Evaluates the expression with a specified x value
 	 *
@@ -105,7 +105,7 @@ public class Function implements Serializable {
 		variables.set("x", x); //$NON-NLS-1$
 		return evaluator.evaluate(expression, variables);
 	}
-	
+
 	/**
 	 * This checks whether a point is on the graph
 	 *
@@ -127,7 +127,7 @@ public class Function implements Serializable {
 
 		return false;
 	}
-	
+
 	/**
 	 * Displays a value table for the expression
 	 *
@@ -161,7 +161,7 @@ public class Function implements Serializable {
 
 		return table.toArray(new String[table.size()]);
 	}
-	
+
 	/**
 	 * Mirror a function on the x-axis
 	 *
@@ -185,7 +185,7 @@ public class Function implements Serializable {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Mirror a function on the y-axis
 	 *
@@ -194,24 +194,31 @@ public class Function implements Serializable {
 	public Function mirrorY() {
 		try {
 			final Function copy = deepCopy();
-			boolean endsWithX = false;
-			if (copy.getExpression().endsWith("x")) //$NON-NLS-1$
-				endsWithX = true;
 
-			final String[] splitX = copy.getExpression().split("x"); //$NON-NLS-1$
-			final String[] splitXRounded = copy.getExpressionRounded().split("x"); //$NON-NLS-1$
+			if (copy.getExpression().trim().equals("x")) { //$NON-NLS-1$
+				copy.setExpression("-x"); //$NON-NLS-1$
+				copy.setExpressionRounded("-x"); //$NON-NLS-1$
+			} else {
 
-			copy.setExpression(splitX[0]);
-			copy.setExpressionRounded(splitXRounded[0]);
+				boolean endsWithX = false;
+				if (copy.getExpression().endsWith("x")) //$NON-NLS-1$
+					endsWithX = true;
 
-			for (int i = 1; i < splitX.length; i++) {
-				copy.setExpression(copy.getExpression() + "(-x)" + splitX[i]); //$NON-NLS-1$
-				copy.setExpressionRounded(copy.getExpressionRounded() + "(-x)" + splitXRounded[i]); //$NON-NLS-1$
-			}
-			
-			if (endsWithX) {
-				copy.setExpression(copy.getExpression() + "(-x)"); //$NON-NLS-1$
-				copy.setExpressionRounded(copy.getExpressionRounded() + "(-x)"); //$NON-NLS-1$
+				final String[] splitX = copy.getExpression().split("x"); //$NON-NLS-1$
+				final String[] splitXRounded = copy.getExpressionRounded().split("x"); //$NON-NLS-1$
+
+				copy.setExpression(splitX[0]);
+				copy.setExpressionRounded(splitXRounded[0]);
+
+				for (int i = 1; i < splitX.length; i++) {
+					copy.setExpression(copy.getExpression() + "(-x)" + splitX[i]); //$NON-NLS-1$
+					copy.setExpressionRounded(copy.getExpressionRounded() + "(-x)" + splitXRounded[i]); //$NON-NLS-1$
+				}
+
+				if (endsWithX) {
+					copy.setExpression(copy.getExpression() + "(-x)"); //$NON-NLS-1$
+					copy.setExpressionRounded(copy.getExpressionRounded() + "(-x)"); //$NON-NLS-1$
+				}
 			}
 
 			copy.setName(FrameMain.getInstance().getMainLogic().getNextName());
@@ -221,7 +228,7 @@ public class Function implements Serializable {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Mirror a function on the x-axis and y-axis => rotate it around the origin
 	 *
@@ -231,7 +238,7 @@ public class Function implements Serializable {
 
 		return mirrorX().mirrorY();
 	}
-	
+
 	/**
 	 * Creates a deep copy of the function using serialization and deserialization
 	 *
@@ -265,7 +272,7 @@ public class Function implements Serializable {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * override .equals so that two functions that have the same expression are equal
 	 */
@@ -281,7 +288,7 @@ public class Function implements Serializable {
 			return true;
 		return false;
 	}
-	
+
 	/**
 	 * override. hashcode by generating the hash with the expression of the function
 	 */
@@ -289,5 +296,5 @@ public class Function implements Serializable {
 	public int hashCode() {
 		return getExpression().hashCode();
 	}
-	
+
 }
