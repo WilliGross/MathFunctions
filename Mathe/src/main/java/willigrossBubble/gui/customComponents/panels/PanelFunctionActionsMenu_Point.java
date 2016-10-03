@@ -13,13 +13,13 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
-import willigrossBubble.Function;
-import willigrossBubble.Point;
-import willigrossBubble.Strings;
-import willigrossBubble.Utility;
-import willigrossBubble.Validations;
+import willigrossBubble.data.Strings;
+import willigrossBubble.data.UtilityData;
 import willigrossBubble.gui.FocusAdapter_SelectAll;
 import willigrossBubble.gui.FrameMain;
+import willigrossBubble.logic.Function;
+import willigrossBubble.logic.Point;
+import willigrossBubble.logic.Validations;
 
 public class PanelFunctionActionsMenu_Point extends RequestFocusForDefaultComponentPanel {
 	
@@ -94,8 +94,8 @@ public class PanelFunctionActionsMenu_Point extends RequestFocusForDefaultCompon
 				source.setBorder(new LineBorder(Color.GRAY));
 				if (Validations.canConvertToNumber(p1x.getText()) && Validations.canConvertToNumber(p1y.getText())) {
 					
-					final double px = Utility.readDoubleFromStringInput(p1x.getText()),
-							py = Utility.readDoubleFromStringInput(p1y.getText());
+					final double px = UtilityData.readDoubleFromStringInput(p1x.getText()),
+							py = UtilityData.readDoubleFromStringInput(p1y.getText());
 					final Point p = new Point(px, py);
 					
 					if (function.testPointOnGraph(p)) {

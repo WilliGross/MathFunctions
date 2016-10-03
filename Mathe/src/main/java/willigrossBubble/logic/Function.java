@@ -1,4 +1,4 @@
-package willigrossBubble;
+package willigrossBubble.logic;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import com.fathzer.soft.javaluator.DoubleEvaluator;
 import com.fathzer.soft.javaluator.StaticVariableSet;
 
+import willigrossBubble.data.Strings;
 import willigrossBubble.gui.FrameMain;
 
 public class Function implements Serializable {
@@ -151,12 +152,12 @@ public class Function implements Serializable {
 		if (start <= end)
 			for (double x = start; x <= end; x += step) {
 				variables.set("x", x); //$NON-NLS-1$
-				table.add(name + "(" + x + ") = " + Utility.roundDouble(evaluator.evaluate(expression, variables), 3)); //$NON-NLS-1$ //$NON-NLS-2$
+				table.add(name + "(" + x + ") = " + UtilityLogic.roundDouble(evaluator.evaluate(expression, variables), 3)); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		else
 			for (double x = start; x >= end; x -= step) {
 				variables.set("x", x); //$NON-NLS-1$
-				table.add(name + "(" + x + ") = " + Utility.roundDouble(evaluator.evaluate(expression, variables), 3)); //$NON-NLS-1$ //$NON-NLS-2$
+				table.add(name + "(" + x + ") = " + UtilityLogic.roundDouble(evaluator.evaluate(expression, variables), 3)); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 
 		return table.toArray(new String[table.size()]);

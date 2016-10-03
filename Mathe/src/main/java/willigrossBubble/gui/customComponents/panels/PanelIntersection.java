@@ -7,11 +7,11 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
-import willigrossBubble.Function;
-import willigrossBubble.Intersection;
-import willigrossBubble.IntersectionNotFoundException;
-import willigrossBubble.Strings;
+import willigrossBubble.data.Strings;
 import willigrossBubble.gui.FrameMain;
+import willigrossBubble.logic.Function;
+import willigrossBubble.logic.Intersection;
+import willigrossBubble.logic.IntersectionNotFoundException;
 
 public class PanelIntersection extends CenterPanel {
 

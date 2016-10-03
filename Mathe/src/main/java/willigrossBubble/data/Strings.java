@@ -1,4 +1,4 @@
-package willigrossBubble;
+package willigrossBubble.data;
 
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
@@ -11,7 +11,7 @@ public class Strings {
 
 	public static String getStringAsHTML(String key) {
 		try {
-			return Utility.convertToHTML(RESOURCE_BUNDLE.getString(key));
+			return UtilityData.convertToHTML(RESOURCE_BUNDLE.getString(key));
 		} catch (@SuppressWarnings("unused") final MissingResourceException e) {
 			return '!' + key + '!';
 		}

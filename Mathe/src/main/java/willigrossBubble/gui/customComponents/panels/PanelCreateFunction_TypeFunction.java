@@ -9,11 +9,11 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
-import willigrossBubble.Function;
-import willigrossBubble.Strings;
-import willigrossBubble.Validations;
+import willigrossBubble.data.Strings;
 import willigrossBubble.gui.FrameMain;
 import willigrossBubble.gui.customComponents.buttons.CustomButtonSmall;
+import willigrossBubble.logic.Function;
+import willigrossBubble.logic.Validations;
 
 public class PanelCreateFunction_TypeFunction extends RequestFocusForDefaultComponentPanel {
 

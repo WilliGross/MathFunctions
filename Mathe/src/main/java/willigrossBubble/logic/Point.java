@@ -1,4 +1,4 @@
-package willigrossBubble;
+package willigrossBubble.logic;
 
 import java.io.Serializable;
 
@@ -91,7 +91,7 @@ public class Point implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "(" + Utility.roundDouble(getX(), 3) + "|" + Utility.roundDouble(getY(), 3) + ")"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		return "(" + UtilityLogic.roundDouble(getX(), 3) + "|" + UtilityLogic.roundDouble(getY(), 3) + ")"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 	
 	/**

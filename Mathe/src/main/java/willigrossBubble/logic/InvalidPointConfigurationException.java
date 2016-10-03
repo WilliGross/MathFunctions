@@ -1,4 +1,4 @@
-package willigrossBubble;
+package willigrossBubble.logic;
 
 public class InvalidPointConfigurationException extends Exception {
 	

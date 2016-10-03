@@ -1,4 +1,6 @@
-package willigrossBubble;
+package willigrossBubble.logic;
+
+import willigrossBubble.data.Strings;
 
 public class LinearFunction extends Function {
 
@@ -48,7 +50,7 @@ public class LinearFunction extends Function {
 				expressionRounded += (m != 1.0) ? (int) m + " * x" : "x"; //$NON-NLS-1$ //$NON-NLS-2$
 			} else {
 				expression += (m != 1.0) ? m + " * x" : "x"; //$NON-NLS-1$ //$NON-NLS-2$
-				expressionRounded += (m != 1.0) ? Utility.roundDouble(m, 3) + " * x" : "x"; //$NON-NLS-1$ //$NON-NLS-2$
+				expressionRounded += (m != 1.0) ? UtilityLogic.roundDouble(m, 3) + " * x" : "x"; //$NON-NLS-1$ //$NON-NLS-2$
 			}
 
 		if (!expression.equals("") && (t != 0)) { //$NON-NLS-1$
@@ -60,7 +62,7 @@ public class LinearFunction extends Function {
 			expressionRounded += (t != 0.0) ? (int) t : ""; //$NON-NLS-1$
 		} else {
 			expression += (t != 0.0) ? t : ""; //$NON-NLS-1$
-			expressionRounded += (t != 0.0) ? Utility.roundDouble(t, 3) : ""; //$NON-NLS-1$
+			expressionRounded += (t != 0.0) ? UtilityLogic.roundDouble(t, 3) : ""; //$NON-NLS-1$
 		}
 
 		return new LinearFunction(expression, expressionRounded);

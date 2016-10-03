@@ -3,7 +3,7 @@ package willigrossBubble.gui.customComponents.panels;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-import willigrossBubble.Strings;
+import willigrossBubble.data.Strings;
 import willigrossBubble.gui.FrameMain;
 import willigrossBubble.gui.customComponents.buttons.CustomButtonLarge;
 

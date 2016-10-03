@@ -6,10 +6,10 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-import willigrossBubble.Function;
-import willigrossBubble.Strings;
+import willigrossBubble.data.Strings;
 import willigrossBubble.gui.FrameMain;
 import willigrossBubble.gui.customComponents.buttons.CustomButtonLarge;
+import willigrossBubble.logic.Function;
 
 public class PanelFunctionActionsMenu_Menu extends RequestFocusForDefaultComponentPanel {
 
@@ -63,14 +63,14 @@ public class PanelFunctionActionsMenu_Menu extends RequestFocusForDefaultCompone
 		saveInFile.setToolTipText(Strings.getStringAsHTML("PanelFunctionActionsMenu_Menu.checkBox_save_tooltip")); //$NON-NLS-1$
 		saveInFile.setHorizontalAlignment(SwingConstants.CENTER);
 		saveInFile.setBounds(100, 220, 400, 30);
-		if (FrameMain.getInstance().getMainLogic().isFunctionSaved(function))
+		if (FrameMain.getInstance().getMainLogic().getMainData().isFunctionSaved(function))
 			saveInFile.setSelected(true);
 		saveInFile.addItemListener(e -> {
 			if (saveInFile.isSelected())
-				FrameMain.getInstance().getMainLogic().saveFunctionInFile(function);
+				FrameMain.getInstance().getMainLogic().getMainData().saveFunctionInFile(function);
 			else
-				FrameMain.getInstance().getMainLogic().removeFunctionFromFile(function);
-			FrameMain.getInstance().getMainLogic().displayFunctionsDat();
+				FrameMain.getInstance().getMainLogic().getMainData().removeFunctionFromFile(function);
+			FrameMain.getInstance().getMainLogic().getMainData().displayFunctionsDat();
 		});
 		add(saveInFile);
 		

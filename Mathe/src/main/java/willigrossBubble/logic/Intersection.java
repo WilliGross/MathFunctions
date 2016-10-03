@@ -1,4 +1,6 @@
-package willigrossBubble;
+package willigrossBubble.logic;
+
+import willigrossBubble.data.Strings;
 
 public class Intersection extends Point {
 	

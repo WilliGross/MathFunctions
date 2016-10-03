@@ -10,9 +10,7 @@ import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
-import willigrossBubble.Function;
-import willigrossBubble.MainLogic;
-import willigrossBubble.Strings;
+import willigrossBubble.data.Strings;
 import willigrossBubble.gui.customComponents.panels.CenterPanel;
 import willigrossBubble.gui.customComponents.panels.PanelCreateFunction;
 import willigrossBubble.gui.customComponents.panels.PanelFunctionActionsMenu;
@@ -22,6 +20,8 @@ import willigrossBubble.gui.customComponents.panels.PanelLoadFunction;
 import willigrossBubble.gui.customComponents.panels.PanelMain;
 import willigrossBubble.gui.customComponents.panels.PanelNavigation;
 import willigrossBubble.gui.customComponents.panels.PanelNavigation.ButtonStates;
+import willigrossBubble.logic.Function;
+import willigrossBubble.logic.MainLogic;
 
 public class FrameMain extends JFrame {
 	
@@ -46,10 +46,10 @@ public class FrameMain extends JFrame {
 
 	/** Panel with back and main menu buttons */
 	private final PanelNavigation	panelSouth;
-
+	
 	/** Main logic controller object */
 	private final MainLogic			mainLogic;
-
+	
 	/** Initializes fonts */
 	static {
 		try {

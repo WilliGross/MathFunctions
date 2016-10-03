@@ -15,12 +15,12 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
-import willigrossBubble.Function;
-import willigrossBubble.Strings;
-import willigrossBubble.Utility;
-import willigrossBubble.Validations;
+import willigrossBubble.data.Strings;
+import willigrossBubble.data.UtilityData;
 import willigrossBubble.gui.FocusAdapter_SelectAll;
 import willigrossBubble.gui.FrameMain;
+import willigrossBubble.logic.Function;
+import willigrossBubble.logic.Validations;
 
 public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultComponentPanel {
 	
@@ -117,8 +117,8 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 			return true;
 		
 		if (Validations.canConvertToNumber(start.getText())) {
-			if ((Utility.readDoubleFromStringInput(start.getText()) > MAX_VALUE)
-					|| (Utility.readDoubleFromStringInput(start.getText()) < MIN_VALUE)) {
+			if ((UtilityData.readDoubleFromStringInput(start.getText()) > MAX_VALUE)
+					|| (UtilityData.readDoubleFromStringInput(start.getText()) < MIN_VALUE)) {
 				if (!listModel.contains(valueWarnStart))
 					listModel.addElement(valueWarnStart);
 				startValidationTwo = false;
@@ -148,8 +148,8 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 			return true;
 		
 		if (Validations.canConvertToNumber(end.getText())) {
-			if ((Utility.readDoubleFromStringInput(end.getText()) > MAX_VALUE)
-					|| (Utility.readDoubleFromStringInput(end.getText()) < MIN_VALUE)) {
+			if ((UtilityData.readDoubleFromStringInput(end.getText()) > MAX_VALUE)
+					|| (UtilityData.readDoubleFromStringInput(end.getText()) < MIN_VALUE)) {
 				if (!listModel.contains(valueWarnEnd))
 					listModel.addElement(valueWarnEnd);
 				endValidationTwo = false;
@@ -179,10 +179,10 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 			return true;
 		
 		if (Validations.canConvertToNumber(step.getText())) {
-			if ((Utility.readDoubleFromStringInput(step.getText()) == 0)
-					|| (Utility.readDoubleFromStringInput(step.getText()) > MAX_VALUE)
-					|| (Utility.readDoubleFromStringInput(step.getText()) < MIN_VALUE)) {
-				if (Utility.readDoubleFromStringInput(step.getText()) == 0)
+			if ((UtilityData.readDoubleFromStringInput(step.getText()) == 0)
+					|| (UtilityData.readDoubleFromStringInput(step.getText()) > MAX_VALUE)
+					|| (UtilityData.readDoubleFromStringInput(step.getText()) < MIN_VALUE)) {
+				if (UtilityData.readDoubleFromStringInput(step.getText()) == 0)
 					valueWarnStep = Strings.getStringAsHTML("PanelFunctionActionsMenu_Table.error_stepZero"); //$NON-NLS-1$
 				if (!listModel.contains(valueWarnStep))
 					listModel.addElement(valueWarnStep);
@@ -240,9 +240,9 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 					&& !end.getText().equals(Strings.getString("PanelFunctionActionsMenu_Table.textField_end")) //$NON-NLS-1$
 					&& !step.getText().equals(Strings.getString("PanelFunctionActionsMenu_Table.textField_step")) //$NON-NLS-1$
 					&& startValidation && endValidation && stepValidation) {
-				final double startValue = Utility.readDoubleFromStringInput(start.getText()),
-						endValue = Utility.readDoubleFromStringInput(end.getText()),
-						stepValue = Utility.readDoubleFromStringInput(step.getText());
+				final double startValue = UtilityData.readDoubleFromStringInput(start.getText()),
+						endValue = UtilityData.readDoubleFromStringInput(end.getText()),
+						stepValue = UtilityData.readDoubleFromStringInput(step.getText());
 				final String[] tableAsArray = function.table(startValue, endValue, stepValue);
 				int equalsIndex = 0;
 				for (final String element : tableAsArray)

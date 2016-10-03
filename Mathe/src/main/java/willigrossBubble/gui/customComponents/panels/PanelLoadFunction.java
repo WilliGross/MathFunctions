@@ -12,9 +12,9 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
-import willigrossBubble.Function;
-import willigrossBubble.Strings;
+import willigrossBubble.data.Strings;
 import willigrossBubble.gui.FrameMain;
+import willigrossBubble.logic.Function;
 
 public class PanelLoadFunction extends CenterPanel {
 

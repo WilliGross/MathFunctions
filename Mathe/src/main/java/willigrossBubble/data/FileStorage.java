@@ -1,7 +1,7 @@
 /*
  * Base code by DeBukkIt: https://github.com/DeBukkIt/SimpleFileStorage Modified by WilliGross for own needs
  */
-package willigrossBubble;
+package willigrossBubble.data;
 
 import java.io.EOFException;
 import java.io.File;
@@ -17,10 +17,10 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 
 public class FileStorage {
-	
+
 	private final File				storageFile;
 	private HashMap<String, Object>	storageMap;
-	
+
 	/**
 	 * Creates a FileStorage. It allows you to store<br>
 	 * your serializable object in a file using a key<br>
@@ -35,19 +35,20 @@ public class FileStorage {
 	 * @throws StreamCorruptedException
 	 *             or EOFException if file is corrupted
 	 */
-	public FileStorage(File file) throws IOException, IllegalArgumentException, StreamCorruptedException, EOFException {
+	public FileStorage(File file) throws IOException, IllegalArgumentException, StreamCorruptedException, EOFException,
+			ClassNotFoundException {
 		storageFile = file;
-		
+
 		if (storageFile.isDirectory())
 			throw new IllegalArgumentException(Strings.getStringAsHTML("FileStorage.exception_directory")); //$NON-NLS-1$
-
+			
 		if (storageFile.createNewFile()) {
 			storageMap = new HashMap<>();
 			save();
 		} else
 			load();
 	}
-	
+
 	/**
 	 * Saves the HashMap into the File
 	 */
@@ -58,7 +59,7 @@ public class FileStorage {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Loads the File into the HashMap
 	 *
@@ -66,16 +67,16 @@ public class FileStorage {
 	 *             or EOFException if file is corrupted
 	 */
 	@SuppressWarnings("unchecked")
-	private void load() throws StreamCorruptedException, EOFException {
+	private void load() throws StreamCorruptedException, EOFException, ClassNotFoundException {
 		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(storageFile))) {
 			storageMap = (HashMap<String, Object>) ois.readObject();
-		} catch (StreamCorruptedException | EOFException e) {
+		} catch (StreamCorruptedException | EOFException | ClassNotFoundException e) {
 			throw e;
-		} catch (IOException | ClassNotFoundException e) {
+		} catch (final IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Stores an Object o using a String key for later identification
 	 *
@@ -88,7 +89,7 @@ public class FileStorage {
 		storageMap.put(key, o);
 		save();
 	}
-	
+
 	/**
 	 * Reads your object from the storage
 	 *
@@ -99,7 +100,7 @@ public class FileStorage {
 	public Object get(String key) {
 		return storageMap.get(key);
 	}
-	
+
 	/**
 	 * Gives you the first key for a stored object
 	 *
@@ -113,7 +114,7 @@ public class FileStorage {
 				return entry.getKey();
 		return null;
 	}
-	
+
 	/**
 	 * All stored objects in an ArrayList of Objects
 	 *
@@ -125,7 +126,7 @@ public class FileStorage {
 			result.add(c);
 		return result;
 	}
-	
+
 	/**
 	 * All stored objects in a HashMap of Strings and Objects
 	 *
@@ -134,7 +135,7 @@ public class FileStorage {
 	public HashMap<String, Object> getAll() {
 		return storageMap;
 	}
-	
+
 	/**
 	 * Prints all stored keys with corresponding objects
 	 */
@@ -142,7 +143,7 @@ public class FileStorage {
 		for (final String cKey : storageMap.keySet())
 			System.out.println(cKey + " :: " + storageMap.get(cKey)); //$NON-NLS-1$
 	}
-	
+
 	/**
 	 * Removes an Key-Object pair from the storage
 	 *
@@ -152,14 +153,14 @@ public class FileStorage {
 		storageMap.remove(key);
 		save();
 	}
-	
+
 	/**
 	 * Removes an Key-Object pair from the storage
 	 *
 	 * @param obj
 	 */
 	public void remove(Object obj) {
-
+		
 		final Iterator<Entry<String, Object>> iterator = storageMap.entrySet().iterator();
 		while (iterator.hasNext()) {
 			final Entry<String, Object> entry = iterator.next();
@@ -168,7 +169,7 @@ public class FileStorage {
 		}
 		save();
 	}
-	
+
 	/**
 	 * Checks whether a key is registerd
 	 *
@@ -179,7 +180,7 @@ public class FileStorage {
 	public boolean hasKey(String key) {
 		return storageMap.containsKey(key);
 	}
-	
+
 	/**
 	 * Checks whether an object is stored at all
 	 *
@@ -190,7 +191,7 @@ public class FileStorage {
 	public boolean hasObject(Object o) {
 		return storageMap.containsValue(o);
 	}
-	
+
 	/**
 	 * Return a String representation of the HashMap<br>
 	 * containing all the key-object pairs.
@@ -202,5 +203,5 @@ public class FileStorage {
 			s += cKey + " :: " + storageMap.get(cKey) + "\n"; //$NON-NLS-1$ //$NON-NLS-2$
 		return s.trim();
 	}
-	
+
 }

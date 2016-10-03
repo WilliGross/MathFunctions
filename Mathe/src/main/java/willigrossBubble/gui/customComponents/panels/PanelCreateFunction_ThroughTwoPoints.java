@@ -9,17 +9,17 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
-import willigrossBubble.ExponentialFunction;
-import willigrossBubble.Function;
-import willigrossBubble.InvalidPointConfigurationException;
-import willigrossBubble.LinearFunction;
-import willigrossBubble.Point;
-import willigrossBubble.Strings;
-import willigrossBubble.Utility;
-import willigrossBubble.Validations;
+import willigrossBubble.data.Strings;
+import willigrossBubble.data.UtilityData;
 import willigrossBubble.gui.FocusAdapter_SelectAll;
 import willigrossBubble.gui.FrameMain;
 import willigrossBubble.gui.customComponents.buttons.CustomButtonSmall;
+import willigrossBubble.logic.ExponentialFunction;
+import willigrossBubble.logic.Function;
+import willigrossBubble.logic.InvalidPointConfigurationException;
+import willigrossBubble.logic.LinearFunction;
+import willigrossBubble.logic.Point;
+import willigrossBubble.logic.Validations;
 
 public class PanelCreateFunction_ThroughTwoPoints extends RequestFocusForDefaultComponentPanel {
 	
@@ -105,10 +105,10 @@ public class PanelCreateFunction_ThroughTwoPoints extends RequestFocusForDefault
 	private void calcFunction() throws Exception {
 		
 		try {
-			final double px = Utility.readDoubleFromStringInput(p1x.getText()),
-					py = Utility.readDoubleFromStringInput(p1y.getText()),
-					qx = Utility.readDoubleFromStringInput(p2x.getText()),
-					qy = Utility.readDoubleFromStringInput(p2y.getText());
+			final double px = UtilityData.readDoubleFromStringInput(p1x.getText()),
+					py = UtilityData.readDoubleFromStringInput(p1y.getText()),
+					qx = UtilityData.readDoubleFromStringInput(p2x.getText()),
+					qy = UtilityData.readDoubleFromStringInput(p2y.getText());
 			final Point p = new Point(px, py), q = new Point(qx, qy);
 			
 			if (type == FunctionType.EXPONENTIAL)

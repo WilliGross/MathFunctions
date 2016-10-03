@@ -4,9 +4,9 @@ import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 
-import willigrossBubble.Function;
 import willigrossBubble.gui.FrameMain;
 import willigrossBubble.gui.customComponents.panels.PanelNavigation.ButtonStates;
+import willigrossBubble.logic.Function;
 
 public class PanelFunctionActionsMenu extends CenterPanel {
 

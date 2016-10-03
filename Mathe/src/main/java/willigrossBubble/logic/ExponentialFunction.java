@@ -1,4 +1,6 @@
-package willigrossBubble;
+package willigrossBubble.logic;
+
+import willigrossBubble.data.Strings;
 
 public class ExponentialFunction extends Function {
 
@@ -29,11 +31,11 @@ public class ExponentialFunction extends Function {
 		//		throw new InvalidPointConfigurationException("Invalid point configuration: Points are equal to each other, can't create a unique function!");
 		
 		if (!p.equals(q)) {
-			if (Utility.arePointsOnHorzontalLine(p, q))
+			if (UtilityLogic.arePointsOnHorzontalLine(p, q))
 				throw new InvalidPointConfigurationException(
 						Strings.getStringAsHTML("ExponentialFunction.IPCE_sameYValues_message"), //$NON-NLS-1$
 						Strings.getStringAsHTML("ExponentialFunction.IPCE_sameYValues_tooltip")); //"Invalid point configuration: Points have the same y coordinate, exponential functions can never be perfectly horizontal!"  //$NON-NLS-1$
-			if (Utility.arePointsOnVerticalLine(p, q))
+			if (UtilityLogic.arePointsOnVerticalLine(p, q))
 				throw new InvalidPointConfigurationException(
 						Strings.getStringAsHTML("ExponentialFunction.IPCE_sameXValues_message"), //$NON-NLS-1$
 						Strings.getStringAsHTML("ExponentialFunction.IPCE_sameXValues_tooltip")); //"Invalid point configuration: Points have the same x coordinate, exponential functions can never be perfectly vertical!"  //$NON-NLS-1$
@@ -64,7 +66,7 @@ public class ExponentialFunction extends Function {
 				expressionRounded += (int) a + "^x"; //$NON-NLS-1$
 			} else {
 				expression += a + "^x"; //$NON-NLS-1$
-				expression += Utility.roundDouble(a, 3) + "^x"; //$NON-NLS-1$
+				expression += UtilityLogic.roundDouble(a, 3) + "^x"; //$NON-NLS-1$
 			}
 			
 			return new ExponentialFunction(expression, expressionRounded);
@@ -83,7 +85,7 @@ public class ExponentialFunction extends Function {
 				expressionRounded += (b != 1.0) ? (int) b + " * " : ""; //$NON-NLS-1$ //$NON-NLS-2$
 			} else {
 				expression += (b != 1.0) ? b + " * " : ""; //$NON-NLS-1$ //$NON-NLS-2$
-				expressionRounded += (b != 1.0) ? Utility.roundDouble(b, 3) + " * " : ""; //$NON-NLS-1$ //$NON-NLS-2$
+				expressionRounded += (b != 1.0) ? UtilityLogic.roundDouble(b, 3) + " * " : ""; //$NON-NLS-1$ //$NON-NLS-2$
 			}
 
 			if ((a - (int) a) == 0) {
@@ -91,7 +93,7 @@ public class ExponentialFunction extends Function {
 				expressionRounded += (int) a + "^x"; //$NON-NLS-1$
 			} else {
 				expression += a + "^x"; //$NON-NLS-1$
-				expressionRounded += Utility.roundDouble(a, 3) + "^x"; //$NON-NLS-1$
+				expressionRounded += UtilityLogic.roundDouble(a, 3) + "^x"; //$NON-NLS-1$
 			}
 			
 		}
