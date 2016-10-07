@@ -43,13 +43,21 @@ public class MainLogic implements ILogicController {
 	}
 	
 	@Override
-	public char getNextName() {
-		return FunctionNames.getNames()[functions.size()];
+	public Function getFunction(char name) {
+		return functions.get(name);
 	}
 
 	@Override
-	public Function getFunction(char name) {
-		return functions.get(name);
+	public Function[] getAllFunctions() {
+		final ArrayList<Function> functionsArrayList = new ArrayList<>();
+		for (final Entry<Character, Function> entry : functions.entrySet())
+			functionsArrayList.add(entry.getValue());
+		return functionsArrayList.toArray(new Function[functionsArrayList.size()]);
+	}
+
+	@Override
+	public Function getLatestFunction() {
+		return functions.get(FunctionNames.getNames()[functions.size() - 1]);
 	}
 
 	@Override
@@ -58,18 +66,10 @@ public class MainLogic implements ILogicController {
 	}
 
 	@Override
-	public Function getLatestFunction() {
-		return functions.get(FunctionNames.getNames()[functions.size() - 1]);
+	public char getNextName() {
+		return FunctionNames.getNames()[functions.size()];
 	}
-	
-	@Override
-	public Function[] getAllFunctions() {
-		final ArrayList<Function> functionsArrayList = new ArrayList<>();
-		for (final Entry<Character, Function> entry : functions.entrySet())
-			functionsArrayList.add(entry.getValue());
-		return functionsArrayList.toArray(new Function[functionsArrayList.size()]);
-	}
-	
+
 	/**
 	 * Debug method: displays the content of 'functions'
 	 */
