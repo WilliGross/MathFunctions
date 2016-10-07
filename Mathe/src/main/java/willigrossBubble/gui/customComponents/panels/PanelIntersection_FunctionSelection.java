@@ -8,10 +8,11 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
+import willigrossBubble.core.Controller;
+import willigrossBubble.core.logic.Function;
 import willigrossBubble.data.Strings;
 import willigrossBubble.gui.FrameMain;
 import willigrossBubble.gui.customComponents.buttons.CustomButtonSmall;
-import willigrossBubble.logic.Function;
 
 public class PanelIntersection_FunctionSelection extends CenterPanel {
 
@@ -36,11 +37,11 @@ public class PanelIntersection_FunctionSelection extends CenterPanel {
 		go = new CustomButtonSmall(Strings.getStringAsHTML("PanelIntersection_FunctionSelection.button_go")); //$NON-NLS-1$
 		go.setLocation(250, 450);
 		go.setEnabled(false);
-		go.addActionListener(e -> FrameMain.getInstance().panelIntersection(function1, function2));
+		go.addActionListener(e -> ((FrameMain) Controller.getInstance().getGUIController()).panelIntersection(function1, function2));
 		add(go);
 
 		listModel = new DefaultListModel<>();
-		for (final Function f : FrameMain.getInstance().getMainLogic().getAllFunctions())
+		for (final Function f : Controller.getInstance().getLogicController().getAllFunctions())
 			listModel.addElement(f);
 		result = new JList<>(listModel);
 		result.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -83,7 +84,7 @@ public class PanelIntersection_FunctionSelection extends CenterPanel {
 	
 	@Override
 	public void back() {
-		FrameMain.getInstance().panelMain();
+		((FrameMain) Controller.getInstance().getGUIController()).panelMain();
 	}
 
 }

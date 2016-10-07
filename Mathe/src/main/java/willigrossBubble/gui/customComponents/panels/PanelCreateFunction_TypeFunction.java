@@ -9,11 +9,12 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
+import willigrossBubble.core.Controller;
+import willigrossBubble.core.logic.Function;
+import willigrossBubble.core.logic.Validations;
 import willigrossBubble.data.Strings;
 import willigrossBubble.gui.FrameMain;
 import willigrossBubble.gui.customComponents.buttons.CustomButtonSmall;
-import willigrossBubble.logic.Function;
-import willigrossBubble.logic.Validations;
 
 public class PanelCreateFunction_TypeFunction extends RequestFocusForDefaultComponentPanel {
 
@@ -60,12 +61,11 @@ public class PanelCreateFunction_TypeFunction extends RequestFocusForDefaultComp
 		go.setLocation(250, 100);
 		go.setEnabled(false);
 		go.addActionListener(
-				e -> FrameMain.getInstance()
-						.panelFunctionActionsMenu(
-								FrameMain.getInstance().getMainLogic()
-										.getFunction(FrameMain.getInstance().getMainLogic()
-												.storeFunction(new Function(function.getText()))),
-								FrameMain.getInstance().getPanelCenter()));
+				e -> ((FrameMain) Controller.getInstance().getGUIController()).panelFunctionActionsMenu(
+						Controller.getInstance().getLogicController()
+								.getFunction(Controller.getInstance().getLogicController()
+										.storeFunction(new Function(function.getText()))),
+						((FrameMain) Controller.getInstance().getGUIController()).getPanelCenter()));
 		add(go);
 
 		setDefaultComponent(function);

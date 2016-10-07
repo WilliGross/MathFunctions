@@ -7,11 +7,12 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
+import willigrossBubble.core.Controller;
+import willigrossBubble.core.logic.Function;
+import willigrossBubble.core.logic.Intersection;
+import willigrossBubble.core.logic.IntersectionNotFoundException;
 import willigrossBubble.data.Strings;
 import willigrossBubble.gui.FrameMain;
-import willigrossBubble.logic.Function;
-import willigrossBubble.logic.Intersection;
-import willigrossBubble.logic.IntersectionNotFoundException;
 
 public class PanelIntersection extends CenterPanel {
 
@@ -54,7 +55,7 @@ public class PanelIntersection extends CenterPanel {
 	
 	@Override
 	public void back() {
-		FrameMain.getInstance().panelIntersection_FunctionSelection();
+		((FrameMain) Controller.getInstance().getGUIController()).panelIntersection_FunctionSelection();
 	}
 
 }

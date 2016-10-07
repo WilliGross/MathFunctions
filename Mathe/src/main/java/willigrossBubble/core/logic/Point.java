@@ -1,4 +1,4 @@
-package willigrossBubble.logic;
+package willigrossBubble.core.logic;
 
 import java.io.Serializable;
 

@@ -13,13 +13,13 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
+import willigrossBubble.core.data.UtilityData;
+import willigrossBubble.core.logic.Function;
+import willigrossBubble.core.logic.Point;
+import willigrossBubble.core.logic.Validations;
 import willigrossBubble.data.Strings;
-import willigrossBubble.data.UtilityData;
 import willigrossBubble.gui.FocusAdapter_SelectAll;
 import willigrossBubble.gui.FrameMain;
-import willigrossBubble.logic.Function;
-import willigrossBubble.logic.Point;
-import willigrossBubble.logic.Validations;
 
 public class PanelFunctionActionsMenu_Point extends RequestFocusForDefaultComponentPanel {
 	

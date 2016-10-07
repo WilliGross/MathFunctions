@@ -3,10 +3,11 @@ package willigrossBubble.gui.customComponents.panels;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import willigrossBubble.core.Controller;
+import willigrossBubble.core.logic.Function;
 import willigrossBubble.data.Strings;
 import willigrossBubble.gui.FrameMain;
 import willigrossBubble.gui.customComponents.buttons.CustomButtonSmall;
-import willigrossBubble.logic.Function;
 
 public class PanelFunctionActionsMenu_Mirror extends RequestFocusForDefaultComponentPanel {
 	
@@ -35,9 +36,9 @@ public class PanelFunctionActionsMenu_Mirror extends RequestFocusForDefaultCompo
 		go.setLocation(250, 130);
 		go.setEnabled(false);
 		go.addActionListener(e -> {
-			FrameMain.getInstance().getMainLogic().storeFunction(functionMirrored);
-			FrameMain.getInstance().panelFunctionActionsMenu(functionMirrored,
-					FrameMain.getInstance().getPanelCenter());
+			Controller.getInstance().getLogicController().storeFunction(functionMirrored);
+			((FrameMain) Controller.getInstance().getGUIController()).panelFunctionActionsMenu(functionMirrored,
+					((FrameMain) Controller.getInstance().getGUIController()).getPanelCenter());
 		});
 		add(go);
 

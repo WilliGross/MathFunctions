@@ -1,7 +1,7 @@
 /**
  *
  */
-package willigrossBubble.data;
+package willigrossBubble.core.data;
 
 import com.fathzer.soft.javaluator.DoubleEvaluator;
 

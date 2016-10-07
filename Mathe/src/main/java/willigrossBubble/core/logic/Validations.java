@@ -1,4 +1,4 @@
-package willigrossBubble.logic;
+package willigrossBubble.core.logic;
 
 import com.fathzer.soft.javaluator.DoubleEvaluator;
 import com.fathzer.soft.javaluator.StaticVariableSet;

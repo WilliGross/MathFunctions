@@ -12,9 +12,10 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
+import willigrossBubble.core.Controller;
+import willigrossBubble.core.logic.Function;
 import willigrossBubble.data.Strings;
 import willigrossBubble.gui.FrameMain;
-import willigrossBubble.logic.Function;
 
 public class PanelLoadFunction extends CenterPanel {
 
@@ -34,7 +35,7 @@ public class PanelLoadFunction extends CenterPanel {
 		add(heading);
 		
 		listModel = new DefaultListModel<>();
-		for (final Function f : FrameMain.getInstance().getMainLogic().getAllFunctions())
+		for (final Function f : Controller.getInstance().getLogicController().getAllFunctions())
 			listModel.addElement(f);
 		result = new JList<>(listModel);
 		result.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -44,8 +45,8 @@ public class PanelLoadFunction extends CenterPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (!result.isSelectionEmpty())
-					FrameMain.getInstance().panelFunctionActionsMenu(listModel.get(result.getSelectedIndex()),
-							FrameMain.getInstance().getPanelCenter());
+					((FrameMain) Controller.getInstance().getGUIController()).panelFunctionActionsMenu(listModel.get(result.getSelectedIndex()),
+							((FrameMain) Controller.getInstance().getGUIController()).getPanelCenter());
 			}
 		});
 		result.setFont(FrameMain.getMonospacedFont().deriveFont(Font.BOLD, 14));
@@ -57,7 +58,7 @@ public class PanelLoadFunction extends CenterPanel {
 
 	@Override
 	public void back() {
-		FrameMain.getInstance().panelMain();
+		((FrameMain) Controller.getInstance().getGUIController()).panelMain();
 	}
 
 }

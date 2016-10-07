@@ -1,4 +1,4 @@
-package willigrossBubble.logic;
+package willigrossBubble.core.logic;
 
 public class IntersectionNotFoundException extends Exception {
 	

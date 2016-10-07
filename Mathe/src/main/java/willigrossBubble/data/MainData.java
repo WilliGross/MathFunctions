@@ -4,34 +4,39 @@ import java.io.EOFException;
 import java.io.File;
 import java.io.IOException;
 import java.io.StreamCorruptedException;
-import java.util.HashMap;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import willigrossBubble.core.Controller;
+import willigrossBubble.core.data.IDataController;
+import willigrossBubble.core.logic.Function;
+import willigrossBubble.core.logic.FunctionNames;
 import willigrossBubble.gui.FrameMain;
-import willigrossBubble.logic.Function;
-import willigrossBubble.logic.MainLogic;
 
-public class MainData {
+public class MainData implements IDataController {
+
+	/** Reference to the main controller */
+	private Controller controller; //Will be used for Logger
+	
+	@Override
+	public void setController(Controller controller) {
+		this.controller = controller;
+	}
 	
 	/** The file where functions are saved to make them survive a program restart */
-	private final File functionsDat = new File(
+	private final File storageFile = new File(
 			MainData.class.getProtectionDomain().getCodeSource().getLocation().getFile().substring(0,
 					MainData.class.getProtectionDomain().getCodeSource().getLocation().getFile().lastIndexOf('/') + 1)
 					+ Strings.getString("MainLogic.functionStorageFileName")); //$NON-NLS-1$
 	
-	/**
-	 * Save a function in 'Functions.dat'
-	 *
-	 * @param function
-	 *            the function to be saved
-	 */
+	@Override
 	public void saveFunctionInFile(Function function) {
 		try {
-			final FileStorage fileStorage = new FileStorage(functionsDat);
-			for (int i = 0; i < MainLogic.names.length; i++)
-				if (!fileStorage.hasKey("" + MainLogic.names[i])) { //$NON-NLS-1$
-					fileStorage.store("" + MainLogic.names[i], function); //$NON-NLS-1$
+			final FileStorage fileStorage = new FileStorage(storageFile);
+			for (int i = 0; i < FunctionNames.getNames().length; i++)
+				if (!fileStorage.hasKey("" + FunctionNames.getNames()[i])) { //$NON-NLS-1$
+					fileStorage.store("" + FunctionNames.getNames()[i], function); //$NON-NLS-1$
 					break;
 				}
 		} catch (IllegalArgumentException | IOException | ClassNotFoundException e) {
@@ -39,63 +44,20 @@ public class MainData {
 		}
 	}
 	
-	/**
-	 * Removes a function from the save file but not from the functions list (-> effective after restart)
-	 *
-	 * @param function
-	 *            - the function to remove
-	 */
+	@Override
 	public void removeFunctionFromFile(Function function) {
 		try {
-			final FileStorage fileStorage = new FileStorage(functionsDat);
+			final FileStorage fileStorage = new FileStorage(storageFile);
 			fileStorage.remove(function);
 		} catch (IllegalArgumentException | IOException | ClassNotFoundException e) {
 			System.err.println(e);
 		}
 	}
 	
-	/**
-	 * Loads all the functions from the save file and adds them to the functions map
-	 */
-	public HashMap<Character, Function> loadFunctions() {
-		final HashMap<Character, Function> functions = new HashMap<>();
-		Function function = null;
-		try {
-			final FileStorage fileStorage = new FileStorage(functionsDat);
-			for (final char name : MainLogic.names) {
-				function = (Function) fileStorage.get("" + name); //$NON-NLS-1$
-				if (function != null)
-					functions.put(MainLogic.names[functions.size()], function);
-			}
-			
-		} catch (@SuppressWarnings("unused") StreamCorruptedException | EOFException | ClassNotFoundException e) {
-			deleteFunctionsDat();
-		} catch (IllegalArgumentException | IOException e) {
-			e.printStackTrace();
-		}
-		return functions;
-	}
-	
-	/**
-	 * Delete the FunctionsDat file
-	 */
-	public void deleteFunctionsDat() {
-		JOptionPane.showMessageDialog(FrameMain.getInstance(),
-				Strings.getStringAsHTML("MainLogic.functionStorageFileCorrupted_message"), //$NON-NLS-1$
-				Strings.getString("MainLogic.functionStorageFileCorrupted_title"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$
-		functionsDat.delete();
-	}
-	
-	/**
-	 * Checks if a function is saved in Functions.dat
-	 *
-	 * @param function
-	 *            the function to check
-	 * @return true if the function is stored in file, otherwise false
-	 */
+	@Override
 	public boolean isFunctionSaved(Function function) {
 		try {
-			final FileStorage fileStorage = new FileStorage(functionsDat);
+			final FileStorage fileStorage = new FileStorage(storageFile);
 			
 			for (final Object f : fileStorage.getAllAsArrayList().toArray())
 				if (((Function) f).equals(function))
@@ -108,12 +70,42 @@ public class MainData {
 		return false;
 	}
 	
+	@Override
+	public Function[] loadFunctions() {
+		final ArrayList<Function> functions = new ArrayList<>();
+		Function function = null;
+		try {
+			final FileStorage fileStorage = new FileStorage(storageFile);
+			for (final char name : FunctionNames.getNames()) {
+				function = (Function) fileStorage.get("" + name); //$NON-NLS-1$
+				if (function != null)
+					functions.add(function);
+			}
+			
+		} catch (@SuppressWarnings("unused") StreamCorruptedException | EOFException | ClassNotFoundException e) {
+			deleteStorageFile();
+		} catch (IllegalArgumentException | IOException e) {
+			e.printStackTrace();
+		}
+		return functions.toArray(new Function[functions.size()]);
+	}
+	
+	/**
+	 * Delete the FunctionsDat file
+	 */
+	public void deleteStorageFile() {
+		JOptionPane.showMessageDialog(((FrameMain) Controller.getInstance().getGUIController()),
+				Strings.getStringAsHTML("MainLogic.functionStorageFileCorrupted_message"), //$NON-NLS-1$
+				Strings.getString("MainLogic.functionStorageFileCorrupted_title"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$
+		storageFile.delete();
+	}
+	
 	/**
 	 * Debug method: displays the content of 'Functions.dat'
 	 */
-	public void displayFunctionsDat() {
+	public void displayStorageFile() {
 		try {
-			final FileStorage fileStorage = new FileStorage(functionsDat);
+			final FileStorage fileStorage = new FileStorage(storageFile);
 			
 			System.out.println(fileStorage.getAll());
 		} catch (IllegalArgumentException | IOException | ClassNotFoundException e) {
