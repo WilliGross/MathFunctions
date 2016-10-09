@@ -37,7 +37,7 @@ public class PanelIntersection_FunctionSelection extends CenterPanel {
 		go = new CustomButtonSmall(Strings.getStringAsHTML("PanelIntersection_FunctionSelection.button_go")); //$NON-NLS-1$
 		go.setLocation(250, 450);
 		go.setEnabled(false);
-		go.addActionListener(e -> ((FrameMain) Controller.getInstance().getGUIController()).panelIntersection(function1, function2));
+		go.addActionListener(e -> FrameMain.getInstance().panelIntersection(function1, function2));
 		add(go);
 
 		listModel = new DefaultListModel<>();
@@ -84,7 +84,7 @@ public class PanelIntersection_FunctionSelection extends CenterPanel {
 	
 	@Override
 	public void back() {
-		((FrameMain) Controller.getInstance().getGUIController()).panelMain();
+		FrameMain.getInstance().panelMain();
 	}
 
 }

@@ -37,8 +37,8 @@ public class PanelFunctionActionsMenu_Mirror extends RequestFocusForDefaultCompo
 		go.setEnabled(false);
 		go.addActionListener(e -> {
 			Controller.getInstance().getLogicController().storeFunction(functionMirrored);
-			((FrameMain) Controller.getInstance().getGUIController()).panelFunctionActionsMenu(functionMirrored,
-					((FrameMain) Controller.getInstance().getGUIController()).getPanelCenter());
+			FrameMain.getInstance().panelFunctionActionsMenu(functionMirrored,
+					FrameMain.getInstance().getPanelCenter());
 		});
 		add(go);
 

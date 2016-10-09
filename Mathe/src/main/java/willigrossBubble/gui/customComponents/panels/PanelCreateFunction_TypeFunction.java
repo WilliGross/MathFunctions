@@ -61,11 +61,11 @@ public class PanelCreateFunction_TypeFunction extends RequestFocusForDefaultComp
 		go.setLocation(250, 100);
 		go.setEnabled(false);
 		go.addActionListener(
-				e -> ((FrameMain) Controller.getInstance().getGUIController()).panelFunctionActionsMenu(
+				e -> FrameMain.getInstance().panelFunctionActionsMenu(
 						Controller.getInstance().getLogicController()
 								.getFunction(Controller.getInstance().getLogicController()
 										.storeFunction(new Function(function.getText()))),
-						((FrameMain) Controller.getInstance().getGUIController()).getPanelCenter()));
+						FrameMain.getInstance().getPanelCenter()));
 		add(go);
 
 		setDefaultComponent(function);

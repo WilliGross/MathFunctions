@@ -45,8 +45,8 @@ public class PanelLoadFunction extends CenterPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (!result.isSelectionEmpty())
-					((FrameMain) Controller.getInstance().getGUIController()).panelFunctionActionsMenu(listModel.get(result.getSelectedIndex()),
-							((FrameMain) Controller.getInstance().getGUIController()).getPanelCenter());
+					FrameMain.getInstance().panelFunctionActionsMenu(listModel.get(result.getSelectedIndex()),
+							FrameMain.getInstance().getPanelCenter());
 			}
 		});
 		result.setFont(FrameMain.getMonospacedFont().deriveFont(Font.BOLD, 14));
@@ -58,7 +58,7 @@ public class PanelLoadFunction extends CenterPanel {
 
 	@Override
 	public void back() {
-		((FrameMain) Controller.getInstance().getGUIController()).panelMain();
+		FrameMain.getInstance().panelMain();
 	}
 
 }

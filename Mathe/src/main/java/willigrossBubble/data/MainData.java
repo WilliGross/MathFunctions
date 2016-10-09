@@ -94,7 +94,7 @@ public class MainData implements IDataController {
 	 * Delete the FunctionsDat file
 	 */
 	public void deleteStorageFile() {
-		JOptionPane.showMessageDialog(((FrameMain) Controller.getInstance().getGUIController()),
+		JOptionPane.showMessageDialog(FrameMain.getInstance(),
 				Strings.getStringAsHTML("MainLogic.functionStorageFileCorrupted_message"), //$NON-NLS-1$
 				Strings.getString("MainLogic.functionStorageFileCorrupted_title"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$
 		storageFile.delete();

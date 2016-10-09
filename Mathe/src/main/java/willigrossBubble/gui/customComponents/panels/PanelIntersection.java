@@ -7,7 +7,6 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
-import willigrossBubble.core.Controller;
 import willigrossBubble.core.logic.Function;
 import willigrossBubble.core.logic.Intersection;
 import willigrossBubble.core.logic.IntersectionNotFoundException;
@@ -15,15 +14,15 @@ import willigrossBubble.data.Strings;
 import willigrossBubble.gui.FrameMain;
 
 public class PanelIntersection extends CenterPanel {
-
+	
 	private static final long	serialVersionUID	= 1L;
 	private final JLabel		heading, intersection, intersection_desc;
 	private Intersection		intersectionPoint;
-	
+
 	public PanelIntersection(Function function1, Function function2) {
-
+		
 		setLayout(null);
-
+		
 		String headingRaw = Strings.getStringAsHTML("PanelIntersection.label_heading"); //$NON-NLS-1$
 		headingRaw = headingRaw.replace("$FUNCTION1$", function1.toString()); //$NON-NLS-1$
 		headingRaw = headingRaw.replace("$FUNCTION2$", function2.toString()); //$NON-NLS-1$
@@ -31,13 +30,13 @@ public class PanelIntersection extends CenterPanel {
 		heading.setFont(FrameMain.getHeadingFont());
 		heading.setBounds(100, 40, 400, 50);
 		add(heading);
-		
+
 		intersection_desc = new JLabel(Strings.getStringAsHTML("PanelIntersection.label_intersection_desc"), //$NON-NLS-1$
 				SwingConstants.CENTER);
 		intersection_desc.setFont(FrameMain.getHeadingFont());
 		intersection_desc.setBounds(100, 150, 400, 30);
 		add(intersection_desc);
-
+		
 		intersection = new JLabel("", SwingConstants.CENTER); //$NON-NLS-1$
 		try {
 			intersectionPoint = new Intersection(function1, function2);
@@ -52,10 +51,10 @@ public class PanelIntersection extends CenterPanel {
 		intersection.setFont(new Font(intersection.getFont().getName(), intersection.getFont().getStyle(), 15));
 		add(intersection);
 	}
-	
+
 	@Override
 	public void back() {
-		((FrameMain) Controller.getInstance().getGUIController()).panelIntersection_FunctionSelection();
+		FrameMain.getInstance().panelIntersection_FunctionSelection();
 	}
-
+	
 }

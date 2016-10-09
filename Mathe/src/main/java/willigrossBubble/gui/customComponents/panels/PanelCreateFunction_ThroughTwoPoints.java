@@ -94,10 +94,10 @@ public class PanelCreateFunction_ThroughTwoPoints extends RequestFocusForDefault
 		go = new CustomButtonSmall(Strings.getStringAsHTML("PanelCreateFunction_ThroughTwoPoints.button_go")); //$NON-NLS-1$
 		go.setLocation(250, 160);
 		go.setEnabled(false);
-		go.addActionListener(e -> ((FrameMain) Controller.getInstance().getGUIController()).panelFunctionActionsMenu(
+		go.addActionListener(e -> FrameMain.getInstance().panelFunctionActionsMenu(
 				Controller.getInstance().getLogicController()
 						.getFunction(Controller.getInstance().getLogicController().storeFunction(function)),
-				((FrameMain) Controller.getInstance().getGUIController()).getPanelCenter()));
+				FrameMain.getInstance().getPanelCenter()));
 		add(go);
 
 		setDefaultComponent(p1x);
