@@ -3,33 +3,38 @@
  */
 package willigrossBubble.core.data;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.fathzer.soft.javaluator.DoubleEvaluator;
 
 public class UtilityData {
 	
+	private static final Logger logger = LoggerFactory.getLogger(UtilityData.class);
+	
 	/**
 	 * A utility method that converts a string expression into a double value
 	 *
-	 * @param input
-	 *            the string input
+	 * @param input the string input
 	 * @return the calculated double value
-	 * @throws IllegalArgumentException
-	 *             if input can't be converted to a number
+	 * @throws IllegalArgumentException if input can't be converted to a number
 	 */
 	public static double readDoubleFromStringInput(String input) throws IllegalArgumentException {
 
 		final DoubleEvaluator evaluator = new DoubleEvaluator();
 
-		evaluator.evaluate(input);
-		return evaluator.evaluate(input);
+		final double result = evaluator.evaluate(input);
+		
+		logger.info("Read {} from \"{}\"", result, input); //$NON-NLS-1$
+		
+		return result;
 	}
 	
 	/**
 	 * Convert a string into html format by replacing escape sequences like \n with <br< and color codes with the
 	 * minecraft color code system
 	 *
-	 * @param string
-	 *            the string to convert
+	 * @param string the string to convert
 	 * @return the updated string
 	 */
 	public static String convertToHTML(String string) {

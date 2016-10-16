@@ -1,5 +1,8 @@
 package willigrossBubble.core;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import willigrossBubble.core.data.IDataController;
 import willigrossBubble.core.gui.IGUIController;
 import willigrossBubble.core.logic.ILogicController;
@@ -14,6 +17,8 @@ import willigrossBubble.core.logic.ILogicController;
  */
 public class Controller {
 	
+	private static final Logger		logger	= LoggerFactory.getLogger(Controller.class);
+	
 	/** Instance */
 	private static Controller		instance;
 
@@ -27,16 +32,19 @@ public class Controller {
 
 	public Controller(IApplication caller, ILogicController logicController, IDataController dataController,
 			IGUIController guiController) { //this reference in constructors of sub-controllers is used for communication purposes, the main controller might have a log function implemented later -> java.util.logging.Logger
+		logger.info("Creating controller..."); //$NON-NLS-1$
 		Controller.caller = caller; //TODO Make less dirty
 		this.logicController = logicController;
 		this.dataController = dataController;
 		this.guiController = guiController;
-
-		logicController.setController(this);
-		dataController.setController(this);
-		guiController.setController(this);
+		logger.info("Subcontrollers initialized"); //$NON-NLS-1$
 
 		logicController.storeAllFunctions(dataController.loadFunctions());
+		logger.info("Functions loaded from data controller and stored in logic controller"); //$NON-NLS-1$
+
+		guiController.start(this);
+
+		logger.info("Controller created"); //$NON-NLS-1$
 	}
 
 	/**
@@ -53,6 +61,7 @@ public class Controller {
 	 */
 	public static void setInstance(Controller controller) {
 		Controller.instance = controller;
+		logger.info("New instance set"); //$NON-NLS-1$
 	}
 
 	/**

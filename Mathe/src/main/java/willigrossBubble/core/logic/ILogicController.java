@@ -1,21 +1,13 @@
 package willigrossBubble.core.logic;
 
-import willigrossBubble.core.Controller;
-
 /**
- * This interface defines all methods a ILogicController has to have. The recommended implementation is in MainLogic.java
+ * This interface defines all methods a ILogicController has to have. The recommended implementation is in
+ * MainLogic.java
  *
  * @see willigrossBubble.core.logic.MainLogic
  */
 public interface ILogicController {
 
-	/**
-	 * Sets the reference to the main controller
-	 *
-	 * @param controller reference to the main controller
-	 */
-	public void setController(Controller controller);
-	
 	/**
 	 * Stores a function
 	 *
@@ -23,14 +15,14 @@ public interface ILogicController {
 	 * @return the function's name as a Character object
 	 */
 	public Character storeFunction(Function function);
-
+	
 	/**
 	 * Stores all functions from a <code>Function[]</code> array
 	 *
 	 * @param functions the array of functions to store
 	 */
 	public void storeAllFunctions(Function[] functions);
-
+	
 	/**
 	 * Get the function for key <code>name</code>
 	 *
@@ -38,21 +30,21 @@ public interface ILogicController {
 	 * @return the function
 	 */
 	public Function getFunction(char name);
-
+	
 	/**
 	 * Get all functions
 	 *
 	 * @return all functions as an array
 	 */
 	public Function[] getAllFunctions();
-
+	
 	/**
 	 * Get the function added last
 	 *
 	 * @return the requested function
 	 */
 	public Function getLatestFunction();
-	
+
 	/**
 	 * Get the name of a function
 	 *
@@ -60,12 +52,12 @@ public interface ILogicController {
 	 * @return the name as a <code>Character</code>
 	 */
 	public char getName(Function function);
-
+	
 	/**
 	 * Get the next function's name
 	 *
 	 * @return the new name
 	 */
 	public char getNextName();
-
+	
 }

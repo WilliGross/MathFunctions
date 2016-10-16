@@ -13,5 +13,8 @@
 			<attribute name="javadoc_location" value="jar:platform:/resource/Mathe/libs/guava-19.0-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="libs/slf4j-api-1.7.21.jar" sourcepath="libs/slf4j-api-1.7.21-sources.jar"/>
+	<classpathentry kind="lib" path="libs/logback-core-1.1.7.jar" sourcepath="libs/logback-core-1.1.7-sources.jar"/>
+	<classpathentry kind="lib" path="libs/logback-classic-1.1.7.jar" sourcepath="libs/logback-classic-1.1.7-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

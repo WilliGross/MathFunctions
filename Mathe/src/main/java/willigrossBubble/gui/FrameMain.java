@@ -10,6 +10,9 @@ import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import willigrossBubble.core.Controller;
 import willigrossBubble.core.gui.IGUIController;
 import willigrossBubble.core.logic.Function;
@@ -25,31 +28,30 @@ import willigrossBubble.gui.customComponents.panels.PanelNavigation;
 import willigrossBubble.gui.customComponents.panels.PanelNavigation.ButtonStates;
 
 public class FrameMain extends JFrame implements IGUIController {
-	
-	private static final long		serialVersionUID	= 1L;
 
+	private static final long		serialVersionUID	= 1L;
+	
+	private static final Logger		logger				= LoggerFactory.getLogger(FrameMain.class);
+	
 	/** Heading font */
 	private static Font				headingFont;
-
+	
 	/** Monospaced Font */
 	private static Font				monospacedFont;
-
+	
 	private static FrameMain		instance;
-
-	/** Reference to the main controller */
-	private Controller				controller;					//Will be used for Logger
-
+	
 	/** Content pane of FrameMain */
 	private final Container			c;
-
+	
 	/**
 	 * Placeholder for subclasses of CenterPanel Will be instantiated with different panels for example menus
 	 */
 	private CenterPanel				panelCenter;
-
+	
 	/** Panel with back and main menu buttons */
 	private final PanelNavigation	panelSouth;
-	
+
 	/** Initializes fonts */
 	static {
 		try {
@@ -63,73 +65,81 @@ public class FrameMain extends JFrame implements IGUIController {
 					.deriveFont(Font.PLAIN, 13);
 			GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(headingFont);
 			GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(monospacedFont);
+
+			logger.info("Custom fonts registered"); //$NON-NLS-1$
 		} catch (IOException | FontFormatException e) {
-			e.printStackTrace();
+			logger.error("Caught {} when creating new fonts: ", e.getClass().getName(), e); //$NON-NLS-1$
 		}
 	}
-	
+
 	/** Constructor of FrameMain that sets properties and creates navigation and main panel */
 	public FrameMain() {
+		
+		logger.info("Creating GUI..."); //$NON-NLS-1$
 
 		setTitle(Strings.getString("FrameMain.title")); //$NON-NLS-1$
 		setSize(600, 600);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setResizable(false);
-		setVisible(true);
-		
+		logger.info("Properties set"); //$NON-NLS-1$
+
 		c = getContentPane();
-		
+
 		panelSouth = new PanelNavigation();
 		c.add(panelSouth, BorderLayout.SOUTH);
 		panelCenter = new PanelMain();
 		panelMain();
+		logger.info("Default panels set"); //$NON-NLS-1$
 	}
-	
+
 	/**
 	 * Returns the instance of FrameMain that is used in the controller
-	 * 
+	 *
 	 * @return the instance
 	 */
 	public static FrameMain getInstance() {
 		return instance;
 	}
-	
+
 	@Override
-	public void setController(Controller controller) {
-		this.controller = controller;
-		if (controller.getGUIController() instanceof FrameMain)
-			instance = (FrameMain) controller.getGUIController();
+	public void start(Controller controller) {
+		final IGUIController guiController = controller.getGUIController();
+		if (guiController instanceof FrameMain)
+			instance = (FrameMain) guiController;
+		
+		logger.info("Setting GUI visible"); //$NON-NLS-1$
+		setVisible(true);
 	}
-	
+
 	/**
 	 * @return the headingFont
 	 */
 	public static Font getHeadingFont() {
 		return headingFont;
 	}
-
+	
 	/**
 	 * @return the monospacedFont
 	 */
 	public static Font getMonospacedFont() {
 		return monospacedFont;
 	}
-
+	
 	/**
 	 * @return the southern panel
 	 */
 	public PanelNavigation getPanelSouth() {
 		return panelSouth;
 	}
-	
+
 	/**
 	 * @return the central panel
 	 */
 	public CenterPanel getPanelCenter() {
 		return panelCenter;
 	}
-	
+
 	/**
 	 * Sets the central panel and updates frame
 	 *
@@ -143,41 +153,42 @@ public class FrameMain extends JFrame implements IGUIController {
 		panelCenter.revalidate();
 		panelCenter.repaint();
 		panelCenter.requestFocusInWindow();
+		logger.info("Central panel updated with {}", panel.getClass().getName()); //$NON-NLS-1$
 	}
-	
+
 	/** Create PanelMain */
 	public void panelMain() {
 		setPanelCenter(new PanelMain(), ButtonStates.NONE);
 	}
-	
+
 	/** Create PanelCreateFunction */
 	public void panelCreateFunction() {
 		setPanelCenter(new PanelCreateFunction(), ButtonStates.MAIN_MENU);
 	}
-	
+
 	/** Create PanelLoadFunction */
 	public void panelLoadFunction() {
 		setPanelCenter(new PanelLoadFunction(), ButtonStates.MAIN_MENU);
 	}
-	
+
 	/** Create PanelIntersection_FunctionSelection */
 	public void panelIntersection_FunctionSelection() {
 		setPanelCenter(new PanelIntersection_FunctionSelection(), ButtonStates.MAIN_MENU);
 	}
-	
+
 	/** Create PanelIntersection */
 	public void panelIntersection(Function function1, Function function2) {
 		setPanelCenter(new PanelIntersection(function1, function2), ButtonStates.BOTH);
 	}
-	
+
 	/** Create PanelFunctionActionsMenu */
 	public void panelFunctionActionsMenu(Function f, CenterPanel caller) {
 		setPanelCenter(new PanelFunctionActionsMenu(f, caller), ButtonStates.BOTH);
 	}
-	
+
 	/** Handle back command */
 	public void back() {
 		panelCenter.back();
 	}
-
+	
 }

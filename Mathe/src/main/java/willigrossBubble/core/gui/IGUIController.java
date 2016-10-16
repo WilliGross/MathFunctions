@@ -5,10 +5,9 @@ import willigrossBubble.core.Controller;
 public interface IGUIController {
 
 	/**
-	 * Sets the reference to the main controller
-	 *
-	 * @param controller reference to the main controller
+	 * This method will be called once the GUIController is registered in the Controller. Here the gui is supposed to be
+	 * set visible.
 	 */
-	public void setController(Controller controller);
-
+	public void start(Controller controller);
+	
 }
