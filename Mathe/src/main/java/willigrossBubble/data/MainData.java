@@ -8,6 +8,9 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import willigrossBubble.core.data.IDataController;
 import willigrossBubble.core.logic.Function;
 import willigrossBubble.core.logic.FunctionNames;
@@ -15,11 +18,13 @@ import willigrossBubble.gui.FrameMain;
 
 public class MainData implements IDataController {
 	
+	private static final Logger	logger		= LoggerFactory.getLogger(MainData.class);
+	
 	/** The file where functions are saved to make them survive a program restart */
-	private final File storageFile = new File(
+	private final File			storageFile	= new File(
 			MainData.class.getProtectionDomain().getCodeSource().getLocation().getFile().substring(0,
 					MainData.class.getProtectionDomain().getCodeSource().getLocation().getFile().lastIndexOf('/') + 1)
-					+ Strings.getString("MainLogic.functionStorageFileName")); //$NON-NLS-1$
+					+ Strings.getString("MainLogic.functionStorageFileName"));											//$NON-NLS-1$
 
 	@Override
 	public void saveFunctionInFile(Function function) {
@@ -31,7 +36,7 @@ public class MainData implements IDataController {
 					break;
 				}
 		} catch (IllegalArgumentException | IOException | ClassNotFoundException e) {
-			System.err.println(e);
+			logger.error("Caught {} when trying to save a function: ", e.getClass().getName(), e); //$NON-NLS-1$
 		}
 	}
 
@@ -41,7 +46,7 @@ public class MainData implements IDataController {
 			final FileStorage fileStorage = new FileStorage(storageFile);
 			fileStorage.remove(function);
 		} catch (IllegalArgumentException | IOException | ClassNotFoundException e) {
-			System.err.println(e);
+			logger.error("Caught {} when trying to remove a function: ", e.getClass().getName(), e); //$NON-NLS-1$
 		}
 	}
 
@@ -55,7 +60,7 @@ public class MainData implements IDataController {
 					return true;
 				
 		} catch (IllegalArgumentException | IOException | ClassNotFoundException e) {
-			e.printStackTrace();
+			logger.error("Caught {} when trying to check if a function is saaved: ", e.getClass().getName(), e); //$NON-NLS-1$
 		}
 
 		return false;
@@ -73,10 +78,11 @@ public class MainData implements IDataController {
 					functions.add(function);
 			}
 
-		} catch (@SuppressWarnings("unused") StreamCorruptedException | EOFException | ClassNotFoundException e) {
+		} catch (StreamCorruptedException | EOFException | ClassNotFoundException e) {
+			logger.error("Caught {} when trying to load functions.: ", e.getClass().getName(), e); //$NON-NLS-1$
 			deleteStorageFile();
 		} catch (IllegalArgumentException | IOException e) {
-			e.printStackTrace();
+			logger.error("Caught {} when trying to load functions: ", e.getClass().getName(), e); //$NON-NLS-1$
 		}
 		return functions.toArray(new Function[functions.size()]);
 	}
@@ -85,6 +91,7 @@ public class MainData implements IDataController {
 	 * Delete the FunctionsDat file
 	 */
 	public void deleteStorageFile() {
+		logger.info("Storage file corrupted - deleting it!"); //$NON-NLS-1$
 		JOptionPane.showMessageDialog(FrameMain.getInstance(),
 				Strings.getStringAsHTML("MainLogic.functionStorageFileCorrupted_message"), //$NON-NLS-1$
 				Strings.getString("MainLogic.functionStorageFileCorrupted_title"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$
@@ -94,14 +101,16 @@ public class MainData implements IDataController {
 	/**
 	 * Debug method: displays the content of 'Functions.dat'
 	 */
-	public void displayStorageFile() {
+	public String displayStorageFile() {
 		try {
 			final FileStorage fileStorage = new FileStorage(storageFile);
 
-			System.out.println(fileStorage.getAll());
+			return fileStorage.getAll().toString();
 		} catch (IllegalArgumentException | IOException | ClassNotFoundException e) {
-			System.err.println(e);
+			logger.error("Caught {}: ", e.getClass().getName(), e); //$NON-NLS-1$
+			return null;
 		}
+		
 	}
 
 }

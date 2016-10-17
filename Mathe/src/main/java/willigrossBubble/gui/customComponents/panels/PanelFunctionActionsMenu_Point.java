@@ -13,6 +13,9 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import willigrossBubble.core.data.UtilityData;
 import willigrossBubble.core.logic.Function;
 import willigrossBubble.core.logic.Point;
@@ -24,12 +27,17 @@ import willigrossBubble.gui.FrameMain;
 public class PanelFunctionActionsMenu_Point extends RequestFocusForDefaultComponentPanel {
 	
 	private static final long	serialVersionUID	= 1L;
+	
+	private static final Logger	logger				= LoggerFactory.getLogger(PanelFunctionActionsMenu_Point.class);
+	
 	private final JTextField	p1x, p1y;
 	private final JLabel		p1, result, heading;
 	private final Function		function;
 	private Image				symbol;
 	
 	public PanelFunctionActionsMenu_Point(Function f) {
+		
+		logger.info("Initializing new PanelFunctionActionsMenu_Point"); //$NON-NLS-1$
 		
 		function = f;
 		
@@ -98,6 +106,8 @@ public class PanelFunctionActionsMenu_Point extends RequestFocusForDefaultCompon
 							py = UtilityData.readDoubleFromStringInput(p1y.getText());
 					final Point p = new Point(px, py);
 					
+					logger.info("Updating result and image"); //$NON-NLS-1$
+
 					if (function.testPointOnGraph(p)) {
 						result.setText(Strings.getStringAsHTML("PanelFunctionActionsMenu_Point.label_result_onGraph")); //$NON-NLS-1$
 						
@@ -108,7 +118,7 @@ public class PanelFunctionActionsMenu_Point extends RequestFocusForDefaultCompon
 									.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
 							repaint();
 						} catch (final IOException ex) {
-							ex.printStackTrace();
+							logger.error("Caught {} when trying to read image: ", ex.getClass().getName(), ex); //$NON-NLS-1$
 						}
 						
 					} else {
@@ -121,7 +131,7 @@ public class PanelFunctionActionsMenu_Point extends RequestFocusForDefaultCompon
 									.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
 							repaint();
 						} catch (final IOException ex) {
-							ex.printStackTrace();
+							logger.error("Caught {} when trying to read image: ", ex.getClass().getName(), ex); //$NON-NLS-1$
 						}
 					}
 				}

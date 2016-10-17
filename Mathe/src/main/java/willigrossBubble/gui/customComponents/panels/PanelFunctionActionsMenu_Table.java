@@ -15,6 +15,9 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import willigrossBubble.core.data.UtilityData;
 import willigrossBubble.core.logic.Function;
 import willigrossBubble.core.logic.Validations;
@@ -25,6 +28,10 @@ import willigrossBubble.gui.FrameMain;
 public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultComponentPanel {
 	
 	private static final long				serialVersionUID	= 1L;
+	
+	private static final Logger				logger				= LoggerFactory
+			.getLogger(PanelFunctionActionsMenu_Point.class);
+	
 	private static final int				MAX_VALUE			= 100000, MIN_VALUE = -100000;
 	private final JLabel					heading, startLabel, endLabel, stepLabel, resultLabel;
 	private final JTextField				start, end, step;
@@ -36,6 +43,8 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 	private String							valueWarn;
 
 	public PanelFunctionActionsMenu_Table(Function f) {
+		
+		logger.info("Initializing new PanelFunctionActionsMenu_Table for function {}", f); //$NON-NLS-1$
 		
 		errorNumber = Strings.getStringAsHTML("PanelFunctionActionsMenu_Table.errorNumber"); //$NON-NLS-1$
 		
@@ -109,6 +118,9 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 	}
 	
 	private boolean validateStart() {
+		
+		logger.info("Validating start value..."); //$NON-NLS-1$
+		
 		final String errorNumberStart = errorNumber.replace("$FIELD$", "start"); //$NON-NLS-1$ //$NON-NLS-2$
 		final String valueWarnStart = valueWarn.replace("$FIELD$", "start"); //$NON-NLS-1$ //$NON-NLS-2$
 		boolean startValidationOne = false, startValidationTwo = false;
@@ -134,12 +146,18 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 			startValidationOne = false;
 		}
 		
-		if (startValidationOne && startValidationTwo)
+		if (startValidationOne && startValidationTwo) {
+			logger.info("...valid"); //$NON-NLS-1$
 			return true;
+		}
+		logger.info("...invalid"); //$NON-NLS-1$
 		return false;
 	}
 	
 	private boolean validateEnd() {
+		
+		logger.info("Validating end value..."); //$NON-NLS-1$
+		
 		final String errorNumberEnd = errorNumber.replace("$FIELD$", "end"); //$NON-NLS-1$ //$NON-NLS-2$
 		final String valueWarnEnd = valueWarn.replace("$FIELD$", "end"); //$NON-NLS-1$ //$NON-NLS-2$
 		boolean endValidationOne = false, endValidationTwo = false;
@@ -165,12 +183,18 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 			endValidationOne = false;
 		}
 		
-		if (endValidationOne && endValidationTwo)
+		if (endValidationOne && endValidationTwo) {
+			logger.info("...valid"); //$NON-NLS-1$
 			return true;
+		}
+		logger.info("...invalid"); //$NON-NLS-1$
 		return false;
 	}
 	
 	private boolean validateStep() {
+
+		logger.info("Validating step value..."); //$NON-NLS-1$
+
 		final String errorNumberStep = errorNumber.replace("$FIELD$", "step"); //$NON-NLS-1$ //$NON-NLS-2$
 		String valueWarnStep = valueWarn.replace("$FIELD$", "step"); //$NON-NLS-1$ //$NON-NLS-2$
 		boolean stepValidationOne = false, stepValidationTwo = false;
@@ -199,8 +223,11 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 			stepValidationOne = false;
 		}
 		
-		if (stepValidationOne && stepValidationTwo)
+		if (stepValidationOne && stepValidationTwo) {
+			logger.info("...valid"); //$NON-NLS-1$
 			return true;
+		}
+		logger.info("...invalid"); //$NON-NLS-1$
 		return false;
 	}
 	
@@ -240,9 +267,11 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 					&& !end.getText().equals(Strings.getString("PanelFunctionActionsMenu_Table.textField_end")) //$NON-NLS-1$
 					&& !step.getText().equals(Strings.getString("PanelFunctionActionsMenu_Table.textField_step")) //$NON-NLS-1$
 					&& startValidation && endValidation && stepValidation) {
+				logger.info("All values valid"); //$NON-NLS-1$
 				final double startValue = UtilityData.readDoubleFromStringInput(start.getText()),
 						endValue = UtilityData.readDoubleFromStringInput(end.getText()),
 						stepValue = UtilityData.readDoubleFromStringInput(step.getText());
+				logger.info("Comissioning value table calculation"); //$NON-NLS-1$
 				final String[] tableAsArray = function.table(startValue, endValue, stepValue);
 				int equalsIndex = 0;
 				for (final String element : tableAsArray)

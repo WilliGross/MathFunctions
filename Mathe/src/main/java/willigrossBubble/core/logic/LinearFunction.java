@@ -6,21 +6,21 @@ import org.slf4j.LoggerFactory;
 import willigrossBubble.data.Strings;
 
 public class LinearFunction extends Function {
-	
-	private static final long	serialVersionUID	= 1L;
 
-	private static final Logger	logger				= LoggerFactory.getLogger(LinearFunction.class);
+	private static final long	serialVersionUID	= 1L;
 	
+	private static final Logger	logger				= LoggerFactory.getLogger(LinearFunction.class);
+
 	/** Implementation of super constructor */
 	private LinearFunction(String expression) {
 		super(expression);
 	}
-	
+
 	/** Implementation of super constructor */
 	private LinearFunction(String expression, String expressionRounded) {
 		super(expression, expressionRounded);
 	}
-
+	
 	/**
 	 * Create a function whose graph runs through two given points
 	 *
@@ -30,12 +30,12 @@ public class LinearFunction extends Function {
 	 *             f(x) for a vertical straight line
 	 */
 	public static LinearFunction createThroughPoints(Point p, Point q) throws InvalidPointConfigurationException {
-		
-		logger.info("Starting calculation of linear function through points P {} and Q {} ...", p, q); //$NON-NLS-1$
-		
+
+		logger.info("Starting calculation of linear function through points P{} and Q{} ...", p, q); //$NON-NLS-1$
+
 		String expression = ""; //$NON-NLS-1$
 		String expressionRounded = ""; //$NON-NLS-1$
-		
+
 		if ((p.getX() == q.getX()) && !p.equals(q)) {
 			final InvalidPointConfigurationException e = new InvalidPointConfigurationException(
 					Strings.getStringAsHTML("LinearFunction.IPCE_sameXValues_message"), //$NON-NLS-1$
@@ -44,18 +44,18 @@ public class LinearFunction extends Function {
 			logger.warn("Can't calculate function!"); //$NON-NLS-1$
 			throw e;
 		}
-
-		double m = (q.getY() - p.getY()) / (q.getX() - p.getX());
 		
+		double m = (q.getY() - p.getY()) / (q.getX() - p.getX());
+
 		if (Double.isNaN(m))
 			m = 0;
-
-		logger.info("Calculated slope m: {}", m); //$NON-NLS-1$
 		
+		logger.info("Calculated slope m: {}", m); //$NON-NLS-1$
+
 		final double t = p.getY() - (m * p.getX());
-
+		
 		logger.info("Calculated intercept t: {}", t); //$NON-NLS-1$
-
+		
 		if (m != 0)
 			if ((m - (int) m) == 0) {
 				expression += (m != 1.0) ? (int) m + " * x" : "x"; //$NON-NLS-1$ //$NON-NLS-2$
@@ -64,7 +64,7 @@ public class LinearFunction extends Function {
 				expression += (m != 1.0) ? m + " * x" : "x"; //$NON-NLS-1$ //$NON-NLS-2$
 				expressionRounded += (m != 1.0) ? UtilityLogic.roundDouble(m, 3) + " * x" : "x"; //$NON-NLS-1$ //$NON-NLS-2$
 			}
-		
+
 		if (!expression.equals("") && (t != 0)) { //$NON-NLS-1$
 			expression += " + "; //$NON-NLS-1$
 			expressionRounded += " + "; //$NON-NLS-1$
@@ -76,8 +76,8 @@ public class LinearFunction extends Function {
 			expression += (t != 0.0) ? t : ""; //$NON-NLS-1$
 			expressionRounded += (t != 0.0) ? UtilityLogic.roundDouble(t, 3) : ""; //$NON-NLS-1$
 		}
-		
+
 		return new LinearFunction(expression, expressionRounded);
 	}
-
+	
 }

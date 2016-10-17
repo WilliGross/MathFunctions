@@ -9,6 +9,9 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import willigrossBubble.core.Controller;
 import willigrossBubble.core.data.UtilityData;
 import willigrossBubble.core.logic.ExponentialFunction;
@@ -25,6 +28,10 @@ import willigrossBubble.gui.customComponents.buttons.CustomButtonSmall;
 public class PanelCreateFunction_ThroughTwoPoints extends RequestFocusForDefaultComponentPanel {
 
 	private static final long		serialVersionUID	= 1L;
+	
+	private static final Logger		logger				= LoggerFactory
+			.getLogger(PanelCreateFunction_ThroughTwoPoints.class);
+	
 	private final JTextField		p1x, p1y, p2x, p2y;
 	private final JLabel			p1, p2, result;
 	private JLabel					heading;
@@ -34,6 +41,8 @@ public class PanelCreateFunction_ThroughTwoPoints extends RequestFocusForDefault
 
 	public PanelCreateFunction_ThroughTwoPoints(FunctionType type) {
 
+		logger.info("Initializing new PanelCreateFunction_ThroughTwoPoints for function type {}", type); //$NON-NLS-1$
+		
 		this.type = type;
 
 		setLayout(null);
@@ -104,7 +113,7 @@ public class PanelCreateFunction_ThroughTwoPoints extends RequestFocusForDefault
 	}
 
 	private void calcFunction() throws Exception {
-
+		logger.info("Comissioning calculation of function"); //$NON-NLS-1$
 		try {
 			final double px = UtilityData.readDoubleFromStringInput(p1x.getText()),
 					py = UtilityData.readDoubleFromStringInput(p1y.getText()),
@@ -118,6 +127,10 @@ public class PanelCreateFunction_ThroughTwoPoints extends RequestFocusForDefault
 				function = LinearFunction.createThroughPoints(p, q);
 			//TODO Display warning when p.equals(q)
 		} catch (IllegalArgumentException | InvalidPointConfigurationException e) {
+			if (e instanceof IllegalArgumentException)
+				logger.error("Caught IllegalArgumentException when comissioning calculation of function", e); //$NON-NLS-1$
+			else
+				logger.warn("Caught InvalidPointConfigurationException, setting tooltip to inform user"); //$NON-NLS-1$
 			result.setText(e.getMessage());
 			result.setForeground(Color.RED);
 			if ((e instanceof InvalidPointConfigurationException)
@@ -143,6 +156,7 @@ public class PanelCreateFunction_ThroughTwoPoints extends RequestFocusForDefault
 				if (Validations.canConvertToNumber(p1x.getText()) && Validations.canConvertToNumber(p1y.getText())
 						&& Validations.canConvertToNumber(p2x.getText())
 						&& Validations.canConvertToNumber(p2y.getText())) {
+					logger.info("All text fields contain valid strings that can be converted to numbers"); //$NON-NLS-1$
 					go.setEnabled(true);
 					try {
 						calcFunction();

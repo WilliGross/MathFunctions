@@ -3,6 +3,9 @@ package willigrossBubble.gui.customComponents.panels;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import willigrossBubble.core.Controller;
 import willigrossBubble.core.logic.Function;
 import willigrossBubble.data.Strings;
@@ -12,12 +15,18 @@ import willigrossBubble.gui.customComponents.buttons.CustomButtonSmall;
 public class PanelFunctionActionsMenu_Mirror extends RequestFocusForDefaultComponentPanel {
 	
 	private static final long		serialVersionUID	= 1L;
+	
+	private static final Logger		logger				= LoggerFactory
+			.getLogger(PanelFunctionActionsMenu_Mirror.class);
+
 	private final JLabel			heading, result;
 	private final CustomButtonSmall	x, y, origin, go;
 	private final Function			functionBase;
 	private Function				functionMirrored;
 
 	public PanelFunctionActionsMenu_Mirror(Function f) {
+
+		logger.info("Initializing new PanelFunctionActionsMenu_Mirror"); //$NON-NLS-1$
 
 		functionBase = f;
 		setLayout(null);

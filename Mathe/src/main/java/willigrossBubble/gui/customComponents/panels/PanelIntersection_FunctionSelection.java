@@ -8,6 +8,9 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import willigrossBubble.core.Controller;
 import willigrossBubble.core.logic.Function;
 import willigrossBubble.data.Strings;
@@ -17,6 +20,8 @@ import willigrossBubble.gui.customComponents.buttons.CustomButtonSmall;
 public class PanelIntersection_FunctionSelection extends CenterPanel {
 
 	private static final long					serialVersionUID	= 1L;
+	private static final Logger					logger				= LoggerFactory
+			.getLogger(PanelIntersection_FunctionSelection.class);
 	private final JLabel						heading, instruction;
 	private final DefaultListModel<Function>	listModel;
 	private final JList<Function>				result;
@@ -25,6 +30,8 @@ public class PanelIntersection_FunctionSelection extends CenterPanel {
 	private Function							function1, function2;
 
 	public PanelIntersection_FunctionSelection() {
+
+		logger.info("Initializing new PanelIntersection_FunctionSelection"); //$NON-NLS-1$
 
 		setLayout(null);
 
@@ -45,20 +52,7 @@ public class PanelIntersection_FunctionSelection extends CenterPanel {
 			listModel.addElement(f);
 		result = new JList<>(listModel);
 		result.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		result.setSelectionModel(new DefaultListSelectionModel() {
-
-			private static final long serialVersionUID = 1L;
-			
-			//			@Override
-			//			public void setSelectionInterval(int index0, int index1) {
-			//				if (isSelectedIndex(index0))
-			//					removeSelectionInterval(index0, index1);
-			//				else
-			//					addSelectionInterval(index0, index1);
-			//				fireValueChanged(index0, index1);
-			//			}
-
-		});
+		result.setSelectionModel(new DefaultListSelectionModel());
 		result.addListSelectionListener(e -> {
 			function1 = result.getSelectedValue();
 			try {

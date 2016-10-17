@@ -5,6 +5,9 @@ import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import willigrossBubble.data.Strings;
 import willigrossBubble.gui.FrameMain;
 import willigrossBubble.gui.customComponents.buttons.CustomButton;
@@ -12,9 +15,14 @@ import willigrossBubble.gui.customComponents.buttons.CustomButton;
 public class PanelNavigation extends JPanel {
 
 	private static final long	serialVersionUID	= 1L;
+	
+	private static final Logger	logger				= LoggerFactory.getLogger(PanelMain.class);
+	
 	private final CustomButton	mainMenu, back;
 
 	public PanelNavigation() {
+
+		logger.info("Initializing new PanelNavigation"); //$NON-NLS-1$
 
 		setLayout(null);
 		setPreferredSize(new Dimension(600, 50));
@@ -35,18 +43,8 @@ public class PanelNavigation extends JPanel {
 		add(back);
 	}
 
-	public void setButtonVisibility(boolean mainMenu, boolean back) {
-		if (mainMenu)
-			this.mainMenu.setEnabled(true);
-		else
-			this.mainMenu.setEnabled(false);
-		if (back)
-			this.back.setEnabled(true);
-		else
-			this.back.setEnabled(false);
-	}
-
 	public void activateButtons(ButtonStates state) {
+		logger.info("Updating button visibility: {}", state); //$NON-NLS-1$
 		switch (state) {
 			case BOTH:
 				mainMenu.setEnabled(true);

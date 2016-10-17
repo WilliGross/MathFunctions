@@ -12,6 +12,9 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import willigrossBubble.core.Controller;
 import willigrossBubble.core.logic.Function;
 import willigrossBubble.data.Strings;
@@ -20,6 +23,9 @@ import willigrossBubble.gui.FrameMain;
 public class PanelLoadFunction extends CenterPanel {
 
 	private static final long					serialVersionUID	= 1L;
+	
+	private static final Logger					logger				= LoggerFactory.getLogger(PanelIntersection.class);
+	
 	private final JLabel						heading;
 	private final DefaultListModel<Function>	listModel;
 	private final JList<Function>				result;
@@ -27,6 +33,8 @@ public class PanelLoadFunction extends CenterPanel {
 
 	public PanelLoadFunction() {
 		
+		logger.info("Initializing new PanelLoadFunction"); //$NON-NLS-1$
+
 		setLayout(null);
 		
 		heading = new JLabel(Strings.getStringAsHTML("PanelLoadFunction.label_heading"), SwingConstants.CENTER); //$NON-NLS-1$
@@ -44,9 +52,12 @@ public class PanelLoadFunction extends CenterPanel {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (!result.isSelectionEmpty())
-					FrameMain.getInstance().panelFunctionActionsMenu(listModel.get(result.getSelectedIndex()),
+				if (!result.isSelectionEmpty()) {
+					final Function function = listModel.get(result.getSelectedIndex());
+					logger.info("Calling FunctionActionsMenu for {}", function); //$NON-NLS-1$
+					FrameMain.getInstance().panelFunctionActionsMenu(function,
 							FrameMain.getInstance().getPanelCenter());
+				}
 			}
 		});
 		result.setFont(FrameMain.getMonospacedFont().deriveFont(Font.BOLD, 14));
