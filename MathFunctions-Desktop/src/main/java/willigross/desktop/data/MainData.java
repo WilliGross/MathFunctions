@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import willigross.core.data.IDataController;
 import willigross.core.logic.Function;
 import willigross.core.logic.FunctionNames;
+import willigross.desktop.gui.FrameMain;
 
 public class MainData implements IDataController {
 
@@ -21,7 +22,7 @@ public class MainData implements IDataController {
 	private final File			storageFile	= new File(
 			MainData.class.getProtectionDomain().getCodeSource().getLocation().getFile().substring(0,
 					MainData.class.getProtectionDomain().getCodeSource().getLocation().getFile().lastIndexOf('/') + 1)
-					+ Strings.getString("MainLogic.functionStorageFileName"));											//$NON-NLS-1$
+					+ Strings.getString("MainData.functionStorageFileName"));											//$NON-NLS-1$
 	
 	@Override
 	public void saveFunctionInFile(Function function) {
@@ -88,11 +89,9 @@ public class MainData implements IDataController {
 	 * Delete the FunctionsDat file
 	 */
 	public void deleteStorageFile() {
-		//		logger.info("Storage file corrupted - deleting it!"); //$NON-NLS-1$
-		//		JOptionPane.showMessageDialog(FrameMain.getInstance(),
-		//				Strings.getStringAsHTML("MainLogic.functionStorageFileCorrupted_message"), //$NON-NLS-1$
-		//				Strings.getString("MainLogic.functionStorageFileCorrupted_title"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$
-		//		storageFile.delete();
+		logger.info("Storage file corrupted - deleting it!"); //$NON-NLS-1$
+		FrameMain.getInstance().displayCorruptedFileWarning();
+		storageFile.delete();
 	}
 	
 	/**
