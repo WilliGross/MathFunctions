@@ -46,6 +46,20 @@ public class Controller {
 
 		logger.info("Controller created"); //$NON-NLS-1$
 	}
+	
+	public Controller(IApplication caller, ILogicController logicController, IGUIController guiController) { //this reference in constructors of sub-controllers is used for communication purposes, the main controller might have a log function implemented later -> java.util.logging.Logger
+		logger.info("Creating controller..."); //$NON-NLS-1$
+		logger.info("Initiazlizing controller without DataController");
+		Controller.caller = caller; //TODO Make less dirty
+		this.logicController = logicController;
+		dataController = null;
+		this.guiController = guiController;
+		logger.info("Subcontrollers initialized"); //$NON-NLS-1$
+
+		guiController.start(this);
+
+		logger.info("Controller created"); //$NON-NLS-1$
+	}
 
 	/**
 	 * @return the instance
@@ -83,6 +97,17 @@ public class Controller {
 	 */
 	public IGUIController getGUIController() {
 		return guiController;
+	}
+	
+	/**
+	 * Is a data controller initialized?
+	 *
+	 * @return true if a data controller is set, otherwise false
+	 */
+	public boolean isDataControllerInitialized() {
+		if (dataController == null)
+			return false;
+		return true;
 	}
 
 }
