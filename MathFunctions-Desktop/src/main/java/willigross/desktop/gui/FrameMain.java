@@ -58,11 +58,13 @@ public class FrameMain extends JFrame implements IGUIController {
 		try {
 			headingFont = Font
 					.createFont(Font.TRUETYPE_FONT,
-							System.class.getResourceAsStream("/assets/fonts/Montserrat-Regular.otf")) //$NON-NLS-1$
+							Thread.currentThread().getContextClassLoader()
+									.getResourceAsStream("willigross/desktop/assets/fonts/Montserrat-Regular.otf")) //$NON-NLS-1$
 					.deriveFont(Font.PLAIN, 15);
 			monospacedFont = Font
 					.createFont(Font.TRUETYPE_FONT,
-							System.class.getResourceAsStream("/assets/fonts/mplus-1m-regular.ttf")) //$NON-NLS-1$
+							Thread.currentThread().getContextClassLoader()
+									.getResourceAsStream("willigross/desktop/assets/fonts/mplus-1m-regular.ttf")) //$NON-NLS-1$
 					.deriveFont(Font.PLAIN, 13);
 			GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(headingFont);
 			GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(monospacedFont);
