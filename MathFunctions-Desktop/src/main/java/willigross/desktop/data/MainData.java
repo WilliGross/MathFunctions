@@ -15,15 +15,15 @@ import willigross.core.logic.FunctionNames;
 import willigross.desktop.gui.FrameMain;
 
 public class MainData implements IDataController {
-
+	
 	private static final Logger	logger		= LoggerFactory.getLogger(MainData.class);
-
+	
 	/** The file where functions are saved to make them survive a program restart */
 	private final File			storageFile	= new File(
 			MainData.class.getProtectionDomain().getCodeSource().getLocation().getFile().substring(0,
 					MainData.class.getProtectionDomain().getCodeSource().getLocation().getFile().lastIndexOf('/') + 1)
 					+ Strings.getString("MainData.functionStorageFileName"));											//$NON-NLS-1$
-	
+
 	@Override
 	public void saveFunctionInFile(Function function) {
 		try {
@@ -37,7 +37,7 @@ public class MainData implements IDataController {
 			logger.error("Caught {} when trying to save a function: ", e.getClass().getName(), e); //$NON-NLS-1$
 		}
 	}
-	
+
 	@Override
 	public void removeFunctionFromFile(Function function) {
 		try {
@@ -47,23 +47,23 @@ public class MainData implements IDataController {
 			logger.error("Caught {} when trying to remove a function: ", e.getClass().getName(), e); //$NON-NLS-1$
 		}
 	}
-	
+
 	@Override
 	public boolean isFunctionSaved(Function function) {
 		try {
 			final FileStorage fileStorage = new FileStorage(storageFile);
-			
+
 			for (final Object f : fileStorage.getAllAsArrayList().toArray())
 				if (((Function) f).equals(function))
 					return true;
-
+				
 		} catch (IllegalArgumentException | IOException | ClassNotFoundException e) {
-			logger.error("Caught {} when trying to check if a function is saaved: ", e.getClass().getName(), e); //$NON-NLS-1$
+			logger.error("Caught {} when trying to check if a function is saved: ", e.getClass().getName(), e); //$NON-NLS-1$
 		}
-		
+
 		return false;
 	}
-	
+
 	@Override
 	public Function[] loadFunctions() {
 		final ArrayList<Function> functions = new ArrayList<>();
@@ -75,7 +75,7 @@ public class MainData implements IDataController {
 				if (function != null)
 					functions.add(function);
 			}
-			
+
 		} catch (StreamCorruptedException | EOFException | ClassNotFoundException e) {
 			logger.error("Caught {} when trying to load functions.: ", e.getClass().getName(), e); //$NON-NLS-1$
 			deleteStorageFile();
@@ -84,7 +84,7 @@ public class MainData implements IDataController {
 		}
 		return functions.toArray(new Function[functions.size()]);
 	}
-	
+
 	/**
 	 * Delete the FunctionsDat file
 	 */
@@ -93,20 +93,20 @@ public class MainData implements IDataController {
 		FrameMain.getInstance().displayCorruptedFileWarning();
 		storageFile.delete();
 	}
-	
+
 	/**
 	 * Debug method: displays the content of 'Functions.dat'
 	 */
 	public String displayStorageFile() {
 		try {
 			final FileStorage fileStorage = new FileStorage(storageFile);
-			
+
 			return fileStorage.getAll().toString();
 		} catch (IllegalArgumentException | IOException | ClassNotFoundException e) {
 			logger.error("Caught {}: ", e.getClass().getName(), e); //$NON-NLS-1$
 			return null;
 		}
-
+		
 	}
-	
+
 }
