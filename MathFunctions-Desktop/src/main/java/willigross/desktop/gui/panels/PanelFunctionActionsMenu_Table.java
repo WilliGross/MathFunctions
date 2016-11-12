@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 
 import javax.swing.DefaultListModel;
 import javax.swing.DefaultListSelectionModel;
@@ -21,27 +22,30 @@ import org.slf4j.LoggerFactory;
 import willigross.core.data.UtilityData;
 import willigross.core.logic.Function;
 import willigross.core.logic.Validations;
+import willigross.core.logic.ValueTablePresentation;
 import willigross.desktop.data.Strings;
 import willigross.desktop.gui.FocusAdapter_SelectAll;
 import willigross.desktop.gui.FrameMain;
 
 public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultComponentPanel {
 
-	private static final long				serialVersionUID	= 1L;
+	private static final long								serialVersionUID	= 1L;
 
-	private static final Logger				logger				= LoggerFactory
+	private static final Logger								logger				= LoggerFactory
 			.getLogger(PanelFunctionActionsMenu_Point.class);
 
-	private static final int				MAX_VALUE			= 100000, MIN_VALUE = -100000;
-	private final JLabel					heading, startLabel, endLabel, stepLabel, resultLabel;
-	private final JTextField				start, end, step;
-	private final DefaultListModel<String>	listModel;
-	private final JList<String>				result;
-	private final JScrollPane				resultScrollPane;
-	private final Function					function;
-	private final String					errorNumber;
-	private String							valueWarn;
-	
+	private static final int								MAX_VALUE			= 100000, MIN_VALUE = -100000;
+	private final JLabel									heading, startLabel, endLabel, stepLabel, resultLabel;
+	private final JTextField								start, end, step;
+	private final DefaultListModel<ValueTablePresentation>	listModel;
+	private final JList<ValueTablePresentation>				result;
+	private final JScrollPane								resultScrollPane;
+	private final Function									function;
+	private final String									errorNumber;
+	private String											valueWarn;
+	private final ValueTablePresentation					errorNumberStart, valueWarnStart, errorNumberEnd,
+			valueWarnEnd, errorNumberStep, valueWarnStep1, valueWarnStep2;
+
 	public PanelFunctionActionsMenu_Table(Function f) {
 
 		logger.info("Initializing new PanelFunctionActionsMenu_Table for function {}", f); //$NON-NLS-1$
@@ -51,6 +55,15 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 		valueWarn = Strings.getStringAsHTML("PanelFunctionActionsMenu_Table.error_enterInterval"); //$NON-NLS-1$
 		valueWarn = valueWarn.replace("$MIN_VALUE$", String.valueOf(MIN_VALUE)); //$NON-NLS-1$
 		valueWarn = valueWarn.replace("$MAX_VALUE$", String.valueOf(MAX_VALUE)); //$NON-NLS-1$
+		
+		errorNumberStart = new ValueTablePresentation(errorNumber.replace("$FIELD$", "start")); //$NON-NLS-1$ //$NON-NLS-2$
+		valueWarnStart = new ValueTablePresentation(valueWarn.replace("$FIELD$", "start")); //$NON-NLS-1$ //$NON-NLS-2$
+		errorNumberEnd = new ValueTablePresentation(errorNumber.replace("$FIELD$", "end")); //$NON-NLS-1$ //$NON-NLS-2$
+		valueWarnEnd = new ValueTablePresentation(valueWarn.replace("$FIELD$", "end")); //$NON-NLS-1$ //$NON-NLS-2$
+		errorNumberStep = new ValueTablePresentation(errorNumber.replace("$FIELD$", "step")); //$NON-NLS-1$ //$NON-NLS-2$
+		valueWarnStep1 = new ValueTablePresentation(valueWarn.replace("$FIELD$", "step")); //$NON-NLS-1$ //$NON-NLS-2$
+		valueWarnStep2 = new ValueTablePresentation(
+				Strings.getStringAsHTML("PanelFunctionActionsMenu_Table.error_stepZero")); //$NON-NLS-1$
 
 		function = f;
 
@@ -100,11 +113,22 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 
 		resultLabel = new JLabel(Strings.getStringAsHTML("PanelFunctionActionsMenu_Table.label_result"), //$NON-NLS-1$
 				SwingConstants.RIGHT);
-		resultLabel.setBounds(50, 105, 45, 30);
+		resultLabel.setBounds(40, 105, 45, 30);
 		add(resultLabel);
 
 		listModel = new DefaultListModel<>();
-		result = new JList<>(listModel);
+		result = new JList<ValueTablePresentation>(listModel) {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public String getToolTipText(MouseEvent event) {
+				final int index = locationToIndex(event.getPoint());
+				final ValueTablePresentation item = getModel().getElementAt(index);
+				return item.getUnroundedValue();
+			}
+
+		};
 		result.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		result.setSelectionModel(new DefaultListSelectionModel());
 		result.addListSelectionListener(e -> result.clearSelection());
@@ -121,16 +145,15 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 
 		logger.info("Validating start value..."); //$NON-NLS-1$
 
-		final String errorNumberStart = errorNumber.replace("$FIELD$", "start"); //$NON-NLS-1$ //$NON-NLS-2$
-		final String valueWarnStart = valueWarn.replace("$FIELD$", "start"); //$NON-NLS-1$ //$NON-NLS-2$
 		boolean startValidationOne = false, startValidationTwo = false;
+		final String text = start.getText();
 
-		if (start.getText().equals(Strings.getString("PanelFunctionActionsMenu_Table.textField_start"))) //$NON-NLS-1$
+		if (text.equals(Strings.getString("PanelFunctionActionsMenu_Table.textField_start"))) //$NON-NLS-1$
 			return true;
 
-		if (Validations.canConvertToNumber(start.getText())) {
-			if ((UtilityData.readDoubleFromStringInput(start.getText()) > MAX_VALUE)
-					|| (UtilityData.readDoubleFromStringInput(start.getText()) < MIN_VALUE)) {
+		if (Validations.canConvertToNumber(text)) {
+			final double value = UtilityData.readDoubleFromStringInput(text);
+			if ((value > MAX_VALUE) || (value < MIN_VALUE)) {
 				if (!listModel.contains(valueWarnStart))
 					listModel.addElement(valueWarnStart);
 				startValidationTwo = false;
@@ -158,16 +181,15 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 
 		logger.info("Validating end value..."); //$NON-NLS-1$
 
-		final String errorNumberEnd = errorNumber.replace("$FIELD$", "end"); //$NON-NLS-1$ //$NON-NLS-2$
-		final String valueWarnEnd = valueWarn.replace("$FIELD$", "end"); //$NON-NLS-1$ //$NON-NLS-2$
 		boolean endValidationOne = false, endValidationTwo = false;
+		final String text = end.getText();
 
-		if (end.getText().equals(Strings.getString("PanelFunctionActionsMenu_Table.textField_end"))) //$NON-NLS-1$
+		if (text.equals(Strings.getString("PanelFunctionActionsMenu_Table.textField_end"))) //$NON-NLS-1$
 			return true;
 
-		if (Validations.canConvertToNumber(end.getText())) {
-			if ((UtilityData.readDoubleFromStringInput(end.getText()) > MAX_VALUE)
-					|| (UtilityData.readDoubleFromStringInput(end.getText()) < MIN_VALUE)) {
+		if (Validations.canConvertToNumber(text)) {
+			final double value = UtilityData.readDoubleFromStringInput(text);
+			if ((value > MAX_VALUE) || (value < MIN_VALUE)) {
 				if (!listModel.contains(valueWarnEnd))
 					listModel.addElement(valueWarnEnd);
 				endValidationTwo = false;
@@ -192,29 +214,38 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 	}
 
 	private boolean validateStep() {
-		
-		logger.info("Validating step value..."); //$NON-NLS-1$
-		
-		final String errorNumberStep = errorNumber.replace("$FIELD$", "step"); //$NON-NLS-1$ //$NON-NLS-2$
-		String valueWarnStep = valueWarn.replace("$FIELD$", "step"); //$NON-NLS-1$ //$NON-NLS-2$
-		boolean stepValidationOne = false, stepValidationTwo = false;
 
-		if (step.getText().equals(Strings.getString("PanelFunctionActionsMenu_Table.textField_step"))) //$NON-NLS-1$
+		logger.info("Validating step value..."); //$NON-NLS-1$
+
+		boolean stepValidationOne = false, stepValidationTwo = false;
+		final String text = step.getText();
+
+		if (text.equals(Strings.getString("PanelFunctionActionsMenu_Table.textField_step"))) //$NON-NLS-1$
 			return true;
 
-		if (Validations.canConvertToNumber(step.getText())) {
-			if ((UtilityData.readDoubleFromStringInput(step.getText()) == 0)
-					|| (UtilityData.readDoubleFromStringInput(step.getText()) > MAX_VALUE)
-					|| (UtilityData.readDoubleFromStringInput(step.getText()) < MIN_VALUE)) {
-				if (UtilityData.readDoubleFromStringInput(step.getText()) == 0)
-					valueWarnStep = Strings.getStringAsHTML("PanelFunctionActionsMenu_Table.error_stepZero"); //$NON-NLS-1$
-				if (!listModel.contains(valueWarnStep))
-					listModel.addElement(valueWarnStep);
-				stepValidationTwo = false;
+		if (Validations.canConvertToNumber(text)) {
+			final double value = UtilityData.readDoubleFromStringInput(text);
+
+			if ((value > MAX_VALUE) || (value < MIN_VALUE)) {
+				if (!listModel.contains(valueWarnStep1)) {
+					listModel.addElement(valueWarnStep1);
+					stepValidationTwo = false;
+				}
 			} else {
-				listModel.removeElement(valueWarnStep);
+				listModel.removeElement(valueWarnStep1);
 				stepValidationTwo = true;
 			}
+
+			if (value == 0) {
+				if (!listModel.contains(valueWarnStep2)) {
+					listModel.addElement(valueWarnStep2);
+					stepValidationTwo = false;
+				}
+			} else {
+				listModel.removeElement(valueWarnStep2);
+				stepValidationTwo = true;
+			}
+
 			listModel.removeElement(errorNumberStep);
 			stepValidationOne = true;
 		} else {
@@ -272,14 +303,15 @@ public class PanelFunctionActionsMenu_Table extends RequestFocusForDefaultCompon
 						endValue = UtilityData.readDoubleFromStringInput(end.getText()),
 						stepValue = UtilityData.readDoubleFromStringInput(step.getText());
 				logger.info("Comissioning value table calculation"); //$NON-NLS-1$
-				final String[] tableAsArray = function.table(startValue, endValue, stepValue);
+				final ValueTablePresentation[] tableAsArray = function.table(startValue, endValue, stepValue);
 				int equalsIndex = 0;
-				for (final String element : tableAsArray)
-					if (element.indexOf('=') > equalsIndex)
-						equalsIndex = element.indexOf('=');
-				for (String element : tableAsArray) {
-					for (int i = element.indexOf('='); i < equalsIndex; i++)
-						element = element.substring(0, 2) + ' ' + element.substring(2);
+				for (final ValueTablePresentation element : tableAsArray)
+					if (element.getRoundedValue().indexOf('=') > equalsIndex)
+						equalsIndex = element.getRoundedValue().indexOf('=');
+				for (final ValueTablePresentation element : tableAsArray) {
+					for (int i = element.getRoundedValue().indexOf('='); i < equalsIndex; i++)
+						element.setRoundedValue(element.getRoundedValue().substring(0, 2) + ' '
+								+ element.getRoundedValue().substring(2));
 					listModel.addElement(element);
 				}
 
