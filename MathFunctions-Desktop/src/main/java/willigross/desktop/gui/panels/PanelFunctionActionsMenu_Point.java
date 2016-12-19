@@ -114,7 +114,7 @@ public class PanelFunctionActionsMenu_Point extends RequestFocusForDefaultCompon
 						try {
 							symbol = ImageIO
 									.read(getClass().getClassLoader()
-											.getResourceAsStream("assets/images/greenCheckMark.png")) //$NON-NLS-1$
+											.getResourceAsStream("willigross/desktop/assets/images/greenCheckMark.png")) //$NON-NLS-1$
 									.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
 							repaint();
 						} catch (final IOException ex) {
@@ -127,7 +127,8 @@ public class PanelFunctionActionsMenu_Point extends RequestFocusForDefaultCompon
 
 						try {
 							symbol = ImageIO
-									.read(getClass().getClassLoader().getResourceAsStream("assets/images/redX.png")) //$NON-NLS-1$
+									.read(getClass().getClassLoader()
+											.getResourceAsStream("willigross/desktop/assets/images/redX.png")) //$NON-NLS-1$
 									.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
 							repaint();
 						} catch (final IOException ex) {
