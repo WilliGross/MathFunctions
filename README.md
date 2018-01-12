@@ -1,4 +1,4 @@
-# Mathe
+# MathFunctions
 This is a program to manage functions. It can create linear and exponential functions through two given points. Afterwards you can have it calculate value tables, check if a specified point lies on the function's graph and do some other fun stuff. More features will be implemented in the future, feel free to suggest ideas in the Issues tab.
 
 Developers will find a complete API in the subproject MathFuncions-Core.
